@@ -9,8 +9,9 @@ public enum HttpScheme
   /// Http
   /// </summary>
   Http,
+
   /// <summary>
   /// Https
   /// </summary>
-  Https
+  Https,
 }

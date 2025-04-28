@@ -32,7 +32,8 @@ internal class InternalRequestOptions
 
   public void AddQueryParameter(string key, object value)
   {
-    if (value == null) return;
+    if (value == null)
+      return;
 
     if (!QueryParameters.ContainsKey(key))
     {
@@ -42,7 +43,8 @@ internal class InternalRequestOptions
 
   public void AddCustomQueryParameters(IDictionary<string, object> values)
   {
-    if (values == null) return;
+    if (values == null)
+      return;
 
     foreach (var t in values)
     {

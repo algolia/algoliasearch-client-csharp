@@ -28,9 +28,7 @@ internal class HttpTransport
   private string _errorMessage;
   private readonly ILogger<HttpTransport> _logger;
 
-  private class VoidResult
-  {
-  }
+  private class VoidResult { }
 
   /// <summary>
   /// Instantiate the transport class with the given configuration and requester
@@ -38,7 +36,11 @@ internal class HttpTransport
   /// <param name="config">Algolia Config</param>
   /// <param name="httpClient">An implementation of http requester <see cref="IHttpRequester"/> </param>
   /// <param name="loggerFactory">Logger factory</param>
-  public HttpTransport(AlgoliaConfig config, IHttpRequester httpClient, ILoggerFactory loggerFactory)
+  public HttpTransport(
+    AlgoliaConfig config,
+    IHttpRequester httpClient,
+    ILoggerFactory loggerFactory
+  )
   {
     _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
     _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
@@ -55,9 +57,12 @@ internal class HttpTransport
   /// <param name="uri">The endpoint URI</param>
   /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
   /// <param name="ct">Optional cancellation token</param>
-  public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri,
+  public async Task<TResult> ExecuteRequestAsync<TResult>(
+    HttpMethod method,
+    string uri,
     InternalRequestOptions requestOptions = null,
-    CancellationToken ct = default)
+    CancellationToken ct = default
+  )
     where TResult : class =>
     await ExecuteRequestAsync<TResult, object>(method, uri, requestOptions, ct)
       .ConfigureAwait(false);
@@ -69,11 +74,12 @@ internal class HttpTransport
   /// <param name="uri">The endpoint URI</param>
   /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
   /// <param name="ct">Optional cancellation token</param>
-  public async Task ExecuteRequestAsync(HttpMethod method, string uri,
+  public async Task ExecuteRequestAsync(
+    HttpMethod method,
+    string uri,
     InternalRequestOptions requestOptions = null,
-    CancellationToken ct = default) =>
-    await ExecuteRequestAsync<VoidResult>(method, uri, requestOptions, ct)
-      .ConfigureAwait(false);
+    CancellationToken ct = default
+  ) => await ExecuteRequestAsync<VoidResult>(method, uri, requestOptions, ct).ConfigureAwait(false);
 
   /// <summary>
   /// Call api with retry strategy
@@ -84,9 +90,12 @@ internal class HttpTransport
   /// <param name="uri">The endpoint URI</param>
   /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
   /// <param name="ct">Optional cancellation token</param>
-  private async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri,
+  private async Task<TResult> ExecuteRequestAsync<TResult, TData>(
+    HttpMethod method,
+    string uri,
     InternalRequestOptions requestOptions = null,
-    CancellationToken ct = default)
+    CancellationToken ct = default
+  )
     where TResult : class
     where TData : class
   {
@@ -104,22 +113,28 @@ internal class HttpTransport
     {
       Method = method,
       Headers = GenerateHeaders(requestOptions?.HeaderParameters),
-      Compression = _algoliaConfig.Compression
+      Compression = _algoliaConfig.Compression,
     };
 
     var callType =
-      (requestOptions?.UseReadTransporter != null && requestOptions.UseReadTransporter.Value) ||
-      method == HttpMethod.Get
+      (requestOptions?.UseReadTransporter != null && requestOptions.UseReadTransporter.Value)
+      || method == HttpMethod.Get
         ? CallType.Read
         : CallType.Write;
 
     foreach (var host in _retryStrategy.GetTryableHost(callType))
     {
       request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress, _logger);
-      request.Uri = BuildUri(host, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
-        requestOptions?.QueryParameters);
-      var requestTimeout =
-        TimeSpan.FromTicks((GetTimeOut(callType, requestOptions)).Ticks * (host.RetryCount + 1));
+      request.Uri = BuildUri(
+        host,
+        uri,
+        requestOptions?.CustomPathParameters,
+        requestOptions?.PathParameters,
+        requestOptions?.QueryParameters
+      );
+      var requestTimeout = TimeSpan.FromTicks(
+        (GetTimeOut(callType, requestOptions)).Ticks * (host.RetryCount + 1)
+      );
 
       if (request.Body == null && (method == HttpMethod.Post || method == HttpMethod.Put))
       {
@@ -137,7 +152,14 @@ internal class HttpTransport
       }
 
       var response = await _httpClient
-        .SendRequestAsync(request, requestTimeout, requestOptions?.ConnectTimeout ?? _algoliaConfig.ConnectTimeout ?? Defaults.ConnectTimeout, ct)
+        .SendRequestAsync(
+          request,
+          requestTimeout,
+          requestOptions?.ConnectTimeout
+            ?? _algoliaConfig.ConnectTimeout
+            ?? Defaults.ConnectTimeout,
+          ct
+        )
         .ConfigureAwait(false);
 
       _errorMessage = response.Error;
@@ -154,12 +176,13 @@ internal class HttpTransport
           {
             var reader = new StreamReader(response.Body);
             var json = await reader.ReadToEndAsync().ConfigureAwait(false);
-            _logger.LogTrace(
-              "Response HTTP {HttpCode}: {Json}", response.HttpStatusCode, json);
+            _logger.LogTrace("Response HTTP {HttpCode}: {Json}", response.HttpStatusCode, json);
             response.Body.Seek(0, SeekOrigin.Begin);
           }
 
-          var deserialized = await _serializer.Deserialize<TResult>(response.Body).ConfigureAwait(false);
+          var deserialized = await _serializer
+            .Deserialize<TResult>(response.Body)
+            .ConfigureAwait(false);
 
           if (_logger.IsEnabled(LogLevel.Trace))
           {
@@ -171,8 +194,10 @@ internal class HttpTransport
           if (_logger.IsEnabled(LogLevel.Debug))
           {
             _logger.LogDebug(
-              "Retrying ... Retryable error for response HTTP {HttpCode} : {Error}", response.HttpStatusCode,
-              response.Error);
+              "Retrying ... Retryable error for response HTTP {HttpCode} : {Error}",
+              response.HttpStatusCode,
+              response.Error
+            );
           }
 
           continue;
@@ -180,8 +205,10 @@ internal class HttpTransport
           if (_logger.IsEnabled(LogLevel.Error))
           {
             _logger.LogError(
-              "Retry strategy with failure outcome. Response HTTP {HttpCode} : {Error}", response.HttpStatusCode,
-              response.Error);
+              "Retry strategy with failure outcome. Response HTTP {HttpCode} : {Error}",
+              response.HttpStatusCode,
+              response.Error
+            );
           }
 
           throw new AlgoliaApiException(response.Error, response.HttpStatusCode);
@@ -195,7 +222,9 @@ internal class HttpTransport
       _logger.LogError("Retry strategy failed: {ErrorMessage}", _errorMessage);
     }
 
-    throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason: " + _errorMessage);
+    throw new AlgoliaUnreachableHostException(
+      "RetryStrategy failed to connect to Algolia. Reason: " + _errorMessage
+    );
   }
 
   /// <summary>
@@ -223,7 +252,9 @@ internal class HttpTransport
   /// </summary>
   /// <param name="optionalHeaders"></param>
   /// <returns></returns>
-  private IDictionary<string, string> GenerateHeaders(IDictionary<string, string> optionalHeaders = null)
+  private IDictionary<string, string> GenerateHeaders(
+    IDictionary<string, string> optionalHeaders = null
+  )
   {
     return optionalHeaders != null && optionalHeaders.Any()
       ? optionalHeaders.MergeWith(_algoliaConfig.BuildHeaders())
@@ -239,10 +270,13 @@ internal class HttpTransport
   /// <param name="pathParameters"></param>
   /// <param name="optionalQueryParameters"></param>
   /// <returns></returns>
-  private static Uri BuildUri(StatefulHost host, string baseUri,
+  private static Uri BuildUri(
+    StatefulHost host,
+    string baseUri,
     IDictionary<string, string> customPathParameters = null,
     IDictionary<string, string> pathParameters = null,
-    IDictionary<string, string> optionalQueryParameters = null)
+    IDictionary<string, string> optionalQueryParameters = null
+  )
   {
     var path = $"{baseUri}";
     if (pathParameters != null)
@@ -261,7 +295,12 @@ internal class HttpTransport
       }
     }
 
-    var builder = new UriBuilder { Scheme = host.Scheme.ToString(), Host = host.Url, Path = path };
+    var builder = new UriBuilder
+    {
+      Scheme = host.Scheme.ToString(),
+      Host = host.Url,
+      Path = path,
+    };
 
     if (optionalQueryParameters != null && optionalQueryParameters.Any())
     {
@@ -286,9 +325,13 @@ internal class HttpTransport
   {
     return callType switch
     {
-      CallType.Read => requestOptions?.ReadTimeout ?? _algoliaConfig.ReadTimeout ?? Defaults.ReadTimeout,
-      CallType.Write => requestOptions?.WriteTimeout ?? _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeout,
-      _ => Defaults.WriteTimeout
+      CallType.Read => requestOptions?.ReadTimeout
+        ?? _algoliaConfig.ReadTimeout
+        ?? Defaults.ReadTimeout,
+      CallType.Write => requestOptions?.WriteTimeout
+        ?? _algoliaConfig.WriteTimeout
+        ?? Defaults.WriteTimeout,
+      _ => Defaults.WriteTimeout,
     };
   }
 }

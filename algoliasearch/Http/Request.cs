@@ -22,7 +22,7 @@ public class Request
   public Uri Uri { get; set; }
 
   /// <summary>
-  /// Headers 
+  /// Headers
   /// </summary>
   public IDictionary<string, string> Headers { get; set; }
 

@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Insights;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -32,7 +31,12 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -45,7 +49,12 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -58,7 +67,12 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -71,35 +85,12 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -113,7 +104,13 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -127,10 +124,56 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API. 
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
   /// </summary>
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -139,7 +182,11 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of  </returns>
-  Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task DeleteUserTokenAsync(
+    string userToken,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.  (Synchronous version)
@@ -151,10 +198,14 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns> </returns>
-  void DeleteUserToken(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
+  void DeleteUserToken(
+    string userToken,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
+  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
   /// </summary>
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -163,7 +214,11 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of EventsResponse</returns>
-  Task<EventsResponse> PushEventsAsync(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<EventsResponse> PushEventsAsync(
+    InsightsEvents insightsEvents,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
@@ -175,11 +230,12 @@ public interface IInsightsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>EventsResponse</returns>
-  EventsResponse PushEvents(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  EventsResponse PushEvents(
+    InsightsEvents insightsEvents,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -196,18 +252,26 @@ public partial class InsightsClient : IInsightsClient
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public InsightsClient(string applicationId, string apiKey, string region = null, ILoggerFactory loggerFactory = null) : this(new InsightsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public InsightsClient(
+    string applicationId,
+    string apiKey,
+    string region = null,
+    ILoggerFactory loggerFactory = null
+  )
+    : this(
+      new InsightsConfig(applicationId, apiKey, region),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public InsightsClient(InsightsConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public InsightsClient(InsightsConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -215,7 +279,11 @@ public partial class InsightsClient : IInsightsClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public InsightsClient(InsightsConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public InsightsClient(
+    InsightsConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -254,12 +322,14 @@ public partial class InsightsClient : IInsightsClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -267,19 +337,32 @@ public partial class InsightsClient : IInsightsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -287,19 +370,33 @@ public partial class InsightsClient : IInsightsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -308,19 +405,35 @@ public partial class InsightsClient : IInsightsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -329,52 +442,88 @@ public partial class InsightsClient : IInsightsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task DeleteUserTokenAsync(
+    string userToken,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (userToken == null)
-      throw new ArgumentException("Parameter `userToken` is required when calling `DeleteUserToken`.");
+      throw new ArgumentException(
+        "Parameter `userToken` is required when calling `DeleteUserToken`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("userToken", QueryStringHelper.ParameterToString(userToken));
 
-    await _transport.ExecuteRequestAsync(new HttpMethod("DELETE"), "/1/usertokens/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
+    await _transport
+      .ExecuteRequestAsync(
+        new HttpMethod("DELETE"),
+        "/1/usertokens/{userToken}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public void DeleteUserToken(
+    string userToken,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteUserTokenAsync(userToken, options, cancellationToken));
 
   /// <inheritdoc />
-  public void DeleteUserToken(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteUserTokenAsync(userToken, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<EventsResponse> PushEventsAsync(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<EventsResponse> PushEventsAsync(
+    InsightsEvents insightsEvents,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (insightsEvents == null)
-      throw new ArgumentException("Parameter `insightsEvents` is required when calling `PushEvents`.");
+      throw new ArgumentException(
+        "Parameter `insightsEvents` is required when calling `PushEvents`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = insightsEvents;
-    return await _transport.ExecuteRequestAsync<EventsResponse>(new HttpMethod("POST"), "/1/events", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<EventsResponse>(
+        new HttpMethod("POST"),
+        "/1/events",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public EventsResponse PushEvents(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => PushEventsAsync(insightsEvents, options, cancellationToken));
-
+  public EventsResponse PushEvents(
+    InsightsEvents insightsEvents,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => PushEventsAsync(insightsEvents, options, cancellationToken));
 }

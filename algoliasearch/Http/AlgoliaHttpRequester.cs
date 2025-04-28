@@ -21,8 +21,9 @@ internal class AlgoliaHttpRequester : IHttpRequester
   private readonly HttpClient _httpClient = new(
     new TimeoutHandler
     {
-      InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
-    });
+      InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip },
+    }
+  );
 
   private readonly ILogger<AlgoliaHttpRequester> _logger;
 
@@ -41,8 +42,12 @@ internal class AlgoliaHttpRequester : IHttpRequester
   /// <param name="connectTimeout">Connect timeout</param>
   /// <param name="ct">Optional cancellation token</param>
   /// <returns></returns>
-  public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
-    TimeSpan connectTimeout, CancellationToken ct = default)
+  public async Task<AlgoliaHttpResponse> SendRequestAsync(
+    Request request,
+    TimeSpan requestTimeout,
+    TimeSpan connectTimeout,
+    CancellationToken ct = default
+  )
   {
     if (request.Method == null)
     {
@@ -58,7 +63,7 @@ internal class AlgoliaHttpRequester : IHttpRequester
     {
       Method = request.Method,
       RequestUri = request.Uri,
-      Content = request.Body != null ? new StreamContent(request.Body) : null
+      Content = request.Body != null ? new StreamContent(request.Body) : null,
     };
 
     if (request.Body != null && httpRequestMessage.Content != null)
@@ -73,7 +78,9 @@ internal class AlgoliaHttpRequester : IHttpRequester
     try
     {
       using (httpRequestMessage)
-      using (var response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+      using (
+        var response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false)
+      )
       {
         using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
         {
@@ -82,7 +89,7 @@ internal class AlgoliaHttpRequester : IHttpRequester
             return new AlgoliaHttpResponse
             {
               Error = await StreamToStringAsync(stream),
-              HttpStatusCode = (int)response.StatusCode
+              HttpStatusCode = (int)response.StatusCode,
             };
           }
 
@@ -93,7 +100,7 @@ internal class AlgoliaHttpRequester : IHttpRequester
           return new AlgoliaHttpResponse
           {
             Body = outputStream,
-            HttpStatusCode = (int)response.StatusCode
+            HttpStatusCode = (int)response.StatusCode,
           };
         }
       }

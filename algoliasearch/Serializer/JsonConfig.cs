@@ -17,9 +17,6 @@ internal static class JsonConfig
     WriteIndented = false,
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
-    Converters =
-    {
-      new SearchResultConverterFactory()
-    }
+    Converters = { new SearchResultConverterFactory() },
   };
 }

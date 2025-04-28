@@ -23,7 +23,7 @@ public static class ModelConverters
       Validity = apiKey.Validity,
       QueryParameters = apiKey.QueryParameters,
       MaxHitsPerQuery = apiKey.MaxHitsPerQuery,
-      MaxQueriesPerIPPerHour = apiKey.MaxQueriesPerIPPerHour
+      MaxQueriesPerIPPerHour = apiKey.MaxQueriesPerIPPerHour,
     };
   }
 }

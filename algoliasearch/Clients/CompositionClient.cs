@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Composition;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -35,7 +34,12 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchResponse{T}</returns>
-  Task<SearchResponse<T>> SearchAsync<T>(string compositionID, RequestBody requestBody, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchResponse<T>> SearchAsync<T>(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Runs a query on a single composition and returns matching results. (Synchronous version)
@@ -51,10 +55,15 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchResponse{T}</returns>
-  SearchResponse<T> Search<T>(string compositionID, RequestBody requestBody, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchResponse<T> Search<T>(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**. 
+  /// Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -68,7 +77,13 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchForFacetValuesResponse</returns>
-  Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string compositionID, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.  (Synchronous version)
@@ -85,11 +100,14 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchForFacetValuesResponse</returns>
-  SearchForFacetValuesResponse SearchForFacetValues(string compositionID, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  SearchForFacetValuesResponse SearchForFacetValues(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -105,19 +123,21 @@ public partial class CompositionClient : ICompositionClient
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
-
-  public CompositionClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new CompositionConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public CompositionClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null)
+    : this(
+      new CompositionConfig(applicationId, apiKey),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public CompositionClient(CompositionConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public CompositionClient(CompositionConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -125,7 +145,11 @@ public partial class CompositionClient : ICompositionClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public CompositionClient(CompositionConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public CompositionClient(
+    CompositionConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -164,58 +188,103 @@ public partial class CompositionClient : ICompositionClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<SearchResponse<T>> SearchAsync<T>(string compositionID, RequestBody requestBody, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchResponse<T>> SearchAsync<T>(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (compositionID == null)
       throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
-
 
     if (requestBody == null)
       throw new ArgumentException("Parameter `requestBody` is required when calling `Search`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("compositionID", QueryStringHelper.ParameterToString(compositionID));
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
 
     requestOptions.Data = requestBody;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchResponse<T>>(new HttpMethod("POST"), "/1/compositions/{compositionID}/run", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchResponse<T>>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/run",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchResponse<T> Search<T>(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => SearchAsync<T>(compositionID, requestBody, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public SearchResponse<T> Search<T>(string compositionID, RequestBody requestBody, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchAsync<T>(compositionID, requestBody, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string compositionID, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (compositionID == null)
-      throw new ArgumentException("Parameter `compositionID` is required when calling `SearchForFacetValues`.");
-
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchForFacetValues`."
+      );
 
     if (facetName == null)
-      throw new ArgumentException("Parameter `facetName` is required when calling `SearchForFacetValues`.");
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("compositionID", QueryStringHelper.ParameterToString(compositionID));
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
     requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
     requestOptions.Data = searchForFacetValuesRequest;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchForFacetValuesResponse>(new HttpMethod("POST"), "/1/compositions/{compositionID}/facets/{facetName}/query", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchForFacetValuesResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/facets/{facetName}/query",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public SearchForFacetValuesResponse SearchForFacetValues(string compositionID, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchForFacetValuesAsync(compositionID, facetName, searchForFacetValuesRequest, options, cancellationToken));
-
+  public SearchForFacetValuesResponse SearchForFacetValues(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchForFacetValuesAsync(
+        compositionID,
+        facetName,
+        searchForFacetValuesRequest,
+        options,
+        cancellationToken
+      )
+    );
 }

@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Recommend;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -22,7 +21,7 @@ namespace Algolia.Search.Clients;
 public interface IRecommendClient
 {
   /// <summary>
-  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead). 
+  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -36,7 +35,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RecommendUpdatedAtResponse</returns>
-  Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(
+    string indexName,
+    RecommendModels model,
+    List<RecommendRule> recommendRule = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
@@ -53,7 +58,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RecommendUpdatedAtResponse</returns>
-  RecommendUpdatedAtResponse BatchRecommendRules(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  RecommendUpdatedAtResponse BatchRecommendRules(
+    string indexName,
+    RecommendModels model,
+    List<RecommendRule> recommendRule = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -66,7 +77,12 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -79,7 +95,12 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -92,7 +113,12 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -105,7 +131,12 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -119,7 +150,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -133,7 +170,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -147,7 +190,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -161,7 +210,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a Recommend rule from a recommendation scenario.
@@ -178,7 +233,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeletedAtResponse</returns>
-  Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeletedAtResponse> DeleteRecommendRuleAsync(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a Recommend rule from a recommendation scenario. (Synchronous version)
@@ -195,7 +256,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeletedAtResponse</returns>
-  DeletedAtResponse DeleteRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeletedAtResponse DeleteRecommendRule(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a Recommend rule that you previously created in the Algolia dashboard.
@@ -212,7 +279,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RecommendRule</returns>
-  Task<RecommendRule> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<RecommendRule> GetRecommendRuleAsync(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a Recommend rule that you previously created in the Algolia dashboard. (Synchronous version)
@@ -229,10 +302,16 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RecommendRule</returns>
-  RecommendRule GetRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  RecommendRule GetRecommendRule(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status. 
+  /// Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -246,7 +325,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetRecommendTaskResponse</returns>
-  Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetRecommendTaskResponse> GetRecommendStatusAsync(
+    string indexName,
+    RecommendModels model,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.  (Synchronous version)
@@ -263,10 +348,16 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetRecommendTaskResponse</returns>
-  GetRecommendTaskResponse GetRecommendStatus(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetRecommendTaskResponse GetRecommendStatus(
+    string indexName,
+    RecommendModels model,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves recommendations from selected AI models. 
+  /// Retrieves recommendations from selected AI models.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -278,7 +369,11 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetRecommendationsResponse</returns>
-  Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetRecommendationsResponse> GetRecommendationsAsync(
+    GetRecommendationsParams getRecommendationsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves recommendations from selected AI models.  (Synchronous version)
@@ -293,10 +388,14 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetRecommendationsResponse</returns>
-  GetRecommendationsResponse GetRecommendations(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetRecommendationsResponse GetRecommendations(
+    GetRecommendationsParams getRecommendationsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario. 
+  /// Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -310,7 +409,13 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchRecommendRulesResponse</returns>
-  Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(
+    string indexName,
+    RecommendModels model,
+    SearchRecommendRulesParams searchRecommendRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.  (Synchronous version)
@@ -327,11 +432,14 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchRecommendRulesResponse</returns>
-  SearchRecommendRulesResponse SearchRecommendRules(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  SearchRecommendRulesResponse SearchRecommendRules(
+    string indexName,
+    RecommendModels model,
+    SearchRecommendRulesParams searchRecommendRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -347,19 +455,21 @@ public partial class RecommendClient : IRecommendClient
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
-
-  public RecommendClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new RecommendConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public RecommendClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null)
+    : this(
+      new RecommendConfig(applicationId, apiKey),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public RecommendClient(RecommendConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public RecommendClient(RecommendConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -367,7 +477,11 @@ public partial class RecommendClient : IRecommendClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public RecommendClient(RecommendConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public RecommendClient(
+    RecommendConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -406,15 +520,19 @@ public partial class RecommendClient : IRecommendClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(
+    string indexName,
+    RecommendModels model,
+    List<RecommendRule> recommendRule = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `BatchRecommendRules`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `BatchRecommendRules`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -422,19 +540,36 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
     requestOptions.Data = recommendRule;
-    return await _transport.ExecuteRequestAsync<RecommendUpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{model}/recommend/rules/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<RecommendUpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/{model}/recommend/rules/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public RecommendUpdatedAtResponse BatchRecommendRules(
+    string indexName,
+    RecommendModels model,
+    List<RecommendRule> recommendRule = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      BatchRecommendRulesAsync(indexName, model, recommendRule, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public RecommendUpdatedAtResponse BatchRecommendRules(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => BatchRecommendRulesAsync(indexName, model, recommendRule, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -442,19 +577,32 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -462,19 +610,33 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -483,19 +645,35 @@ public partial class RecommendClient : IRecommendClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -504,26 +682,44 @@ public partial class RecommendClient : IRecommendClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeletedAtResponse> DeleteRecommendRuleAsync(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRecommendRule`.");
-
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteRecommendRule`."
+      );
 
     if (objectID == null)
-      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRecommendRule`.");
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteRecommendRule`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -531,26 +727,46 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
-    return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeletedAtResponse>(
+        new HttpMethod("DELETE"),
+        "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public DeletedAtResponse DeleteRecommendRule(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteRecommendRuleAsync(indexName, model, objectID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public DeletedAtResponse DeleteRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteRecommendRuleAsync(indexName, model, objectID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<RecommendRule> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<RecommendRule> GetRecommendRuleAsync(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `GetRecommendRule`.");
-
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendRule`."
+      );
 
     if (objectID == null)
-      throw new ArgumentException("Parameter `objectID` is required when calling `GetRecommendRule`.");
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `GetRecommendRule`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -558,23 +774,41 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
-    return await _transport.ExecuteRequestAsync<RecommendRule>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<RecommendRule>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public RecommendRule GetRecommendRule(
+    string indexName,
+    RecommendModels model,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetRecommendRuleAsync(indexName, model, objectID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public RecommendRule GetRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetRecommendRuleAsync(indexName, model, objectID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetRecommendTaskResponse> GetRecommendStatusAsync(
+    string indexName,
+    RecommendModels model,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `GetRecommendStatus`.");
-
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendStatus`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -582,43 +816,77 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    return await _transport.ExecuteRequestAsync<GetRecommendTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetRecommendTaskResponse>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/{model}/task/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetRecommendTaskResponse GetRecommendStatus(
+    string indexName,
+    RecommendModels model,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetRecommendStatusAsync(indexName, model, taskID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetRecommendTaskResponse GetRecommendStatus(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetRecommendStatusAsync(indexName, model, taskID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetRecommendationsResponse> GetRecommendationsAsync(
+    GetRecommendationsParams getRecommendationsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (getRecommendationsParams == null)
-      throw new ArgumentException("Parameter `getRecommendationsParams` is required when calling `GetRecommendations`.");
+      throw new ArgumentException(
+        "Parameter `getRecommendationsParams` is required when calling `GetRecommendations`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = getRecommendationsParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<GetRecommendationsResponse>(new HttpMethod("POST"), "/1/indexes/*/recommendations", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetRecommendationsResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/*/recommendations",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetRecommendationsResponse GetRecommendations(
+    GetRecommendationsParams getRecommendationsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetRecommendationsAsync(getRecommendationsParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetRecommendationsResponse GetRecommendations(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetRecommendationsAsync(getRecommendationsParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(
+    string indexName,
+    RecommendModels model,
+    SearchRecommendRulesParams searchRecommendRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `SearchRecommendRules`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchRecommendRules`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -627,12 +895,31 @@ public partial class RecommendClient : IRecommendClient
 
     requestOptions.Data = searchRecommendRulesParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchRecommendRulesResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{model}/recommend/rules/search", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchRecommendRulesResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/{model}/recommend/rules/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public SearchRecommendRulesResponse SearchRecommendRules(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchRecommendRulesAsync(indexName, model, searchRecommendRulesParams, options, cancellationToken));
-
+  public SearchRecommendRulesResponse SearchRecommendRules(
+    string indexName,
+    RecommendModels model,
+    SearchRecommendRulesParams searchRecommendRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchRecommendRulesAsync(
+        indexName,
+        model,
+        searchRecommendRulesParams,
+        options,
+        cancellationToken
+      )
+    );
 }

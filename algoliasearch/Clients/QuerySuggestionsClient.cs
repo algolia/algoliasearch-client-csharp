@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.QuerySuggestions;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -22,7 +21,7 @@ namespace Algolia.Search.Clients;
 public interface IQuerySuggestionsClient
 {
   /// <summary>
-  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -34,7 +33,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of BaseResponse</returns>
-  Task<BaseResponse> CreateConfigAsync(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<BaseResponse> CreateConfigAsync(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
@@ -49,7 +52,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BaseResponse</returns>
-  BaseResponse CreateConfig(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default);
+  BaseResponse CreateConfig(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -62,7 +69,12 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -75,7 +87,12 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -88,7 +105,12 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -101,7 +123,12 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -115,7 +142,13 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -129,7 +162,13 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -143,7 +182,13 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -157,10 +202,16 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation. 
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -172,7 +223,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of BaseResponse</returns>
-  Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<BaseResponse> DeleteConfigAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
@@ -187,7 +242,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BaseResponse</returns>
-  BaseResponse DeleteConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  BaseResponse DeleteConfig(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves all Query Suggestions configurations of your Algolia application.
@@ -201,7 +260,10 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of List{ConfigurationResponse}</returns>
-  Task<List<ConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<ConfigurationResponse>> GetAllConfigsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
@@ -215,7 +277,10 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{ConfigurationResponse}</returns>
-  List<ConfigurationResponse> GetAllConfigs(RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<ConfigurationResponse> GetAllConfigs(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a single Query Suggestions configuration by its index name.
@@ -230,7 +295,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ConfigurationResponse</returns>
-  Task<ConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ConfigurationResponse> GetConfigAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
@@ -245,7 +314,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ConfigurationResponse</returns>
-  ConfigurationResponse GetConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ConfigurationResponse GetConfig(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Reports the status of a Query Suggestions index.
@@ -260,7 +333,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ConfigStatus</returns>
-  Task<ConfigStatus> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ConfigStatus> GetConfigStatusAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Reports the status of a Query Suggestions index. (Synchronous version)
@@ -275,7 +352,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ConfigStatus</returns>
-  ConfigStatus GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ConfigStatus GetConfigStatus(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index.
@@ -290,7 +371,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of LogFile</returns>
-  Task<LogFile> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<LogFile> GetLogFileAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
@@ -305,7 +390,11 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>LogFile</returns>
-  LogFile GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  LogFile GetLogFile(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Updates a QuerySuggestions configuration.
@@ -321,7 +410,12 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of BaseResponse</returns>
-  Task<BaseResponse> UpdateConfigAsync(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<BaseResponse> UpdateConfigAsync(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Updates a QuerySuggestions configuration. (Synchronous version)
@@ -337,11 +431,13 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BaseResponse</returns>
-  BaseResponse UpdateConfig(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  BaseResponse UpdateConfig(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -358,18 +454,26 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public QuerySuggestionsClient(string applicationId, string apiKey, string region, ILoggerFactory loggerFactory = null) : this(new QuerySuggestionsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public QuerySuggestionsClient(
+    string applicationId,
+    string apiKey,
+    string region,
+    ILoggerFactory loggerFactory = null
+  )
+    : this(
+      new QuerySuggestionsConfig(applicationId, apiKey, region),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public QuerySuggestionsClient(QuerySuggestionsConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public QuerySuggestionsClient(QuerySuggestionsConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -377,7 +481,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public QuerySuggestionsClient(QuerySuggestionsConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public QuerySuggestionsClient(
+    QuerySuggestionsConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -416,32 +524,48 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<BaseResponse> CreateConfigAsync(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<BaseResponse> CreateConfigAsync(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (configurationWithIndex == null)
-      throw new ArgumentException("Parameter `configurationWithIndex` is required when calling `CreateConfig`.");
+      throw new ArgumentException(
+        "Parameter `configurationWithIndex` is required when calling `CreateConfig`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = configurationWithIndex;
-    return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("POST"), "/1/configs", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<BaseResponse>(
+        new HttpMethod("POST"),
+        "/1/configs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public BaseResponse CreateConfig(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => CreateConfigAsync(configurationWithIndex, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public BaseResponse CreateConfig(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CreateConfigAsync(configurationWithIndex, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -449,19 +573,32 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -469,19 +606,33 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -490,19 +641,35 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -511,19 +678,33 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<BaseResponse> DeleteConfigAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
 
@@ -531,34 +712,54 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("DELETE"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<BaseResponse>(
+        new HttpMethod("DELETE"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public BaseResponse DeleteConfig(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteConfigAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public BaseResponse DeleteConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteConfigAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<List<ConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<List<ConfigurationResponse>> GetAllConfigsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<List<ConfigurationResponse>>(new HttpMethod("GET"), "/1/configs", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<List<ConfigurationResponse>>(
+        new HttpMethod("GET"),
+        "/1/configs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public List<ConfigurationResponse> GetAllConfigs(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetAllConfigsAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public List<ConfigurationResponse> GetAllConfigs(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetAllConfigsAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ConfigurationResponse> GetConfigAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
 
@@ -566,39 +767,63 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<ConfigurationResponse>(new HttpMethod("GET"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ConfigurationResponse>(
+        new HttpMethod("GET"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ConfigurationResponse GetConfig(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetConfigAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public ConfigurationResponse GetConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetConfigAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ConfigStatus> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ConfigStatus> GetConfigStatusAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `GetConfigStatus`.");
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetConfigStatus`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<ConfigStatus>(new HttpMethod("GET"), "/1/configs/{indexName}/status", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ConfigStatus>(
+        new HttpMethod("GET"),
+        "/1/configs/{indexName}/status",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ConfigStatus GetConfigStatus(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetConfigStatusAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public ConfigStatus GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetConfigStatusAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<LogFile> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<LogFile> GetLogFileAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
 
@@ -606,37 +831,62 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<LogFile>(new HttpMethod("GET"), "/1/logs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<LogFile>(
+        new HttpMethod("GET"),
+        "/1/logs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public LogFile GetLogFile(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetLogFileAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public LogFile GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetLogFileAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<BaseResponse> UpdateConfigAsync(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<BaseResponse> UpdateConfigAsync(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
 
-
     if (configuration == null)
-      throw new ArgumentException("Parameter `configuration` is required when calling `UpdateConfig`.");
+      throw new ArgumentException(
+        "Parameter `configuration` is required when calling `UpdateConfig`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = configuration;
-    return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("PUT"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<BaseResponse>(
+        new HttpMethod("PUT"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public BaseResponse UpdateConfig(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => UpdateConfigAsync(indexName, configuration, options, cancellationToken));
-
+  public BaseResponse UpdateConfig(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateConfigAsync(indexName, configuration, options, cancellationToken)
+    );
 }

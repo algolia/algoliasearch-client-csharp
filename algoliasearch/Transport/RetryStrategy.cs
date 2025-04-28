@@ -112,8 +112,9 @@ internal class RetryStrategy
   /// <returns></returns>
   private static bool IsRetryable(AlgoliaHttpResponse response)
   {
-    var isRetryableHttpCode = (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2 &&
-                              (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
+    var isRetryableHttpCode =
+      (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2
+      && (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
 
     return isRetryableHttpCode || response.IsNetworkError;
   }
@@ -162,5 +163,5 @@ public enum RetryOutcomeType
   /// <summary>
   /// Call failed error
   /// </summary>
-  Failure
+  Failure,
 }

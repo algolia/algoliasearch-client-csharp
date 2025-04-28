@@ -13,8 +13,10 @@ internal class TimeoutHandler : DelegatingHandler
 {
   private TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromSeconds(100);
 
-  protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-    CancellationToken cancellationToken)
+  protected override async Task<HttpResponseMessage> SendAsync(
+    HttpRequestMessage request,
+    CancellationToken cancellationToken
+  )
   {
     using var cts = GetCancellationTokenSource(request, cancellationToken);
     try
@@ -27,8 +29,10 @@ internal class TimeoutHandler : DelegatingHandler
     }
   }
 
-  private CancellationTokenSource GetCancellationTokenSource(HttpRequestMessage request,
-    CancellationToken cancellationToken)
+  private CancellationTokenSource GetCancellationTokenSource(
+    HttpRequestMessage request,
+    CancellationToken cancellationToken
+  )
   {
     var timeout = request.GetTimeout() ?? DefaultTimeout;
     if (timeout == Timeout.InfiniteTimeSpan)

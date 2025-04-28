@@ -17,9 +17,10 @@ internal static class QueryStringHelper
       throw new ArgumentNullException(nameof(dic));
     }
 
-    return string.Join("&",
-      dic.Select(kvp =>
-        string.Format($"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}")));
+    return string.Join(
+      "&",
+      dic.Select(kvp => string.Format($"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}"))
+    );
   }
 
   /// <summary>
@@ -63,7 +64,10 @@ internal static class QueryStringHelper
       throw new ArgumentNullException(nameof(enumVal));
     var enumType = enumVal.GetType();
     var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<JsonPropertyNameAttribute>()
+    var attr = memInfo
+      .FirstOrDefault()
+      ?.GetCustomAttributes(false)
+      .OfType<JsonPropertyNameAttribute>()
       .FirstOrDefault();
     return attr != null;
   }
@@ -79,7 +83,10 @@ internal static class QueryStringHelper
       throw new ArgumentNullException(nameof(enumVal));
     var enumType = enumVal.GetType();
     var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<JsonPropertyNameAttribute>()
+    var attr = memInfo
+      .FirstOrDefault()
+      ?.GetCustomAttributes(false)
+      .OfType<JsonPropertyNameAttribute>()
       .FirstOrDefault();
     return attr?.Name;
   }

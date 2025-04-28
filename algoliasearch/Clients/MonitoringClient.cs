@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Monitoring;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -32,7 +31,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -45,7 +49,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -58,7 +67,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -71,35 +85,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -113,7 +104,13 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -127,7 +124,53 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves known incidents for the selected clusters.
@@ -139,7 +182,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of IncidentsResponse</returns>
-  Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<IncidentsResponse> GetClusterIncidentsAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves known incidents for the selected clusters. (Synchronous version)
@@ -151,7 +198,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>IncidentsResponse</returns>
-  IncidentsResponse GetClusterIncidents(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  IncidentsResponse GetClusterIncidents(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the status of selected clusters.
@@ -163,7 +214,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of StatusResponse</returns>
-  Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<StatusResponse> GetClusterStatusAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the status of selected clusters. (Synchronous version)
@@ -175,7 +230,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>StatusResponse</returns>
-  StatusResponse GetClusterStatus(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  StatusResponse GetClusterStatus(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves known incidents for all clusters.
@@ -186,7 +245,10 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of IncidentsResponse</returns>
-  Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<IncidentsResponse> GetIncidentsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves known incidents for all clusters. (Synchronous version)
@@ -197,7 +259,10 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>IncidentsResponse</returns>
-  IncidentsResponse GetIncidents(RequestOptions options = null, CancellationToken cancellationToken = default);
+  IncidentsResponse GetIncidents(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves average times for indexing operations for selected clusters.
@@ -209,7 +274,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of IndexingTimeResponse</returns>
-  Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<IndexingTimeResponse> GetIndexingTimeAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves average times for indexing operations for selected clusters. (Synchronous version)
@@ -221,7 +290,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>IndexingTimeResponse</returns>
-  IndexingTimeResponse GetIndexingTime(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  IndexingTimeResponse GetIndexingTime(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the average latency for search requests for selected clusters.
@@ -233,7 +306,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of LatencyResponse</returns>
-  Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<LatencyResponse> GetLatencyAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the average latency for search requests for selected clusters. (Synchronous version)
@@ -245,10 +322,14 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>LatencyResponse</returns>
-  LatencyResponse GetLatency(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  LatencyResponse GetLatency(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key). 
+  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).
   /// </summary>
   /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. </param>
   /// <param name="period">Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. </param>
@@ -258,7 +339,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of InfrastructureResponse</returns>
-  Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<InfrastructureResponse> GetMetricsAsync(
+    Metric metric,
+    Period period,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).  (Synchronous version)
@@ -271,7 +357,12 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>InfrastructureResponse</returns>
-  InfrastructureResponse GetMetrics(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default);
+  InfrastructureResponse GetMetrics(
+    Metric metric,
+    Period period,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Test whether clusters are reachable or not.
@@ -283,7 +374,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of Dictionary{string, Dictionary{string, bool}}</returns>
-  Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Test whether clusters are reachable or not. (Synchronous version)
@@ -295,10 +390,14 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Dictionary{string, Dictionary{string, bool}}</returns>
-  Dictionary<string, Dictionary<string, bool>> GetReachability(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Dictionary<string, Dictionary<string, bool>> GetReachability(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
+  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -306,7 +405,10 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of InventoryResponse</returns>
-  Task<InventoryResponse> GetServersAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<InventoryResponse> GetServersAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
@@ -317,7 +419,10 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>InventoryResponse</returns>
-  InventoryResponse GetServers(RequestOptions options = null, CancellationToken cancellationToken = default);
+  InventoryResponse GetServers(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the status of all Algolia clusters and instances.
@@ -328,7 +433,10 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of StatusResponse</returns>
-  Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<StatusResponse> GetStatusAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the status of all Algolia clusters and instances. (Synchronous version)
@@ -339,11 +447,11 @@ public interface IMonitoringClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>StatusResponse</returns>
-  StatusResponse GetStatus(RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  StatusResponse GetStatus(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -359,19 +467,21 @@ public partial class MonitoringClient : IMonitoringClient
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
-
-  public MonitoringClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new MonitoringConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public MonitoringClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null)
+    : this(
+      new MonitoringConfig(applicationId, apiKey),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public MonitoringClient(MonitoringConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public MonitoringClient(MonitoringConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -379,7 +489,11 @@ public partial class MonitoringClient : IMonitoringClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public MonitoringClient(MonitoringConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public MonitoringClient(
+    MonitoringConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -418,12 +532,14 @@ public partial class MonitoringClient : IMonitoringClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -431,19 +547,32 @@ public partial class MonitoringClient : IMonitoringClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -451,19 +580,33 @@ public partial class MonitoringClient : IMonitoringClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -472,19 +615,35 @@ public partial class MonitoringClient : IMonitoringClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -493,94 +652,156 @@ public partial class MonitoringClient : IMonitoringClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<IncidentsResponse> GetClusterIncidentsAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (clusters == null)
-      throw new ArgumentException("Parameter `clusters` is required when calling `GetClusterIncidents`.");
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterIncidents`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
-    return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<IncidentsResponse>(
+        new HttpMethod("GET"),
+        "/1/incidents/{clusters}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public IncidentsResponse GetClusterIncidents(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetClusterIncidentsAsync(clusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public IncidentsResponse GetClusterIncidents(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetClusterIncidentsAsync(clusters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<StatusResponse> GetClusterStatusAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (clusters == null)
-      throw new ArgumentException("Parameter `clusters` is required when calling `GetClusterStatus`.");
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterStatus`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
-    return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<StatusResponse>(
+        new HttpMethod("GET"),
+        "/1/status/{clusters}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public StatusResponse GetClusterStatus(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetClusterStatusAsync(clusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public StatusResponse GetClusterStatus(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetClusterStatusAsync(clusters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<IncidentsResponse> GetIncidentsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<IncidentsResponse>(
+        new HttpMethod("GET"),
+        "/1/incidents",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public IncidentsResponse GetIncidents(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetIncidentsAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public IncidentsResponse GetIncidents(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetIncidentsAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<IndexingTimeResponse> GetIndexingTimeAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (clusters == null)
-      throw new ArgumentException("Parameter `clusters` is required when calling `GetIndexingTime`.");
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetIndexingTime`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
-    return await _transport.ExecuteRequestAsync<IndexingTimeResponse>(new HttpMethod("GET"), "/1/indexing/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<IndexingTimeResponse>(
+        new HttpMethod("GET"),
+        "/1/indexing/{clusters}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public IndexingTimeResponse GetIndexingTime(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetIndexingTimeAsync(clusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public IndexingTimeResponse GetIndexingTime(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetIndexingTimeAsync(clusters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<LatencyResponse> GetLatencyAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (clusters == null)
       throw new ArgumentException("Parameter `clusters` is required when calling `GetLatency`.");
 
@@ -588,81 +809,132 @@ public partial class MonitoringClient : IMonitoringClient
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
-    return await _transport.ExecuteRequestAsync<LatencyResponse>(new HttpMethod("GET"), "/1/latency/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<LatencyResponse>(
+        new HttpMethod("GET"),
+        "/1/latency/{clusters}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public LatencyResponse GetLatency(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetLatencyAsync(clusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public LatencyResponse GetLatency(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetLatencyAsync(clusters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<InfrastructureResponse> GetMetricsAsync(
+    Metric metric,
+    Period period,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
-
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("metric", QueryStringHelper.ParameterToString(metric));
     requestOptions.PathParameters.Add("period", QueryStringHelper.ParameterToString(period));
 
-    return await _transport.ExecuteRequestAsync<InfrastructureResponse>(new HttpMethod("GET"), "/1/infrastructure/{metric}/period/{period}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<InfrastructureResponse>(
+        new HttpMethod("GET"),
+        "/1/infrastructure/{metric}/period/{period}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public InfrastructureResponse GetMetrics(
+    Metric metric,
+    Period period,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetMetricsAsync(metric, period, options, cancellationToken));
 
   /// <inheritdoc />
-  public InfrastructureResponse GetMetrics(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetMetricsAsync(metric, period, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (clusters == null)
-      throw new ArgumentException("Parameter `clusters` is required when calling `GetReachability`.");
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetReachability`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
-    return await _transport.ExecuteRequestAsync<Dictionary<string, Dictionary<string, bool>>>(new HttpMethod("GET"), "/1/reachability/{clusters}/probes", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<Dictionary<string, Dictionary<string, bool>>>(
+        new HttpMethod("GET"),
+        "/1/reachability/{clusters}/probes",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public Dictionary<string, Dictionary<string, bool>> GetReachability(
+    string clusters,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetReachabilityAsync(clusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public Dictionary<string, Dictionary<string, bool>> GetReachability(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetReachabilityAsync(clusters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<InventoryResponse> GetServersAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<InventoryResponse> GetServersAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<InventoryResponse>(new HttpMethod("GET"), "/1/inventory/servers", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<InventoryResponse>(
+        new HttpMethod("GET"),
+        "/1/inventory/servers",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public InventoryResponse GetServers(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetServersAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public InventoryResponse GetServers(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetServersAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<StatusResponse> GetStatusAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<StatusResponse>(
+        new HttpMethod("GET"),
+        "/1/status",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public StatusResponse GetStatus(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetStatusAsync(options, cancellationToken));
-
+  public StatusResponse GetStatus(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetStatusAsync(options, cancellationToken));
 }

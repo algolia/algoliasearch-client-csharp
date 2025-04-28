@@ -17,5 +17,5 @@ public enum CallType
   /// <summary>
   /// Write Call
   /// </summary>
-  Write = 2
+  Write = 2,
 }

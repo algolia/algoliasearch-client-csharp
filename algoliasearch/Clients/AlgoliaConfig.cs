@@ -31,7 +31,7 @@ namespace Algolia.Search.Clients
         { Defaults.AlgoliaApiKeyHeader.ToLowerInvariant(), ApiKey },
         { Defaults.UserAgentHeader.ToLowerInvariant(), "" },
         { Defaults.Connection.ToLowerInvariant(), Defaults.KeepAlive },
-        { Defaults.AcceptHeader.ToLowerInvariant(), JsonConfig.JsonContentType }
+        { Defaults.AcceptHeader.ToLowerInvariant(), JsonConfig.JsonContentType },
       };
     }
 

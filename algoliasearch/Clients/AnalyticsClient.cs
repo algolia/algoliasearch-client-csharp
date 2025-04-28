@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Analytics;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -32,7 +31,12 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -45,7 +49,12 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -58,7 +67,12 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -71,35 +85,12 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -113,7 +104,13 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -127,10 +124,56 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -145,7 +188,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetAddToCartRateResponse</returns>
-  Task<GetAddToCartRateResponse> GetAddToCartRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetAddToCartRateResponse> GetAddToCartRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -163,10 +213,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetAddToCartRateResponse</returns>
-  GetAddToCartRateResponse GetAddToCartRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetAddToCartRateResponse GetAddToCartRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event. 
+  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -181,7 +238,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetAverageClickPositionResponse</returns>
-  Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event.  (Synchronous version)
@@ -199,10 +263,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetAverageClickPositionResponse</returns>
-  GetAverageClickPositionResponse GetAverageClickPosition(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetAverageClickPositionResponse GetAverageClickPosition(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. 
+  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -217,7 +288,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetClickPositionsResponse</returns>
-  Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetClickPositionsResponse> GetClickPositionsAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries.  (Synchronous version)
@@ -235,10 +313,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetClickPositionsResponse</returns>
-  GetClickPositionsResponse GetClickPositions(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetClickPositionsResponse GetClickPositions(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -253,7 +338,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetClickThroughRateResponse</returns>
-  Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetClickThroughRateResponse> GetClickThroughRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -271,10 +363,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetClickThroughRateResponse</returns>
-  GetClickThroughRateResponse GetClickThroughRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetClickThroughRateResponse GetClickThroughRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -289,7 +388,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetConversionRateResponse</returns>
-  Task<GetConversionRateResponse> GetConversionRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetConversionRateResponse> GetConversionRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -307,10 +413,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetConversionRateResponse</returns>
-  GetConversionRateResponse GetConversionRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetConversionRateResponse GetConversionRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown. It also returns the number of tracked searches and tracked searches without clicks.  By default, the analyzed period includes the last eight days including the current day. 
+  /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown. It also returns the number of tracked searches and tracked searches without clicks.  By default, the analyzed period includes the last eight days including the current day.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -325,7 +438,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetNoClickRateResponse</returns>
-  Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetNoClickRateResponse> GetNoClickRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown. It also returns the number of tracked searches and tracked searches without clicks.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
@@ -343,10 +463,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetNoClickRateResponse</returns>
-  GetNoClickRateResponse GetNoClickRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetNoClickRateResponse GetNoClickRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown. It also returns the count of searches and searches without results used to compute the rates.  By default, the analyzed period includes the last eight days including the current day. 
+  /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown. It also returns the count of searches and searches without results used to compute the rates.  By default, the analyzed period includes the last eight days including the current day.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -361,7 +488,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetNoResultsRateResponse</returns>
-  Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetNoResultsRateResponse> GetNoResultsRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown. It also returns the count of searches and searches without results used to compute the rates.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
@@ -379,10 +513,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetNoResultsRateResponse</returns>
-  GetNoResultsRateResponse GetNoResultsRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetNoResultsRateResponse GetNoResultsRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -397,7 +538,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetPurchaseRateResponse</returns>
-  Task<GetPurchaseRateResponse> GetPurchaseRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetPurchaseRateResponse> GetPurchaseRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -415,10 +563,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetPurchaseRateResponse</returns>
-  GetPurchaseRateResponse GetPurchaseRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetPurchaseRateResponse GetPurchaseRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, send purchase events. By default, the analyzed period includes the last eight days including the current day.  Revenue is based on purchase conversion events (a conversion event with an `eventSubtype` attribute of `purchase`). The revenue is the `price` attribute multiplied by the `quantity` attribute for each object in the event's `objectData` array. 
+  /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, send purchase events. By default, the analyzed period includes the last eight days including the current day.  Revenue is based on purchase conversion events (a conversion event with an `eventSubtype` attribute of `purchase`). The revenue is the `price` attribute multiplied by the `quantity` attribute for each object in the event's `objectData` array.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -433,7 +588,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetRevenue</returns>
-  Task<GetRevenue> GetRevenueAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetRevenue> GetRevenueAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, send purchase events. By default, the analyzed period includes the last eight days including the current day.  Revenue is based on purchase conversion events (a conversion event with an `eventSubtype` attribute of `purchase`). The revenue is the `price` attribute multiplied by the `quantity` attribute for each object in the event's `objectData` array.  (Synchronous version)
@@ -451,10 +613,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetRevenue</returns>
-  GetRevenue GetRevenue(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetRevenue GetRevenue(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
+  /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -469,7 +638,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetSearchesCountResponse</returns>
-  Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetSearchesCountResponse> GetSearchesCountAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
@@ -487,10 +663,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetSearchesCountResponse</returns>
-  GetSearchesCountResponse GetSearchesCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetSearchesCountResponse GetSearchesCount(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.  For each search, it also returns the number of displayed search results that remained unclicked. 
+  /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.  For each search, it also returns the number of displayed search results that remained unclicked.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -507,7 +690,16 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetSearchesNoClicksResponse</returns>
-  Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.  For each search, it also returns the number of displayed search results that remained unclicked.  (Synchronous version)
@@ -527,7 +719,16 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetSearchesNoClicksResponse</returns>
-  GetSearchesNoClicksResponse GetSearchesNoClicks(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetSearchesNoClicksResponse GetSearchesNoClicks(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the 1,000 most frequent searches that produced zero results.
@@ -547,7 +748,16 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetSearchesNoResultsResponse</returns>
-  Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the 1,000 most frequent searches that produced zero results. (Synchronous version)
@@ -567,10 +777,19 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetSearchesNoResultsResponse</returns>
-  GetSearchesNoResultsResponse GetSearchesNoResults(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetSearchesNoResultsResponse GetSearchesNoResults(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the time when the Analytics data for the specified index was last updated.  If the index has been recently created or no search has been performed yet the updated time is `null`.  The Analytics data is updated every 5&nbsp;minutes. 
+  /// Retrieves the time when the Analytics data for the specified index was last updated.  If the index has been recently created or no search has been performed yet the updated time is `null`.  The Analytics data is updated every 5&nbsp;minutes.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -582,7 +801,11 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetStatusResponse</returns>
-  Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetStatusResponse> GetStatusAsync(
+    string index,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the time when the Analytics data for the specified index was last updated.  If the index has been recently created or no search has been performed yet the updated time is `null`.  The Analytics data is updated every 5&nbsp;minutes.  (Synchronous version)
@@ -597,7 +820,11 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetStatusResponse</returns>
-  GetStatusResponse GetStatus(string index, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetStatusResponse GetStatus(
+    string index,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the countries with the most searches in your index.
@@ -617,7 +844,16 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopCountriesResponse</returns>
-  Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopCountriesResponse> GetTopCountriesAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the countries with the most searches in your index. (Synchronous version)
@@ -637,10 +873,19 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopCountriesResponse</returns>
-  GetTopCountriesResponse GetTopCountries(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopCountriesResponse GetTopCountries(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the 1,000 most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
+  /// Retrieves the 1,000 most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -658,7 +903,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopFilterAttributesResponse</returns>
-  Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the 1,000 most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
@@ -679,10 +934,20 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopFilterAttributesResponse</returns>
-  GetTopFilterAttributesResponse GetTopFilterAttributes(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopFilterAttributesResponse GetTopFilterAttributes(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the 1,000 most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
+  /// Retrieves the 1,000 most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -701,7 +966,18 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopFilterForAttributeResponse</returns>
-  Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(
+    string attribute,
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the 1,000 most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
@@ -723,10 +999,21 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopFilterForAttributeResponse</returns>
-  GetTopFilterForAttributeResponse GetTopFilterForAttribute(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopFilterForAttributeResponse GetTopFilterForAttribute(
+    string attribute,
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation. 
+  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -744,7 +1031,17 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopFiltersNoResultsResponse</returns>
-  Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.  (Synchronous version)
@@ -765,10 +1062,20 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopFiltersNoResultsResponse</returns>
-  GetTopFiltersNoResultsResponse GetTopFiltersNoResults(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopFiltersNoResultsResponse GetTopFiltersNoResults(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -788,7 +1095,19 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopHitsResponse</returns>
-  Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopHitsResponse> GetTopHitsAsync(
+    string index,
+    string search = default,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -811,10 +1130,22 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopHitsResponse</returns>
-  GetTopHitsResponse GetTopHits(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopHitsResponse GetTopHits(
+    string index,
+    string search = default,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received. 
+  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -835,7 +1166,20 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopSearchesResponse</returns>
-  Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopSearchesResponse> GetTopSearchesAsync(
+    string index,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    OrderBy? orderBy = default,
+    Direction? direction = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
@@ -859,10 +1203,23 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopSearchesResponse</returns>
-  GetTopSearchesResponse GetTopSearches(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopSearchesResponse GetTopSearches(
+    string index,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    OrderBy? orderBy = default,
+    Direction? direction = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since it returns the number of unique users, the sum of the daily values might be different from the total number.  By default:  - Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. - The analyzed period includes the last eight days including the current day. 
+  /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since it returns the number of unique users, the sum of the daily values might be different from the total number.  By default:  - Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. - The analyzed period includes the last eight days including the current day.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -877,7 +1234,14 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetUsersCountResponse</returns>
-  Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetUsersCountResponse> GetUsersCountAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since it returns the number of unique users, the sum of the daily values might be different from the total number.  By default:  - Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. - The analyzed period includes the last eight days including the current day.  (Synchronous version)
@@ -895,11 +1259,15 @@ public interface IAnalyticsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetUsersCountResponse</returns>
-  GetUsersCountResponse GetUsersCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  GetUsersCountResponse GetUsersCount(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -916,18 +1284,26 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public AnalyticsClient(string applicationId, string apiKey, string region = null, ILoggerFactory loggerFactory = null) : this(new AnalyticsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public AnalyticsClient(
+    string applicationId,
+    string apiKey,
+    string region = null,
+    ILoggerFactory loggerFactory = null
+  )
+    : this(
+      new AnalyticsConfig(applicationId, apiKey, region),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public AnalyticsClient(AnalyticsConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public AnalyticsClient(AnalyticsConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -935,7 +1311,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public AnalyticsClient(AnalyticsConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public AnalyticsClient(
+    AnalyticsConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -974,12 +1354,14 @@ public partial class AnalyticsClient : IAnalyticsClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -987,19 +1369,32 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -1007,19 +1402,33 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -1028,19 +1437,35 @@ public partial class AnalyticsClient : IAnalyticsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -1049,254 +1474,472 @@ public partial class AnalyticsClient : IAnalyticsClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<GetAddToCartRateResponse> GetAddToCartRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetAddToCartRateResponse> GetAddToCartRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetAddToCartRate`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetAddToCartRateResponse>(new HttpMethod("GET"), "/2/conversions/addToCartRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetAddToCartRateResponse>(
+        new HttpMethod("GET"),
+        "/2/conversions/addToCartRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetAddToCartRateResponse GetAddToCartRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetAddToCartRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetAddToCartRateResponse GetAddToCartRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetAddToCartRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetAverageClickPosition`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetAverageClickPosition`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetAverageClickPositionResponse>(new HttpMethod("GET"), "/2/clicks/averageClickPosition", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetAverageClickPositionResponse>(
+        new HttpMethod("GET"),
+        "/2/clicks/averageClickPosition",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetAverageClickPositionResponse GetAverageClickPosition(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetAverageClickPositionAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetAverageClickPositionResponse GetAverageClickPosition(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetAverageClickPositionAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetClickPositionsResponse> GetClickPositionsAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetClickPositions`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickPositions`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetClickPositionsResponse>(new HttpMethod("GET"), "/2/clicks/positions", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetClickPositionsResponse>(
+        new HttpMethod("GET"),
+        "/2/clicks/positions",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetClickPositionsResponse GetClickPositions(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetClickPositionsAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetClickPositionsResponse GetClickPositions(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetClickPositionsAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetClickThroughRate`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickThroughRate`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetClickThroughRateResponse>(new HttpMethod("GET"), "/2/clicks/clickThroughRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetClickThroughRateResponse>(
+        new HttpMethod("GET"),
+        "/2/clicks/clickThroughRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetClickThroughRateResponse GetClickThroughRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetClickThroughRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetClickThroughRateResponse GetClickThroughRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetClickThroughRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetConversionRateResponse> GetConversionRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetConversionRateResponse> GetConversionRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetConversionRate`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetConversionRate`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetConversionRateResponse>(new HttpMethod("GET"), "/2/conversions/conversionRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetConversionRateResponse>(
+        new HttpMethod("GET"),
+        "/2/conversions/conversionRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetConversionRateResponse GetConversionRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetConversionRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetConversionRateResponse GetConversionRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetConversionRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetNoClickRateResponse> GetNoClickRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoClickRate`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetNoClickRateResponse>(new HttpMethod("GET"), "/2/searches/noClickRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetNoClickRateResponse>(
+        new HttpMethod("GET"),
+        "/2/searches/noClickRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetNoClickRateResponse GetNoClickRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetNoClickRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetNoClickRateResponse GetNoClickRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetNoClickRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoResultsRate`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetNoResultsRateResponse>(new HttpMethod("GET"), "/2/searches/noResultRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetNoResultsRateResponse>(
+        new HttpMethod("GET"),
+        "/2/searches/noResultRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetNoResultsRateResponse GetNoResultsRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetNoResultsRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetNoResultsRateResponse GetNoResultsRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetNoResultsRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetPurchaseRateResponse> GetPurchaseRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetPurchaseRateResponse> GetPurchaseRateAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetPurchaseRate`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetPurchaseRateResponse>(new HttpMethod("GET"), "/2/conversions/purchaseRate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetPurchaseRateResponse>(
+        new HttpMethod("GET"),
+        "/2/conversions/purchaseRate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetPurchaseRateResponse GetPurchaseRate(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetPurchaseRateAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetPurchaseRateResponse GetPurchaseRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetPurchaseRateAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetRevenue> GetRevenueAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetRevenue> GetRevenueAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetRevenue`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetRevenue>(new HttpMethod("GET"), "/2/conversions/revenue", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetRevenue>(
+        new HttpMethod("GET"),
+        "/2/conversions/revenue",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetRevenue GetRevenue(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetRevenueAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetRevenue GetRevenue(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetRevenueAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetSearchesCountResponse> GetSearchesCountAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetSearchesCount`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetSearchesCountResponse>(new HttpMethod("GET"), "/2/searches/count", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetSearchesCountResponse>(
+        new HttpMethod("GET"),
+        "/2/searches/count",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetSearchesCountResponse GetSearchesCount(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetSearchesCountAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetSearchesCountResponse GetSearchesCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSearchesCountAsync(index, startDate, endDate, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetSearchesNoClicks`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoClicks`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
@@ -1304,24 +1947,58 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetSearchesNoClicksResponse>(new HttpMethod("GET"), "/2/searches/noClicks", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetSearchesNoClicksResponse>(
+        new HttpMethod("GET"),
+        "/2/searches/noClicks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetSearchesNoClicksResponse GetSearchesNoClicks(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetSearchesNoClicksAsync(
+        index,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetSearchesNoClicksResponse GetSearchesNoClicks(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSearchesNoClicksAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetSearchesNoResults`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoResults`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
@@ -1329,44 +2006,86 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetSearchesNoResultsResponse>(new HttpMethod("GET"), "/2/searches/noResults", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetSearchesNoResultsResponse>(
+        new HttpMethod("GET"),
+        "/2/searches/noResults",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetSearchesNoResultsResponse GetSearchesNoResults(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetSearchesNoResultsAsync(
+        index,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetSearchesNoResultsResponse GetSearchesNoResults(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSearchesNoResultsAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetStatusResponse> GetStatusAsync(
+    string index,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetStatus`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
-    return await _transport.ExecuteRequestAsync<GetStatusResponse>(new HttpMethod("GET"), "/2/status", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetStatusResponse>(
+        new HttpMethod("GET"),
+        "/2/status",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetStatusResponse GetStatus(
+    string index,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetStatusAsync(index, options, cancellationToken));
 
   /// <inheritdoc />
-  public GetStatusResponse GetStatus(string index, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetStatusAsync(index, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopCountriesResponse> GetTopCountriesAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopCountries`.");
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
@@ -1374,24 +2093,59 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopCountriesResponse>(new HttpMethod("GET"), "/2/countries", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopCountriesResponse>(
+        new HttpMethod("GET"),
+        "/2/countries",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopCountriesResponse GetTopCountries(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopCountriesAsync(
+        index,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopCountriesResponse GetTopCountries(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopCountriesAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetTopFilterAttributes`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterAttributes`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("search", search);
@@ -1400,25 +2154,65 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopFilterAttributesResponse>(new HttpMethod("GET"), "/2/filters", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopFilterAttributesResponse>(
+        new HttpMethod("GET"),
+        "/2/filters",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopFilterAttributesResponse GetTopFilterAttributes(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopFilterAttributesAsync(
+        index,
+        search,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopFilterAttributesResponse GetTopFilterAttributes(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopFilterAttributesAsync(index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(
+    string attribute,
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (attribute == null)
-      throw new ArgumentException("Parameter `attribute` is required when calling `GetTopFilterForAttribute`.");
-
+      throw new ArgumentException(
+        "Parameter `attribute` is required when calling `GetTopFilterForAttribute`."
+      );
 
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetTopFilterForAttribute`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterForAttribute`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -1431,24 +2225,63 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopFilterForAttributeResponse>(new HttpMethod("GET"), "/2/filters/{attribute}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopFilterForAttributeResponse>(
+        new HttpMethod("GET"),
+        "/2/filters/{attribute}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopFilterForAttributeResponse GetTopFilterForAttribute(
+    string attribute,
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopFilterForAttributeAsync(
+        attribute,
+        index,
+        search,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopFilterForAttributeResponse GetTopFilterForAttribute(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopFilterForAttributeAsync(attribute, index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
-      throw new ArgumentException("Parameter `index` is required when calling `GetTopFiltersNoResults`.");
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFiltersNoResults`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("search", search);
@@ -1457,24 +2290,61 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopFiltersNoResultsResponse>(new HttpMethod("GET"), "/2/filters/noResults", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopFiltersNoResultsResponse>(
+        new HttpMethod("GET"),
+        "/2/filters/noResults",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopFiltersNoResultsResponse GetTopFiltersNoResults(
+    string index,
+    string search = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopFiltersNoResultsAsync(
+        index,
+        search,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopFiltersNoResultsResponse GetTopFiltersNoResults(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopFiltersNoResultsAsync(index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopHitsResponse> GetTopHitsAsync(
+    string index,
+    string search = default,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopHits`.");
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("search", search);
@@ -1485,24 +2355,66 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopHitsResponse>(new HttpMethod("GET"), "/2/hits", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopHitsResponse>(
+        new HttpMethod("GET"),
+        "/2/hits",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopHitsResponse GetTopHits(
+    string index,
+    string search = default,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopHitsAsync(
+        index,
+        search,
+        clickAnalytics,
+        revenueAnalytics,
+        startDate,
+        endDate,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopHitsResponse GetTopHits(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopHitsAsync(index, search, clickAnalytics, revenueAnalytics, startDate, endDate, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopSearchesResponse> GetTopSearchesAsync(
+    string index,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    OrderBy? orderBy = default,
+    Direction? direction = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopSearches`.");
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("clickAnalytics", clickAnalytics);
@@ -1514,35 +2426,87 @@ public partial class AnalyticsClient : IAnalyticsClient
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetTopSearchesResponse>(new HttpMethod("GET"), "/2/searches", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopSearchesResponse>(
+        new HttpMethod("GET"),
+        "/2/searches",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTopSearchesResponse GetTopSearches(
+    string index,
+    bool? clickAnalytics = default,
+    bool? revenueAnalytics = default,
+    string startDate = default,
+    string endDate = default,
+    OrderBy? orderBy = default,
+    Direction? direction = default,
+    int? limit = default,
+    int? offset = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTopSearchesAsync(
+        index,
+        clickAnalytics,
+        revenueAnalytics,
+        startDate,
+        endDate,
+        orderBy,
+        direction,
+        limit,
+        offset,
+        tags,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public GetTopSearchesResponse GetTopSearches(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopSearchesAsync(index, clickAnalytics, revenueAnalytics, startDate, endDate, orderBy, direction, limit, offset, tags, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetUsersCountResponse> GetUsersCountAsync(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetUsersCount`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("index", index);
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("tags", tags);
-    return await _transport.ExecuteRequestAsync<GetUsersCountResponse>(new HttpMethod("GET"), "/2/users/count", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetUsersCountResponse>(
+        new HttpMethod("GET"),
+        "/2/users/count",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public GetUsersCountResponse GetUsersCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetUsersCountAsync(index, startDate, endDate, tags, options, cancellationToken));
-
+  public GetUsersCountResponse GetUsersCount(
+    string index,
+    string startDate = default,
+    string endDate = default,
+    string tags = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetUsersCountAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
 }

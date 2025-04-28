@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -34,7 +33,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of AddApiKeyResponse</returns>
-  Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<AddApiKeyResponse> AddApiKeyAsync(
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Creates a new API key with specific permissions and restrictions. (Synchronous version)
@@ -49,10 +52,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>AddApiKeyResponse</returns>
-  AddApiKeyResponse AddApiKey(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
+  AddApiKeyResponse AddApiKey(
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  If you want to use auto-generated object IDs, use the [`saveObject` operation](#tag/Records/operation/saveObject). To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
+  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  If you want to use auto-generated object IDs, use the [`saveObject` operation](#tag/Records/operation/saveObject). To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -66,7 +73,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtWithObjectIdResponse</returns>
-  Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(
+    string indexName,
+    string objectID,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  If you want to use auto-generated object IDs, use the [`saveObject` operation](#tag/Records/operation/saveObject). To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
@@ -83,7 +96,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtWithObjectIdResponse</returns>
-  UpdatedAtWithObjectIdResponse AddOrUpdateObject(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtWithObjectIdResponse AddOrUpdateObject(
+    string indexName,
+    string objectID,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds a source to the list of allowed sources.
@@ -98,7 +117,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
-  Task<CreatedAtResponse> AppendSourceAsync(Source source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<CreatedAtResponse> AppendSourceAsync(
+    Source source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds a source to the list of allowed sources. (Synchronous version)
@@ -113,10 +136,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
-  CreatedAtResponse AppendSource(Source source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  CreatedAtResponse AppendSource(
+    Source source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID. 
+  /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -130,7 +157,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
   [Obsolete]
-  Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<CreatedAtResponse> AssignUserIdAsync(
+    string xAlgoliaUserID,
+    AssignUserIdParams assignUserIdParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID.  (Synchronous version)
@@ -147,10 +179,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
   [Obsolete]
-  CreatedAtResponse AssignUserId(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  CreatedAtResponse AssignUserId(
+    string xAlgoliaUserID,
+    AssignUserIdParams assignUserIdParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="batchWriteParams"></param>
@@ -160,7 +197,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of BatchResponse</returns>
-  Task<BatchResponse> BatchAsync(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<BatchResponse> BatchAsync(
+    string indexName,
+    BatchWriteParams batchWriteParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -173,10 +215,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BatchResponse</returns>
-  BatchResponse Batch(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  BatchResponse Batch(
+    string indexName,
+    BatchWriteParams batchWriteParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Assigns multiple user IDs to a cluster.  **You can't move users with this operation**. 
+  /// Assigns multiple user IDs to a cluster.  **You can't move users with this operation**.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -190,7 +237,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
   [Obsolete]
-  Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<CreatedAtResponse> BatchAssignUserIdsAsync(
+    string xAlgoliaUserID,
+    BatchAssignUserIdsParams batchAssignUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Assigns multiple user IDs to a cluster.  **You can't move users with this operation**.  (Synchronous version)
@@ -207,7 +259,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
   [Obsolete]
-  CreatedAtResponse BatchAssignUserIds(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  CreatedAtResponse BatchAssignUserIds(
+    string xAlgoliaUserID,
+    BatchAssignUserIdsParams batchAssignUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds or deletes multiple entries from your plurals, segmentation, or stop word dictionaries.
@@ -223,7 +280,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(
+    DictionaryType dictionaryName,
+    BatchDictionaryEntriesParams batchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds or deletes multiple entries from your plurals, segmentation, or stop word dictionaries. (Synchronous version)
@@ -239,10 +301,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse BatchDictionaryEntries(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse BatchDictionaryEntries(
+    DictionaryType dictionaryName,
+    BatchDictionaryEntriesParams batchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves records from an index, up to 1,000 per request.  While searching retrieves _hits_ (records augmented with attributes for highlighting and ranking details), browsing _just_ returns matching records. This can be useful if you want to export your indices.  - The Analytics API doesn't collect data when using `browse`. - Records are ranked by attributes and custom ranking. - There's no ranking for: typo-tolerance, number of matched words, proximity, geo distance.  Browse requests automatically apply these settings:  - `advancedSyntax`: `false` - `attributesToHighlight`: `[]` - `attributesToSnippet`: `[]` - `distinct`: `false` - `enablePersonalization`: `false` - `enableRules`: `false` - `facets`: `[]` - `getRankingInfo`: `false` - `ignorePlurals`: `false` - `optionalFilters`: `[]` - `typoTolerance`: `true` or `false` (`min` and `strict` evaluate to `true`)  If you send these parameters with your browse requests, they'll be ignored. 
+  /// Retrieves records from an index, up to 1,000 per request.  While searching retrieves _hits_ (records augmented with attributes for highlighting and ranking details), browsing _just_ returns matching records. This can be useful if you want to export your indices.  - The Analytics API doesn't collect data when using `browse`. - Records are ranked by attributes and custom ranking. - There's no ranking for: typo-tolerance, number of matched words, proximity, geo distance.  Browse requests automatically apply these settings:  - `advancedSyntax`: `false` - `attributesToHighlight`: `[]` - `attributesToSnippet`: `[]` - `distinct`: `false` - `enablePersonalization`: `false` - `enableRules`: `false` - `facets`: `[]` - `getRankingInfo`: `false` - `ignorePlurals`: `false` - `optionalFilters`: `[]` - `typoTolerance`: `true` or `false` (`min` and `strict` evaluate to `true`)  If you send these parameters with your browse requests, they'll be ignored.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -255,7 +322,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of BrowseResponse{T}</returns>
-  Task<BrowseResponse<T>> BrowseAsync<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<BrowseResponse<T>> BrowseAsync<T>(
+    string indexName,
+    BrowseParams browseParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves records from an index, up to 1,000 per request.  While searching retrieves _hits_ (records augmented with attributes for highlighting and ranking details), browsing _just_ returns matching records. This can be useful if you want to export your indices.  - The Analytics API doesn't collect data when using `browse`. - Records are ranked by attributes and custom ranking. - There's no ranking for: typo-tolerance, number of matched words, proximity, geo distance.  Browse requests automatically apply these settings:  - `advancedSyntax`: `false` - `attributesToHighlight`: `[]` - `attributesToSnippet`: `[]` - `distinct`: `false` - `enablePersonalization`: `false` - `enableRules`: `false` - `facets`: `[]` - `getRankingInfo`: `false` - `ignorePlurals`: `false` - `optionalFilters`: `[]` - `typoTolerance`: `true` or `false` (`min` and `strict` evaluate to `true`)  If you send these parameters with your browse requests, they'll be ignored.  (Synchronous version)
@@ -271,10 +343,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BrowseResponse{T}</returns>
-  BrowseResponse<T> Browse<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  BrowseResponse<T> Browse<T>(
+    string indexName,
+    BrowseParams browseParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes only the records from an index while keeping settings, synonyms, and rules. This operation is resource-intensive and subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Deletes only the records from an index while keeping settings, synonyms, and rules. This operation is resource-intensive and subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -286,7 +363,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> ClearObjectsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> ClearObjectsAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes only the records from an index while keeping settings, synonyms, and rules. This operation is resource-intensive and subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -301,7 +382,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse ClearObjects(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse ClearObjects(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes all rules from the index.
@@ -317,7 +402,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> ClearRulesAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> ClearRulesAsync(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes all rules from the index. (Synchronous version)
@@ -333,7 +423,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse ClearRules(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse ClearRules(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes all synonyms from the index.
@@ -349,7 +444,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> ClearSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> ClearSynonymsAsync(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes all synonyms from the index. (Synchronous version)
@@ -365,7 +465,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse ClearSynonyms(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse ClearSynonyms(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -378,7 +483,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -391,7 +501,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -404,7 +519,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -417,7 +537,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -431,7 +556,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -445,7 +576,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -459,7 +596,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -473,7 +616,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes the API key.
@@ -488,7 +637,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeleteApiKeyResponse</returns>
-  Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeleteApiKeyResponse> DeleteApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes the API key. (Synchronous version)
@@ -503,10 +656,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteApiKeyResponse</returns>
-  DeleteApiKeyResponse DeleteApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeleteApiKeyResponse DeleteApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// This operation doesn't accept empty filters.  This operation is resource-intensive. You should only use it if you can't get the object IDs of the records you want to delete. It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// This operation doesn't accept empty filters.  This operation is resource-intensive. You should only use it if you can't get the object IDs of the records you want to delete. It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -519,7 +676,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> DeleteByAsync(
+    string indexName,
+    DeleteByParams deleteByParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This operation doesn't accept empty filters.  This operation is resource-intensive. You should only use it if you can't get the object IDs of the records you want to delete. It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -535,10 +697,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse DeleteBy(
+    string indexName,
+    DeleteByParams deleteByParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes an index and all its settings.  - Deleting an index doesn't delete its analytics data. - If you try to delete a non-existing index, the operation is ignored without warning. - If the index you want to delete has replica indices, the replicas become independent indices. - If the index you want to delete is a replica index, you must first unlink it from its primary index before you can delete it.   For more information, see [Delete replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/deleting-replicas/). 
+  /// Deletes an index and all its settings.  - Deleting an index doesn't delete its analytics data. - If you try to delete a non-existing index, the operation is ignored without warning. - If the index you want to delete has replica indices, the replicas become independent indices. - If the index you want to delete is a replica index, you must first unlink it from its primary index before you can delete it.   For more information, see [Delete replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/deleting-replicas/).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -550,7 +717,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeletedAtResponse</returns>
-  Task<DeletedAtResponse> DeleteIndexAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeletedAtResponse> DeleteIndexAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes an index and all its settings.  - Deleting an index doesn't delete its analytics data. - If you try to delete a non-existing index, the operation is ignored without warning. - If the index you want to delete has replica indices, the replicas become independent indices. - If the index you want to delete is a replica index, you must first unlink it from its primary index before you can delete it.   For more information, see [Delete replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/deleting-replicas/).  (Synchronous version)
@@ -565,10 +736,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeletedAtResponse</returns>
-  DeletedAtResponse DeleteIndex(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeletedAtResponse DeleteIndex(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy). 
+  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -581,7 +756,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeletedAtResponse</returns>
-  Task<DeletedAtResponse> DeleteObjectAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeletedAtResponse> DeleteObjectAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).  (Synchronous version)
@@ -597,10 +777,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeletedAtResponse</returns>
-  DeletedAtResponse DeleteObject(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeletedAtResponse DeleteObject(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes a rule by its ID. To find the object ID for rules, use the [`search` operation](#tag/Rules/operation/searchRules). 
+  /// Deletes a rule by its ID. To find the object ID for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -614,7 +799,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> DeleteRuleAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> DeleteRuleAsync(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a rule by its ID. To find the object ID for rules, use the [`search` operation](#tag/Rules/operation/searchRules).  (Synchronous version)
@@ -631,7 +822,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse DeleteRule(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse DeleteRule(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a source from the list of allowed sources.
@@ -646,7 +843,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeleteSourceResponse</returns>
-  Task<DeleteSourceResponse> DeleteSourceAsync(string source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeleteSourceResponse> DeleteSourceAsync(
+    string source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a source from the list of allowed sources. (Synchronous version)
@@ -661,10 +862,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteSourceResponse</returns>
-  DeleteSourceResponse DeleteSource(string source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeleteSourceResponse DeleteSource(
+    string source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Deletes a synonym by its ID. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms). 
+  /// Deletes a synonym by its ID. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -678,7 +883,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeletedAtResponse</returns>
-  Task<DeletedAtResponse> DeleteSynonymAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeletedAtResponse> DeleteSynonymAsync(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a synonym by its ID. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).  (Synchronous version)
@@ -695,10 +906,16 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeletedAtResponse</returns>
-  DeletedAtResponse DeleteSynonym(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeletedAtResponse DeleteSynonym(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`. 
+  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`.
   /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -707,7 +924,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetApiKeyResponse</returns>
-  Task<GetApiKeyResponse> GetApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetApiKeyResponse> GetApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`.  (Synchronous version)
@@ -719,10 +940,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetApiKeyResponse</returns>
-  GetApiKeyResponse GetApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetApiKeyResponse GetApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Checks the status of a given application task. 
+  /// Checks the status of a given application task.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -734,7 +959,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTaskResponse</returns>
-  Task<GetTaskResponse> GetAppTaskAsync(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTaskResponse> GetAppTaskAsync(
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Checks the status of a given application task.  (Synchronous version)
@@ -749,10 +978,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTaskResponse</returns>
-  GetTaskResponse GetAppTask(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTaskResponse GetAppTask(
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Lists supported languages with their supported dictionary types and number of custom entries. 
+  /// Lists supported languages with their supported dictionary types and number of custom entries.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -763,7 +996,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of Dictionary{string, Languages}</returns>
-  Task<Dictionary<string, Languages>> GetDictionaryLanguagesAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<Dictionary<string, Languages>> GetDictionaryLanguagesAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists supported languages with their supported dictionary types and number of custom entries.  (Synchronous version)
@@ -777,7 +1013,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Dictionary{string, Languages}</returns>
-  Dictionary<string, Languages> GetDictionaryLanguages(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Dictionary<string, Languages> GetDictionaryLanguages(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the languages for which standard dictionary entries are turned off.
@@ -791,7 +1030,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetDictionarySettingsResponse</returns>
-  Task<GetDictionarySettingsResponse> GetDictionarySettingsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetDictionarySettingsResponse> GetDictionarySettingsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the languages for which standard dictionary entries are turned off. (Synchronous version)
@@ -805,10 +1047,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetDictionarySettingsResponse</returns>
-  GetDictionarySettingsResponse GetDictionarySettings(RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetDictionarySettingsResponse GetDictionarySettings(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  - Logs are held for the last seven days. - Up to 1,000 API requests per server are logged. - This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself. 
+  /// The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  - Logs are held for the last seven days. - Up to 1,000 API requests per server are logged. - This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -823,7 +1068,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetLogsResponse</returns>
-  Task<GetLogsResponse> GetLogsAsync(int? offset = default, int? length = default, string indexName = default, LogType? type = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetLogsResponse> GetLogsAsync(
+    int? offset = default,
+    int? length = default,
+    string indexName = default,
+    LogType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  - Logs are held for the last seven days. - Up to 1,000 API requests per server are logged. - This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself.  (Synchronous version)
@@ -841,10 +1093,17 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetLogsResponse</returns>
-  GetLogsResponse GetLogs(int? offset = default, int? length = default, string indexName = default, LogType? type = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetLogsResponse GetLogs(
+    int? offset = default,
+    int? length = default,
+    string indexName = default,
+    LogType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves one record by its object ID.  To retrieve more than one record, use the [`objects` operation](#tag/Records/operation/getObjects). 
+  /// Retrieves one record by its object ID.  To retrieve more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -858,7 +1117,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> GetObjectAsync(
+    string indexName,
+    string objectID,
+    List<string> attributesToRetrieve = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves one record by its object ID.  To retrieve more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).  (Synchronous version)
@@ -875,10 +1140,16 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object GetObject(
+    string indexName,
+    string objectID,
+    List<string> attributesToRetrieve = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves one or more records, potentially from different indices.  Records are returned in the same order as the requests. 
+  /// Retrieves one or more records, potentially from different indices.  Records are returned in the same order as the requests.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -890,7 +1161,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetObjectsResponse{T}</returns>
-  Task<GetObjectsResponse<T>> GetObjectsAsync<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetObjectsResponse<T>> GetObjectsAsync<T>(
+    GetObjectsParams getObjectsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves one or more records, potentially from different indices.  Records are returned in the same order as the requests.  (Synchronous version)
@@ -905,10 +1180,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetObjectsResponse{T}</returns>
-  GetObjectsResponse<T> GetObjects<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetObjectsResponse<T> GetObjects<T>(
+    GetObjectsParams getObjectsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules). 
+  /// Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -921,7 +1200,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of Rule</returns>
-  Task<Rule> GetRuleAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<Rule> GetRuleAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).  (Synchronous version)
@@ -937,7 +1221,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Rule</returns>
-  Rule GetRule(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Rule GetRule(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves an object with non-null index settings.
@@ -952,7 +1241,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SettingsResponse</returns>
-  Task<SettingsResponse> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SettingsResponse> GetSettingsAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves an object with non-null index settings. (Synchronous version)
@@ -967,7 +1260,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SettingsResponse</returns>
-  SettingsResponse GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SettingsResponse GetSettings(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves all allowed IP addresses with access to your application.
@@ -981,7 +1278,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of List{Source}</returns>
-  Task<List<Source>> GetSourcesAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<Source>> GetSourcesAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves all allowed IP addresses with access to your application. (Synchronous version)
@@ -995,10 +1295,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{Source}</returns>
-  List<Source> GetSources(RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<Source> GetSources(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Retrieves a synonym by its ID. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms). 
+  /// Retrieves a synonym by its ID. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1011,7 +1314,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SynonymHit</returns>
-  Task<SynonymHit> GetSynonymAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SynonymHit> GetSynonymAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves a synonym by its ID. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).  (Synchronous version)
@@ -1027,10 +1335,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SynonymHit</returns>
-  SynonymHit GetSynonym(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SynonymHit GetSynonym(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Checks the status of a given task.  Indexing tasks are asynchronous. When you add, update, or delete records or indices, a task is created on a queue and completed depending on the load on the server.  The indexing tasks' responses include a task ID that you can use to check the status. 
+  /// Checks the status of a given task.  Indexing tasks are asynchronous. When you add, update, or delete records or indices, a task is created on a queue and completed depending on the load on the server.  The indexing tasks' responses include a task ID that you can use to check the status.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1043,7 +1356,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTaskResponse</returns>
-  Task<GetTaskResponse> GetTaskAsync(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTaskResponse> GetTaskAsync(
+    string indexName,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Checks the status of a given task.  Indexing tasks are asynchronous. When you add, update, or delete records or indices, a task is created on a queue and completed depending on the load on the server.  The indexing tasks' responses include a task ID that you can use to check the status.  (Synchronous version)
@@ -1059,10 +1377,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTaskResponse</returns>
-  GetTaskResponse GetTask(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTaskResponse GetTask(
+    string indexName,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Get the IDs of the 10 users with the highest number of records per cluster.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time. 
+  /// Get the IDs of the 10 users with the highest number of records per cluster.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1074,7 +1397,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopUserIdsResponse</returns>
   [Obsolete]
-  Task<GetTopUserIdsResponse> GetTopUserIdsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<GetTopUserIdsResponse> GetTopUserIdsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Get the IDs of the 10 users with the highest number of records per cluster.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  (Synchronous version)
@@ -1089,10 +1415,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopUserIdsResponse</returns>
   [Obsolete]
-  GetTopUserIdsResponse GetTopUserIds(RequestOptions options = null, CancellationToken cancellationToken = default);
+  GetTopUserIdsResponse GetTopUserIds(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time. 
+  /// Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1105,7 +1434,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UserId</returns>
   [Obsolete]
-  Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UserId> GetUserIdAsync(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  (Synchronous version)
@@ -1121,10 +1454,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UserId</returns>
   [Obsolete]
-  UserId GetUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UserId GetUserId(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process. 
+  /// To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1137,7 +1474,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of HasPendingMappingsResponse</returns>
   [Obsolete]
-  Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<HasPendingMappingsResponse> HasPendingMappingsAsync(
+    bool? getClusters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process.  (Synchronous version)
@@ -1153,7 +1494,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>HasPendingMappingsResponse</returns>
   [Obsolete]
-  HasPendingMappingsResponse HasPendingMappings(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  HasPendingMappingsResponse HasPendingMappings(
+    bool? getClusters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists all API keys associated with your Algolia application, including their permissions and restrictions.
@@ -1167,7 +1512,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListApiKeysResponse</returns>
-  Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListApiKeysResponse> ListApiKeysAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists all API keys associated with your Algolia application, including their permissions and restrictions. (Synchronous version)
@@ -1181,7 +1529,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListApiKeysResponse</returns>
-  ListApiKeysResponse ListApiKeys(RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListApiKeysResponse ListApiKeys(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists the available clusters in a multi-cluster setup.
@@ -1196,7 +1547,10 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListClustersResponse</returns>
   [Obsolete]
-  Task<ListClustersResponse> ListClustersAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListClustersResponse> ListClustersAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists the available clusters in a multi-cluster setup. (Synchronous version)
@@ -1211,10 +1565,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListClustersResponse</returns>
   [Obsolete]
-  ListClustersResponse ListClusters(RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListClustersResponse ListClusters(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Lists all indices in the current Algolia application.  The request follows any index restrictions of the API key you use to make the request. 
+  /// Lists all indices in the current Algolia application.  The request follows any index restrictions of the API key you use to make the request.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1227,7 +1584,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListIndicesResponse</returns>
-  Task<ListIndicesResponse> ListIndicesAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListIndicesResponse> ListIndicesAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists all indices in the current Algolia application.  The request follows any index restrictions of the API key you use to make the request.  (Synchronous version)
@@ -1243,10 +1605,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListIndicesResponse</returns>
-  ListIndicesResponse ListIndices(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListIndicesResponse ListIndices(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Lists the userIDs assigned to a multi-cluster application.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time. 
+  /// Lists the userIDs assigned to a multi-cluster application.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1260,7 +1627,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListUserIdsResponse</returns>
   [Obsolete]
-  Task<ListUserIdsResponse> ListUserIdsAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListUserIdsResponse> ListUserIdsAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists the userIDs assigned to a multi-cluster application.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  (Synchronous version)
@@ -1277,10 +1649,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListUserIdsResponse</returns>
   [Obsolete]
-  ListUserIdsResponse ListUserIds(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListUserIdsResponse ListUserIds(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   /// <param name="batchParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1289,7 +1666,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of MultipleBatchResponse</returns>
-  Task<MultipleBatchResponse> MultipleBatchAsync(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<MultipleBatchResponse> MultipleBatchAsync(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1301,10 +1682,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>MultipleBatchResponse</returns>
-  MultipleBatchResponse MultipleBatch(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  MultipleBatchResponse MultipleBatch(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Copies or moves (renames) an index within the same Algolia application.  - Existing destination indices are overwritten, except for their analytics data. - If the destination index doesn't exist yet, it'll be created. - This operation is resource-intensive.  **Copy**  - Copying a source index that doesn't exist creates a new index with 0 records and default settings. - The API keys of the source index are merged with the existing keys in the destination index. - You can't copy the `enableReRanking`, `mode`, and `replicas` settings. - You can't copy to a destination index that already has replicas. - Be aware of the [size limits](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits). - Related guide: [Copy indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/copy-indices/)  **Move**  - Moving a source index that doesn't exist is ignored without returning an error. - When moving an index, the analytics data keeps its original name, and a new set of analytics data is started for the new name.   To access the original analytics in the dashboard, create an index with the original name. - If the destination index has replicas, moving will overwrite the existing index and copy the data to the replica indices. - Related guide: [Move indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/move-indices/).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Copies or moves (renames) an index within the same Algolia application.  - Existing destination indices are overwritten, except for their analytics data. - If the destination index doesn't exist yet, it'll be created. - This operation is resource-intensive.  **Copy**  - Copying a source index that doesn't exist creates a new index with 0 records and default settings. - The API keys of the source index are merged with the existing keys in the destination index. - You can't copy the `enableReRanking`, `mode`, and `replicas` settings. - You can't copy to a destination index that already has replicas. - Be aware of the [size limits](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits). - Related guide: [Copy indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/copy-indices/)  **Move**  - Moving a source index that doesn't exist is ignored without returning an error. - When moving an index, the analytics data keeps its original name, and a new set of analytics data is started for the new name.   To access the original analytics in the dashboard, create an index with the original name. - If the destination index has replicas, moving will overwrite the existing index and copy the data to the replica indices. - Related guide: [Move indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/move-indices/).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1317,7 +1702,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> OperationIndexAsync(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> OperationIndexAsync(
+    string indexName,
+    OperationIndexParams operationIndexParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Copies or moves (renames) an index within the same Algolia application.  - Existing destination indices are overwritten, except for their analytics data. - If the destination index doesn't exist yet, it'll be created. - This operation is resource-intensive.  **Copy**  - Copying a source index that doesn't exist creates a new index with 0 records and default settings. - The API keys of the source index are merged with the existing keys in the destination index. - You can't copy the `enableReRanking`, `mode`, and `replicas` settings. - You can't copy to a destination index that already has replicas. - Be aware of the [size limits](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits). - Related guide: [Copy indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/copy-indices/)  **Move**  - Moving a source index that doesn't exist is ignored without returning an error. - When moving an index, the analytics data keeps its original name, and a new set of analytics data is started for the new name.   To access the original analytics in the dashboard, create an index with the original name. - If the destination index has replicas, moving will overwrite the existing index and copy the data to the replica indices. - Related guide: [Move indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/move-indices/).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1333,10 +1723,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse OperationIndex(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse OperationIndex(
+    string indexName,
+    OperationIndexParams operationIndexParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Adds new attributes to a record, or updates existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, this operation replaces its first-level ancestor.  To update an attribute without pushing the entire record, you can use these built-in operations. These operations can be helpful if you don't have access to your initial data.  - Increment: increment a numeric attribute - Decrement: decrement a numeric attribute - Add: append a number or string element to an array attribute - Remove: remove all matching number or string elements from an array attribute made of numbers or strings - AddUnique: add a number or string element to an array attribute made of numbers or strings only if it's not already present - IncrementFrom: increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementFrom value of 2 for the version attribute, but the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine only creates it if you pass an IncrementFrom value of 0. - IncrementSet: increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementSet value of 2 for the version attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't exist yet, the engine only creates it if you pass an IncrementSet value greater than 0.  You can specify an operation by providing an object with the attribute to update as the key and its value being an object with the following properties:  - _operation: the operation to apply on the attribute - value: the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.  When updating multiple attributes or using multiple operations targeting the same record, you should use a single partial update for faster processing.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Adds new attributes to a record, or updates existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, this operation replaces its first-level ancestor.  To update an attribute without pushing the entire record, you can use these built-in operations. These operations can be helpful if you don't have access to your initial data.  - Increment: increment a numeric attribute - Decrement: decrement a numeric attribute - Add: append a number or string element to an array attribute - Remove: remove all matching number or string elements from an array attribute made of numbers or strings - AddUnique: add a number or string element to an array attribute made of numbers or strings only if it's not already present - IncrementFrom: increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementFrom value of 2 for the version attribute, but the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine only creates it if you pass an IncrementFrom value of 0. - IncrementSet: increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementSet value of 2 for the version attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't exist yet, the engine only creates it if you pass an IncrementSet value greater than 0.  You can specify an operation by providing an object with the attribute to update as the key and its value being an object with the following properties:  - _operation: the operation to apply on the attribute - value: the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.  When updating multiple attributes or using multiple operations targeting the same record, you should use a single partial update for faster processing.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1351,7 +1746,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtWithObjectIdResponse</returns>
-  Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(string indexName, string objectID, object attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(
+    string indexName,
+    string objectID,
+    object attributesToUpdate,
+    bool? createIfNotExists = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds new attributes to a record, or updates existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, this operation replaces its first-level ancestor.  To update an attribute without pushing the entire record, you can use these built-in operations. These operations can be helpful if you don't have access to your initial data.  - Increment: increment a numeric attribute - Decrement: decrement a numeric attribute - Add: append a number or string element to an array attribute - Remove: remove all matching number or string elements from an array attribute made of numbers or strings - AddUnique: add a number or string element to an array attribute made of numbers or strings only if it's not already present - IncrementFrom: increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementFrom value of 2 for the version attribute, but the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine only creates it if you pass an IncrementFrom value of 0. - IncrementSet: increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementSet value of 2 for the version attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't exist yet, the engine only creates it if you pass an IncrementSet value greater than 0.  You can specify an operation by providing an object with the attribute to update as the key and its value being an object with the following properties:  - _operation: the operation to apply on the attribute - value: the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.  When updating multiple attributes or using multiple operations targeting the same record, you should use a single partial update for faster processing.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1369,7 +1771,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtWithObjectIdResponse</returns>
-  UpdatedAtWithObjectIdResponse PartialUpdateObject(string indexName, string objectID, object attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtWithObjectIdResponse PartialUpdateObject(
+    string indexName,
+    string objectID,
+    object attributesToUpdate,
+    bool? createIfNotExists = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a user ID and its associated data from the clusters.
@@ -1385,7 +1794,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RemoveUserIdResponse</returns>
   [Obsolete]
-  Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<RemoveUserIdResponse> RemoveUserIdAsync(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes a user ID and its associated data from the clusters. (Synchronous version)
@@ -1401,7 +1814,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RemoveUserIdResponse</returns>
   [Obsolete]
-  RemoveUserIdResponse RemoveUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  RemoveUserIdResponse RemoveUserId(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Replaces the list of allowed sources.
@@ -1416,7 +1833,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ReplaceSourceResponse</returns>
-  Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ReplaceSourceResponse> ReplaceSourcesAsync(
+    List<Source> source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Replaces the list of allowed sources. (Synchronous version)
@@ -1431,10 +1852,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ReplaceSourceResponse</returns>
-  ReplaceSourceResponse ReplaceSources(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ReplaceSourceResponse ReplaceSources(
+    List<Source> source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Restores a deleted API key.  Restoring resets the `validity` attribute to `0`.  Algolia stores up to 1,000 API keys per application. If you create more, the oldest API keys are deleted and can't be restored. 
+  /// Restores a deleted API key.  Restoring resets the `validity` attribute to `0`.  Algolia stores up to 1,000 API keys per application. If you create more, the oldest API keys are deleted and can't be restored.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1446,7 +1871,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of AddApiKeyResponse</returns>
-  Task<AddApiKeyResponse> RestoreApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<AddApiKeyResponse> RestoreApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Restores a deleted API key.  Restoring resets the `validity` attribute to `0`.  Algolia stores up to 1,000 API keys per application. If you create more, the oldest API keys are deleted and can't be restored.  (Synchronous version)
@@ -1461,10 +1890,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>AddApiKeyResponse</returns>
-  AddApiKeyResponse RestoreApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
+  AddApiKeyResponse RestoreApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Adds a record to an index or replaces it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Adds a record to an index or replaces it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1477,7 +1910,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SaveObjectResponse</returns>
-  Task<SaveObjectResponse> SaveObjectAsync(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SaveObjectResponse> SaveObjectAsync(
+    string indexName,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Adds a record to an index or replaces it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1493,10 +1931,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SaveObjectResponse</returns>
-  SaveObjectResponse SaveObject(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SaveObjectResponse SaveObject(
+    string indexName,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// If a rule with the specified object ID doesn't exist, it's created. Otherwise, the existing rule is replaced.  To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules). 
+  /// If a rule with the specified object ID doesn't exist, it's created. Otherwise, the existing rule is replaced.  To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1511,7 +1954,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> SaveRuleAsync(
+    string indexName,
+    string objectID,
+    Rule rule,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// If a rule with the specified object ID doesn't exist, it's created. Otherwise, the existing rule is replaced.  To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).  (Synchronous version)
@@ -1529,10 +1979,17 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse SaveRule(
+    string indexName,
+    string objectID,
+    Rule rule,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Create or update multiple rules.  If a rule with the specified object ID doesn't exist, Algolia creates a new one. Otherwise, existing rules are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Create or update multiple rules.  If a rule with the specified object ID doesn't exist, Algolia creates a new one. Otherwise, existing rules are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1547,7 +2004,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> SaveRulesAsync(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> SaveRulesAsync(
+    string indexName,
+    List<Rule> rules,
+    bool? forwardToReplicas = default,
+    bool? clearExistingRules = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Create or update multiple rules.  If a rule with the specified object ID doesn't exist, Algolia creates a new one. Otherwise, existing rules are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1565,10 +2029,17 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse SaveRules(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse SaveRules(
+    string indexName,
+    List<Rule> rules,
+    bool? forwardToReplicas = default,
+    bool? clearExistingRules = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// If a synonym with the specified object ID doesn't exist, Algolia adds a new one. Otherwise, the existing synonym is replaced. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms). 
+  /// If a synonym with the specified object ID doesn't exist, Algolia adds a new one. Otherwise, the existing synonym is replaced. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1583,7 +2054,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SaveSynonymResponse</returns>
-  Task<SaveSynonymResponse> SaveSynonymAsync(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SaveSynonymResponse> SaveSynonymAsync(
+    string indexName,
+    string objectID,
+    SynonymHit synonymHit,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// If a synonym with the specified object ID doesn't exist, Algolia adds a new one. Otherwise, the existing synonym is replaced. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms).  (Synchronous version)
@@ -1601,10 +2079,17 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SaveSynonymResponse</returns>
-  SaveSynonymResponse SaveSynonym(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SaveSynonymResponse SaveSynonym(
+    string indexName,
+    string objectID,
+    SynonymHit synonymHit,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// If a synonym with the `objectID` doesn't exist, Algolia adds a new one. Otherwise, existing synonyms are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// If a synonym with the `objectID` doesn't exist, Algolia adds a new one. Otherwise, existing synonyms are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1619,7 +2104,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> SaveSynonymsAsync(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> SaveSynonymsAsync(
+    string indexName,
+    List<SynonymHit> synonymHit,
+    bool? forwardToReplicas = default,
+    bool? replaceExistingSynonyms = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// If a synonym with the `objectID` doesn't exist, Algolia adds a new one. Otherwise, existing synonyms are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
@@ -1637,10 +2129,17 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse SaveSynonyms(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse SaveSynonyms(
+    string indexName,
+    List<SynonymHit> synonymHit,
+    bool? forwardToReplicas = default,
+    bool? replaceExistingSynonyms = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want. 
+  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1652,7 +2151,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchResponses{T}</returns>
-  Task<SearchResponses<T>> SearchAsync<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchResponses<T>> SearchAsync<T>(
+    SearchMethodParams searchMethodParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.  (Synchronous version)
@@ -1667,7 +2170,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchResponses{T}</returns>
-  SearchResponses<T> Search<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchResponses<T> Search<T>(
+    SearchMethodParams searchMethodParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for standard and custom dictionary entries.
@@ -1683,7 +2190,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchDictionaryEntriesResponse</returns>
-  Task<SearchDictionaryEntriesResponse> SearchDictionaryEntriesAsync(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchDictionaryEntriesResponse> SearchDictionaryEntriesAsync(
+    DictionaryType dictionaryName,
+    SearchDictionaryEntriesParams searchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for standard and custom dictionary entries. (Synchronous version)
@@ -1699,10 +2211,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchDictionaryEntriesResponse</returns>
-  SearchDictionaryEntriesResponse SearchDictionaryEntries(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchDictionaryEntriesResponse SearchDictionaryEntries(
+    DictionaryType dictionaryName,
+    SearchDictionaryEntriesParams searchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Searches for values of a specified facet attribute.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**. 
+  /// Searches for values of a specified facet attribute.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1716,7 +2233,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchForFacetValuesResponse</returns>
-  Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(
+    string indexName,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for values of a specified facet attribute.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.  (Synchronous version)
@@ -1733,7 +2256,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchForFacetValuesResponse</returns>
-  SearchForFacetValuesResponse SearchForFacetValues(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchForFacetValuesResponse SearchForFacetValues(
+    string indexName,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for rules in your index.
@@ -1749,7 +2278,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchRulesResponse</returns>
-  Task<SearchRulesResponse> SearchRulesAsync(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchRulesResponse> SearchRulesAsync(
+    string indexName,
+    SearchRulesParams searchRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for rules in your index. (Synchronous version)
@@ -1765,10 +2299,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchRulesResponse</returns>
-  SearchRulesResponse SearchRules(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchRulesResponse SearchRules(
+    string indexName,
+    SearchRulesParams searchRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Searches a single index and returns matching search results (_hits_).  This method lets you retrieve up to 1,000 hits. If you need more, use the [`browse` operation](#tag/Search/operation/browse) or increase the `paginatedLimitedTo` index setting. 
+  /// Searches a single index and returns matching search results (_hits_).  This method lets you retrieve up to 1,000 hits. If you need more, use the [`browse` operation](#tag/Search/operation/browse) or increase the `paginatedLimitedTo` index setting.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1781,7 +2320,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchResponse{T}</returns>
-  Task<SearchResponse<T>> SearchSingleIndexAsync<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchResponse<T>> SearchSingleIndexAsync<T>(
+    string indexName,
+    SearchParams searchParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches a single index and returns matching search results (_hits_).  This method lets you retrieve up to 1,000 hits. If you need more, use the [`browse` operation](#tag/Search/operation/browse) or increase the `paginatedLimitedTo` index setting.  (Synchronous version)
@@ -1797,7 +2341,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchResponse{T}</returns>
-  SearchResponse<T> SearchSingleIndex<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchResponse<T> SearchSingleIndex<T>(
+    string indexName,
+    SearchParams searchParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for synonyms in your index.
@@ -1813,7 +2362,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchSynonymsResponse</returns>
-  Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchSynonymsResponse> SearchSynonymsAsync(
+    string indexName,
+    SearchSynonymsParams searchSynonymsParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Searches for synonyms in your index. (Synchronous version)
@@ -1829,10 +2383,15 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchSynonymsResponse</returns>
-  SearchSynonymsResponse SearchSynonyms(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchSynonymsResponse SearchSynonyms(
+    string indexName,
+    SearchSynonymsParams searchSynonymsParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
+  /// Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1845,7 +2404,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchUserIdsResponse</returns>
   [Obsolete]
-  Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<SearchUserIdsResponse> SearchUserIdsAsync(
+    SearchUserIdsParams searchUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).  (Synchronous version)
@@ -1861,7 +2424,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchUserIdsResponse</returns>
   [Obsolete]
-  SearchUserIdsResponse SearchUserIds(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  SearchUserIdsResponse SearchUserIds(
+    SearchUserIdsParams searchUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Turns standard stop word dictionary entries on or off for a given language.
@@ -1876,7 +2443,11 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> SetDictionarySettingsAsync(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> SetDictionarySettingsAsync(
+    DictionarySettingsParams dictionarySettingsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Turns standard stop word dictionary entries on or off for a given language. (Synchronous version)
@@ -1891,10 +2462,14 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse SetDictionarySettings(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse SetDictionarySettings(
+    DictionarySettingsParams dictionarySettingsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Update the specified index settings.  Index settings that you don't specify are left unchanged. Specify `null` to reset a setting to its default value.  For best performance, update the index settings before you add new records to your index. 
+  /// Update the specified index settings.  Index settings that you don't specify are left unchanged. Specify `null` to reset a setting to its default value.  For best performance, update the index settings before you add new records to your index.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1908,7 +2483,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdatedAtResponse</returns>
-  Task<UpdatedAtResponse> SetSettingsAsync(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdatedAtResponse> SetSettingsAsync(
+    string indexName,
+    IndexSettings indexSettings,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Update the specified index settings.  Index settings that you don't specify are left unchanged. Specify `null` to reset a setting to its default value.  For best performance, update the index settings before you add new records to your index.  (Synchronous version)
@@ -1925,10 +2506,16 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdatedAtResponse</returns>
-  UpdatedAtResponse SetSettings(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  UpdatedAtResponse SetSettings(
+    string indexName,
+    IndexSettings indexSettings,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Replaces the permissions of an existing API key.  Any unspecified attribute resets that attribute to its default value. 
+  /// Replaces the permissions of an existing API key.  Any unspecified attribute resets that attribute to its default value.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1941,7 +2528,12 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UpdateApiKeyResponse</returns>
-  Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string key, ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<UpdateApiKeyResponse> UpdateApiKeyAsync(
+    string key,
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Replaces the permissions of an existing API key.  Any unspecified attribute resets that attribute to its default value.  (Synchronous version)
@@ -1957,11 +2549,13 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UpdateApiKeyResponse</returns>
-  UpdateApiKeyResponse UpdateApiKey(string key, ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  UpdateApiKeyResponse UpdateApiKey(
+    string key,
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -1977,19 +2571,21 @@ public partial class SearchClient : ISearchClient
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
-
-  public SearchClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new SearchConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public SearchClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null)
+    : this(
+      new SearchConfig(applicationId, apiKey),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public SearchClient(SearchConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public SearchClient(SearchConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -1997,7 +2593,11 @@ public partial class SearchClient : ISearchClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public SearchClient(SearchConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public SearchClient(
+    SearchConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -2036,39 +2636,54 @@ public partial class SearchClient : ISearchClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<AddApiKeyResponse> AddApiKeyAsync(
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (apiKey == null)
       throw new ArgumentException("Parameter `apiKey` is required when calling `AddApiKey`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = apiKey;
-    return await _transport.ExecuteRequestAsync<AddApiKeyResponse>(new HttpMethod("POST"), "/1/keys", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<AddApiKeyResponse>(
+        new HttpMethod("POST"),
+        "/1/keys",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public AddApiKeyResponse AddApiKey(
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => AddApiKeyAsync(apiKey, options, cancellationToken));
 
   /// <inheritdoc />
-  public AddApiKeyResponse AddApiKey(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AddApiKeyAsync(apiKey, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(
+    string indexName,
+    string objectID,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `AddOrUpdateObject`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `AddOrUpdateObject`."
+      );
 
     if (objectID == null)
-      throw new ArgumentException("Parameter `objectID` is required when calling `AddOrUpdateObject`.");
-
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `AddOrUpdateObject`."
+      );
 
     if (body == null)
       throw new ArgumentException("Parameter `body` is required when calling `AddOrUpdateObject`.");
@@ -2079,69 +2694,116 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<UpdatedAtWithObjectIdResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtWithObjectIdResponse>(
+        new HttpMethod("PUT"),
+        "/1/indexes/{indexName}/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtWithObjectIdResponse AddOrUpdateObject(
+    string indexName,
+    string objectID,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      AddOrUpdateObjectAsync(indexName, objectID, body, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtWithObjectIdResponse AddOrUpdateObject(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AddOrUpdateObjectAsync(indexName, objectID, body, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<CreatedAtResponse> AppendSourceAsync(Source source, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<CreatedAtResponse> AppendSourceAsync(
+    Source source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (source == null)
       throw new ArgumentException("Parameter `source` is required when calling `AppendSource`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = source;
-    return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/security/sources/append", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<CreatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/security/sources/append",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public CreatedAtResponse AppendSource(Source source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AppendSourceAsync(source, options, cancellationToken));
-
+  public CreatedAtResponse AppendSource(
+    Source source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => AppendSourceAsync(source, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<CreatedAtResponse> AssignUserIdAsync(
+    string xAlgoliaUserID,
+    AssignUserIdParams assignUserIdParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (xAlgoliaUserID == null)
-      throw new ArgumentException("Parameter `xAlgoliaUserID` is required when calling `AssignUserId`.");
-
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`."
+      );
 
     if (assignUserIdParams == null)
-      throw new ArgumentException("Parameter `assignUserIdParams` is required when calling `AssignUserId`.");
+      throw new ArgumentException(
+        "Parameter `assignUserIdParams` is required when calling `AssignUserId`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
-    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), QueryStringHelper.ParameterToString(xAlgoliaUserID)); // header parameter
+    requestOptions.HeaderParameters.Add(
+      "X-Algolia-User-ID".ToLowerInvariant(),
+      QueryStringHelper.ParameterToString(xAlgoliaUserID)
+    ); // header parameter
     requestOptions.Data = assignUserIdParams;
-    return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/clusters/mapping", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<CreatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/clusters/mapping",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public CreatedAtResponse AssignUserId(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AssignUserIdAsync(xAlgoliaUserID, assignUserIdParams, options, cancellationToken));
-
+  public CreatedAtResponse AssignUserId(
+    string xAlgoliaUserID,
+    AssignUserIdParams assignUserIdParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      AssignUserIdAsync(xAlgoliaUserID, assignUserIdParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public async Task<BatchResponse> BatchAsync(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<BatchResponse> BatchAsync(
+    string indexName,
+    BatchWriteParams batchWriteParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `Batch`.");
-
 
     if (batchWriteParams == null)
       throw new ArgumentException("Parameter `batchWriteParams` is required when calling `Batch`.");
@@ -2151,68 +2813,128 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = batchWriteParams;
-    return await _transport.ExecuteRequestAsync<BatchResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<BatchResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public BatchResponse Batch(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public BatchResponse Batch(
+    string indexName,
+    BatchWriteParams batchWriteParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => BatchAsync(indexName, batchWriteParams, options, cancellationToken));
 
-
   /// <inheritdoc />
   [Obsolete]
-  public async Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<CreatedAtResponse> BatchAssignUserIdsAsync(
+    string xAlgoliaUserID,
+    BatchAssignUserIdsParams batchAssignUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (xAlgoliaUserID == null)
-      throw new ArgumentException("Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`.");
-
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`."
+      );
 
     if (batchAssignUserIdsParams == null)
-      throw new ArgumentException("Parameter `batchAssignUserIdsParams` is required when calling `BatchAssignUserIds`.");
+      throw new ArgumentException(
+        "Parameter `batchAssignUserIdsParams` is required when calling `BatchAssignUserIds`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
-    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), QueryStringHelper.ParameterToString(xAlgoliaUserID)); // header parameter
+    requestOptions.HeaderParameters.Add(
+      "X-Algolia-User-ID".ToLowerInvariant(),
+      QueryStringHelper.ParameterToString(xAlgoliaUserID)
+    ); // header parameter
     requestOptions.Data = batchAssignUserIdsParams;
-    return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/clusters/mapping/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<CreatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/clusters/mapping/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public CreatedAtResponse BatchAssignUserIds(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => BatchAssignUserIdsAsync(xAlgoliaUserID, batchAssignUserIdsParams, options, cancellationToken));
-
+  public CreatedAtResponse BatchAssignUserIds(
+    string xAlgoliaUserID,
+    BatchAssignUserIdsParams batchAssignUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      BatchAssignUserIdsAsync(xAlgoliaUserID, batchAssignUserIdsParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public async Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(
+    DictionaryType dictionaryName,
+    BatchDictionaryEntriesParams batchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
-
     if (batchDictionaryEntriesParams == null)
-      throw new ArgumentException("Parameter `batchDictionaryEntriesParams` is required when calling `BatchDictionaryEntries`.");
+      throw new ArgumentException(
+        "Parameter `batchDictionaryEntriesParams` is required when calling `BatchDictionaryEntries`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("dictionaryName", QueryStringHelper.ParameterToString(dictionaryName));
+    requestOptions.PathParameters.Add(
+      "dictionaryName",
+      QueryStringHelper.ParameterToString(dictionaryName)
+    );
 
     requestOptions.Data = batchDictionaryEntriesParams;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/dictionaries/{dictionaryName}/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/dictionaries/{dictionaryName}/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse BatchDictionaryEntries(
+    DictionaryType dictionaryName,
+    BatchDictionaryEntriesParams batchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      BatchDictionaryEntriesAsync(
+        dictionaryName,
+        batchDictionaryEntriesParams,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse BatchDictionaryEntries(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => BatchDictionaryEntriesAsync(dictionaryName, batchDictionaryEntriesParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<BrowseResponse<T>> BrowseAsync<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<BrowseResponse<T>> BrowseAsync<T>(
+    string indexName,
+    BrowseParams browseParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `Browse`.");
 
@@ -2222,19 +2944,32 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.Data = browseParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<BrowseResponse<T>>(new HttpMethod("POST"), "/1/indexes/{indexName}/browse", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<BrowseResponse<T>>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/browse",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public BrowseResponse<T> Browse<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public BrowseResponse<T> Browse<T>(
+    string indexName,
+    BrowseParams browseParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => BrowseAsync<T>(indexName, browseParams, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<UpdatedAtResponse> ClearObjectsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> ClearObjectsAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearObjects`.");
 
@@ -2242,19 +2977,31 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/clear", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/clear",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse ClearObjects(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ClearObjectsAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public UpdatedAtResponse ClearObjects(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ClearObjectsAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> ClearRulesAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> ClearRulesAsync(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearRules`.");
 
@@ -2263,40 +3010,74 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/rules/clear", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/rules/clear",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse ClearRules(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ClearRulesAsync(indexName, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse ClearRules(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ClearRulesAsync(indexName, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> ClearSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> ClearSynonymsAsync(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `ClearSynonyms`.");
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `ClearSynonyms`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/clear", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/synonyms/clear",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse ClearSynonyms(
+    string indexName,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ClearSynonymsAsync(indexName, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse ClearSynonyms(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ClearSynonymsAsync(indexName, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -2304,19 +3085,32 @@ public partial class SearchClient : ISearchClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -2324,19 +3118,33 @@ public partial class SearchClient : ISearchClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -2345,19 +3153,35 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -2366,19 +3190,33 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeleteApiKeyResponse> DeleteApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `DeleteApiKey`.");
 
@@ -2386,44 +3224,70 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
-    return await _transport.ExecuteRequestAsync<DeleteApiKeyResponse>(new HttpMethod("DELETE"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeleteApiKeyResponse>(
+        new HttpMethod("DELETE"),
+        "/1/keys/{key}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public DeleteApiKeyResponse DeleteApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteApiKeyAsync(key, options, cancellationToken));
 
   /// <inheritdoc />
-  public DeleteApiKeyResponse DeleteApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteApiKeyAsync(key, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> DeleteByAsync(
+    string indexName,
+    DeleteByParams deleteByParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteBy`.");
 
-
     if (deleteByParams == null)
-      throw new ArgumentException("Parameter `deleteByParams` is required when calling `DeleteBy`.");
+      throw new ArgumentException(
+        "Parameter `deleteByParams` is required when calling `DeleteBy`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = deleteByParams;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/deleteByQuery", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/deleteByQuery",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public UpdatedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public UpdatedAtResponse DeleteBy(
+    string indexName,
+    DeleteByParams deleteByParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => DeleteByAsync(indexName, deleteByParams, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<DeletedAtResponse> DeleteIndexAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeletedAtResponse> DeleteIndexAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteIndex`.");
 
@@ -2431,22 +3295,33 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeletedAtResponse>(
+        new HttpMethod("DELETE"),
+        "/1/indexes/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public DeletedAtResponse DeleteIndex(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public DeletedAtResponse DeleteIndex(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<DeletedAtResponse> DeleteObjectAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeletedAtResponse> DeleteObjectAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteObject`.");
-
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteObject`.");
@@ -2456,22 +3331,36 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
-    return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeletedAtResponse>(
+        new HttpMethod("DELETE"),
+        "/1/indexes/{indexName}/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public DeletedAtResponse DeleteObject(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public DeletedAtResponse DeleteObject(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => DeleteObjectAsync(indexName, objectID, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<UpdatedAtResponse> DeleteRuleAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> DeleteRuleAsync(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRule`.");
-
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRule`.");
@@ -2482,19 +3371,35 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("DELETE"),
+        "/1/indexes/{indexName}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse DeleteRule(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteRuleAsync(indexName, objectID, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse DeleteRule(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteRuleAsync(indexName, objectID, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<DeleteSourceResponse> DeleteSourceAsync(string source, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeleteSourceResponse> DeleteSourceAsync(
+    string source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (source == null)
       throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
 
@@ -2502,22 +3407,36 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(source));
 
-    return await _transport.ExecuteRequestAsync<DeleteSourceResponse>(new HttpMethod("DELETE"), "/1/security/sources/{source}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeleteSourceResponse>(
+        new HttpMethod("DELETE"),
+        "/1/security/sources/{source}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public DeleteSourceResponse DeleteSource(
+    string source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteSourceAsync(source, options, cancellationToken));
 
   /// <inheritdoc />
-  public DeleteSourceResponse DeleteSource(string source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteSourceAsync(source, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<DeletedAtResponse> DeleteSynonymAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeletedAtResponse> DeleteSynonymAsync(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteSynonym`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteSynonym`."
+      );
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteSynonym`.");
@@ -2528,19 +3447,35 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
-    return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/synonyms/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<DeletedAtResponse>(
+        new HttpMethod("DELETE"),
+        "/1/indexes/{indexName}/synonyms/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public DeletedAtResponse DeleteSynonym(
+    string indexName,
+    string objectID,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteSynonymAsync(indexName, objectID, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public DeletedAtResponse DeleteSynonym(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteSynonymAsync(indexName, objectID, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetApiKeyResponse> GetApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetApiKeyResponse> GetApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `GetApiKey`.");
 
@@ -2548,88 +3483,149 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
-    return await _transport.ExecuteRequestAsync<GetApiKeyResponse>(new HttpMethod("GET"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetApiKeyResponse>(
+        new HttpMethod("GET"),
+        "/1/keys/{key}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetApiKeyResponse GetApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetApiKeyAsync(key, options, cancellationToken));
 
   /// <inheritdoc />
-  public GetApiKeyResponse GetApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetApiKeyAsync(key, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTaskResponse> GetAppTaskAsync(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTaskResponse> GetAppTaskAsync(
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    return await _transport.ExecuteRequestAsync<GetTaskResponse>(new HttpMethod("GET"), "/1/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTaskResponse>(
+        new HttpMethod("GET"),
+        "/1/task/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetTaskResponse GetAppTask(
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetAppTaskAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
-  public GetTaskResponse GetAppTask(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetAppTaskAsync(taskID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<Dictionary<string, Languages>> GetDictionaryLanguagesAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<Dictionary<string, Languages>> GetDictionaryLanguagesAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<Dictionary<string, Languages>>(new HttpMethod("GET"), "/1/dictionaries/*/languages", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<Dictionary<string, Languages>>(
+        new HttpMethod("GET"),
+        "/1/dictionaries/*/languages",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public Dictionary<string, Languages> GetDictionaryLanguages(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetDictionaryLanguagesAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public Dictionary<string, Languages> GetDictionaryLanguages(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetDictionaryLanguagesAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetDictionarySettingsResponse> GetDictionarySettingsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetDictionarySettingsResponse> GetDictionarySettingsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<GetDictionarySettingsResponse>(new HttpMethod("GET"), "/1/dictionaries/*/settings", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetDictionarySettingsResponse>(
+        new HttpMethod("GET"),
+        "/1/dictionaries/*/settings",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetDictionarySettingsResponse GetDictionarySettings(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetDictionarySettingsAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public GetDictionarySettingsResponse GetDictionarySettings(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetDictionarySettingsAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetLogsResponse> GetLogsAsync(int? offset = default, int? length = default, string indexName = default, LogType? type = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetLogsResponse> GetLogsAsync(
+    int? offset = default,
+    int? length = default,
+    string indexName = default,
+    LogType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("length", length);
     requestOptions.AddQueryParameter("indexName", indexName);
     requestOptions.AddQueryParameter("type", type);
-    return await _transport.ExecuteRequestAsync<GetLogsResponse>(new HttpMethod("GET"), "/1/logs", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetLogsResponse>(
+        new HttpMethod("GET"),
+        "/1/logs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetLogsResponse GetLogs(
+    int? offset = default,
+    int? length = default,
+    string indexName = default,
+    LogType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetLogsAsync(offset, length, indexName, type, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public GetLogsResponse GetLogs(int? offset = default, int? length = default, string indexName = default, LogType? type = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetLogsAsync(offset, length, indexName, type, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> GetObjectAsync(
+    string indexName,
+    string objectID,
+    List<string> attributesToRetrieve = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetObject`.");
-
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetObject`.");
@@ -2640,43 +3636,71 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("attributesToRetrieve", attributesToRetrieve);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object GetObject(
+    string indexName,
+    string objectID,
+    List<string> attributesToRetrieve = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetObjectAsync(indexName, objectID, attributesToRetrieve, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public object GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetObjectAsync(indexName, objectID, attributesToRetrieve, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetObjectsResponse<T>> GetObjectsAsync<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetObjectsResponse<T>> GetObjectsAsync<T>(
+    GetObjectsParams getObjectsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (getObjectsParams == null)
-      throw new ArgumentException("Parameter `getObjectsParams` is required when calling `GetObjects`.");
+      throw new ArgumentException(
+        "Parameter `getObjectsParams` is required when calling `GetObjects`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = getObjectsParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<GetObjectsResponse<T>>(new HttpMethod("POST"), "/1/indexes/*/objects", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetObjectsResponse<T>>(
+        new HttpMethod("POST"),
+        "/1/indexes/*/objects",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public GetObjectsResponse<T> GetObjects<T>(
+    GetObjectsParams getObjectsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetObjectsAsync<T>(getObjectsParams, options, cancellationToken));
 
   /// <inheritdoc />
-  public GetObjectsResponse<T> GetObjects<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetObjectsAsync<T>(getObjectsParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<Rule> GetRuleAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<Rule> GetRuleAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetRule`.");
-
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
@@ -2686,19 +3710,31 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
-    return await _transport.ExecuteRequestAsync<Rule>(new HttpMethod("GET"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<Rule>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public Rule GetRule(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetRuleAsync(indexName, objectID, options, cancellationToken));
 
   /// <inheritdoc />
-  public Rule GetRule(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetRuleAsync(indexName, objectID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SettingsResponse> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SettingsResponse> GetSettingsAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSettings`.");
 
@@ -2706,37 +3742,57 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<SettingsResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/settings", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SettingsResponse>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/settings",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SettingsResponse GetSettings(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetSettingsAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
-  public SettingsResponse GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSettingsAsync(indexName, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<List<Source>> GetSourcesAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<List<Source>> GetSourcesAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<List<Source>>(new HttpMethod("GET"), "/1/security/sources", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<List<Source>>(
+        new HttpMethod("GET"),
+        "/1/security/sources",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public List<Source> GetSources(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetSourcesAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public List<Source> GetSources(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSourcesAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SynonymHit> GetSynonymAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SynonymHit> GetSynonymAsync(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSynonym`.");
-
 
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetSynonym`.");
@@ -2746,59 +3802,92 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
-    return await _transport.ExecuteRequestAsync<SynonymHit>(new HttpMethod("GET"), "/1/indexes/{indexName}/synonyms/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SynonymHit>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/synonyms/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SynonymHit GetSynonym(
+    string indexName,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetSynonymAsync(indexName, objectID, options, cancellationToken));
 
   /// <inheritdoc />
-  public SynonymHit GetSynonym(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetSynonymAsync(indexName, objectID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<GetTaskResponse> GetTaskAsync(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTaskResponse> GetTaskAsync(
+    string indexName,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetTask`.");
-
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    return await _transport.ExecuteRequestAsync<GetTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTaskResponse>(
+        new HttpMethod("GET"),
+        "/1/indexes/{indexName}/task/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public GetTaskResponse GetTask(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTaskAsync(indexName, taskID, options, cancellationToken));
-
+  public GetTaskResponse GetTask(
+    string indexName,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetTaskAsync(indexName, taskID, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<GetTopUserIdsResponse> GetTopUserIdsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<GetTopUserIdsResponse> GetTopUserIdsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<GetTopUserIdsResponse>(new HttpMethod("GET"), "/1/clusters/mapping/top", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<GetTopUserIdsResponse>(
+        new HttpMethod("GET"),
+        "/1/clusters/mapping/top",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  [Obsolete]
+  public GetTopUserIdsResponse GetTopUserIds(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetTopUserIdsAsync(options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public GetTopUserIdsResponse GetTopUserIds(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetTopUserIdsAsync(options, cancellationToken));
-
-
-  /// <inheritdoc />
-  [Obsolete]
-  public async Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UserId> GetUserIdAsync(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `GetUserId`.");
 
@@ -2806,161 +3895,265 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
 
-    return await _transport.ExecuteRequestAsync<UserId>(new HttpMethod("GET"), "/1/clusters/mapping/{userID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UserId>(
+        new HttpMethod("GET"),
+        "/1/clusters/mapping/{userID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  [Obsolete]
+  public UserId GetUserId(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetUserIdAsync(userID, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public UserId GetUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetUserIdAsync(userID, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  [Obsolete]
-  public async Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<HasPendingMappingsResponse> HasPendingMappingsAsync(
+    bool? getClusters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("getClusters", getClusters);
-    return await _transport.ExecuteRequestAsync<HasPendingMappingsResponse>(new HttpMethod("GET"), "/1/clusters/mapping/pending", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<HasPendingMappingsResponse>(
+        new HttpMethod("GET"),
+        "/1/clusters/mapping/pending",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public HasPendingMappingsResponse HasPendingMappings(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => HasPendingMappingsAsync(getClusters, options, cancellationToken));
-
+  public HasPendingMappingsResponse HasPendingMappings(
+    bool? getClusters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => HasPendingMappingsAsync(getClusters, options, cancellationToken));
 
   /// <inheritdoc />
-  public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListApiKeysResponse> ListApiKeysAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<ListApiKeysResponse>(new HttpMethod("GET"), "/1/keys", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ListApiKeysResponse>(
+        new HttpMethod("GET"),
+        "/1/keys",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public ListApiKeysResponse ListApiKeys(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListApiKeysAsync(options, cancellationToken));
-
+  public ListApiKeysResponse ListApiKeys(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ListApiKeysAsync(options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<ListClustersResponse> ListClustersAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListClustersResponse> ListClustersAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
-    return await _transport.ExecuteRequestAsync<ListClustersResponse>(new HttpMethod("GET"), "/1/clusters", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ListClustersResponse>(
+        new HttpMethod("GET"),
+        "/1/clusters",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public ListClustersResponse ListClusters(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListClustersAsync(options, cancellationToken));
-
+  public ListClustersResponse ListClusters(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ListClustersAsync(options, cancellationToken));
 
   /// <inheritdoc />
-  public async Task<ListIndicesResponse> ListIndicesAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListIndicesResponse> ListIndicesAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("hitsPerPage", hitsPerPage);
-    return await _transport.ExecuteRequestAsync<ListIndicesResponse>(new HttpMethod("GET"), "/1/indexes", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ListIndicesResponse>(
+        new HttpMethod("GET"),
+        "/1/indexes",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public ListIndicesResponse ListIndices(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListIndicesAsync(page, hitsPerPage, options, cancellationToken));
-
+  public ListIndicesResponse ListIndices(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ListIndicesAsync(page, hitsPerPage, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<ListUserIdsResponse> ListUserIdsAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListUserIdsResponse> ListUserIdsAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("hitsPerPage", hitsPerPage);
-    return await _transport.ExecuteRequestAsync<ListUserIdsResponse>(new HttpMethod("GET"), "/1/clusters/mapping", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ListUserIdsResponse>(
+        new HttpMethod("GET"),
+        "/1/clusters/mapping",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public ListUserIdsResponse ListUserIds(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, options, cancellationToken));
-
+  public ListUserIdsResponse ListUserIds(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, options, cancellationToken));
 
   /// <inheritdoc />
-  public async Task<MultipleBatchResponse> MultipleBatchAsync(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<MultipleBatchResponse> MultipleBatchAsync(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (batchParams == null)
-      throw new ArgumentException("Parameter `batchParams` is required when calling `MultipleBatch`.");
+      throw new ArgumentException(
+        "Parameter `batchParams` is required when calling `MultipleBatch`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.Data = batchParams;
-    return await _transport.ExecuteRequestAsync<MultipleBatchResponse>(new HttpMethod("POST"), "/1/indexes/*/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<MultipleBatchResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/*/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public MultipleBatchResponse MultipleBatch(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => MultipleBatchAsync(batchParams, options, cancellationToken));
 
   /// <inheritdoc />
-  public MultipleBatchResponse MultipleBatch(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => MultipleBatchAsync(batchParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> OperationIndexAsync(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> OperationIndexAsync(
+    string indexName,
+    OperationIndexParams operationIndexParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `OperationIndex`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `OperationIndex`."
+      );
 
     if (operationIndexParams == null)
-      throw new ArgumentException("Parameter `operationIndexParams` is required when calling `OperationIndex`.");
+      throw new ArgumentException(
+        "Parameter `operationIndexParams` is required when calling `OperationIndex`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = operationIndexParams;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/operation", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/operation",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse OperationIndex(
+    string indexName,
+    OperationIndexParams operationIndexParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      OperationIndexAsync(indexName, operationIndexParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse OperationIndex(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => OperationIndexAsync(indexName, operationIndexParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(string indexName, string objectID, object attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(
+    string indexName,
+    string objectID,
+    object attributesToUpdate,
+    bool? createIfNotExists = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `PartialUpdateObject`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `PartialUpdateObject`."
+      );
 
     if (objectID == null)
-      throw new ArgumentException("Parameter `objectID` is required when calling `PartialUpdateObject`.");
-
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PartialUpdateObject`."
+      );
 
     if (attributesToUpdate == null)
-      throw new ArgumentException("Parameter `attributesToUpdate` is required when calling `PartialUpdateObject`.");
+      throw new ArgumentException(
+        "Parameter `attributesToUpdate` is required when calling `PartialUpdateObject`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -2969,20 +4162,44 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddQueryParameter("createIfNotExists", createIfNotExists);
     requestOptions.Data = attributesToUpdate;
-    return await _transport.ExecuteRequestAsync<UpdatedAtWithObjectIdResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{objectID}/partial", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtWithObjectIdResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/{objectID}/partial",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public UpdatedAtWithObjectIdResponse PartialUpdateObject(string indexName, string objectID, object attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => PartialUpdateObjectAsync(indexName, objectID, attributesToUpdate, createIfNotExists, options, cancellationToken));
-
+  public UpdatedAtWithObjectIdResponse PartialUpdateObject(
+    string indexName,
+    string objectID,
+    object attributesToUpdate,
+    bool? createIfNotExists = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PartialUpdateObjectAsync(
+        indexName,
+        objectID,
+        attributesToUpdate,
+        createIfNotExists,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<RemoveUserIdResponse> RemoveUserIdAsync(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `RemoveUserId`.");
 
@@ -2990,40 +4207,61 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
 
-    return await _transport.ExecuteRequestAsync<RemoveUserIdResponse>(new HttpMethod("DELETE"), "/1/clusters/mapping/{userID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<RemoveUserIdResponse>(
+        new HttpMethod("DELETE"),
+        "/1/clusters/mapping/{userID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public RemoveUserIdResponse RemoveUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => RemoveUserIdAsync(userID, options, cancellationToken));
-
+  public RemoveUserIdResponse RemoveUserId(
+    string userID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => RemoveUserIdAsync(userID, options, cancellationToken));
 
   /// <inheritdoc />
-  public async Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ReplaceSourceResponse> ReplaceSourcesAsync(
+    List<Source> source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (source == null)
       throw new ArgumentException("Parameter `source` is required when calling `ReplaceSources`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = source;
-    return await _transport.ExecuteRequestAsync<ReplaceSourceResponse>(new HttpMethod("PUT"), "/1/security/sources", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ReplaceSourceResponse>(
+        new HttpMethod("PUT"),
+        "/1/security/sources",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ReplaceSourceResponse ReplaceSources(
+    List<Source> source,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ReplaceSourcesAsync(source, options, cancellationToken));
 
   /// <inheritdoc />
-  public ReplaceSourceResponse ReplaceSources(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ReplaceSourcesAsync(source, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<AddApiKeyResponse> RestoreApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<AddApiKeyResponse> RestoreApiKeyAsync(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `RestoreApiKey`.");
 
@@ -3031,22 +4269,33 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
-    return await _transport.ExecuteRequestAsync<AddApiKeyResponse>(new HttpMethod("POST"), "/1/keys/{key}/restore", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<AddApiKeyResponse>(
+        new HttpMethod("POST"),
+        "/1/keys/{key}/restore",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public AddApiKeyResponse RestoreApiKey(
+    string key,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => RestoreApiKeyAsync(key, options, cancellationToken));
 
   /// <inheritdoc />
-  public AddApiKeyResponse RestoreApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => RestoreApiKeyAsync(key, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SaveObjectResponse> SaveObjectAsync(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SaveObjectResponse> SaveObjectAsync(
+    string indexName,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveObject`.");
-
 
     if (body == null)
       throw new ArgumentException("Parameter `body` is required when calling `SaveObject`.");
@@ -3056,26 +4305,39 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<SaveObjectResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SaveObjectResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SaveObjectResponse SaveObject(
+    string indexName,
+    object body,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => SaveObjectAsync(indexName, body, options, cancellationToken));
 
   /// <inheritdoc />
-  public SaveObjectResponse SaveObject(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SaveObjectAsync(indexName, body, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SaveRuleAsync(
+    string indexName,
+    string objectID,
+    Rule rule,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRule`.");
 
-
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveRule`.");
-
 
     if (rule == null)
       throw new ArgumentException("Parameter `rule` is required when calling `SaveRule`.");
@@ -3087,22 +4349,41 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = rule;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("PUT"),
+        "/1/indexes/{indexName}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse SaveRule(
+    string indexName,
+    string objectID,
+    Rule rule,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveRuleAsync(indexName, objectID, rule, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SaveRuleAsync(indexName, objectID, rule, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> SaveRulesAsync(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SaveRulesAsync(
+    string indexName,
+    List<Rule> rules,
+    bool? forwardToReplicas = default,
+    bool? clearExistingRules = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRules`.");
-
 
     if (rules == null)
       throw new ArgumentException("Parameter `rules` is required when calling `SaveRules`.");
@@ -3114,26 +4395,51 @@ public partial class SearchClient : ISearchClient
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.AddQueryParameter("clearExistingRules", clearExistingRules);
     requestOptions.Data = rules;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/rules/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/rules/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse SaveRules(
+    string indexName,
+    List<Rule> rules,
+    bool? forwardToReplicas = default,
+    bool? clearExistingRules = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveRulesAsync(
+        indexName,
+        rules,
+        forwardToReplicas,
+        clearExistingRules,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse SaveRules(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SaveRulesAsync(indexName, rules, forwardToReplicas, clearExistingRules, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SaveSynonymResponse> SaveSynonymAsync(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SaveSynonymResponse> SaveSynonymAsync(
+    string indexName,
+    string objectID,
+    SynonymHit synonymHit,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonym`.");
 
-
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveSynonym`.");
-
 
     if (synonymHit == null)
       throw new ArgumentException("Parameter `synonymHit` is required when calling `SaveSynonym`.");
@@ -3145,25 +4451,53 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = synonymHit;
-    return await _transport.ExecuteRequestAsync<SaveSynonymResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/synonyms/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SaveSynonymResponse>(
+        new HttpMethod("PUT"),
+        "/1/indexes/{indexName}/synonyms/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SaveSynonymResponse SaveSynonym(
+    string indexName,
+    string objectID,
+    SynonymHit synonymHit,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveSynonymAsync(
+        indexName,
+        objectID,
+        synonymHit,
+        forwardToReplicas,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public SaveSynonymResponse SaveSynonym(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SaveSynonymAsync(indexName, objectID, synonymHit, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> SaveSynonymsAsync(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SaveSynonymsAsync(
+    string indexName,
+    List<SynonymHit> synonymHit,
+    bool? forwardToReplicas = default,
+    bool? replaceExistingSynonyms = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonyms`.");
 
-
     if (synonymHit == null)
-      throw new ArgumentException("Parameter `synonymHit` is required when calling `SaveSynonyms`.");
+      throw new ArgumentException(
+        "Parameter `synonymHit` is required when calling `SaveSynonyms`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3172,69 +4506,135 @@ public partial class SearchClient : ISearchClient
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.AddQueryParameter("replaceExistingSynonyms", replaceExistingSynonyms);
     requestOptions.Data = synonymHit;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/synonyms/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse SaveSynonyms(
+    string indexName,
+    List<SynonymHit> synonymHit,
+    bool? forwardToReplicas = default,
+    bool? replaceExistingSynonyms = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveSynonymsAsync(
+        indexName,
+        synonymHit,
+        forwardToReplicas,
+        replaceExistingSynonyms,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse SaveSynonyms(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SaveSynonymsAsync(indexName, synonymHit, forwardToReplicas, replaceExistingSynonyms, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchResponses<T>> SearchAsync<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchResponses<T>> SearchAsync<T>(
+    SearchMethodParams searchMethodParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (searchMethodParams == null)
-      throw new ArgumentException("Parameter `searchMethodParams` is required when calling `Search`.");
+      throw new ArgumentException(
+        "Parameter `searchMethodParams` is required when calling `Search`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.Data = searchMethodParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchResponses<T>>(new HttpMethod("POST"), "/1/indexes/*/queries", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchResponses<T>>(
+        new HttpMethod("POST"),
+        "/1/indexes/*/queries",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchResponses<T> Search<T>(
+    SearchMethodParams searchMethodParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => SearchAsync<T>(searchMethodParams, options, cancellationToken));
 
   /// <inheritdoc />
-  public SearchResponses<T> Search<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchAsync<T>(searchMethodParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchDictionaryEntriesResponse> SearchDictionaryEntriesAsync(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchDictionaryEntriesResponse> SearchDictionaryEntriesAsync(
+    DictionaryType dictionaryName,
+    SearchDictionaryEntriesParams searchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
-
     if (searchDictionaryEntriesParams == null)
-      throw new ArgumentException("Parameter `searchDictionaryEntriesParams` is required when calling `SearchDictionaryEntries`.");
+      throw new ArgumentException(
+        "Parameter `searchDictionaryEntriesParams` is required when calling `SearchDictionaryEntries`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("dictionaryName", QueryStringHelper.ParameterToString(dictionaryName));
+    requestOptions.PathParameters.Add(
+      "dictionaryName",
+      QueryStringHelper.ParameterToString(dictionaryName)
+    );
 
     requestOptions.Data = searchDictionaryEntriesParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchDictionaryEntriesResponse>(new HttpMethod("POST"), "/1/dictionaries/{dictionaryName}/search", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchDictionaryEntriesResponse>(
+        new HttpMethod("POST"),
+        "/1/dictionaries/{dictionaryName}/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchDictionaryEntriesResponse SearchDictionaryEntries(
+    DictionaryType dictionaryName,
+    SearchDictionaryEntriesParams searchDictionaryEntriesParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchDictionaryEntriesAsync(
+        dictionaryName,
+        searchDictionaryEntriesParams,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public SearchDictionaryEntriesResponse SearchDictionaryEntries(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchDictionaryEntriesAsync(dictionaryName, searchDictionaryEntriesParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(
+    string indexName,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `SearchForFacetValues`.");
-
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchForFacetValues`."
+      );
 
     if (facetName == null)
-      throw new ArgumentException("Parameter `facetName` is required when calling `SearchForFacetValues`.");
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3243,19 +4643,42 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.Data = searchForFacetValuesRequest;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchForFacetValuesResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/facets/{facetName}/query", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchForFacetValuesResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/facets/{facetName}/query",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchForFacetValuesResponse SearchForFacetValues(
+    string indexName,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchForFacetValuesAsync(
+        indexName,
+        facetName,
+        searchForFacetValuesRequest,
+        options,
+        cancellationToken
+      )
+    );
 
   /// <inheritdoc />
-  public SearchForFacetValuesResponse SearchForFacetValues(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchForFacetValuesAsync(indexName, facetName, searchForFacetValuesRequest, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchRulesResponse> SearchRulesAsync(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchRulesResponse> SearchRulesAsync(
+    string indexName,
+    SearchRulesParams searchRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SearchRules`.");
 
@@ -3265,21 +4688,39 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.Data = searchRulesParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchRulesResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/rules/search", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchRulesResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/rules/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchRulesResponse SearchRules(
+    string indexName,
+    SearchRulesParams searchRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchRulesAsync(indexName, searchRulesParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public SearchRulesResponse SearchRules(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchRulesAsync(indexName, searchRulesParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchResponse<T>> SearchSingleIndexAsync<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchResponse<T>> SearchSingleIndexAsync<T>(
+    string indexName,
+    SearchParams searchParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `SearchSingleIndex`.");
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSingleIndex`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3287,21 +4728,39 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.Data = searchParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchResponse<T>>(new HttpMethod("POST"), "/1/indexes/{indexName}/query", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchResponse<T>>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/query",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public SearchResponse<T> SearchSingleIndex<T>(
+    string indexName,
+    SearchParams searchParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchSingleIndexAsync<T>(indexName, searchParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public SearchResponse<T> SearchSingleIndex<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchSingleIndexAsync<T>(indexName, searchParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchSynonymsResponse> SearchSynonymsAsync(
+    string indexName,
+    SearchSynonymsParams searchSynonymsParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
-      throw new ArgumentException("Parameter `indexName` is required when calling `SearchSynonyms`.");
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSynonyms`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3309,68 +4768,114 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.Data = searchSynonymsParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchSynonymsResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/search", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchSynonymsResponse>(
+        new HttpMethod("POST"),
+        "/1/indexes/{indexName}/synonyms/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public SearchSynonymsResponse SearchSynonyms(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchSynonymsAsync(indexName, searchSynonymsParams, options, cancellationToken));
-
+  public SearchSynonymsResponse SearchSynonyms(
+    string indexName,
+    SearchSynonymsParams searchSynonymsParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchSynonymsAsync(indexName, searchSynonymsParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   [Obsolete]
-  public async Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<SearchUserIdsResponse> SearchUserIdsAsync(
+    SearchUserIdsParams searchUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (searchUserIdsParams == null)
-      throw new ArgumentException("Parameter `searchUserIdsParams` is required when calling `SearchUserIds`.");
+      throw new ArgumentException(
+        "Parameter `searchUserIdsParams` is required when calling `SearchUserIds`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.Data = searchUserIdsParams;
     requestOptions.UseReadTransporter = true;
-    return await _transport.ExecuteRequestAsync<SearchUserIdsResponse>(new HttpMethod("POST"), "/1/clusters/mapping/search", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<SearchUserIdsResponse>(
+        new HttpMethod("POST"),
+        "/1/clusters/mapping/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
-
 
   /// <inheritdoc />
   [Obsolete]
-  public SearchUserIdsResponse SearchUserIds(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public SearchUserIdsResponse SearchUserIds(
+    SearchUserIdsParams searchUserIdsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => SearchUserIdsAsync(searchUserIdsParams, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<UpdatedAtResponse> SetDictionarySettingsAsync(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SetDictionarySettingsAsync(
+    DictionarySettingsParams dictionarySettingsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (dictionarySettingsParams == null)
-      throw new ArgumentException("Parameter `dictionarySettingsParams` is required when calling `SetDictionarySettings`.");
+      throw new ArgumentException(
+        "Parameter `dictionarySettingsParams` is required when calling `SetDictionarySettings`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = dictionarySettingsParams;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("PUT"), "/1/dictionaries/*/settings", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("PUT"),
+        "/1/dictionaries/*/settings",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse SetDictionarySettings(
+    DictionarySettingsParams dictionarySettingsParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SetDictionarySettingsAsync(dictionarySettingsParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse SetDictionarySettings(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SetDictionarySettingsAsync(dictionarySettingsParams, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdatedAtResponse> SetSettingsAsync(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SetSettingsAsync(
+    string indexName,
+    IndexSettings indexSettings,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SetSettings`.");
 
-
     if (indexSettings == null)
-      throw new ArgumentException("Parameter `indexSettings` is required when calling `SetSettings`.");
+      throw new ArgumentException(
+        "Parameter `indexSettings` is required when calling `SetSettings`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3378,22 +4883,38 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = indexSettings;
-    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/settings", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdatedAtResponse>(
+        new HttpMethod("PUT"),
+        "/1/indexes/{indexName}/settings",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public UpdatedAtResponse SetSettings(
+    string indexName,
+    IndexSettings indexSettings,
+    bool? forwardToReplicas = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SetSettingsAsync(indexName, indexSettings, forwardToReplicas, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public UpdatedAtResponse SetSettings(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SetSettingsAsync(indexName, indexSettings, forwardToReplicas, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string key, ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(
+    string key,
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `UpdateApiKey`.");
-
 
     if (apiKey == null)
       throw new ArgumentException("Parameter `apiKey` is required when calling `UpdateApiKey`.");
@@ -3403,12 +4924,21 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
     requestOptions.Data = apiKey;
-    return await _transport.ExecuteRequestAsync<UpdateApiKeyResponse>(new HttpMethod("PUT"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<UpdateApiKeyResponse>(
+        new HttpMethod("PUT"),
+        "/1/keys/{key}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public UpdateApiKeyResponse UpdateApiKey(string key, ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => UpdateApiKeyAsync(key, apiKey, options, cancellationToken));
-
+  public UpdateApiKeyResponse UpdateApiKey(
+    string key,
+    ApiKey apiKey,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => UpdateApiKeyAsync(key, apiKey, options, cancellationToken));
 }

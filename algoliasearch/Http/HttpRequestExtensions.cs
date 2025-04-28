@@ -22,7 +22,9 @@ internal static class HttpRequestExtensions
   {
     if (request == null)
       throw new ArgumentNullException(nameof(request));
-    if (request.Properties.TryGetValue(TimeoutPropertyKey, out var value) && value is TimeSpan timeout)
+    if (
+      request.Properties.TryGetValue(TimeoutPropertyKey, out var value) && value is TimeSpan timeout
+    )
       return timeout;
     return null;
   }

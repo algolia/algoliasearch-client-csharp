@@ -13,5 +13,5 @@ public enum CompressionType
   /// <summary>
   /// GZip Compression. Only supported by Search API.
   /// </summary>
-  Gzip = 2
+  Gzip = 2,
 }

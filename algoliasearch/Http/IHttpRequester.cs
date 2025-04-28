@@ -18,5 +18,10 @@ public interface IHttpRequester
   /// <param name="connectTimeout">Connect timeout</param>
   /// <param name="ct">Optional cancellation token</param>
   /// <returns></returns>
-  Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout, TimeSpan connectTimeout, CancellationToken ct = default);
+  Task<AlgoliaHttpResponse> SendRequestAsync(
+    Request request,
+    TimeSpan requestTimeout,
+    TimeSpan connectTimeout,
+    CancellationToken ct = default
+  );
 }

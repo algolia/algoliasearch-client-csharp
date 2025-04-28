@@ -18,7 +18,7 @@ public class RequestOptionBuilder
     _options = new RequestOptions
     {
       Headers = new Dictionary<string, string>(),
-      QueryParameters = new Dictionary<string, object>()
+      QueryParameters = new Dictionary<string, object>(),
     };
   }
 

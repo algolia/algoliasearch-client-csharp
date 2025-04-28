@@ -10,7 +10,8 @@ namespace Algolia.Search.Serializer;
 
 internal class DefaultJsonSerializer(ILoggerFactory logger) : ISerializer
 {
-  private readonly ILogger<DefaultJsonSerializer> _logger = logger.CreateLogger<DefaultJsonSerializer>();
+  private readonly ILogger<DefaultJsonSerializer> _logger =
+    logger.CreateLogger<DefaultJsonSerializer>();
 
   /// <summary>
   /// Serialize the object into a JSON string.

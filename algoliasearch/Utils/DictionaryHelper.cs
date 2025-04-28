@@ -16,8 +16,10 @@ public static class DictionaryHelper
   /// <typeparam name="TKey"></typeparam>
   /// <typeparam name="TValue"></typeparam>
   /// <returns></returns>
-  public static IDictionary<TKey, TValue> MergeWith<TKey, TValue>(this IDictionary<TKey, TValue> a,
-    Dictionary<TKey, TValue> b)
+  public static IDictionary<TKey, TValue> MergeWith<TKey, TValue>(
+    this IDictionary<TKey, TValue> a,
+    Dictionary<TKey, TValue> b
+  )
   {
     if (a == null && b != null)
     {
@@ -29,7 +31,8 @@ public static class DictionaryHelper
       return a;
     }
 
-    var mergeWith = a?.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null))
+    var mergeWith = a
+      ?.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null))
       .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     return mergeWith;
   }

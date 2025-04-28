@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Abtesting;
 using Algolia.Search.Transport;
-using Algolia.Search.Http;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -34,7 +33,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
-  Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ABTestResponse> AddABTestsAsync(
+    AddABTestsRequest addABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Creates a new A/B test. (Synchronous version)
@@ -49,7 +52,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
-  ABTestResponse AddABTests(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ABTestResponse AddABTests(
+    AddABTestsRequest addABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -62,7 +69,12 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -75,7 +87,12 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -88,7 +105,12 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -101,7 +123,12 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -115,7 +142,13 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -129,7 +162,13 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
@@ -143,7 +182,13 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
-  Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
@@ -157,7 +202,13 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
-  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes an A/B test by its ID.
@@ -172,7 +223,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
-  Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ABTestResponse> DeleteABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Deletes an A/B test by its ID. (Synchronous version)
@@ -187,7 +242,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
-  ABTestResponse DeleteABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ABTestResponse DeleteABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
@@ -202,7 +261,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of EstimateABTestResponse</returns>
-  Task<EstimateABTestResponse> EstimateABTestAsync(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<EstimateABTestResponse> EstimateABTestAsync(
+    EstimateABTestRequest estimateABTestRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic. (Synchronous version)
@@ -217,7 +280,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>EstimateABTestResponse</returns>
-  EstimateABTestResponse EstimateABTest(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  EstimateABTestResponse EstimateABTest(
+    EstimateABTestRequest estimateABTestRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the details for an A/B test by its ID.
@@ -232,7 +299,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTest</returns>
-  Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ABTest> GetABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Retrieves the details for an A/B test by its ID. (Synchronous version)
@@ -247,7 +318,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTest</returns>
-  ABTest GetABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ABTest GetABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists all A/B tests you configured for this application.
@@ -265,7 +340,14 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListABTestsResponse</returns>
-  Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListABTestsResponse> ListABTestsAsync(
+    int? offset = default,
+    int? limit = default,
+    string indexPrefix = default,
+    string indexSuffix = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Lists all A/B tests you configured for this application. (Synchronous version)
@@ -283,10 +365,17 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListABTestsResponse</returns>
-  ListABTestsResponse ListABTests(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListABTestsResponse ListABTests(
+    int? offset = default,
+    int? limit = default,
+    string indexPrefix = default,
+    string indexSuffix = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Schedule an A/B test to be started at a later time. 
+  /// Schedule an A/B test to be started at a later time.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -298,7 +387,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ScheduleABTestResponse</returns>
-  Task<ScheduleABTestResponse> ScheduleABTestAsync(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ScheduleABTestResponse> ScheduleABTestAsync(
+    ScheduleABTestsRequest scheduleABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Schedule an A/B test to be started at a later time.  (Synchronous version)
@@ -313,10 +406,14 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ScheduleABTestResponse</returns>
-  ScheduleABTestResponse ScheduleABTest(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ScheduleABTestResponse ScheduleABTest(
+    ScheduleABTestsRequest scheduleABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
-  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests. 
+  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -328,7 +425,11 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
-  Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ABTestResponse> StopABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
@@ -343,11 +444,12 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
-  ABTestResponse StopABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
-
+  ABTestResponse StopABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
-
-
 
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
@@ -364,18 +466,26 @@ public partial class AbtestingClient : IAbtestingClient
   /// <param name="apiKey">Your API key</param>
   /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public AbtestingClient(string applicationId, string apiKey, string region = null, ILoggerFactory loggerFactory = null) : this(new AbtestingConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public AbtestingClient(
+    string applicationId,
+    string apiKey,
+    string region = null,
+    ILoggerFactory loggerFactory = null
+  )
+    : this(
+      new AbtestingConfig(applicationId, apiKey, region),
+      new AlgoliaHttpRequester(loggerFactory),
+      loggerFactory
+    )
+  { }
 
   /// <summary>
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
   /// <param name="loggerFactory">Logger factory</param>
-  public AbtestingClient(AbtestingConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
-  {
-  }
+  public AbtestingClient(AbtestingConfig config, ILoggerFactory loggerFactory = null)
+    : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory) { }
 
   /// <summary>
   /// Initialize the client with custom config and custom Requester
@@ -383,7 +493,11 @@ public partial class AbtestingClient : IAbtestingClient
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
   /// <param name="loggerFactory">Logger factory</param>
-  public AbtestingClient(AbtestingConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
+  public AbtestingClient(
+    AbtestingConfig config,
+    IHttpRequester httpRequester,
+    ILoggerFactory loggerFactory = null
+  )
   {
     if (httpRequester == null)
     {
@@ -422,32 +536,46 @@ public partial class AbtestingClient : IAbtestingClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
-
-
   /// <inheritdoc />
-  public async Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ABTestResponse> AddABTestsAsync(
+    AddABTestsRequest addABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (addABTestsRequest == null)
-      throw new ArgumentException("Parameter `addABTestsRequest` is required when calling `AddABTests`.");
+      throw new ArgumentException(
+        "Parameter `addABTestsRequest` is required when calling `AddABTests`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = addABTestsRequest;
-    return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ABTestResponse>(
+        new HttpMethod("POST"),
+        "/2/abtests",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ABTestResponse AddABTests(
+    AddABTestsRequest addABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => AddABTestsAsync(addABTestsRequest, options, cancellationToken));
 
   /// <inheritdoc />
-  public ABTestResponse AddABTests(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AddABTestsAsync(addABTestsRequest, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomDeleteAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
@@ -455,19 +583,32 @@ public partial class AbtestingClient : IAbtestingClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomDelete(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomGetAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
@@ -475,19 +616,33 @@ public partial class AbtestingClient : IAbtestingClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
-  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPostAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
@@ -496,19 +651,35 @@ public partial class AbtestingClient : IAbtestingClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPost(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<object> CustomPutAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
@@ -517,122 +688,215 @@ public partial class AbtestingClient : IAbtestingClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<object>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
-
   /// <inheritdoc />
-  public async Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ABTestResponse> DeleteABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("id", QueryStringHelper.ParameterToString(id));
 
-    return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("DELETE"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ABTestResponse>(
+        new HttpMethod("DELETE"),
+        "/2/abtests/{id}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ABTestResponse DeleteABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteABTestAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
-  public ABTestResponse DeleteABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteABTestAsync(id, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<EstimateABTestResponse> EstimateABTestAsync(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<EstimateABTestResponse> EstimateABTestAsync(
+    EstimateABTestRequest estimateABTestRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (estimateABTestRequest == null)
-      throw new ArgumentException("Parameter `estimateABTestRequest` is required when calling `EstimateABTest`.");
+      throw new ArgumentException(
+        "Parameter `estimateABTestRequest` is required when calling `EstimateABTest`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.Data = estimateABTestRequest;
-    return await _transport.ExecuteRequestAsync<EstimateABTestResponse>(new HttpMethod("POST"), "/2/abtests/estimate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<EstimateABTestResponse>(
+        new HttpMethod("POST"),
+        "/2/abtests/estimate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public EstimateABTestResponse EstimateABTest(
+    EstimateABTestRequest estimateABTestRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => EstimateABTestAsync(estimateABTestRequest, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public EstimateABTestResponse EstimateABTest(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => EstimateABTestAsync(estimateABTestRequest, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ABTest> GetABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("id", QueryStringHelper.ParameterToString(id));
 
-    return await _transport.ExecuteRequestAsync<ABTest>(new HttpMethod("GET"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ABTest>(
+        new HttpMethod("GET"),
+        "/2/abtests/{id}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ABTest GetABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetABTestAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
-  public ABTest GetABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetABTestAsync(id, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListABTestsResponse> ListABTestsAsync(
+    int? offset = default,
+    int? limit = default,
+    string indexPrefix = default,
+    string indexSuffix = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var requestOptions = new InternalRequestOptions(options);
-
 
     requestOptions.AddQueryParameter("offset", offset);
     requestOptions.AddQueryParameter("limit", limit);
     requestOptions.AddQueryParameter("indexPrefix", indexPrefix);
     requestOptions.AddQueryParameter("indexSuffix", indexSuffix);
-    return await _transport.ExecuteRequestAsync<ListABTestsResponse>(new HttpMethod("GET"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ListABTestsResponse>(
+        new HttpMethod("GET"),
+        "/2/abtests",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ListABTestsResponse ListABTests(
+    int? offset = default,
+    int? limit = default,
+    string indexPrefix = default,
+    string indexSuffix = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListABTestsAsync(offset, limit, indexPrefix, indexSuffix, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public ListABTestsResponse ListABTests(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListABTestsAsync(offset, limit, indexPrefix, indexSuffix, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ScheduleABTestResponse> ScheduleABTestAsync(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ScheduleABTestResponse> ScheduleABTestAsync(
+    ScheduleABTestsRequest scheduleABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     if (scheduleABTestsRequest == null)
-      throw new ArgumentException("Parameter `scheduleABTestsRequest` is required when calling `ScheduleABTest`.");
+      throw new ArgumentException(
+        "Parameter `scheduleABTestsRequest` is required when calling `ScheduleABTest`."
+      );
 
     var requestOptions = new InternalRequestOptions(options);
 
-
     requestOptions.Data = scheduleABTestsRequest;
-    return await _transport.ExecuteRequestAsync<ScheduleABTestResponse>(new HttpMethod("POST"), "/2/abtests/schedule", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ScheduleABTestResponse>(
+        new HttpMethod("POST"),
+        "/2/abtests/schedule",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  public ScheduleABTestResponse ScheduleABTest(
+    ScheduleABTestsRequest scheduleABTestsRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ScheduleABTestAsync(scheduleABTestsRequest, options, cancellationToken)
+    );
 
   /// <inheritdoc />
-  public ScheduleABTestResponse ScheduleABTest(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ScheduleABTestAsync(scheduleABTestsRequest, options, cancellationToken));
-
-
-  /// <inheritdoc />
-  public async Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ABTestResponse> StopABTestAsync(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
-
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("id", QueryStringHelper.ParameterToString(id));
 
-    return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests/{id}/stop", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport
+      .ExecuteRequestAsync<ABTestResponse>(
+        new HttpMethod("POST"),
+        "/2/abtests/{id}/stop",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
-
   /// <inheritdoc />
-  public ABTestResponse StopABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => StopABTestAsync(id, options, cancellationToken));
-
+  public ABTestResponse StopABTest(
+    int id,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => StopABTestAsync(id, options, cancellationToken));
 }

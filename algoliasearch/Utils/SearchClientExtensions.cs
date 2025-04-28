@@ -24,9 +24,24 @@ public partial interface ISearchClient
   /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
   /// <param name="ct">Cancellation token (optional)</param>
-  Task<GetTaskResponse> WaitForTaskAsync(string indexName, long taskId, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  Task<GetTaskResponse> WaitForTaskAsync(
+    string indexName,
+    long taskId,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
+
   /// <inheritdoc cref="WaitForTaskAsync(string, long, int, Func{int, int}, RequestOptions, CancellationToken)"/>
-  GetTaskResponse WaitForTask(string indexName, long taskId, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  GetTaskResponse WaitForTask(
+    string indexName,
+    long taskId,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
 
   /// <summary>
   /// Wait for an application-level task to complete with `taskID`.
@@ -36,9 +51,22 @@ public partial interface ISearchClient
   /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
   /// <param name="ct">Cancellation token (optional)</param>
-  Task<GetTaskResponse> WaitForAppTaskAsync(long taskId, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  Task<GetTaskResponse> WaitForAppTaskAsync(
+    long taskId,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
+
   /// <inheritdoc cref="WaitForAppTaskAsync(long, int, Func{int, int}, RequestOptions, CancellationToken)"/>
-  GetTaskResponse WaitForAppTask(long taskId, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  GetTaskResponse WaitForAppTask(
+    long taskId,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
 
   /// <summary>
   /// Helper method that waits for an API key task to be processed.
@@ -50,9 +78,26 @@ public partial interface ISearchClient
   /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
   /// <param name="ct">Cancellation token (optional)</param>
-  Task<GetApiKeyResponse> WaitForApiKeyAsync(string key, ApiKeyOperation operation, ApiKey apiKey = default, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  Task<GetApiKeyResponse> WaitForApiKeyAsync(
+    string key,
+    ApiKeyOperation operation,
+    ApiKey apiKey = default,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
+
   /// <inheritdoc cref="WaitForApiKeyAsync(string, ApiKeyOperation, ApiKey, int, Func{int, int}, RequestOptions, CancellationToken)"/>
-  GetApiKeyResponse WaitForApiKey(string key, ApiKeyOperation operation, ApiKey apiKey = default, int maxRetries = SearchClient.DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default);
+  GetApiKeyResponse WaitForApiKey(
+    string key,
+    ApiKeyOperation operation,
+    ApiKey apiKey = default,
+    int maxRetries = SearchClient.DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  );
 
   /// <summary>
   /// Iterate on the `browse` method of the client to allow aggregating objects of an index.
@@ -61,9 +106,18 @@ public partial interface ISearchClient
   /// <param name="browseParams">The `browse` parameters.</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be forwarded to the `browse` method and merged with the transporter requestOptions.</param>
   /// <typeparam name="T">The model of the record</typeparam>
-  Task<IEnumerable<T>> BrowseObjectsAsync<T>(string indexName, BrowseParamsObject browseParams, RequestOptions requestOptions = null);
+  Task<IEnumerable<T>> BrowseObjectsAsync<T>(
+    string indexName,
+    BrowseParamsObject browseParams,
+    RequestOptions requestOptions = null
+  );
+
   /// <inheritdoc cref="BrowseObjectsAsync{T}(string, BrowseParamsObject, RequestOptions)"/>
-  IEnumerable<T> BrowseObjects<T>(string indexName, BrowseParamsObject browseParams, RequestOptions requestOptions = null);
+  IEnumerable<T> BrowseObjects<T>(
+    string indexName,
+    BrowseParamsObject browseParams,
+    RequestOptions requestOptions = null
+  );
 
   /// <summary>
   /// Iterate on the `SearchRules` method of the client to allow aggregating rules of an index.
@@ -71,9 +125,18 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="searchRulesParams">The `SearchRules` parameters</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be forwarded to the `searchRules` method and merged with the transporter requestOptions.</param>
-  Task<IEnumerable<Rule>> BrowseRulesAsync(string indexName, SearchRulesParams searchRulesParams, RequestOptions requestOptions = null);
+  Task<IEnumerable<Rule>> BrowseRulesAsync(
+    string indexName,
+    SearchRulesParams searchRulesParams,
+    RequestOptions requestOptions = null
+  );
+
   /// <inheritdoc cref="BrowseRulesAsync(string, SearchRulesParams, RequestOptions)"/>
-  IEnumerable<Rule> BrowseRules(string indexName, SearchRulesParams searchRulesParams, RequestOptions requestOptions = null);
+  IEnumerable<Rule> BrowseRules(
+    string indexName,
+    SearchRulesParams searchRulesParams,
+    RequestOptions requestOptions = null
+  );
 
   /// <summary>
   /// Iterate on the `SearchSynonyms` method of the client to allow aggregating rules of an index.
@@ -81,9 +144,18 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="synonymsParams">The `SearchSynonyms` parameters.</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be forwarded to the `searchSynonyms` method and merged with the transporter requestOptions.</param>
-  Task<IEnumerable<SynonymHit>> BrowseSynonymsAsync(string indexName, SearchSynonymsParams synonymsParams, RequestOptions requestOptions = null);
+  Task<IEnumerable<SynonymHit>> BrowseSynonymsAsync(
+    string indexName,
+    SearchSynonymsParams synonymsParams,
+    RequestOptions requestOptions = null
+  );
+
   /// <inheritdoc cref="BrowseSynonymsAsync(string, SearchSynonymsParams, RequestOptions)"/>
-  IEnumerable<SynonymHit> BrowseSynonyms(string indexName, SearchSynonymsParams synonymsParams, RequestOptions requestOptions = null);
+  IEnumerable<SynonymHit> BrowseSynonyms(
+    string indexName,
+    SearchSynonymsParams synonymsParams,
+    RequestOptions requestOptions = null
+  );
 
   /// <summary>
   /// Generate a virtual API Key without any call to the server.
@@ -92,6 +164,7 @@ public partial interface ISearchClient
   /// <param name="restriction">Restriction to add the key</param>
   /// <returns></returns>
   string GenerateSecuredApiKey(string parentApiKey, SecuredApiKeyRestrictions restriction);
+
   /// <summary>
   ///  Get the remaining validity of a key generated by `GenerateSecuredApiKey`.
   /// </summary>
@@ -112,9 +185,20 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of List{SearchResponse{T}}</returns>
-  Task<List<SearchResponse<T>>> SearchForHitsAsync<T>(IEnumerable<SearchForHits> requests, SearchStrategy? searchStrategy = null, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<SearchResponse<T>>> SearchForHitsAsync<T>(
+    IEnumerable<SearchForHits> requests,
+    SearchStrategy? searchStrategy = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
   /// <inheritdoc cref="SearchForHitsAsync{T}(IEnumerable{SearchForHits}, SearchStrategy?, RequestOptions, CancellationToken)"/>
-  List<SearchResponse<T>> SearchForHits<T>(IEnumerable<SearchForHits> requests, SearchStrategy? searchStrategy = null, RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<SearchResponse<T>> SearchForHits<T>(
+    IEnumerable<SearchForHits> requests,
+    SearchStrategy? searchStrategy = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Executes a synchronous search for the provided search requests, with certainty that we will only request Algolia facets. Results will be received in the same order as the queries.
@@ -127,9 +211,20 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of List{SearchResponse{T}}</returns>
-  Task<List<SearchForFacetValuesResponse>> SearchForFacetsAsync(IEnumerable<SearchForFacets> requests, SearchStrategy? searchStrategy, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<SearchForFacetValuesResponse>> SearchForFacetsAsync(
+    IEnumerable<SearchForFacets> requests,
+    SearchStrategy? searchStrategy,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
   /// <inheritdoc cref="SearchForFacetsAsync(IEnumerable{SearchForFacets}, SearchStrategy?, RequestOptions, CancellationToken)"/>
-  List<SearchForFacetValuesResponse> SearchForFacets(IEnumerable<SearchForFacets> requests, SearchStrategy? searchStrategy, RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<SearchForFacetValuesResponse> SearchForFacets(
+    IEnumerable<SearchForFacets> requests,
+    SearchStrategy? searchStrategy,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   ///  Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
@@ -143,9 +238,26 @@ public partial interface ISearchClient
   /// <param name="scopes"> The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
+
   /// <inheritdoc cref="ReplaceAllObjectsAsync{T}(string, IEnumerable{T}, int, RequestOptions, CancellationToken)"/>
-  ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  ReplaceAllObjectsResponse ReplaceAllObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
 
   /// <summary>
   /// Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
@@ -158,9 +270,28 @@ public partial interface ISearchClient
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <typeparam name="T"></typeparam>
-  Task<List<BatchResponse>> ChunkedBatchAsync<T>(string indexName, IEnumerable<T> objects, Action action = Action.AddObject, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> ChunkedBatchAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    Action action = Action.AddObject,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
+
   /// <inheritdoc cref="ChunkedBatchAsync{T}(string, IEnumerable{T}, Action, bool, int, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> ChunkedBatch<T>(string indexName, IEnumerable<T> objects, Action action = Action.AddObject, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> ChunkedBatch<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    Action action = Action.AddObject,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
 
   /// <summary>
   /// Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
@@ -172,9 +303,26 @@ public partial interface ISearchClient
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <typeparam name="T"></typeparam>
-  Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> SaveObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
+
   /// <inheritdoc cref="SaveObjectsAsync{T}(string, IEnumerable{T}, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> SaveObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
 
   /// <summary>
   /// Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
@@ -184,9 +332,22 @@ public partial interface ISearchClient
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <typeparam name="T"></typeparam>
-  Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects, RequestOptions options, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> SaveObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    RequestOptions options,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
+
   /// <inheritdoc cref="SaveObjectsAsync{T}(string, IEnumerable{T}, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, RequestOptions options, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> SaveObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    RequestOptions options,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
 
   /// <summary>
   /// Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
@@ -197,9 +358,24 @@ public partial interface ISearchClient
   /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<List<BatchResponse>> DeleteObjectsAsync(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<BatchResponse>> DeleteObjectsAsync(
+    string indexName,
+    IEnumerable<String> objectIDs,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
   /// <inheritdoc cref="DeleteObjectsAsync(string, IEnumerable{String}, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<BatchResponse> DeleteObjects(
+    string indexName,
+    IEnumerable<String> objectIDs,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 
   /// <summary>
   /// Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
@@ -211,9 +387,28 @@ public partial interface ISearchClient
   /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool createIfNotExists,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
+
   /// <inheritdoc cref="PartialUpdateObjectsAsync{T}(string, IEnumerable{T}, bool, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> PartialUpdateObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool createIfNotExists,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class;
 
   /// <summary>
   /// Helper: Check if an index exists.
@@ -221,6 +416,7 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to check.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   Task<bool> IndexExistsAsync(string indexName, CancellationToken cancellationToken = default);
+
   /// <inheritdoc cref="IndexExistsAsync(string, CancellationToken)"/>
   bool IndexExists(string indexName, CancellationToken cancellationToken = default);
 }
@@ -233,36 +429,77 @@ public partial class SearchClient : ISearchClient
   public const int DefaultMaxRetries = 50;
 
   /// <inheritdoc/>
-  public async Task<GetTaskResponse> WaitForTaskAsync(string indexName, long taskId, int maxRetries = DefaultMaxRetries,
-    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default)
+  public async Task<GetTaskResponse> WaitForTaskAsync(
+    string indexName,
+    long taskId,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  )
   {
-    return await RetryUntil(async () => await GetTaskAsync(indexName, taskId, requestOptions, ct),
-      resp => resp.Status == Models.Search.TaskStatus.Published, maxRetries, timeout, ct).ConfigureAwait(false);
+    return await RetryUntil(
+        async () => await GetTaskAsync(indexName, taskId, requestOptions, ct),
+        resp => resp.Status == Models.Search.TaskStatus.Published,
+        maxRetries,
+        timeout,
+        ct
+      )
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public GetTaskResponse WaitForTask(string indexName, long taskId, int maxRetries = DefaultMaxRetries,
-    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default) =>
-    AsyncHelper.RunSync(() => WaitForTaskAsync(indexName, taskId, maxRetries, timeout, requestOptions, ct));
+  public GetTaskResponse WaitForTask(
+    string indexName,
+    long taskId,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      WaitForTaskAsync(indexName, taskId, maxRetries, timeout, requestOptions, ct)
+    );
 
   /// <inheritdoc/>
-  public async Task<GetTaskResponse> WaitForAppTaskAsync(long taskId, int maxRetries = DefaultMaxRetries,
-    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default)
+  public async Task<GetTaskResponse> WaitForAppTaskAsync(
+    long taskId,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  )
   {
-    return await RetryUntil(async () => await GetAppTaskAsync(taskId, requestOptions, ct),
-      resp => resp.Status == Models.Search.TaskStatus.Published, maxRetries, timeout, ct).ConfigureAwait(false);
+    return await RetryUntil(
+        async () => await GetAppTaskAsync(taskId, requestOptions, ct),
+        resp => resp.Status == Models.Search.TaskStatus.Published,
+        maxRetries,
+        timeout,
+        ct
+      )
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public GetTaskResponse WaitForAppTask(long taskId, int maxRetries = DefaultMaxRetries,
-    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default) =>
+  public GetTaskResponse WaitForAppTask(
+    long taskId,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  ) =>
     AsyncHelper.RunSync(() => WaitForAppTaskAsync(taskId, maxRetries, timeout, requestOptions, ct));
 
   /// <inheritdoc/>
-  public async Task<GetApiKeyResponse> WaitForApiKeyAsync(string key,
+  public async Task<GetApiKeyResponse> WaitForApiKeyAsync(
+    string key,
     ApiKeyOperation operation,
-    ApiKey apiKey = default, int maxRetries = DefaultMaxRetries, Func<int, int> timeout = null,
-    RequestOptions requestOptions = null, CancellationToken ct = default)
+    ApiKey apiKey = default,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  )
   {
     if (operation == ApiKeyOperation.Update)
     {
@@ -271,25 +508,32 @@ public partial class SearchClient : ISearchClient
         throw new AlgoliaException("`ApiKey` is required when waiting for an `update` operation.");
       }
 
-      return await RetryUntil(() => GetApiKeyAsync(key, requestOptions, ct),
-        resp =>
-        {
-          var apiKeyResponse = new ApiKey
+      return await RetryUntil(
+          () => GetApiKeyAsync(key, requestOptions, ct),
+          resp =>
           {
-            Acl = resp.Acl,
-            Description = resp.Description,
-            Indexes = resp.Indexes,
-            Referers = resp.Referers,
-            Validity = resp.Validity,
-            QueryParameters = resp.QueryParameters,
-            MaxHitsPerQuery = resp.MaxHitsPerQuery,
-            MaxQueriesPerIPPerHour = resp.MaxQueriesPerIPPerHour
-          };
-          return apiKeyResponse.Equals(apiKey);
-        }, maxRetries, timeout, ct).ConfigureAwait(false);
+            var apiKeyResponse = new ApiKey
+            {
+              Acl = resp.Acl,
+              Description = resp.Description,
+              Indexes = resp.Indexes,
+              Referers = resp.Referers,
+              Validity = resp.Validity,
+              QueryParameters = resp.QueryParameters,
+              MaxHitsPerQuery = resp.MaxHitsPerQuery,
+              MaxQueriesPerIPPerHour = resp.MaxQueriesPerIPPerHour,
+            };
+            return apiKeyResponse.Equals(apiKey);
+          },
+          maxRetries,
+          timeout,
+          ct
+        )
+        .ConfigureAwait(false);
     }
 
-    return await RetryUntil(async () =>
+    return await RetryUntil(
+      async () =>
       {
         try
         {
@@ -304,95 +548,137 @@ public partial class SearchClient : ISearchClient
 
           throw;
         }
-      }, (response) =>
+      },
+      (response) =>
       {
         return operation switch
         {
           ApiKeyOperation.Add =>
-            // stop either when the key is created or when we don't receive 404
-            response is not null,
+          // stop either when the key is created or when we don't receive 404
+          response is not null,
           ApiKeyOperation.Delete =>
-            // stop when the key is not found
-            response is null,
-          _ => false
+          // stop when the key is not found
+          response is null,
+          _ => false,
         };
       },
-      maxRetries, timeout, ct);
+      maxRetries,
+      timeout,
+      ct
+    );
   }
 
   /// <inheritdoc/>
-  public GetApiKeyResponse WaitForApiKey(string key, ApiKeyOperation operation, ApiKey apiKey = default,
-    int maxRetries = DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null,
-    CancellationToken ct = default) =>
-    AsyncHelper.RunSync(() => WaitForApiKeyAsync(key, operation, apiKey, maxRetries, timeout, requestOptions, ct));
-
+  public GetApiKeyResponse WaitForApiKey(
+    string key,
+    ApiKeyOperation operation,
+    ApiKey apiKey = default,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    RequestOptions requestOptions = null,
+    CancellationToken ct = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      WaitForApiKeyAsync(key, operation, apiKey, maxRetries, timeout, requestOptions, ct)
+    );
 
   /// <inheritdoc/>
-  public async Task<IEnumerable<T>> BrowseObjectsAsync<T>(string indexName, BrowseParamsObject browseParams,
-    RequestOptions requestOptions = null)
+  public async Task<IEnumerable<T>> BrowseObjectsAsync<T>(
+    string indexName,
+    BrowseParamsObject browseParams,
+    RequestOptions requestOptions = null
+  )
   {
     browseParams.HitsPerPage = 1000;
-    var all = await CreateIterable<BrowseResponse<T>>(async prevResp =>
-    {
-      browseParams.Cursor = prevResp?.Cursor;
-      return await BrowseAsync<T>(indexName, new BrowseParams(browseParams), requestOptions);
-    }, resp => resp is { Cursor: null }).ConfigureAwait(false);
+    var all = await CreateIterable<BrowseResponse<T>>(
+        async prevResp =>
+        {
+          browseParams.Cursor = prevResp?.Cursor;
+          return await BrowseAsync<T>(indexName, new BrowseParams(browseParams), requestOptions);
+        },
+        resp => resp is { Cursor: null }
+      )
+      .ConfigureAwait(false);
 
     return all.SelectMany(u => u.Hits);
   }
 
+  /// <inheritdoc/>
+  public IEnumerable<T> BrowseObjects<T>(
+    string indexName,
+    BrowseParamsObject browseParams,
+    RequestOptions requestOptions = null
+  ) => AsyncHelper.RunSync(() => BrowseObjectsAsync<T>(indexName, browseParams, requestOptions));
 
   /// <inheritdoc/>
-  public IEnumerable<T> BrowseObjects<T>(string indexName, BrowseParamsObject browseParams,
-    RequestOptions requestOptions = null) =>
-    AsyncHelper.RunSync(() => BrowseObjectsAsync<T>(indexName, browseParams, requestOptions));
-
-
-  /// <inheritdoc/>
-  public async Task<IEnumerable<Rule>> BrowseRulesAsync(string indexName, SearchRulesParams searchRulesParams,
-    RequestOptions requestOptions = null)
+  public async Task<IEnumerable<Rule>> BrowseRulesAsync(
+    string indexName,
+    SearchRulesParams searchRulesParams,
+    RequestOptions requestOptions = null
+  )
   {
     const int hitsPerPage = 1000;
     searchRulesParams.HitsPerPage = hitsPerPage;
 
-    var all = await CreateIterable<Tuple<SearchRulesResponse, int>>(async (prevResp) =>
-    {
-      var page = prevResp?.Item2 ?? 0;
-      var searchSynonymsResponse = await SearchRulesAsync(indexName, searchRulesParams, requestOptions);
-      return new Tuple<SearchRulesResponse, int>(searchSynonymsResponse, page + 1);
-    }, resp => resp?.Item1 is { Hits.Count: < hitsPerPage }).ConfigureAwait(false);
+    var all = await CreateIterable<Tuple<SearchRulesResponse, int>>(
+        async (prevResp) =>
+        {
+          var page = prevResp?.Item2 ?? 0;
+          var searchSynonymsResponse = await SearchRulesAsync(
+            indexName,
+            searchRulesParams,
+            requestOptions
+          );
+          return new Tuple<SearchRulesResponse, int>(searchSynonymsResponse, page + 1);
+        },
+        resp => resp?.Item1 is { Hits.Count: < hitsPerPage }
+      )
+      .ConfigureAwait(false);
 
     return all.SelectMany(u => u.Item1.Hits);
   }
 
   /// <inheritdoc/>
-  public IEnumerable<Rule> BrowseRules(string indexName, SearchRulesParams searchRulesParams,
-    RequestOptions requestOptions = null) =>
-    AsyncHelper.RunSync(() => BrowseRulesAsync(indexName, searchRulesParams, requestOptions));
-
+  public IEnumerable<Rule> BrowseRules(
+    string indexName,
+    SearchRulesParams searchRulesParams,
+    RequestOptions requestOptions = null
+  ) => AsyncHelper.RunSync(() => BrowseRulesAsync(indexName, searchRulesParams, requestOptions));
 
   /// <inheritdoc/>
-  public async Task<IEnumerable<SynonymHit>> BrowseSynonymsAsync(string indexName, SearchSynonymsParams synonymsParams,
-    RequestOptions requestOptions = null)
+  public async Task<IEnumerable<SynonymHit>> BrowseSynonymsAsync(
+    string indexName,
+    SearchSynonymsParams synonymsParams,
+    RequestOptions requestOptions = null
+  )
   {
     const int hitsPerPage = 1000;
     var page = synonymsParams.Page ?? 0;
     synonymsParams.HitsPerPage = hitsPerPage;
-    var all = await CreateIterable<Tuple<SearchSynonymsResponse, int>>(async (prevResp) =>
-    {
-      var searchSynonymsResponse = await SearchSynonymsAsync(indexName, synonymsParams, requestOptions);
-      page = page + 1;
-      return new Tuple<SearchSynonymsResponse, int>(searchSynonymsResponse, page);
-    }, resp => resp?.Item1 is { Hits.Count: < hitsPerPage }).ConfigureAwait(false);
+    var all = await CreateIterable<Tuple<SearchSynonymsResponse, int>>(
+        async (prevResp) =>
+        {
+          var searchSynonymsResponse = await SearchSynonymsAsync(
+            indexName,
+            synonymsParams,
+            requestOptions
+          );
+          page = page + 1;
+          return new Tuple<SearchSynonymsResponse, int>(searchSynonymsResponse, page);
+        },
+        resp => resp?.Item1 is { Hits.Count: < hitsPerPage }
+      )
+      .ConfigureAwait(false);
 
     return all.SelectMany(u => u.Item1.Hits);
   }
 
   /// <inheritdoc/>
-  public IEnumerable<SynonymHit> BrowseSynonyms(string indexName, SearchSynonymsParams synonymsParams,
-    RequestOptions requestOptions = null) =>
-    AsyncHelper.RunSync(() => BrowseSynonymsAsync(indexName, synonymsParams, requestOptions));
-
+  public IEnumerable<SynonymHit> BrowseSynonyms(
+    string indexName,
+    SearchSynonymsParams synonymsParams,
+    RequestOptions requestOptions = null
+  ) => AsyncHelper.RunSync(() => BrowseSynonymsAsync(indexName, synonymsParams, requestOptions));
 
   /// <inheritdoc/>
   public string GenerateSecuredApiKey(string parentApiKey, SecuredApiKeyRestrictions restriction)
@@ -401,7 +687,6 @@ public partial class SearchClient : ISearchClient
     var hash = HmacShaHelper.GetHash(parentApiKey, queryParams);
     return HmacShaHelper.Base64Encode($"{hash}{queryParams}");
   }
-
 
   /// <inheritdoc/>
   public TimeSpan GetSecuredApiKeyRemainingValidity(string securedApiKey)
@@ -433,43 +718,69 @@ public partial class SearchClient : ISearchClient
     return TimeSpan.FromSeconds(timeStamp - unixTime);
   }
 
-
   /// <inheritdoc/>
-  public async Task<List<SearchResponse<T>>> SearchForHitsAsync<T>(IEnumerable<SearchForHits> requests,
-    SearchStrategy? searchStrategy = null, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<List<SearchResponse<T>>> SearchForHitsAsync<T>(
+    IEnumerable<SearchForHits> requests,
+    SearchStrategy? searchStrategy = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var queries = requests.Select(t => new SearchQuery(t)).ToList();
     var searchMethod = new SearchMethodParams(queries) { Strategy = searchStrategy };
     var searchResponses = await SearchAsync<T>(searchMethod, options, cancellationToken);
-    return searchResponses.Results.Where(x => x.IsSearchResponse()).Select(x => x.AsSearchResponse()).ToList();
+    return searchResponses
+      .Results.Where(x => x.IsSearchResponse())
+      .Select(x => x.AsSearchResponse())
+      .ToList();
   }
 
   /// <inheritdoc/>
-  public List<SearchResponse<T>> SearchForHits<T>(IEnumerable<SearchForHits> requests,
-    SearchStrategy? searchStrategy = null, RequestOptions options = null,
-    CancellationToken cancellationToken = default) =>
+  public List<SearchResponse<T>> SearchForHits<T>(
+    IEnumerable<SearchForHits> requests,
+    SearchStrategy? searchStrategy = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
     AsyncHelper.RunSync(() =>
-      SearchForHitsAsync<T>(requests, searchStrategy, options, cancellationToken));
-
+      SearchForHitsAsync<T>(requests, searchStrategy, options, cancellationToken)
+    );
 
   /// <inheritdoc/>
-  public async Task<List<SearchForFacetValuesResponse>> SearchForFacetsAsync(IEnumerable<SearchForFacets> requests,
-    SearchStrategy? searchStrategy, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<List<SearchForFacetValuesResponse>> SearchForFacetsAsync(
+    IEnumerable<SearchForFacets> requests,
+    SearchStrategy? searchStrategy,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
   {
     var queries = requests.Select(t => new SearchQuery(t)).ToList();
     var searchMethod = new SearchMethodParams(queries) { Strategy = searchStrategy };
     var searchResponses = await SearchAsync<object>(searchMethod, options, cancellationToken);
-    return searchResponses.Results.Where(x => x.IsSearchForFacetValuesResponse())
-      .Select(x => x.AsSearchForFacetValuesResponse()).ToList();
+    return searchResponses
+      .Results.Where(x => x.IsSearchForFacetValuesResponse())
+      .Select(x => x.AsSearchForFacetValuesResponse())
+      .ToList();
   }
 
   /// <inheritdoc/>
-  public List<SearchForFacetValuesResponse> SearchForFacets(IEnumerable<SearchForFacets> requests,
-    SearchStrategy? searchStrategy, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => SearchForFacetsAsync(requests, searchStrategy, options, cancellationToken));
+  public List<SearchForFacetValuesResponse> SearchForFacets(
+    IEnumerable<SearchForFacets> requests,
+    SearchStrategy? searchStrategy,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchForFacetsAsync(requests, searchStrategy, options, cancellationToken)
+    );
 
-  private static async Task<T> RetryUntil<T>(Func<Task<T>> func, Func<T, bool> validate,
-    int maxRetries = DefaultMaxRetries, Func<int, int> timeout = null, CancellationToken ct = default)
+  private static async Task<T> RetryUntil<T>(
+    Func<Task<T>> func,
+    Func<T, bool> validate,
+    int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null,
+    CancellationToken ct = default
+  )
   {
     timeout ??= NextDelay;
 
@@ -487,7 +798,8 @@ public partial class SearchClient : ISearchClient
     }
 
     throw new AlgoliaException(
-      "The maximum number of retries exceeded. (" + (retryCount + 1) + "/" + maxRetries + ")");
+      "The maximum number of retries exceeded. (" + (retryCount + 1) + "/" + maxRetries + ")"
+    );
   }
 
   private static int NextDelay(int retryCount)
@@ -496,8 +808,15 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <inheritdoc/>
-  public async Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(string indexName, IEnumerable<T> objects,
-    int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class
+  public async Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class
   {
     if (objects == null)
     {
@@ -514,55 +833,105 @@ public partial class SearchClient : ISearchClient
 
     try
     {
-      var copyResponse = await OperationIndexAsync(indexName,
-          new OperationIndexParams(OperationType.Copy, tmpIndexName)
-          { Scope = scopes }, options, cancellationToken)
+      var copyResponse = await OperationIndexAsync(
+          indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName) { Scope = scopes },
+          options,
+          cancellationToken
+        )
         .ConfigureAwait(false);
 
-      var batchResponse = await ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, true, batchSize,
-        options, cancellationToken).ConfigureAwait(false);
-
-      await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      var batchResponse = await ChunkedBatchAsync(
+          tmpIndexName,
+          objects,
+          Action.AddObject,
+          true,
+          batchSize,
+          options,
+          cancellationToken
+        )
         .ConfigureAwait(false);
 
-      copyResponse = await OperationIndexAsync(indexName,
-          new OperationIndexParams(OperationType.Copy, tmpIndexName)
-          { Scope = scopes }, options, cancellationToken)
-        .ConfigureAwait(false);
-      await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
-        .ConfigureAwait(false);
-
-      var moveResponse = await OperationIndexAsync(tmpIndexName,
-          new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
+      await WaitForTaskAsync(
+          tmpIndexName,
+          copyResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
         .ConfigureAwait(false);
 
-      await WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      copyResponse = await OperationIndexAsync(
+          indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName) { Scope = scopes },
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+      await WaitForTaskAsync(
+          tmpIndexName,
+          copyResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      var moveResponse = await OperationIndexAsync(
+          tmpIndexName,
+          new OperationIndexParams(OperationType.Move, indexName),
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      await WaitForTaskAsync(
+          tmpIndexName,
+          moveResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
         .ConfigureAwait(false);
 
       return new ReplaceAllObjectsResponse
       {
         CopyOperationResponse = copyResponse,
         MoveOperationResponse = moveResponse,
-        BatchResponses = batchResponse
+        BatchResponses = batchResponse,
       };
     }
     catch (Exception ex)
     {
-      await DeleteIndexAsync(tmpIndexName, cancellationToken: cancellationToken).ConfigureAwait(false);
+      await DeleteIndexAsync(tmpIndexName, cancellationToken: cancellationToken)
+        .ConfigureAwait(false);
 
       throw ex;
     }
   }
 
   /// <inheritdoc/>
-  public ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null,
-    RequestOptions options = null, CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(indexName, objects, batchSize, scopes, options, cancellationToken));
+  public ReplaceAllObjectsResponse ReplaceAllObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class =>
+    AsyncHelper.RunSync(() =>
+      ReplaceAllObjectsAsync(indexName, objects, batchSize, scopes, options, cancellationToken)
+    );
 
   /// <inheritdoc/>
-  public async Task<List<BatchResponse>> ChunkedBatchAsync<T>(string indexName, IEnumerable<T> objects,
-    Action action = Action.AddObject, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null,
-    CancellationToken cancellationToken = default) where T : class
+  public async Task<List<BatchResponse>> ChunkedBatchAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    Action action = Action.AddObject,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class
   {
     var batchCount = (int)Math.Ceiling((double)objects.Count() / batchSize);
     var responses = new List<BatchResponse>();
@@ -570,9 +939,13 @@ public partial class SearchClient : ISearchClient
     for (var i = 0; i < batchCount; i++)
     {
       var chunk = objects.Skip(i * batchSize).Take(batchSize);
-      var batchResponse = await BatchAsync(indexName,
-        new BatchWriteParams(chunk.Select(x => new BatchRequest(action, x)).ToList()),
-        options, cancellationToken).ConfigureAwait(false);
+      var batchResponse = await BatchAsync(
+          indexName,
+          new BatchWriteParams(chunk.Select(x => new BatchRequest(action, x)).ToList()),
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
 
       responses.Add(batchResponse);
     }
@@ -581,7 +954,12 @@ public partial class SearchClient : ISearchClient
     {
       foreach (var batch in responses)
       {
-        await WaitForTaskAsync(indexName, batch.TaskID, requestOptions: options, ct: cancellationToken)
+        await WaitForTaskAsync(
+            indexName,
+            batch.TaskID,
+            requestOptions: options,
+            ct: cancellationToken
+          )
           .ConfigureAwait(false);
       }
     }
@@ -590,69 +968,174 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> ChunkedBatch<T>(string indexName, IEnumerable<T> objects, Action action = Action.AddObject,
-    bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default)
-    where T : class =>
-    AsyncHelper.RunSync(() => ChunkedBatchAsync(indexName, objects, action, waitForTasks, batchSize, options, cancellationToken));
-
-  /// <inheritdoc/>
-  public async Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects,
+  public List<BatchResponse> ChunkedBatch<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    Action action = Action.AddObject,
     bool waitForTasks = false,
     int batchSize = 1000,
     RequestOptions options = null,
-    CancellationToken cancellationToken = default) where T : class
+    CancellationToken cancellationToken = default
+  )
+    where T : class =>
+    AsyncHelper.RunSync(() =>
+      ChunkedBatchAsync(
+        indexName,
+        objects,
+        action,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc/>
+  public async Task<List<BatchResponse>> SaveObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class
   {
-    return await ChunkedBatchAsync(indexName, objects, Action.AddObject, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(
+        indexName,
+        objects,
+        Action.AddObject,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null,
-    CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => SaveObjectsAsync(indexName, objects, waitForTasks, batchSize, options, cancellationToken));
+  public List<BatchResponse> SaveObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class =>
+    AsyncHelper.RunSync(() =>
+      SaveObjectsAsync(indexName, objects, waitForTasks, batchSize, options, cancellationToken)
+    );
 
   /// <inheritdoc/>
-  public async Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects,
+  public async Task<List<BatchResponse>> SaveObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
     RequestOptions options,
-    CancellationToken cancellationToken = default) where T : class
+    CancellationToken cancellationToken = default
+  )
+    where T : class
   {
-    return await SaveObjectsAsync(indexName, objects, false, 1000, options, cancellationToken).ConfigureAwait(false);
+    return await SaveObjectsAsync(indexName, objects, false, 1000, options, cancellationToken)
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, RequestOptions options,
-    CancellationToken cancellationToken = default) where T : class =>
+  public List<BatchResponse> SaveObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    RequestOptions options,
+    CancellationToken cancellationToken = default
+  )
+    where T : class =>
     AsyncHelper.RunSync(() => SaveObjectsAsync(indexName, objects, options, cancellationToken));
 
   /// <inheritdoc/>
-  public async Task<List<BatchResponse>> DeleteObjectsAsync(string indexName, IEnumerable<String> objectIDs,
+  public async Task<List<BatchResponse>> DeleteObjectsAsync(
+    string indexName,
+    IEnumerable<String> objectIDs,
     bool waitForTasks = false,
     int batchSize = 1000,
     RequestOptions options = null,
-    CancellationToken cancellationToken = default)
+    CancellationToken cancellationToken = default
+  )
   {
-    return await ChunkedBatchAsync(indexName, objectIDs.Select(id => new { objectID = id }), Action.DeleteObject, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(
+        indexName,
+        objectIDs.Select(id => new { objectID = id }),
+        Action.DeleteObject,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null,
-    CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteObjectsAsync(indexName, objectIDs, waitForTasks, batchSize, options, cancellationToken));
-
-  /// <inheritdoc/>
-  public async Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000,
+  public List<BatchResponse> DeleteObjects(
+    string indexName,
+    IEnumerable<String> objectIDs,
+    bool waitForTasks = false,
+    int batchSize = 1000,
     RequestOptions options = null,
-    CancellationToken cancellationToken = default) where T : class
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteObjectsAsync(indexName, objectIDs, waitForTasks, batchSize, options, cancellationToken)
+    );
+
+  /// <inheritdoc/>
+  public async Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool createIfNotExists,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class
   {
-    return await ChunkedBatchAsync(indexName, objects, createIfNotExists ? Action.PartialUpdateObject : Action.PartialUpdateObjectNoCreate, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(
+        indexName,
+        objects,
+        createIfNotExists ? Action.PartialUpdateObject : Action.PartialUpdateObjectNoCreate,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000,
-    RequestOptions options = null, CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(indexName, objects, createIfNotExists, waitForTasks, batchSize, options, cancellationToken));
+  public List<BatchResponse> PartialUpdateObjects<T>(
+    string indexName,
+    IEnumerable<T> objects,
+    bool createIfNotExists,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+    where T : class =>
+    AsyncHelper.RunSync(() =>
+      PartialUpdateObjectsAsync(
+        indexName,
+        objects,
+        createIfNotExists,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+    );
 
-  private static async Task<List<TU>> CreateIterable<TU>(Func<TU, Task<TU>> executeQuery,
-    Func<TU, bool> stopCondition)
+  private static async Task<List<TU>> CreateIterable<TU>(
+    Func<TU, Task<TU>> executeQuery,
+    Func<TU, bool> stopCondition
+  )
   {
     var responses = new List<TU>();
     var current = default(TU);
@@ -667,7 +1150,10 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <inheritdoc/>
-  public async Task<bool> IndexExistsAsync(string indexName, CancellationToken cancellationToken = default)
+  public async Task<bool> IndexExistsAsync(
+    string indexName,
+    CancellationToken cancellationToken = default
+  )
   {
     try
     {
@@ -686,5 +1172,6 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <inheritdoc/>
-  public bool IndexExists(string indexName, CancellationToken cancellationToken = default) => AsyncHelper.RunSync(() => IndexExistsAsync(indexName, cancellationToken));
+  public bool IndexExists(string indexName, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => IndexExistsAsync(indexName, cancellationToken));
 }

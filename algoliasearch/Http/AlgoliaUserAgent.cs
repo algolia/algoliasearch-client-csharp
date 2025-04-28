@@ -47,7 +47,6 @@ public class AlgoliaUserAgent
     _segments.Add(new KeyValuePair<string, string>(key, value));
   }
 
-
   /// <summary>
   /// Create a valid user-agent header
   /// </summary>
