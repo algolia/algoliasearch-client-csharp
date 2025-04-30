@@ -1,3 +1,8 @@
+## [7.16.5](https://github.com/algolia/algoliasearch-client-csharp/compare/7.16.4...7.16.5)
+
+- [9ea9937b3b](https://github.com/algolia/api-clients-automation/commit/9ea9937b3b) chore(specs): Prepare Composition API for GA and remove Beta wording ([#4761](https://github.com/algolia/api-clients-automation/pull/4761)) by [@e-krebs](https://github.com/e-krebs/)
+- [53ac749807](https://github.com/algolia/api-clients-automation/commit/53ac749807) chore(deps): dependencies 2025-04-28 ([#4785](https://github.com/algolia/api-clients-automation/pull/4785)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [7.16.4](https://github.com/algolia/algoliasearch-client-csharp/compare/7.16.3...7.16.4)
 
 - [ae2d0f077](https://github.com/algolia/api-clients-automation/commit/ae2d0f077) docs(personalization): add rate limit information for personalization API ([#4725](https://github.com/algolia/api-clients-automation/pull/4725)) by [@Keylor42](https://github.com/Keylor42/)
