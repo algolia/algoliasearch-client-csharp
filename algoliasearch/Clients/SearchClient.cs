@@ -743,7 +743,7 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).
+  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteBy` operation](#tag/Records/operation/deleteBy).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -764,7 +764,7 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).  (Synchronous version)
+  /// Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteBy` operation](#tag/Records/operation/deleteBy).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
