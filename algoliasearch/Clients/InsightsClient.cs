@@ -175,6 +175,9 @@ public interface IInsightsClient
   /// <summary>
   /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteObject
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -191,6 +194,9 @@ public interface IInsightsClient
   /// <summary>
   /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteObject
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -207,6 +213,9 @@ public interface IInsightsClient
   /// <summary>
   /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -223,6 +232,9 @@ public interface IInsightsClient
   /// <summary>
   /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
