@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 using Algolia.Search.Utils;
 
@@ -14,7 +15,7 @@ internal static class HttpRequestHeadersExtensions
   /// <returns></returns>
   internal static void Fill(this HttpRequestHeaders headers, IDictionary<string, string> dictionary)
   {
-    foreach (var header in dictionary)
+    foreach (var header in dictionary.ToList())
     {
       headers.TryAddWithoutValidation(header.Key, header.Value);
     }
