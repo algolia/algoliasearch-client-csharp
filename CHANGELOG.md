@@ -1,3 +1,9 @@
+## [7.17.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.16.5...7.17.0)
+
+- [bebb56e0b9](https://github.com/algolia/api-clients-automation/commit/bebb56e0b9) fix(specs): add x-acl to insights endpoints ([#4822](https://github.com/algolia/api-clients-automation/pull/4822)) by [@kai687](https://github.com/kai687/)
+- [d6e67a47a9](https://github.com/algolia/api-clients-automation/commit/d6e67a47a9) fix(clients): InvalidOperationException in C# Fill() due to unsafe dictionary enumeration ([#4820](https://github.com/algolia/api-clients-automation/pull/4820)) by [@reneemundie](https://github.com/reneemundie/)
+- [7e226c4559](https://github.com/algolia/api-clients-automation/commit/7e226c4559) feat(scripts): add push to mcp-node on release ([#4784](https://github.com/algolia/api-clients-automation/pull/4784)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [7.16.5](https://github.com/algolia/algoliasearch-client-csharp/compare/7.16.4...7.16.5)
 
 - [9ea9937b3b](https://github.com/algolia/api-clients-automation/commit/9ea9937b3b) chore(specs): Prepare Composition API for GA and remove Beta wording ([#4761](https://github.com/algolia/api-clients-automation/pull/4761)) by [@e-krebs](https://github.com/e-krebs/)
