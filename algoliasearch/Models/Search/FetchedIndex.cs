@@ -39,8 +39,8 @@ public partial class FetchedIndex
     string createdAt,
     string updatedAt,
     int entries,
-    int dataSize,
-    int fileSize,
+    long dataSize,
+    long fileSize,
     int lastBuildTimeS,
     int numberOfPendingTasks,
     bool pendingTask
@@ -90,14 +90,14 @@ public partial class FetchedIndex
   /// </summary>
   /// <value>Number of bytes of the index in minified format.</value>
   [JsonPropertyName("dataSize")]
-  public int DataSize { get; set; }
+  public long DataSize { get; set; }
 
   /// <summary>
   /// Number of bytes of the index binary file.
   /// </summary>
   /// <value>Number of bytes of the index binary file.</value>
   [JsonPropertyName("fileSize")]
-  public int FileSize { get; set; }
+  public long FileSize { get; set; }
 
   /// <summary>
   /// Last build time.
