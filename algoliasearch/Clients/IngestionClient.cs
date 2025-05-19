@@ -1685,7 +1685,57 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data/), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<WatchResponse> PushAsync(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data/), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  WatchResponse Push(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data/), this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1693,7 +1743,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
-  /// <param name="pushTaskPayload">Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="pushTaskPayload"></param>
   /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1710,7 +1760,7 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints. (Synchronous version)
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data/), this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1718,7 +1768,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
-  /// <param name="pushTaskPayload">Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="pushTaskPayload"></param>
   /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -4103,6 +4153,52 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ListTransformationsAsync(itemsPerPage, page, sort, order, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<WatchResponse> PushAsync(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `Push`.");
+
+    if (pushTaskPayload == null)
+      throw new ArgumentException("Parameter `pushTaskPayload` is required when calling `Push`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    requestOptions.AddQueryParameter("watch", watch);
+    requestOptions.Data = pushTaskPayload;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<WatchResponse>(
+        new HttpMethod("POST"),
+        "/1/push/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public WatchResponse Push(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PushAsync(indexName, pushTaskPayload, watch, options, cancellationToken)
     );
 
   /// <inheritdoc />

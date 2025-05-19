@@ -41,22 +41,4 @@ public enum Action
   /// </summary>
   [JsonPropertyName("partialUpdateObjectNoCreate")]
   PartialUpdateObjectNoCreate = 4,
-
-  /// <summary>
-  /// Enum DeleteObject for value: deleteObject
-  /// </summary>
-  [JsonPropertyName("deleteObject")]
-  DeleteObject = 5,
-
-  /// <summary>
-  /// Enum Delete for value: delete
-  /// </summary>
-  [JsonPropertyName("delete")]
-  Delete = 6,
-
-  /// <summary>
-  /// Enum Clear for value: clear
-  /// </summary>
-  [JsonPropertyName("clear")]
-  Clear = 7,
 }
