@@ -39,6 +39,13 @@ public partial class WatchResponse
   public string RunID { get; set; }
 
   /// <summary>
+  /// Universally unique identifier (UUID) of an event.
+  /// </summary>
+  /// <value>Universally unique identifier (UUID) of an event.</value>
+  [JsonPropertyName("eventID")]
+  public string EventID { get; set; }
+
+  /// <summary>
   /// when used with discovering or validating sources, the sampled data of your source is returned.
   /// </summary>
   /// <value>when used with discovering or validating sources, the sampled data of your source is returned.</value>
@@ -60,6 +67,13 @@ public partial class WatchResponse
   public string Message { get; set; }
 
   /// <summary>
+  /// Date of creation in RFC 3339 format.
+  /// </summary>
+  /// <value>Date of creation in RFC 3339 format.</value>
+  [JsonPropertyName("createdAt")]
+  public string CreatedAt { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -68,9 +82,11 @@ public partial class WatchResponse
     StringBuilder sb = new StringBuilder();
     sb.Append("class WatchResponse {\n");
     sb.Append("  RunID: ").Append(RunID).Append("\n");
+    sb.Append("  EventID: ").Append(EventID).Append("\n");
     sb.Append("  Data: ").Append(Data).Append("\n");
     sb.Append("  Events: ").Append(Events).Append("\n");
     sb.Append("  Message: ").Append(Message).Append("\n");
+    sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -97,6 +113,7 @@ public partial class WatchResponse
     }
 
     return (RunID == input.RunID || (RunID != null && RunID.Equals(input.RunID)))
+      && (EventID == input.EventID || (EventID != null && EventID.Equals(input.EventID)))
       && (
         Data == input.Data || Data != null && input.Data != null && Data.SequenceEqual(input.Data)
       )
@@ -104,7 +121,8 @@ public partial class WatchResponse
         Events == input.Events
         || Events != null && input.Events != null && Events.SequenceEqual(input.Events)
       )
-      && (Message == input.Message || (Message != null && Message.Equals(input.Message)));
+      && (Message == input.Message || (Message != null && Message.Equals(input.Message)))
+      && (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt)));
   }
 
   /// <summary>
@@ -120,6 +138,10 @@ public partial class WatchResponse
       {
         hashCode = (hashCode * 59) + RunID.GetHashCode();
       }
+      if (EventID != null)
+      {
+        hashCode = (hashCode * 59) + EventID.GetHashCode();
+      }
       if (Data != null)
       {
         hashCode = (hashCode * 59) + Data.GetHashCode();
@@ -131,6 +153,10 @@ public partial class WatchResponse
       if (Message != null)
       {
         hashCode = (hashCode * 59) + Message.GetHashCode();
+      }
+      if (CreatedAt != null)
+      {
+        hashCode = (hashCode * 59) + CreatedAt.GetHashCode();
       }
       return hashCode;
     }
