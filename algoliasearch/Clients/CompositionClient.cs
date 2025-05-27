@@ -228,7 +228,8 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => SearchAsync<T>(compositionID, requestBody, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      SearchAsync<T>(compositionID, requestBody, options, cancellationToken)
     );
 
   /// <inheritdoc />

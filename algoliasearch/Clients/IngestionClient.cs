@@ -2788,7 +2788,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => CreateDestinationAsync(destinationCreate, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      CreateDestinationAsync(destinationCreate, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4282,7 +4283,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => RunSourceAsync(sourceID, runSourcePayload, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      RunSourceAsync(sourceID, runSourcePayload, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4415,7 +4417,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => SearchDestinationsAsync(destinationSearch, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      SearchDestinationsAsync(destinationSearch, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4584,7 +4587,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => TriggerDockerSourceDiscoverAsync(sourceID, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      TriggerDockerSourceDiscoverAsync(sourceID, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4618,7 +4622,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => TryTransformationAsync(transformationTry, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      TryTransformationAsync(transformationTry, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4805,7 +4810,8 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => UpdateSourceAsync(sourceID, sourceUpdate, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      UpdateSourceAsync(sourceID, sourceUpdate, options, cancellationToken)
     );
 
   /// <inheritdoc />

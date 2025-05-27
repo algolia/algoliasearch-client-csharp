@@ -555,7 +555,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => CreateConfigAsync(configurationWithIndex, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      CreateConfigAsync(configurationWithIndex, options, cancellationToken)
     );
 
   /// <inheritdoc />

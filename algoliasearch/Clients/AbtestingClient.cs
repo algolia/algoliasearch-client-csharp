@@ -767,7 +767,8 @@ public partial class AbtestingClient : IAbtestingClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
-    AsyncHelper.RunSync(() => EstimateABTestAsync(estimateABTestRequest, options, cancellationToken)
+    AsyncHelper.RunSync(() =>
+      EstimateABTestAsync(estimateABTestRequest, options, cancellationToken)
     );
 
   /// <inheritdoc />
