@@ -29,4 +29,16 @@ public enum TypoToleranceEnum
   /// </summary>
   [JsonPropertyName("strict")]
   Strict = 2,
+
+  /// <summary>
+  /// Enum True for value: true
+  /// </summary>
+  [JsonPropertyName("true")]
+  True = 3,
+
+  /// <summary>
+  /// Enum False for value: false
+  /// </summary>
+  [JsonPropertyName("false")]
+  False = 4,
 }

@@ -22,16 +22,6 @@ public partial class TypoTolerance : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the TypoTolerance class
-  /// with a bool
-  /// </summary>
-  /// <param name="actualInstance">An instance of bool.</param>
-  public TypoTolerance(bool actualInstance)
-  {
-    ActualInstance = actualInstance;
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the TypoTolerance class
   /// with a TypoToleranceEnum
   /// </summary>
   /// <param name="actualInstance">An instance of TypoToleranceEnum.</param>
@@ -41,19 +31,19 @@ public partial class TypoTolerance : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the TypoTolerance class
+  /// with a bool
+  /// </summary>
+  /// <param name="actualInstance">An instance of bool.</param>
+  public TypoTolerance(bool actualInstance)
+  {
+    ActualInstance = actualInstance;
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
-
-  /// <summary>
-  /// Get the actual instance of `bool`. If the actual instance is not `bool`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of bool</returns>
-  public bool AsBool()
-  {
-    return (bool)ActualInstance;
-  }
 
   /// <summary>
   /// Get the actual instance of `TypoToleranceEnum`. If the actual instance is not `TypoToleranceEnum`,
@@ -66,12 +56,13 @@ public partial class TypoTolerance : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `bool` type.
+  /// Get the actual instance of `bool`. If the actual instance is not `bool`,
+  /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsBool()
+  /// <returns>An instance of bool</returns>
+  public bool AsBool()
   {
-    return ActualInstance.GetType() == typeof(bool);
+    return (bool)ActualInstance;
   }
 
   /// <summary>
@@ -81,6 +72,15 @@ public partial class TypoTolerance : AbstractSchema
   public bool IsTypoToleranceEnum()
   {
     return ActualInstance.GetType() == typeof(TypoToleranceEnum);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `bool` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsBool()
+  {
+    return ActualInstance.GetType() == typeof(bool);
   }
 
   /// <summary>
@@ -166,18 +166,6 @@ public class TypoToleranceJsonConverter : JsonConverter<TypoTolerance>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.True || root.ValueKind == JsonValueKind.False)
-    {
-      try
-      {
-        return new TypoTolerance(jsonDocument.Deserialize<bool>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into bool: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.String)
     {
       try
@@ -190,6 +178,18 @@ public class TypoToleranceJsonConverter : JsonConverter<TypoTolerance>
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into TypoToleranceEnum: {exception}"
         );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.True || root.ValueKind == JsonValueKind.False)
+    {
+      try
+      {
+        return new TypoTolerance(jsonDocument.Deserialize<bool>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into bool: {exception}");
       }
     }
     throw new InvalidDataException(
