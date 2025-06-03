@@ -25,7 +25,7 @@ public partial class TransformationTry
   /// <summary>
   /// Initializes a new instance of the TransformationTry class.
   /// </summary>
-  /// <param name="code">The source code of the transformation. (required).</param>
+  /// <param name="code">It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required).</param>
   /// <param name="sampleRecord">The record to apply the given code to. (required).</param>
   public TransformationTry(string code, object sampleRecord)
   {
@@ -34,10 +34,11 @@ public partial class TransformationTry
   }
 
   /// <summary>
-  /// The source code of the transformation.
+  /// It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
   /// </summary>
-  /// <value>The source code of the transformation.</value>
+  /// <value>It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.</value>
   [JsonPropertyName("code")]
+  [Obsolete]
   public string Code { get; set; }
 
   /// <summary>

@@ -17,6 +17,12 @@ namespace Algolia.Search.Models.Ingestion;
 public partial class TransformationCreate
 {
   /// <summary>
+  /// Gets or Sets Type
+  /// </summary>
+  [JsonPropertyName("type")]
+  public TransformationType? Type { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the TransformationCreate class.
   /// </summary>
   [JsonConstructor]
@@ -25,19 +31,22 @@ public partial class TransformationCreate
   /// <summary>
   /// Initializes a new instance of the TransformationCreate class.
   /// </summary>
-  /// <param name="code">The source code of the transformation. (required).</param>
   /// <param name="name">The uniquely identified name of your transformation. (required).</param>
-  public TransformationCreate(string code, string name)
+  /// <param name="type">type (required).</param>
+  /// <param name="input">input (required).</param>
+  public TransformationCreate(string name, TransformationType? type, TransformationInput input)
   {
-    Code = code ?? throw new ArgumentNullException(nameof(code));
     Name = name ?? throw new ArgumentNullException(nameof(name));
+    Type = type;
+    Input = input ?? throw new ArgumentNullException(nameof(input));
   }
 
   /// <summary>
-  /// The source code of the transformation.
+  /// It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
   /// </summary>
-  /// <value>The source code of the transformation.</value>
+  /// <value>It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.</value>
   [JsonPropertyName("code")]
+  [Obsolete]
   public string Code { get; set; }
 
   /// <summary>
@@ -46,6 +55,12 @@ public partial class TransformationCreate
   /// <value>The uniquely identified name of your transformation.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Input
+  /// </summary>
+  [JsonPropertyName("input")]
+  public TransformationInput Input { get; set; }
 
   /// <summary>
   /// A descriptive name for your transformation of what it does.
@@ -71,6 +86,8 @@ public partial class TransformationCreate
     sb.Append("class TransformationCreate {\n");
     sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
+    sb.Append("  Type: ").Append(Type).Append("\n");
+    sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  AuthenticationIDs: ").Append(AuthenticationIDs).Append("\n");
     sb.Append("}\n");
@@ -100,6 +117,8 @@ public partial class TransformationCreate
 
     return (Code == input.Code || (Code != null && Code.Equals(input.Code)))
       && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
+      && (Type == input.Type || Type.Equals(input.Type))
+      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
       && (
         Description == input.Description
         || (Description != null && Description.Equals(input.Description))
@@ -128,6 +147,11 @@ public partial class TransformationCreate
       if (Name != null)
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + Type.GetHashCode();
+      if (Input != null)
+      {
+        hashCode = (hashCode * 59) + Input.GetHashCode();
       }
       if (Description != null)
       {

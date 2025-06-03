@@ -17,6 +17,12 @@ namespace Algolia.Search.Models.Ingestion;
 public partial class Transformation
 {
   /// <summary>
+  /// Gets or Sets Type
+  /// </summary>
+  [JsonPropertyName("type")]
+  public TransformationType? Type { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the Transformation class.
   /// </summary>
   [JsonConstructor]
@@ -26,7 +32,7 @@ public partial class Transformation
   /// Initializes a new instance of the Transformation class.
   /// </summary>
   /// <param name="transformationID">Universally unique identifier (UUID) of a transformation. (required).</param>
-  /// <param name="code">The source code of the transformation. (required).</param>
+  /// <param name="code">It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required).</param>
   /// <param name="name">The uniquely identified name of your transformation. (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
   /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
@@ -61,11 +67,18 @@ public partial class Transformation
   public List<string> AuthenticationIDs { get; set; }
 
   /// <summary>
-  /// The source code of the transformation.
+  /// It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
   /// </summary>
-  /// <value>The source code of the transformation.</value>
+  /// <value>It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.</value>
   [JsonPropertyName("code")]
+  [Obsolete]
   public string Code { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Input
+  /// </summary>
+  [JsonPropertyName("input")]
+  public TransformationInput Input { get; set; }
 
   /// <summary>
   /// The uniquely identified name of your transformation.
@@ -113,6 +126,8 @@ public partial class Transformation
     sb.Append("  TransformationID: ").Append(TransformationID).Append("\n");
     sb.Append("  AuthenticationIDs: ").Append(AuthenticationIDs).Append("\n");
     sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("  Type: ").Append(Type).Append("\n");
+    sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  Owner: ").Append(Owner).Append("\n");
@@ -154,6 +169,8 @@ public partial class Transformation
           && AuthenticationIDs.SequenceEqual(input.AuthenticationIDs)
       )
       && (Code == input.Code || (Code != null && Code.Equals(input.Code)))
+      && (Type == input.Type || Type.Equals(input.Type))
+      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
       && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
       && (
         Description == input.Description
@@ -184,6 +201,11 @@ public partial class Transformation
       if (Code != null)
       {
         hashCode = (hashCode * 59) + Code.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + Type.GetHashCode();
+      if (Input != null)
+      {
+        hashCode = (hashCode * 59) + Input.GetHashCode();
       }
       if (Name != null)
       {
