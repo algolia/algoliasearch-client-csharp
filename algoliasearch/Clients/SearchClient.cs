@@ -1233,7 +1233,7 @@ public partial interface ISearchClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - search
+  ///   - settings
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1252,7 +1252,7 @@ public partial interface ISearchClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - search
+  ///   - settings
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
