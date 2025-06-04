@@ -9,7 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Algolia.Search.Serializer;
 
-namespace Algolia.Search.Models.Ingestion;
+namespace Algolia.Search.Models.Search;
 
 /// <summary>
 /// WatchResponse
