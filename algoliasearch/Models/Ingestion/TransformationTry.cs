@@ -17,6 +17,12 @@ namespace Algolia.Search.Models.Ingestion;
 public partial class TransformationTry
 {
   /// <summary>
+  /// Gets or Sets Type
+  /// </summary>
+  [JsonPropertyName("type")]
+  public TransformationType? Type { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the TransformationTry class.
   /// </summary>
   [JsonConstructor]
@@ -25,11 +31,9 @@ public partial class TransformationTry
   /// <summary>
   /// Initializes a new instance of the TransformationTry class.
   /// </summary>
-  /// <param name="code">It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required).</param>
   /// <param name="sampleRecord">The record to apply the given code to. (required).</param>
-  public TransformationTry(string code, object sampleRecord)
+  public TransformationTry(object sampleRecord)
   {
-    Code = code ?? throw new ArgumentNullException(nameof(code));
     SampleRecord = sampleRecord ?? throw new ArgumentNullException(nameof(sampleRecord));
   }
 
@@ -40,6 +44,12 @@ public partial class TransformationTry
   [JsonPropertyName("code")]
   [Obsolete]
   public string Code { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Input
+  /// </summary>
+  [JsonPropertyName("input")]
+  public TransformationInput Input { get; set; }
 
   /// <summary>
   /// The record to apply the given code to.
@@ -63,6 +73,8 @@ public partial class TransformationTry
     StringBuilder sb = new StringBuilder();
     sb.Append("class TransformationTry {\n");
     sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("  Type: ").Append(Type).Append("\n");
+    sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  SampleRecord: ").Append(SampleRecord).Append("\n");
     sb.Append("  Authentications: ").Append(Authentications).Append("\n");
     sb.Append("}\n");
@@ -91,6 +103,8 @@ public partial class TransformationTry
     }
 
     return (Code == input.Code || (Code != null && Code.Equals(input.Code)))
+      && (Type == input.Type || Type.Equals(input.Type))
+      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
       && (
         SampleRecord == input.SampleRecord
         || (SampleRecord != null && SampleRecord.Equals(input.SampleRecord))
@@ -115,6 +129,11 @@ public partial class TransformationTry
       if (Code != null)
       {
         hashCode = (hashCode * 59) + Code.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + Type.GetHashCode();
+      if (Input != null)
+      {
+        hashCode = (hashCode * 59) + Input.GetHashCode();
       }
       if (SampleRecord != null)
       {

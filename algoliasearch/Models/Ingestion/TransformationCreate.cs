@@ -32,13 +32,9 @@ public partial class TransformationCreate
   /// Initializes a new instance of the TransformationCreate class.
   /// </summary>
   /// <param name="name">The uniquely identified name of your transformation. (required).</param>
-  /// <param name="type">type (required).</param>
-  /// <param name="input">input (required).</param>
-  public TransformationCreate(string name, TransformationType? type, TransformationInput input)
+  public TransformationCreate(string name)
   {
     Name = name ?? throw new ArgumentNullException(nameof(name));
-    Type = type;
-    Input = input ?? throw new ArgumentNullException(nameof(input));
   }
 
   /// <summary>
