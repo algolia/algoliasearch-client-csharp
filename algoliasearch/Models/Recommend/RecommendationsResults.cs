@@ -25,11 +25,9 @@ public partial class RecommendationsResults
   /// <summary>
   /// Initializes a new instance of the RecommendationsResults class.
   /// </summary>
-  /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
   /// <param name="hits">hits (required).</param>
-  public RecommendationsResults(int processingTimeMS, List<RecommendationsHit> hits)
+  public RecommendationsResults(List<RecommendationsHit> hits)
   {
-    ProcessingTimeMS = processingTimeMS;
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
   }
 
@@ -152,7 +150,7 @@ public partial class RecommendationsResults
   /// </summary>
   /// <value>Time the server took to process the request, in milliseconds.</value>
   [JsonPropertyName("processingTimeMS")]
-  public int ProcessingTimeMS { get; set; }
+  public int? ProcessingTimeMS { get; set; }
 
   /// <summary>
   /// Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.

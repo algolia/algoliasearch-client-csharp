@@ -25,7 +25,6 @@ public partial class SearchResultsItem<T>
   /// <summary>
   /// Initializes a new instance of the SearchResultsItem class.
   /// </summary>
-  /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
   /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
   /// <param name="nbPages">Number of pages of results. (required).</param>
@@ -35,7 +34,6 @@ public partial class SearchResultsItem<T>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
   /// <param name="compositions">compositions (required).</param>
   public SearchResultsItem(
-    int processingTimeMS,
     int page,
     int nbHits,
     int nbPages,
@@ -46,7 +44,6 @@ public partial class SearchResultsItem<T>
     Dictionary<string, ResultsCompositionInfoResponse> compositions
   )
   {
-    ProcessingTimeMS = processingTimeMS;
     Page = page;
     NbHits = nbHits;
     NbPages = nbPages;
@@ -176,7 +173,7 @@ public partial class SearchResultsItem<T>
   /// </summary>
   /// <value>Time the server took to process the request, in milliseconds.</value>
   [JsonPropertyName("processingTimeMS")]
-  public int ProcessingTimeMS { get; set; }
+  public int? ProcessingTimeMS { get; set; }
 
   /// <summary>
   /// Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
