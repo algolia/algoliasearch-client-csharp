@@ -1695,6 +1695,7 @@ public interface IIngestionClient
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="pushTaskPayload"></param>
   /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="referenceIndexName">This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1705,6 +1706,7 @@ public interface IIngestionClient
     string indexName,
     PushTaskPayload pushTaskPayload,
     bool? watch = default,
+    string referenceIndexName = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1720,6 +1722,7 @@ public interface IIngestionClient
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="pushTaskPayload"></param>
   /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="referenceIndexName">This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1730,6 +1733,7 @@ public interface IIngestionClient
     string indexName,
     PushTaskPayload pushTaskPayload,
     bool? watch = default,
+    string referenceIndexName = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -4161,6 +4165,7 @@ public partial class IngestionClient : IIngestionClient
     string indexName,
     PushTaskPayload pushTaskPayload,
     bool? watch = default,
+    string referenceIndexName = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4176,6 +4181,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("watch", watch);
+    requestOptions.AddQueryParameter("referenceIndexName", referenceIndexName);
     requestOptions.Data = pushTaskPayload;
     requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
     requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
@@ -4195,11 +4201,12 @@ public partial class IngestionClient : IIngestionClient
     string indexName,
     PushTaskPayload pushTaskPayload,
     bool? watch = default,
+    string referenceIndexName = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      PushAsync(indexName, pushTaskPayload, watch, options, cancellationToken)
+      PushAsync(indexName, pushTaskPayload, watch, referenceIndexName, options, cancellationToken)
     );
 
   /// <inheritdoc />
