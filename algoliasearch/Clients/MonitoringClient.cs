@@ -23,7 +23,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -41,7 +41,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -59,7 +59,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -77,7 +77,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -95,7 +95,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -115,7 +115,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -135,7 +135,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API.
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -155,7 +155,7 @@ public interface IMonitoringClient
   /// <summary>
   /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
