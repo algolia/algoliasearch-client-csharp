@@ -50,6 +50,13 @@ public partial class Currency
   public double? StandardDeviation { get; set; }
 
   /// <summary>
+  /// The amount of revenue for this currency that was removed after capping purchase amounts to the 95th percentile.
+  /// </summary>
+  /// <value>The amount of revenue for this currency that was removed after capping purchase amounts to the 95th percentile.</value>
+  [JsonPropertyName("winsorizedAmount")]
+  public double? WinsorizedAmount { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -61,6 +68,7 @@ public partial class Currency
     sb.Append("  Revenue: ").Append(Revenue).Append("\n");
     sb.Append("  Mean: ").Append(Mean).Append("\n");
     sb.Append("  StandardDeviation: ").Append(StandardDeviation).Append("\n");
+    sb.Append("  WinsorizedAmount: ").Append(WinsorizedAmount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -95,6 +103,10 @@ public partial class Currency
       && (
         StandardDeviation == input.StandardDeviation
         || StandardDeviation.Equals(input.StandardDeviation)
+      )
+      && (
+        WinsorizedAmount == input.WinsorizedAmount
+        || WinsorizedAmount.Equals(input.WinsorizedAmount)
       );
   }
 
@@ -114,6 +126,7 @@ public partial class Currency
       hashCode = (hashCode * 59) + Revenue.GetHashCode();
       hashCode = (hashCode * 59) + Mean.GetHashCode();
       hashCode = (hashCode * 59) + StandardDeviation.GetHashCode();
+      hashCode = (hashCode * 59) + WinsorizedAmount.GetHashCode();
       return hashCode;
     }
   }
