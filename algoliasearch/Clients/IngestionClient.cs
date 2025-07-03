@@ -1789,7 +1789,7 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+  /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1812,7 +1812,7 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task. (Synchronous version)
+  /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

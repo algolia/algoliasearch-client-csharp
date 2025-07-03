@@ -28,23 +28,23 @@ public partial class RunSourcePayload
   public RunSourcePayload() { }
 
   /// <summary>
-  /// List of index names to include in reidexing/update.
+  /// List of index names to include in reindex/update.
   /// </summary>
-  /// <value>List of index names to include in reidexing/update.</value>
+  /// <value>List of index names to include in reindex/update.</value>
   [JsonPropertyName("indexToInclude")]
   public List<string> IndexToInclude { get; set; }
 
   /// <summary>
-  /// List of index names to exclude in reidexing/update.
+  /// List of index names to exclude in reindex/update.
   /// </summary>
-  /// <value>List of index names to exclude in reidexing/update.</value>
+  /// <value>List of index names to exclude in reindex/update.</value>
   [JsonPropertyName("indexToExclude")]
   public List<string> IndexToExclude { get; set; }
 
   /// <summary>
-  /// List of entityID to update.
+  /// List of entityIDs to update.
   /// </summary>
-  /// <value>List of entityID to update.</value>
+  /// <value>List of entityIDs to update.</value>
   [JsonPropertyName("entityIDs")]
   public List<string> EntityIDs { get; set; }
 
