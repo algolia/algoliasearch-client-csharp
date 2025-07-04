@@ -19,33 +19,21 @@ public partial class TimeRange
   /// <summary>
   /// Initializes a new instance of the TimeRange class.
   /// </summary>
-  [JsonConstructor]
   public TimeRange() { }
-
-  /// <summary>
-  /// Initializes a new instance of the TimeRange class.
-  /// </summary>
-  /// <param name="from">When the rule should start to be active, in Unix epoch time. (required).</param>
-  /// <param name="until">When the rule should stop to be active, in Unix epoch time. (required).</param>
-  public TimeRange(long from, long until)
-  {
-    From = from;
-    Until = until;
-  }
 
   /// <summary>
   /// When the rule should start to be active, in Unix epoch time.
   /// </summary>
   /// <value>When the rule should start to be active, in Unix epoch time.</value>
   [JsonPropertyName("from")]
-  public long From { get; set; }
+  public long? From { get; set; }
 
   /// <summary>
   /// When the rule should stop to be active, in Unix epoch time.
   /// </summary>
   /// <value>When the rule should stop to be active, in Unix epoch time.</value>
   [JsonPropertyName("until")]
-  public long Until { get; set; }
+  public long? Until { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
