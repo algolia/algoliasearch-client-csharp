@@ -1,3 +1,9 @@
+## [7.22.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.22.0...7.22.1)
+
+- [4c9416a9fe](https://github.com/algolia/api-clients-automation/commit/4c9416a9fe) fix(specs): update sourceRun docs ([#5057](https://github.com/algolia/api-clients-automation/pull/5057)) by [@DevinCodes](https://github.com/DevinCodes/)
+- [f1a36e9a5f](https://github.com/algolia/api-clients-automation/commit/f1a36e9a5f) fix(specs): analytics base url correction ([#5059](https://github.com/algolia/api-clients-automation/pull/5059)) by [@kai687](https://github.com/kai687/)
+- [754efceb80](https://github.com/algolia/api-clients-automation/commit/754efceb80) fix(specs): allow one sided rule validity ([#5060](https://github.com/algolia/api-clients-automation/pull/5060)) by [@millotp](https://github.com/millotp/)
+
 ## [7.22.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.21.0...7.22.0)
 
 - [d1e9835e53](https://github.com/algolia/api-clients-automation/commit/d1e9835e53) chore(deps): dependencies 2025-06-30 ([#5031](https://github.com/algolia/api-clients-automation/pull/5031)) by [@algolia-bot](https://github.com/algolia-bot/)
