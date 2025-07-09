@@ -1843,6 +1843,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1851,6 +1852,7 @@ public interface IIngestionClient
   /// <returns>Task of RunResponse</returns>
   Task<RunResponse> RunTaskAsync(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1864,6 +1866,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1872,6 +1875,7 @@ public interface IIngestionClient
   /// <returns>RunResponse</returns>
   RunResponse RunTask(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1885,6 +1889,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1894,6 +1899,7 @@ public interface IIngestionClient
   [Obsolete]
   Task<RunResponse> RunTaskV1Async(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1907,6 +1913,7 @@ public interface IIngestionClient
   ///   - deleteIndex
   ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1916,6 +1923,7 @@ public interface IIngestionClient
   [Obsolete]
   RunResponse RunTaskV1(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -4297,6 +4305,7 @@ public partial class IngestionClient : IIngestionClient
   /// <inheritdoc />
   public async Task<RunResponse> RunTaskAsync(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4308,6 +4317,7 @@ public partial class IngestionClient : IIngestionClient
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
+    requestOptions.Data = runTaskPayload;
     return await _transport
       .ExecuteRequestAsync<RunResponse>(
         new HttpMethod("POST"),
@@ -4321,14 +4331,16 @@ public partial class IngestionClient : IIngestionClient
   /// <inheritdoc />
   public RunResponse RunTask(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
-  ) => AsyncHelper.RunSync(() => RunTaskAsync(taskID, options, cancellationToken));
+  ) => AsyncHelper.RunSync(() => RunTaskAsync(taskID, runTaskPayload, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
   public async Task<RunResponse> RunTaskV1Async(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4340,6 +4352,7 @@ public partial class IngestionClient : IIngestionClient
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
+    requestOptions.Data = runTaskPayload;
     return await _transport
       .ExecuteRequestAsync<RunResponse>(
         new HttpMethod("POST"),
@@ -4354,9 +4367,11 @@ public partial class IngestionClient : IIngestionClient
   [Obsolete]
   public RunResponse RunTaskV1(
     string taskID,
+    RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
-  ) => AsyncHelper.RunSync(() => RunTaskV1Async(taskID, options, cancellationToken));
+  ) =>
+    AsyncHelper.RunSync(() => RunTaskV1Async(taskID, runTaskPayload, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<List<Authentication>> SearchAuthenticationsAsync(

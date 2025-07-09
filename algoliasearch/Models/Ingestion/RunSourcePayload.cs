@@ -49,6 +49,13 @@ public partial class RunSourcePayload
   public List<string> EntityIDs { get; set; }
 
   /// <summary>
+  /// Additional information that will be passed to the created runs.
+  /// </summary>
+  /// <value>Additional information that will be passed to the created runs.</value>
+  [JsonPropertyName("runMetadata")]
+  public Dictionary<string, object> RunMetadata { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -60,6 +67,7 @@ public partial class RunSourcePayload
     sb.Append("  IndexToExclude: ").Append(IndexToExclude).Append("\n");
     sb.Append("  EntityIDs: ").Append(EntityIDs).Append("\n");
     sb.Append("  EntityType: ").Append(EntityType).Append("\n");
+    sb.Append("  RunMetadata: ").Append(RunMetadata).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -101,7 +109,13 @@ public partial class RunSourcePayload
         EntityIDs == input.EntityIDs
         || EntityIDs != null && input.EntityIDs != null && EntityIDs.SequenceEqual(input.EntityIDs)
       )
-      && (EntityType == input.EntityType || EntityType.Equals(input.EntityType));
+      && (EntityType == input.EntityType || EntityType.Equals(input.EntityType))
+      && (
+        RunMetadata == input.RunMetadata
+        || RunMetadata != null
+          && input.RunMetadata != null
+          && RunMetadata.SequenceEqual(input.RunMetadata)
+      );
   }
 
   /// <summary>
@@ -126,6 +140,10 @@ public partial class RunSourcePayload
         hashCode = (hashCode * 59) + EntityIDs.GetHashCode();
       }
       hashCode = (hashCode * 59) + EntityType.GetHashCode();
+      if (RunMetadata != null)
+      {
+        hashCode = (hashCode * 59) + RunMetadata.GetHashCode();
+      }
       return hashCode;
     }
   }
