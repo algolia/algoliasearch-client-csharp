@@ -80,7 +80,7 @@ public partial class Variant
   /// </summary>
   /// <value>[Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant. </value>
   [JsonPropertyName("averageClickPosition")]
-  public int? AverageClickPosition { get; set; }
+  public double? AverageClickPosition { get; set; }
 
   /// <summary>
   /// Number of click events for this variant.
