@@ -15,7 +15,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Insights;
 
 /// <summary>
-/// Total monetary value of this event in units of `currency`.
+/// Total monetary value of this event in units of `currency`. This should be equal to the sum of `price` times `quantity`.
 /// </summary>
 [JsonConverter(typeof(ValueJsonConverter))]
 public partial class Value : AbstractSchema
