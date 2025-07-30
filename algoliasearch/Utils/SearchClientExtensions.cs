@@ -230,7 +230,7 @@ public partial interface ISearchClient
   ///  Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
   /// Replace all objects in an index without any downtime. Internally, this method copies the existing index settings, synonyms and query rules and indexes all passed objects.
   /// Finally, the temporary one replaces the existing index.
-  /// See https://api-clients-automation.netlify.app/docs/add-new-api-client#5-helpers for implementation details.
+  /// See https://api-clients-automation.netlify.app/docs/custom-helpers/#replaceallobjects for implementation details.
   /// </summary>
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
