@@ -69,6 +69,12 @@ public partial class Hit
   public int? DistinctSeqID { get; set; }
 
   /// <summary>
+  /// Gets or Sets Extra
+  /// </summary>
+  [JsonPropertyName("_extra")]
+  public HitMetadata Extra { get; set; }
+
+  /// <summary>
   /// Gets or Sets additional properties
   /// </summary>
   [JsonExtensionData]
@@ -87,6 +93,7 @@ public partial class Hit
     sb.Append("  SnippetResult: ").Append(SnippetResult).Append("\n");
     sb.Append("  RankingInfo: ").Append(RankingInfo).Append("\n");
     sb.Append("  DistinctSeqID: ").Append(DistinctSeqID).Append("\n");
+    sb.Append("  Extra: ").Append(Extra).Append("\n");
     sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -131,6 +138,7 @@ public partial class Hit
         || (RankingInfo != null && RankingInfo.Equals(input.RankingInfo))
       )
       && (DistinctSeqID == input.DistinctSeqID || DistinctSeqID.Equals(input.DistinctSeqID))
+      && (Extra == input.Extra || (Extra != null && Extra.Equals(input.Extra)))
       && (
         AdditionalProperties.Count == input.AdditionalProperties.Count
         && !AdditionalProperties.Except(input.AdditionalProperties).Any()
@@ -163,6 +171,10 @@ public partial class Hit
         hashCode = (hashCode * 59) + RankingInfo.GetHashCode();
       }
       hashCode = (hashCode * 59) + DistinctSeqID.GetHashCode();
+      if (Extra != null)
+      {
+        hashCode = (hashCode * 59) + Extra.GetHashCode();
+      }
       if (AdditionalProperties != null)
       {
         hashCode = (hashCode * 59) + AdditionalProperties.GetHashCode();
