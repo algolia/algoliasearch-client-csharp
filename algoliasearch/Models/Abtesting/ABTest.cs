@@ -116,6 +116,13 @@ public partial class ABTest
   public string EndAt { get; set; }
 
   /// <summary>
+  /// Date and time when the A/B test was stopped, in RFC 3339 format.
+  /// </summary>
+  /// <value>Date and time when the A/B test was stopped, in RFC 3339 format.</value>
+  [JsonPropertyName("stoppedAt")]
+  public string StoppedAt { get; set; }
+
+  /// <summary>
   /// A/B test name.
   /// </summary>
   /// <value>A/B test name.</value>
@@ -152,6 +159,7 @@ public partial class ABTest
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  EndAt: ").Append(EndAt).Append("\n");
+    sb.Append("  StoppedAt: ").Append(StoppedAt).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
     sb.Append("  Variants: ").Append(Variants).Append("\n");
@@ -212,6 +220,7 @@ public partial class ABTest
       && (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)))
       && (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt)))
       && (EndAt == input.EndAt || (EndAt != null && EndAt.Equals(input.EndAt)))
+      && (StoppedAt == input.StoppedAt || (StoppedAt != null && StoppedAt.Equals(input.StoppedAt)))
       && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
       && (Status == input.Status || Status.Equals(input.Status))
       && (
@@ -265,6 +274,10 @@ public partial class ABTest
       if (EndAt != null)
       {
         hashCode = (hashCode * 59) + EndAt.GetHashCode();
+      }
+      if (StoppedAt != null)
+      {
+        hashCode = (hashCode * 59) + StoppedAt.GetHashCode();
       }
       if (Name != null)
       {
