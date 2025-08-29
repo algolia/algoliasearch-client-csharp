@@ -1789,6 +1789,42 @@ public interface IIngestionClient
   );
 
   /// <summary>
+  /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+  /// </summary>
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskReplace"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  Task<TaskUpdateResponse> ReplaceTaskAsync(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields. (Synchronous version)
+  /// </summary>
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskReplace"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  TaskUpdateResponse ReplaceTask(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
   /// </summary>
   ///
@@ -2451,7 +2487,7 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID.
+  /// Partially updates a task by its ID.
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
@@ -2469,7 +2505,7 @@ public interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID. (Synchronous version)
+  /// Partially updates a task by its ID. (Synchronous version)
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
@@ -4264,6 +4300,45 @@ public partial class IngestionClient : IIngestionClient
     AsyncHelper.RunSync(() =>
       PushTaskAsync(taskID, pushTaskPayload, watch, options, cancellationToken)
     );
+
+  /// <inheritdoc />
+  public async Task<TaskUpdateResponse> ReplaceTaskAsync(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `ReplaceTask`.");
+
+    if (taskReplace == null)
+      throw new ArgumentException(
+        "Parameter `taskReplace` is required when calling `ReplaceTask`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = taskReplace;
+    return await _transport
+      .ExecuteRequestAsync<TaskUpdateResponse>(
+        new HttpMethod("PUT"),
+        "/2/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public TaskUpdateResponse ReplaceTask(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ReplaceTaskAsync(taskID, taskReplace, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<RunSourceResponse> RunSourceAsync(

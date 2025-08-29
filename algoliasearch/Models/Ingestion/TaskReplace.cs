@@ -12,10 +12,16 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for partially updating a task.
+/// API request body for updating a task.
 /// </summary>
-public partial class TaskUpdate
+public partial class TaskReplace
 {
+  /// <summary>
+  /// Gets or Sets Action
+  /// </summary>
+  [JsonPropertyName("action")]
+  public ActionType? Action { get; set; }
+
   /// <summary>
   /// Gets or Sets SubscriptionAction
   /// </summary>
@@ -23,9 +29,21 @@ public partial class TaskUpdate
   public ActionType? SubscriptionAction { get; set; }
 
   /// <summary>
-  /// Initializes a new instance of the TaskUpdate class.
+  /// Initializes a new instance of the TaskReplace class.
   /// </summary>
-  public TaskUpdate() { }
+  [JsonConstructor]
+  public TaskReplace() { }
+
+  /// <summary>
+  /// Initializes a new instance of the TaskReplace class.
+  /// </summary>
+  /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
+  /// <param name="action">action (required).</param>
+  public TaskReplace(string destinationID, ActionType? action)
+  {
+    DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
+    Action = action;
+  }
 
   /// <summary>
   /// Universally unique identifier (UUID) of a destination resource.
@@ -42,12 +60,6 @@ public partial class TaskUpdate
   public string Cron { get; set; }
 
   /// <summary>
-  /// Gets or Sets Input
-  /// </summary>
-  [JsonPropertyName("input")]
-  public TaskInput Input { get; set; }
-
-  /// <summary>
   /// Whether the task is enabled.
   /// </summary>
   /// <value>Whether the task is enabled.</value>
@@ -60,6 +72,19 @@ public partial class TaskUpdate
   /// <value>Maximum accepted percentage of failures for a task run to finish successfully.</value>
   [JsonPropertyName("failureThreshold")]
   public int? FailureThreshold { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Input
+  /// </summary>
+  [JsonPropertyName("input")]
+  public TaskInput Input { get; set; }
+
+  /// <summary>
+  /// Date of the last cursor in RFC 3339 format.
+  /// </summary>
+  /// <value>Date of the last cursor in RFC 3339 format.</value>
+  [JsonPropertyName("cursor")]
+  public string Cursor { get; set; }
 
   /// <summary>
   /// Gets or Sets Notifications
@@ -80,13 +105,15 @@ public partial class TaskUpdate
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TaskUpdate {\n");
+    sb.Append("class TaskReplace {\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
-    sb.Append("  Cron: ").Append(Cron).Append("\n");
-    sb.Append("  Input: ").Append(Input).Append("\n");
-    sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+    sb.Append("  Action: ").Append(Action).Append("\n");
     sb.Append("  SubscriptionAction: ").Append(SubscriptionAction).Append("\n");
+    sb.Append("  Cron: ").Append(Cron).Append("\n");
+    sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
+    sb.Append("  Input: ").Append(Input).Append("\n");
+    sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("  Notifications: ").Append(Notifications).Append("\n");
     sb.Append("  Policies: ").Append(Policies).Append("\n");
     sb.Append("}\n");
@@ -109,7 +136,7 @@ public partial class TaskUpdate
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TaskUpdate input)
+    if (obj is not TaskReplace input)
     {
       return false;
     }
@@ -118,17 +145,19 @@ public partial class TaskUpdate
         DestinationID == input.DestinationID
         || (DestinationID != null && DestinationID.Equals(input.DestinationID))
       )
-      && (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron)))
-      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
-      && (Enabled == input.Enabled || Enabled.Equals(input.Enabled))
+      && (Action == input.Action || Action.Equals(input.Action))
       && (
         SubscriptionAction == input.SubscriptionAction
         || SubscriptionAction.Equals(input.SubscriptionAction)
       )
+      && (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron)))
+      && (Enabled == input.Enabled || Enabled.Equals(input.Enabled))
       && (
         FailureThreshold == input.FailureThreshold
         || FailureThreshold.Equals(input.FailureThreshold)
       )
+      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
+      && (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)))
       && (
         Notifications == input.Notifications
         || (Notifications != null && Notifications.Equals(input.Notifications))
@@ -149,17 +178,22 @@ public partial class TaskUpdate
       {
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Action.GetHashCode();
+      hashCode = (hashCode * 59) + SubscriptionAction.GetHashCode();
       if (Cron != null)
       {
         hashCode = (hashCode * 59) + Cron.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Enabled.GetHashCode();
+      hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
       if (Input != null)
       {
         hashCode = (hashCode * 59) + Input.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Enabled.GetHashCode();
-      hashCode = (hashCode * 59) + SubscriptionAction.GetHashCode();
-      hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
+      if (Cursor != null)
+      {
+        hashCode = (hashCode * 59) + Cursor.GetHashCode();
+      }
       if (Notifications != null)
       {
         hashCode = (hashCode * 59) + Notifications.GetHashCode();
