@@ -1235,6 +1235,7 @@ public partial interface ISearchClient
   /// Required API Key ACLs:
   ///   - settings
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="getVersion">When set to 2, the endpoint will not include `synonyms` in the response. This parameter is here for backward compatibility. (optional, default to 1)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1243,6 +1244,7 @@ public partial interface ISearchClient
   /// <returns>Task of SettingsResponse</returns>
   Task<SettingsResponse> GetSettingsAsync(
     string indexName,
+    int? getVersion = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1254,6 +1256,7 @@ public partial interface ISearchClient
   /// Required API Key ACLs:
   ///   - settings
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="getVersion">When set to 2, the endpoint will not include `synonyms` in the response. This parameter is here for backward compatibility. (optional, default to 1)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1262,6 +1265,7 @@ public partial interface ISearchClient
   /// <returns>SettingsResponse</returns>
   SettingsResponse GetSettings(
     string indexName,
+    int? getVersion = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -3731,6 +3735,7 @@ public partial class SearchClient : ISearchClient
   /// <inheritdoc />
   public async Task<SettingsResponse> GetSettingsAsync(
     string indexName,
+    int? getVersion = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -3742,6 +3747,7 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
+    requestOptions.AddQueryParameter("getVersion", getVersion);
     return await _transport
       .ExecuteRequestAsync<SettingsResponse>(
         new HttpMethod("GET"),
@@ -3755,9 +3761,11 @@ public partial class SearchClient : ISearchClient
   /// <inheritdoc />
   public SettingsResponse GetSettings(
     string indexName,
+    int? getVersion = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
-  ) => AsyncHelper.RunSync(() => GetSettingsAsync(indexName, options, cancellationToken));
+  ) =>
+    AsyncHelper.RunSync(() => GetSettingsAsync(indexName, getVersion, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<List<Source>> GetSourcesAsync(

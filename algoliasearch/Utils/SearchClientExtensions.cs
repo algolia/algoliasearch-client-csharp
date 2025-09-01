@@ -1157,7 +1157,7 @@ public partial class SearchClient : ISearchClient
   {
     try
     {
-      await GetSettingsAsync(indexName, null, cancellationToken);
+      await GetSettingsAsync(indexName, null, null, cancellationToken);
     }
     catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404)
     {
