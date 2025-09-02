@@ -198,6 +198,13 @@ public partial class Params
   public bool? EnableReRanking { get; set; }
 
   /// <summary>
+  /// A list of extenrally injected objectID groups into from an external source.
+  /// </summary>
+  /// <value>A list of extenrally injected objectID groups into from an external source. </value>
+  [JsonPropertyName("injectedItems")]
+  public Dictionary<string, ExternalInjectedItem> InjectedItems { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -231,6 +238,7 @@ public partial class Params
     sb.Append("  AnalyticsTags: ").Append(AnalyticsTags).Append("\n");
     sb.Append("  EnableABTest: ").Append(EnableABTest).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
+    sb.Append("  InjectedItems: ").Append(InjectedItems).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -336,8 +344,12 @@ public partial class Params
           && AnalyticsTags.SequenceEqual(input.AnalyticsTags)
       )
       && (EnableABTest == input.EnableABTest || EnableABTest.Equals(input.EnableABTest))
+      && (EnableReRanking == input.EnableReRanking || EnableReRanking.Equals(input.EnableReRanking))
       && (
-        EnableReRanking == input.EnableReRanking || EnableReRanking.Equals(input.EnableReRanking)
+        InjectedItems == input.InjectedItems
+        || InjectedItems != null
+          && input.InjectedItems != null
+          && InjectedItems.SequenceEqual(input.InjectedItems)
       );
   }
 
@@ -421,6 +433,10 @@ public partial class Params
       }
       hashCode = (hashCode * 59) + EnableABTest.GetHashCode();
       hashCode = (hashCode * 59) + EnableReRanking.GetHashCode();
+      if (InjectedItems != null)
+      {
+        hashCode = (hashCode * 59) + InjectedItems.GetHashCode();
+      }
       return hashCode;
     }
   }
