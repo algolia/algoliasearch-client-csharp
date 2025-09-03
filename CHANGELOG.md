@@ -1,3 +1,12 @@
+## [7.26.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.25.0...7.26.0)
+
+- [8f4abf3a1](https://github.com/algolia/api-clients-automation/commit/8f4abf3a1) fix(specs): Cross-reference filerPromotes to relevant guide ([#5279](https://github.com/algolia/api-clients-automation/pull/5279)) by [@gazconroy](https://github.com/gazconroy/)
+- [1f4a3a9f7](https://github.com/algolia/api-clients-automation/commit/1f4a3a9f7) feat(specs): add put task endpoint to ingestion api ([#5281](https://github.com/algolia/api-clients-automation/pull/5281)) by [@shortcuts](https://github.com/shortcuts/)
+- [08e9d1888](https://github.com/algolia/api-clients-automation/commit/08e9d1888) fix(specs): add getVersion parameter to getSettings ([#5254](https://github.com/algolia/api-clients-automation/pull/5254)) by [@millotp](https://github.com/millotp/)
+- [716aa852f](https://github.com/algolia/api-clients-automation/commit/716aa852f) chore(deps): dependencies 2025-09-01 ([#5285](https://github.com/algolia/api-clients-automation/pull/5285)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [f4eee1c4a](https://github.com/algolia/api-clients-automation/commit/f4eee1c4a) chore(website): exclude schema from generated variables file ([#5306](https://github.com/algolia/api-clients-automation/pull/5306)) by [@Fluf22](https://github.com/Fluf22/)
+- [2fa0389f8](https://github.com/algolia/api-clients-automation/commit/2fa0389f8) fix(clients): link to support/help center on unreachable hosts ([#5305](https://github.com/algolia/api-clients-automation/pull/5305)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [7.25.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.24.0...7.25.0)
 
 - [b0a24b653a](https://github.com/algolia/api-clients-automation/commit/b0a24b653a) docs: use the correct link for replaceAllObjects ([#5185](https://github.com/algolia/api-clients-automation/pull/5185)) by [@millotp](https://github.com/millotp/)
