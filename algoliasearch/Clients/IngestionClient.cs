@@ -1642,6 +1642,7 @@ public interface IIngestionClient
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="type">Whether to filter the list of transformations by the type of transformation. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1653,6 +1654,7 @@ public interface IIngestionClient
     int? page = default,
     TransformationSortKeys? sort = default,
     OrderKeys? order = default,
+    TransformationType? type = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1669,6 +1671,7 @@ public interface IIngestionClient
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="type">Whether to filter the list of transformations by the type of transformation. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1680,6 +1683,7 @@ public interface IIngestionClient
     int? page = default,
     TransformationSortKeys? sort = default,
     OrderKeys? order = default,
+    TransformationType? type = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -4171,6 +4175,7 @@ public partial class IngestionClient : IIngestionClient
     int? page = default,
     TransformationSortKeys? sort = default,
     OrderKeys? order = default,
+    TransformationType? type = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4181,6 +4186,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("sort", sort);
     requestOptions.AddQueryParameter("order", order);
+    requestOptions.AddQueryParameter("type", type);
     return await _transport
       .ExecuteRequestAsync<ListTransformationsResponse>(
         new HttpMethod("GET"),
@@ -4197,11 +4203,12 @@ public partial class IngestionClient : IIngestionClient
     int? page = default,
     TransformationSortKeys? sort = default,
     OrderKeys? order = default,
+    TransformationType? type = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      ListTransformationsAsync(itemsPerPage, page, sort, order, options, cancellationToken)
+      ListTransformationsAsync(itemsPerPage, page, sort, order, type, options, cancellationToken)
     );
 
   /// <inheritdoc />
