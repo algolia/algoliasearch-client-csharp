@@ -37,8 +37,14 @@ public enum ActionType
   Partial = 3,
 
   /// <summary>
+  /// Enum PartialNoCreate for value: partialNoCreate
+  /// </summary>
+  [JsonPropertyName("partialNoCreate")]
+  PartialNoCreate = 4,
+
+  /// <summary>
   /// Enum Append for value: append
   /// </summary>
   [JsonPropertyName("append")]
-  Append = 4,
+  Append = 5,
 }
