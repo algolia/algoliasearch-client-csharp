@@ -45,6 +45,12 @@ public partial class Injection
   public List<InjectedItem> InjectedItems { get; set; }
 
   /// <summary>
+  /// Gets or Sets Deduplication
+  /// </summary>
+  [JsonPropertyName("deduplication")]
+  public Deduplication Deduplication { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -54,6 +60,7 @@ public partial class Injection
     sb.Append("class Injection {\n");
     sb.Append("  Main: ").Append(Main).Append("\n");
     sb.Append("  InjectedItems: ").Append(InjectedItems).Append("\n");
+    sb.Append("  Deduplication: ").Append(Deduplication).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -85,6 +92,10 @@ public partial class Injection
         || InjectedItems != null
           && input.InjectedItems != null
           && InjectedItems.SequenceEqual(input.InjectedItems)
+      )
+      && (
+        Deduplication == input.Deduplication
+        || (Deduplication != null && Deduplication.Equals(input.Deduplication))
       );
   }
 
@@ -104,6 +115,10 @@ public partial class Injection
       if (InjectedItems != null)
       {
         hashCode = (hashCode * 59) + InjectedItems.GetHashCode();
+      }
+      if (Deduplication != null)
+      {
+        hashCode = (hashCode * 59) + Deduplication.GetHashCode();
       }
       return hashCode;
     }
