@@ -26,7 +26,7 @@ public partial class SaveObjectResponse
   /// Initializes a new instance of the SaveObjectResponse class.
   /// </summary>
   /// <param name="createdAt">Date and time when the object was created, in RFC 3339 format. (required).</param>
-  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.  (required).</param>
   public SaveObjectResponse(string createdAt, long taskID)
   {
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
@@ -41,9 +41,9 @@ public partial class SaveObjectResponse
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
+  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.
   /// </summary>
-  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. </value>
+  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID. </value>
   [JsonPropertyName("taskID")]
   public long TaskID { get; set; }
 

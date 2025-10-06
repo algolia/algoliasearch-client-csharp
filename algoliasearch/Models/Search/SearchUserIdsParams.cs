@@ -25,16 +25,15 @@ public partial class SearchUserIdsParams
   /// <summary>
   /// Initializes a new instance of the SearchUserIdsParams class.
   /// </summary>
-  /// <param name="query">Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required).</param>
+  /// <param name="query">query (required).</param>
   public SearchUserIdsParams(string query)
   {
     Query = query ?? throw new ArgumentNullException(nameof(query));
   }
 
   /// <summary>
-  /// Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
+  /// Gets or Sets Query
   /// </summary>
-  /// <value>Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 

@@ -25,7 +25,7 @@ public partial class DeleteUserProfileResponse
   /// <summary>
   /// Initializes a new instance of the DeleteUserProfileResponse class.
   /// </summary>
-  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  (required).</param>
   /// <param name="deletedUntil">Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile.  (required).</param>
   public DeleteUserProfileResponse(string userToken, string deletedUntil)
   {
@@ -34,9 +34,9 @@ public partial class DeleteUserProfileResponse
   }
 
   /// <summary>
-  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
   /// </summary>
-  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 

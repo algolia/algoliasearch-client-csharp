@@ -25,7 +25,7 @@ public partial class GetUserTokenResponse
   /// <summary>
   /// Initializes a new instance of the GetUserTokenResponse class.
   /// </summary>
-  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  (required).</param>
   /// <param name="lastEventAt">Date and time of the last event from this user, in RFC 3339 format. (required).</param>
   /// <param name="scores">Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events.  (required).</param>
   public GetUserTokenResponse(string userToken, string lastEventAt, object scores)
@@ -36,9 +36,9 @@ public partial class GetUserTokenResponse
   }
 
   /// <summary>
-  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
   /// </summary>
-  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 

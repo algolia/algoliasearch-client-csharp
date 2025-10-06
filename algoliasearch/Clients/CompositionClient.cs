@@ -293,7 +293,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+  /// Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -315,7 +315,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).  (Synchronous version)
+  /// Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -511,7 +511,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Upsert a Composition Rule for the specified composition ID.
+  /// If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -534,7 +534,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Upsert a Composition Rule for the specified composition ID.  (Synchronous version)
+  /// If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

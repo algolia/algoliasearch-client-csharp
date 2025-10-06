@@ -223,9 +223,9 @@ public partial class SearchResultsItem<T>
   public object UserData { get; set; }
 
   /// <summary>
-  /// Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+  /// Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics).
   /// </summary>
-  /// <value>Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).</value>
+  /// <value>Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics).</value>
   [JsonPropertyName("queryID")]
   public string QueryID { get; set; }
 

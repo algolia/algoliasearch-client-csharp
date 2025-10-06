@@ -25,7 +25,7 @@ public partial class DeletedAtResponse
   /// <summary>
   /// Initializes a new instance of the DeletedAtResponse class.
   /// </summary>
-  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.  (required).</param>
   /// <param name="deletedAt">Date and time when the object was deleted, in RFC 3339 format. (required).</param>
   public DeletedAtResponse(long taskID, string deletedAt)
   {
@@ -34,9 +34,9 @@ public partial class DeletedAtResponse
   }
 
   /// <summary>
-  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
+  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.
   /// </summary>
-  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. </value>
+  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID. </value>
   [JsonPropertyName("taskID")]
   public long TaskID { get; set; }
 

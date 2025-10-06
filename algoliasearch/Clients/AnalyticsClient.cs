@@ -173,7 +173,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -181,7 +181,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -198,7 +198,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -206,7 +206,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -223,7 +223,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event.
+  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries. The average is `null` until Algolia receives at least one click event.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -231,7 +231,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -248,7 +248,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event.  (Synchronous version)
+  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries. The average is `null` until Algolia receives at least one click event.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -256,7 +256,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -273,7 +273,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries.
+  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -281,7 +281,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -298,7 +298,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries.  (Synchronous version)
+  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -306,7 +306,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -323,7 +323,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -331,7 +331,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -348,7 +348,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -356,7 +356,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -373,7 +373,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -381,7 +381,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -398,7 +398,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -406,7 +406,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -431,7 +431,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -456,7 +456,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -481,7 +481,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -506,7 +506,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -523,7 +523,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -531,7 +531,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -548,7 +548,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -556,7 +556,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -581,7 +581,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -606,7 +606,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -631,7 +631,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -656,7 +656,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -683,7 +683,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -712,7 +712,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -741,7 +741,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -770,7 +770,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -837,7 +837,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -866,7 +866,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -896,7 +896,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -927,7 +927,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -959,7 +959,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -992,7 +992,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1013,7 +1013,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.
+  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](https://www.algolia.com/doc/rest-api/analytics/get-searches-no-results) operation.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1024,7 +1024,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1044,7 +1044,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.  (Synchronous version)
+  /// Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](https://www.algolia.com/doc/rest-api/analytics/get-searches-no-results) operation.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1055,7 +1055,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1075,7 +1075,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1088,7 +1088,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1110,7 +1110,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1123,7 +1123,7 @@ public interface IAnalyticsClient
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1145,7 +1145,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1159,7 +1159,7 @@ public interface IAnalyticsClient
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1182,7 +1182,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.  (Synchronous version)
+  /// Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1196,7 +1196,7 @@ public interface IAnalyticsClient
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return.  (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return.  (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1227,7 +1227,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1252,7 +1252,7 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
+  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
