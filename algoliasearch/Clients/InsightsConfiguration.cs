@@ -28,7 +28,7 @@ public sealed class InsightsConfig : AlgoliaConfig
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region (optional)</param>
   public InsightsConfig(string appId, string apiKey, string region = null)
-    : base(appId, apiKey, "Insights", "7.28.0")
+    : base(appId, apiKey, "Insights", "7.29.0")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
