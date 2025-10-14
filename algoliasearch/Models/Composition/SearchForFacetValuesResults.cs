@@ -27,7 +27,7 @@ public partial class SearchForFacetValuesResults
   /// </summary>
   /// <param name="indexName">indexName (required).</param>
   /// <param name="facetHits">Matching facet values. (required).</param>
-  /// <param name="exhaustiveFacetsCount">Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).  (required).</param>
+  /// <param name="exhaustiveFacetsCount">Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).  (required).</param>
   public SearchForFacetValuesResults(
     string indexName,
     List<FacetHits> facetHits,
@@ -53,9 +53,9 @@ public partial class SearchForFacetValuesResults
   public List<FacetHits> FacetHits { get; set; }
 
   /// <summary>
-  /// Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+  /// Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).
   /// </summary>
-  /// <value>Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). </value>
+  /// <value>Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate). </value>
   [JsonPropertyName("exhaustiveFacetsCount")]
   public bool ExhaustiveFacetsCount { get; set; }
 

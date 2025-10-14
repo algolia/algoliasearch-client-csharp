@@ -27,7 +27,7 @@ public partial class FacetHits
   /// </summary>
   /// <param name="value">Facet value. (required).</param>
   /// <param name="highlighted">Highlighted attribute value, including HTML tags. (required).</param>
-  /// <param name="count">Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). (required).</param>
+  /// <param name="count">Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate). (required).</param>
   public FacetHits(string value, string highlighted, int count)
   {
     Value = value ?? throw new ArgumentNullException(nameof(value));
@@ -50,9 +50,9 @@ public partial class FacetHits
   public string Highlighted { get; set; }
 
   /// <summary>
-  /// Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+  /// Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).
   /// </summary>
-  /// <value>Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).</value>
+  /// <value>Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 
