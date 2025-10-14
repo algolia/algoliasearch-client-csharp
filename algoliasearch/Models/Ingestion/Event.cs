@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// An event describe a step of the task execution flow..
+/// An event describe a step of the task execution flow.
 /// </summary>
 public partial class Event
 {

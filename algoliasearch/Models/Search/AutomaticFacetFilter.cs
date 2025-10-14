@@ -46,9 +46,9 @@ public partial class AutomaticFacetFilter
   public int? Score { get; set; }
 
   /// <summary>
-  /// Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation.
+  /// Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurrences are combined with the logical `OR` operation. If false, multiple occurrences are combined with the logical `AND` operation.
   /// </summary>
-  /// <value>Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation. </value>
+  /// <value>Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurrences are combined with the logical `OR` operation. If false, multiple occurrences are combined with the logical `AND` operation. </value>
   [JsonPropertyName("disjunctive")]
   public bool? Disjunctive { get; set; }
 
