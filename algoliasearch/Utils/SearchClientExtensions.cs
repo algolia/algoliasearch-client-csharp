@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
+using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using Action = Algolia.Search.Models.Search.Action;
 
@@ -419,6 +422,102 @@ public partial interface ISearchClient
 
   /// <inheritdoc cref="IndexExistsAsync(string, CancellationToken)"/>
   bool IndexExists(string indexName, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Helper: Similar to the `SaveObjects` method but requires a Push connector to be created first,
+  /// in order to transform records before indexing them to Algolia.
+  /// The ingestion region must have been provided at client instantiation.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="waitForTasks">Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  Task<List<Algolia.Search.Models.Ingestion.WatchResponse>> SaveObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <inheritdoc cref="SaveObjectsWithTransformationAsync(string, IEnumerable{object}, bool, int, RequestOptions, CancellationToken)"/>
+  List<Algolia.Search.Models.Ingestion.WatchResponse> SaveObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Helper: Similar to the `PartialUpdateObjects` method but requires a Push connector to be created first,
+  /// in order to transform records before indexing them to Algolia.
+  /// The ingestion region must have been provided at client instantiation.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to update in the given Algolia `indexName`.</param>
+  /// <param name="createIfNotExists">To be provided if non-existing objects are passed, otherwise, the call will fail.</param>
+  /// <param name="waitForTasks">Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  Task<
+    List<Algolia.Search.Models.Ingestion.WatchResponse>
+  > PartialUpdateObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    bool createIfNotExists = true,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <inheritdoc cref="PartialUpdateObjectsWithTransformationAsync(string, IEnumerable{object}, bool, bool, int, RequestOptions, CancellationToken)"/>
+  List<Algolia.Search.Models.Ingestion.WatchResponse> PartialUpdateObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    bool createIfNotExists = true,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Helper: Similar to the `ReplaceAllObjects` method but requires a Push connector to be created first,
+  /// in order to transform records before indexing them to Algolia.
+  /// The ingestion region must have been provided at client instantiation.
+  /// A temporary index is created during this process in order to backup your data.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `objects.length / batchSize`. Defaults to 1000.</param>
+  /// <param name="scopes">The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  Task<ReplaceAllObjectsWithTransformationResponse> ReplaceAllObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <inheritdoc cref="ReplaceAllObjectsWithTransformationAsync(string, IEnumerable{object}, int, List{ScopeType}, RequestOptions, CancellationToken)"/>
+  ReplaceAllObjectsWithTransformationResponse ReplaceAllObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
 
 public partial class SearchClient : ISearchClient
@@ -426,7 +525,7 @@ public partial class SearchClient : ISearchClient
   /// <summary>
   /// The default maximum number of retries for search operations.
   /// </summary>
-  public const int DefaultMaxRetries = 50;
+  public const int DefaultMaxRetries = RetryHelper.DefaultMaxRetries;
 
   /// <inheritdoc/>
   public async Task<GetTaskResponse> WaitForTaskAsync(
@@ -436,9 +535,9 @@ public partial class SearchClient : ISearchClient
     Func<int, int> timeout = null,
     RequestOptions requestOptions = null,
     CancellationToken ct = default
-  )
-  {
-    return await RetryUntil(
+  ) =>
+    await RetryHelper
+      .RetryUntil(
         async () => await GetTaskAsync(indexName, taskId, requestOptions, ct),
         resp => resp.Status == Models.Search.TaskStatus.Published,
         maxRetries,
@@ -446,7 +545,6 @@ public partial class SearchClient : ISearchClient
         ct
       )
       .ConfigureAwait(false);
-  }
 
   /// <inheritdoc/>
   public GetTaskResponse WaitForTask(
@@ -468,9 +566,9 @@ public partial class SearchClient : ISearchClient
     Func<int, int> timeout = null,
     RequestOptions requestOptions = null,
     CancellationToken ct = default
-  )
-  {
-    return await RetryUntil(
+  ) =>
+    await RetryHelper
+      .RetryUntil(
         async () => await GetAppTaskAsync(taskId, requestOptions, ct),
         resp => resp.Status == Models.Search.TaskStatus.Published,
         maxRetries,
@@ -478,7 +576,6 @@ public partial class SearchClient : ISearchClient
         ct
       )
       .ConfigureAwait(false);
-  }
 
   /// <inheritdoc/>
   public GetTaskResponse WaitForAppTask(
@@ -508,7 +605,8 @@ public partial class SearchClient : ISearchClient
         throw new AlgoliaException("`ApiKey` is required when waiting for an `update` operation.");
       }
 
-      return await RetryUntil(
+      return await RetryHelper
+        .RetryUntil(
           () => GetApiKeyAsync(key, requestOptions, ct),
           resp =>
           {
@@ -532,7 +630,7 @@ public partial class SearchClient : ISearchClient
         .ConfigureAwait(false);
     }
 
-    return await RetryUntil(
+    return await RetryHelper.RetryUntil(
       async () =>
       {
         try
@@ -774,39 +872,6 @@ public partial class SearchClient : ISearchClient
       SearchForFacetsAsync(requests, searchStrategy, options, cancellationToken)
     );
 
-  private static async Task<T> RetryUntil<T>(
-    Func<Task<T>> func,
-    Func<T, bool> validate,
-    int maxRetries = DefaultMaxRetries,
-    Func<int, int> timeout = null,
-    CancellationToken ct = default
-  )
-  {
-    timeout ??= NextDelay;
-
-    var retryCount = 0;
-    while (retryCount < maxRetries)
-    {
-      var resp = await func().ConfigureAwait(false);
-      if (validate(resp))
-      {
-        return resp;
-      }
-
-      await Task.Delay(timeout(retryCount), ct).ConfigureAwait(false);
-      retryCount++;
-    }
-
-    throw new AlgoliaException(
-      "The maximum number of retries exceeded. (" + (retryCount + 1) + "/" + maxRetries + ")"
-    );
-  }
-
-  private static int NextDelay(int retryCount)
-  {
-    return Math.Min(retryCount * 200, 5000);
-  }
-
   /// <inheritdoc/>
   public async Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(
     string indexName,
@@ -828,8 +893,12 @@ public partial class SearchClient : ISearchClient
       scopes = new List<ScopeType> { ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms };
     }
 
-    var rnd = new Random();
-    var tmpIndexName = $"{indexName}_tmp_{rnd.Next(100)}";
+    var rng = RandomNumberGenerator.Create();
+    var bytes = new byte[4];
+    rng.GetBytes(bytes);
+
+    var randomSuffix = (Math.Abs(BitConverter.ToInt32(bytes, 0)) % 900001) + 100000;
+    var tmpIndexName = $"{indexName}_tmp_{randomSuffix}";
 
     try
     {
@@ -1174,4 +1243,281 @@ public partial class SearchClient : ISearchClient
   /// <inheritdoc/>
   public bool IndexExists(string indexName, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => IndexExistsAsync(indexName, cancellationToken));
+
+  // ==================== SaveObjectsWithTransformation ====================
+
+  /// <inheritdoc/>
+  public async Task<
+    List<Algolia.Search.Models.Ingestion.WatchResponse>
+  > SaveObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (_ingestionTransporter == null)
+    {
+      throw new AlgoliaException(
+        "`setTransformationRegion` must have been called before calling this method."
+      );
+    }
+
+    return await _ingestionTransporter
+      .ChunkedPushAsync(
+        indexName,
+        objects,
+        Algolia.Search.Models.Ingestion.Action.AddObject,
+        waitForTasks,
+        batchSize,
+        referenceIndexName: null,
+        options,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc/>
+  public List<Algolia.Search.Models.Ingestion.WatchResponse> SaveObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveObjectsWithTransformationAsync(
+        indexName,
+        objects,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+    );
+
+  // ==================== PartialUpdateObjectsWithTransformation ====================
+
+  /// <inheritdoc/>
+  public async Task<
+    List<Algolia.Search.Models.Ingestion.WatchResponse>
+  > PartialUpdateObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    bool createIfNotExists = true,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (_ingestionTransporter == null)
+    {
+      throw new AlgoliaException(
+        "`setTransformationRegion` must have been called before calling this method."
+      );
+    }
+
+    var action = createIfNotExists
+      ? Algolia.Search.Models.Ingestion.Action.PartialUpdateObject
+      : Algolia.Search.Models.Ingestion.Action.PartialUpdateObjectNoCreate;
+
+    return await _ingestionTransporter
+      .ChunkedPushAsync(
+        indexName,
+        objects,
+        action,
+        waitForTasks,
+        batchSize,
+        referenceIndexName: null,
+        options,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc/>
+  public List<Algolia.Search.Models.Ingestion.WatchResponse> PartialUpdateObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    bool createIfNotExists = true,
+    bool waitForTasks = false,
+    int batchSize = 1000,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PartialUpdateObjectsWithTransformationAsync(
+        indexName,
+        objects,
+        createIfNotExists,
+        waitForTasks,
+        batchSize,
+        options,
+        cancellationToken
+      )
+    );
+
+  // ==================== ReplaceAllObjectsWithTransformation ====================
+
+  /// <inheritdoc/>
+  public async Task<ReplaceAllObjectsWithTransformationResponse> ReplaceAllObjectsWithTransformationAsync(
+    string indexName,
+    IEnumerable<object> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (_ingestionTransporter == null)
+    {
+      throw new AlgoliaException(
+        "`setTransformationRegion` must have been called before calling this method."
+      );
+    }
+
+    if (scopes == null)
+    {
+      scopes = new List<ScopeType> { ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms };
+    }
+
+    var rng = RandomNumberGenerator.Create();
+    var bytes = new byte[4];
+    rng.GetBytes(bytes);
+
+    var randomSuffix = (Math.Abs(BitConverter.ToInt32(bytes, 0)) % 900001) + 100000;
+    var tmpIndexName = $"{indexName}_tmp_{randomSuffix}";
+
+    try
+    {
+      // Step 1: Copy settings/rules/synonyms from source to temp
+      var copyOperationResponse = await OperationIndexAsync(
+          indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName) { Scope = scopes },
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      // Step 2: Push transformed objects to temp index (referencing original index for transformation)
+      var watchResponses = await _ingestionTransporter
+        .ChunkedPushAsync(
+          tmpIndexName,
+          objects,
+          Algolia.Search.Models.Ingestion.Action.AddObject,
+          waitForTasks: true,
+          batchSize,
+          referenceIndexName: indexName, // CRITICAL: Apply transformation from original index
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      // Step 3: Wait for copy operation to complete
+      await WaitForTaskAsync(
+          tmpIndexName,
+          copyOperationResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      // Step 4: Copy again to ensure latest settings/rules/synonyms
+      copyOperationResponse = await OperationIndexAsync(
+          indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName) { Scope = scopes },
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      await WaitForTaskAsync(
+          tmpIndexName,
+          copyOperationResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      // Step 5: Move temp index to replace original
+      var moveOperationResponse = await OperationIndexAsync(
+          tmpIndexName,
+          new OperationIndexParams(OperationType.Move, indexName),
+          options,
+          cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      await WaitForTaskAsync(
+          tmpIndexName,
+          moveOperationResponse.TaskID,
+          requestOptions: options,
+          ct: cancellationToken
+        )
+        .ConfigureAwait(false);
+
+      return new ReplaceAllObjectsWithTransformationResponse(
+        copyOperationResponse,
+        ToSearchWatchResponses(watchResponses),
+        moveOperationResponse
+      );
+    }
+    catch
+    {
+      // Clean up temp index on error
+      try
+      {
+        await DeleteIndexAsync(tmpIndexName, cancellationToken: cancellationToken)
+          .ConfigureAwait(false);
+      }
+      catch
+      {
+        // Ignore errors during cleanup
+      }
+      throw;
+    }
+  }
+
+  /// <inheritdoc/>
+  public ReplaceAllObjectsWithTransformationResponse ReplaceAllObjectsWithTransformation(
+    string indexName,
+    IEnumerable<object> objects,
+    int batchSize = 1000,
+    List<ScopeType> scopes = null,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ReplaceAllObjectsWithTransformationAsync(
+        indexName,
+        objects,
+        batchSize,
+        scopes,
+        options,
+        cancellationToken
+      )
+    );
+
+  private static List<Models.Search.WatchResponse> ToSearchWatchResponses(
+    List<Models.Ingestion.WatchResponse> ingestionResponses
+  )
+  {
+    var searchResponses = new List<Models.Search.WatchResponse>();
+
+    foreach (var response in ingestionResponses)
+    {
+      var jsonString = JsonSerializer.Serialize(response, JsonConfig.Options);
+      var searchResponse = JsonSerializer.Deserialize<Models.Search.WatchResponse>(
+        jsonString,
+        JsonConfig.Options
+      );
+      searchResponses.Add(searchResponse);
+    }
+
+    return searchResponses;
+  }
 }

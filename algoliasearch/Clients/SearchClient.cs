@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
@@ -2568,6 +2569,7 @@ public partial class SearchClient : ISearchClient
 {
   internal HttpTransport _transport;
   private readonly ILogger<SearchClient> _logger;
+  private IIngestionClient _ingestionTransporter;
 
   /// <summary>
   /// Create a new Search client for the given appID and apiKey.
@@ -2638,6 +2640,43 @@ public partial class SearchClient : ISearchClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Sets the region of the transformation pipeline. This is required to be called
+  /// if you wish to leverage the transformation pipeline (via the *WithTransformation methods).
+  /// </summary>
+  /// <param name="region">The region ("us" or "eu")</param>
+  /// <param name="factory">Logger factory</param>
+  public void SetTransformationRegion(string region, ILoggerFactory factory = null)
+  {
+    if (string.IsNullOrWhiteSpace(region))
+    {
+      throw new ArgumentException(
+        "`region` must be provided when leveraging the transformation pipeline"
+      );
+    }
+
+    if (
+      string.IsNullOrWhiteSpace(_transport._algoliaConfig.AppId)
+      || string.IsNullOrWhiteSpace(_transport._algoliaConfig.ApiKey)
+    )
+    {
+      throw new ArgumentException("AppId and ApiKey are required for transformation pipeline");
+    }
+
+    _ingestionTransporter = new IngestionClient(
+      new IngestionConfig(_transport._algoliaConfig.AppId, _transport._algoliaConfig.ApiKey, region)
+      {
+        DefaultHeaders = _transport._algoliaConfig.DefaultHeaders,
+        ConnectTimeout = _transport._algoliaConfig.ConnectTimeout,
+        ReadTimeout = _transport._algoliaConfig.ReadTimeout,
+        WriteTimeout = _transport._algoliaConfig.WriteTimeout,
+        Compression = _transport._algoliaConfig.Compression,
+        CustomHosts = _transport._algoliaConfig.CustomHosts,
+      },
+      factory
+    );
   }
 
   /// <inheritdoc />

@@ -18,7 +18,7 @@ namespace Algolia.Search.Clients;
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public interface IIngestionClient
+public partial interface IIngestionClient
 {
   /// <summary>
   /// Creates a new authentication resource.
