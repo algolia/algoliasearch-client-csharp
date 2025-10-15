@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.algolia.com/doc/libraries/csharp/v7/" target="_blank">Documentation</a>  •
+  <a href="https://www.algolia.com/doc/libraries/sdk/install#c%23" target="_blank">Documentation</a>  •
   <a href="https://discourse.algolia.com" target="_blank">Community Forum</a>  •
   <a href="http://stackoverflow.com/questions/tagged/algolia" target="_blank">Stack Overflow</a>  •
   <a href="https://github.com/algolia/algoliasearch-client-csharp/issues" target="_blank">Report a bug</a>  •
@@ -32,7 +32,7 @@
 
 **Migration note from v5.x to v6.x**
 
-> In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
+> In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/libraries/sdk/v1/upgrade/csharp).
 Version 5.x will **no longer** be under active development.
 
 ## 💡 Getting Started
@@ -89,7 +89,7 @@ var response = await client.SearchAsync<Object>(
 );
 ```
 
-For full documentation, visit the **[Algolia CSharp API Client](https://www.algolia.com/doc/libraries/csharp/)**.
+For full documentation, visit the **[Algolia CSharp API Client](https://www.algolia.com/doc/libraries/sdk/install#c%23)**.
 
 ## ❓ Troubleshooting
 
