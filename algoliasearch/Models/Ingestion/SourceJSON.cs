@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceJSON
+/// Specific configuration attributes of a `json` source.
 /// </summary>
 public partial class SourceJSON
 {

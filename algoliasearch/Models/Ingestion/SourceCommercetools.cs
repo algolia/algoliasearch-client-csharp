@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceCommercetools
+/// Specific configuration attributes of a `commercetools` source.
 /// </summary>
 public partial class SourceCommercetools
 {

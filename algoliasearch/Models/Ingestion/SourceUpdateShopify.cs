@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceUpdateShopify
+/// Specific configuration attributes of a `shopify` source.
 /// </summary>
 public partial class SourceUpdateShopify
 {

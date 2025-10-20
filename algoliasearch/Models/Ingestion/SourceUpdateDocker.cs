@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceUpdateDocker
+/// Specific configuration attributes of a `docker` source.
 /// </summary>
 public partial class SourceUpdateDocker
 {

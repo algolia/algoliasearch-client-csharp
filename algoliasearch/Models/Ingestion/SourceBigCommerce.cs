@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceBigCommerce
+/// Specific configuration attributes of a `bigcommerce` source.
 /// </summary>
 public partial class SourceBigCommerce
 {

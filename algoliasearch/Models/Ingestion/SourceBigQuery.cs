@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceBigQuery
+/// Specific configuration attributes of a `bigquery` source.
 /// </summary>
 public partial class SourceBigQuery
 {

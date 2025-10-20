@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceCSV
+/// Specific configuration attributes of a `csv` source.
 /// </summary>
 public partial class SourceCSV
 {

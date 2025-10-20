@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceGA4BigQueryExport
+/// Specific configuration attributes of a `ga4BigqueryExport` source.
 /// </summary>
 public partial class SourceGA4BigQueryExport
 {
