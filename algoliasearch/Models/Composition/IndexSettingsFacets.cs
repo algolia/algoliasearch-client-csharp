@@ -14,12 +14,12 @@ namespace Algolia.Search.Models.Composition;
 /// <summary>
 /// Order of facet names.
 /// </summary>
-public partial class Facets
+public partial class IndexSettingsFacets
 {
   /// <summary>
-  /// Initializes a new instance of the Facets class.
+  /// Initializes a new instance of the IndexSettingsFacets class.
   /// </summary>
-  public Facets() { }
+  public IndexSettingsFacets() { }
 
   /// <summary>
   /// Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
@@ -35,7 +35,7 @@ public partial class Facets
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Facets {\n");
+    sb.Append("class IndexSettingsFacets {\n");
     sb.Append("  Order: ").Append(Order).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -57,7 +57,7 @@ public partial class Facets
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Facets input)
+    if (obj is not IndexSettingsFacets input)
     {
       return false;
     }
