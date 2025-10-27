@@ -190,6 +190,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="batchWriteParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -208,6 +211,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="batchWriteParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -918,6 +924,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -934,6 +943,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1664,6 +1676,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="batchParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1680,6 +1695,9 @@ public partial interface ISearchClient
   /// <summary>
   /// Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="batchParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

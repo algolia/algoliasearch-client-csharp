@@ -149,6 +149,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new task.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -165,6 +170,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new task. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -181,6 +191,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new task using the v1 endpoint, please use `createTask` instead.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -198,6 +213,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new task using the v1 endpoint, please use `createTask` instead. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -215,6 +235,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new transformation.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationCreate">Request body for creating a transformation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -231,6 +256,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Creates a new transformation. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationCreate">Request body for creating a transformation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -525,6 +555,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a task by its ID.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -541,6 +576,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a task by its ID. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -557,6 +597,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -574,6 +619,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -591,6 +641,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a transformation by its ID.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationID">Unique identifier of a transformation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -607,6 +662,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Deletes a transformation by its ID. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationID">Unique identifier of a transformation.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1795,6 +1855,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskReplace"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1813,6 +1878,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskReplace"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2493,6 +2563,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Partially updates a task by its ID.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2511,6 +2586,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Partially updates a task by its ID. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2529,6 +2609,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2548,6 +2633,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2567,6 +2657,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Updates a transformation by its ID.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationID">Unique identifier of a transformation.</param>
   /// <param name="transformationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2585,6 +2680,11 @@ public partial interface IIngestionClient
   /// <summary>
   /// Updates a transformation by its ID. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
   /// <param name="transformationID">Unique identifier of a transformation.</param>
   /// <param name="transformationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
