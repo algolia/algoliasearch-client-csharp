@@ -368,6 +368,12 @@ public partial class MainInjectionQueryParameters
   public int? MaxValuesPerFacet { get; set; }
 
   /// <summary>
+  /// Gets or Sets RenderingContent
+  /// </summary>
+  [JsonPropertyName("renderingContent")]
+  public RenderingContent RenderingContent { get; set; }
+
+  /// <summary>
   /// Order in which to retrieve facet values - `count`.   Facet values are retrieved by decreasing count.   The count is the number of matching records containing this facet value - `alpha`.   Retrieve facet values alphabetically This setting doesn't influence how facet values are displayed in your UI (see `renderingContent`). For more information, see [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js).
   /// </summary>
   /// <value>Order in which to retrieve facet values - `count`.   Facet values are retrieved by decreasing count.   The count is the number of matching records containing this facet value - `alpha`.   Retrieve facet values alphabetically This setting doesn't influence how facet values are displayed in your UI (see `renderingContent`). For more information, see [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js). </value>
@@ -446,6 +452,7 @@ public partial class MainInjectionQueryParameters
     sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  MaxValuesPerFacet: ").Append(MaxValuesPerFacet).Append("\n");
+    sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  SortFacetValuesBy: ").Append(SortFacetValuesBy).Append("\n");
     sb.Append("  SumOrFiltersScores: ").Append(SumOrFiltersScores).Append("\n");
     sb.Append("}\n");
@@ -659,6 +666,10 @@ public partial class MainInjectionQueryParameters
         || MaxValuesPerFacet.Equals(input.MaxValuesPerFacet)
       )
       && (
+        RenderingContent == input.RenderingContent
+        || (RenderingContent != null && RenderingContent.Equals(input.RenderingContent))
+      )
+      && (
         SortFacetValuesBy == input.SortFacetValuesBy
         || (SortFacetValuesBy != null && SortFacetValuesBy.Equals(input.SortFacetValuesBy))
       )
@@ -803,6 +814,10 @@ public partial class MainInjectionQueryParameters
       }
       hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
       hashCode = (hashCode * 59) + MaxValuesPerFacet.GetHashCode();
+      if (RenderingContent != null)
+      {
+        hashCode = (hashCode * 59) + RenderingContent.GetHashCode();
+      }
       if (SortFacetValuesBy != null)
       {
         hashCode = (hashCode * 59) + SortFacetValuesBy.GetHashCode();
