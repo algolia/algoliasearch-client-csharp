@@ -57,17 +57,17 @@ public partial class Params
   public int? RelevancyStrictness { get; set; }
 
   /// <summary>
-  /// Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
-  /// </summary>
-  /// <value>Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts). </value>
-  [JsonPropertyName("facets")]
-  public List<string> Facets { get; set; }
-
-  /// <summary>
   /// Gets or Sets FacetFilters
   /// </summary>
   [JsonPropertyName("facetFilters")]
   public FacetFilters FacetFilters { get; set; }
+
+  /// <summary>
+  /// Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+  /// </summary>
+  /// <value>Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting). </value>
+  [JsonPropertyName("facets")]
+  public List<string> Facets { get; set; }
 
   /// <summary>
   /// Gets or Sets OptionalFilters
@@ -224,8 +224,8 @@ public partial class Params
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  GetRankingInfo: ").Append(GetRankingInfo).Append("\n");
     sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
-    sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
+    sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
     sb.Append("  NumericFilters: ").Append(NumericFilters).Append("\n");
     sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
@@ -281,12 +281,12 @@ public partial class Params
         || RelevancyStrictness.Equals(input.RelevancyStrictness)
       )
       && (
-        Facets == input.Facets
-        || Facets != null && input.Facets != null && Facets.SequenceEqual(input.Facets)
-      )
-      && (
         FacetFilters == input.FacetFilters
         || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))
+      )
+      && (
+        Facets == input.Facets
+        || Facets != null && input.Facets != null && Facets.SequenceEqual(input.Facets)
       )
       && (
         OptionalFilters == input.OptionalFilters
@@ -385,13 +385,13 @@ public partial class Params
       hashCode = (hashCode * 59) + Page.GetHashCode();
       hashCode = (hashCode * 59) + GetRankingInfo.GetHashCode();
       hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
-      if (Facets != null)
-      {
-        hashCode = (hashCode * 59) + Facets.GetHashCode();
-      }
       if (FacetFilters != null)
       {
         hashCode = (hashCode * 59) + FacetFilters.GetHashCode();
+      }
+      if (Facets != null)
+      {
+        hashCode = (hashCode * 59) + Facets.GetHashCode();
       }
       if (OptionalFilters != null)
       {
