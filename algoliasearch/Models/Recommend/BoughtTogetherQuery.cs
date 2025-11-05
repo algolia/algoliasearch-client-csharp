@@ -78,6 +78,12 @@ public partial class BoughtTogetherQuery
   public string ObjectID { get; set; }
 
   /// <summary>
+  /// Gets or Sets FallbackParameters
+  /// </summary>
+  [JsonPropertyName("fallbackParameters")]
+  public FallbackParams FallbackParameters { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -91,6 +97,7 @@ public partial class BoughtTogetherQuery
     sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
+    sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -129,7 +136,11 @@ public partial class BoughtTogetherQuery
         || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))
       )
       && (Model == input.Model || Model.Equals(input.Model))
-      && (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID)));
+      && (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID)))
+      && (
+        FallbackParameters == input.FallbackParameters
+        || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters))
+      );
   }
 
   /// <summary>
@@ -155,6 +166,10 @@ public partial class BoughtTogetherQuery
       if (ObjectID != null)
       {
         hashCode = (hashCode * 59) + ObjectID.GetHashCode();
+      }
+      if (FallbackParameters != null)
+      {
+        hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();
       }
       return hashCode;
     }
