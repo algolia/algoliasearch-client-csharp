@@ -28,7 +28,7 @@ public sealed class QuerySuggestionsConfig : AlgoliaConfig
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region </param>
   public QuerySuggestionsConfig(string appId, string apiKey, string region)
-    : base(appId, apiKey, "QuerySuggestions", "7.31.0")
+    : base(appId, apiKey, "QuerySuggestions", "7.32.0")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
