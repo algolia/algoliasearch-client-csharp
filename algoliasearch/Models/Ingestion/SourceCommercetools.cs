@@ -73,6 +73,13 @@ public partial class SourceCommercetools
   public string ProductQueryPredicate { get; set; }
 
   /// <summary>
+  /// When set to true, the connector indexes objects with all images attributes instead of only the URLs.
+  /// </summary>
+  /// <value>When set to true, the connector indexes objects with all images attributes instead of only the URLs. </value>
+  [JsonPropertyName("useImagesObjects")]
+  public bool? UseImagesObjects { get; set; }
+
+  /// <summary>
   /// Gets or Sets CustomFields
   /// </summary>
   [JsonPropertyName("customFields")]
@@ -92,6 +99,7 @@ public partial class SourceCommercetools
     sb.Append("  ProjectKey: ").Append(ProjectKey).Append("\n");
     sb.Append("  FallbackIsInStockValue: ").Append(FallbackIsInStockValue).Append("\n");
     sb.Append("  ProductQueryPredicate: ").Append(ProductQueryPredicate).Append("\n");
+    sb.Append("  UseImagesObjects: ").Append(UseImagesObjects).Append("\n");
     sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -142,6 +150,10 @@ public partial class SourceCommercetools
         )
       )
       && (
+        UseImagesObjects == input.UseImagesObjects
+        || UseImagesObjects.Equals(input.UseImagesObjects)
+      )
+      && (
         CustomFields == input.CustomFields
         || (CustomFields != null && CustomFields.Equals(input.CustomFields))
       );
@@ -177,6 +189,7 @@ public partial class SourceCommercetools
       {
         hashCode = (hashCode * 59) + ProductQueryPredicate.GetHashCode();
       }
+      hashCode = (hashCode * 59) + UseImagesObjects.GetHashCode();
       if (CustomFields != null)
       {
         hashCode = (hashCode * 59) + CustomFields.GetHashCode();
