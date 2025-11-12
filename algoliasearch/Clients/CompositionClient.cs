@@ -469,7 +469,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Upsert a composition in the current Algolia application.
+  /// Update and insert a composition in the current Algolia application.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -490,7 +490,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Upsert a composition in the current Algolia application.  (Synchronous version)
+  /// Update and insert a composition in the current Algolia application.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
