@@ -75,6 +75,18 @@ public partial class Rule
   public List<TimeRange> Validity { get; set; }
 
   /// <summary>
+  /// Gets or Sets Tags
+  /// </summary>
+  [JsonPropertyName("tags")]
+  public List<string> Tags { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Scope
+  /// </summary>
+  [JsonPropertyName("scope")]
+  public string Scope { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -88,6 +100,8 @@ public partial class Rule
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  Validity: ").Append(Validity).Append("\n");
+    sb.Append("  Tags: ").Append(Tags).Append("\n");
+    sb.Append("  Scope: ").Append(Scope).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -132,7 +146,11 @@ public partial class Rule
       && (
         Validity == input.Validity
         || Validity != null && input.Validity != null && Validity.SequenceEqual(input.Validity)
-      );
+      )
+      && (
+        Tags == input.Tags || Tags != null && input.Tags != null && Tags.SequenceEqual(input.Tags)
+      )
+      && (Scope == input.Scope || (Scope != null && Scope.Equals(input.Scope)));
   }
 
   /// <summary>
@@ -164,6 +182,14 @@ public partial class Rule
       if (Validity != null)
       {
         hashCode = (hashCode * 59) + Validity.GetHashCode();
+      }
+      if (Tags != null)
+      {
+        hashCode = (hashCode * 59) + Tags.GetHashCode();
+      }
+      if (Scope != null)
+      {
+        hashCode = (hashCode * 59) + Scope.GetHashCode();
       }
       return hashCode;
     }
