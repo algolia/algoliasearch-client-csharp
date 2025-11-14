@@ -31,20 +31,14 @@ public enum RunStatus
   Started = 2,
 
   /// <summary>
-  /// Enum Idled for value: idled
-  /// </summary>
-  [JsonPropertyName("idled")]
-  Idled = 3,
-
-  /// <summary>
   /// Enum Finished for value: finished
   /// </summary>
   [JsonPropertyName("finished")]
-  Finished = 4,
+  Finished = 3,
 
   /// <summary>
   /// Enum Skipped for value: skipped
   /// </summary>
   [JsonPropertyName("skipped")]
-  Skipped = 5,
+  Skipped = 4,
 }

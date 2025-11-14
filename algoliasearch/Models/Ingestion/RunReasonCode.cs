@@ -25,38 +25,50 @@ public enum RunReasonCode
   Internal = 1,
 
   /// <summary>
+  /// Enum Cancelled for value: cancelled
+  /// </summary>
+  [JsonPropertyName("cancelled")]
+  Cancelled = 2,
+
+  /// <summary>
   /// Enum Critical for value: critical
   /// </summary>
   [JsonPropertyName("critical")]
-  Critical = 2,
+  Critical = 3,
 
   /// <summary>
   /// Enum NoEvents for value: no_events
   /// </summary>
   [JsonPropertyName("no_events")]
-  NoEvents = 3,
+  NoEvents = 4,
 
   /// <summary>
   /// Enum TooManyErrors for value: too_many_errors
   /// </summary>
   [JsonPropertyName("too_many_errors")]
-  TooManyErrors = 4,
+  TooManyErrors = 5,
+
+  /// <summary>
+  /// Enum LackingEvents for value: lacking_events
+  /// </summary>
+  [JsonPropertyName("lacking_events")]
+  LackingEvents = 6,
 
   /// <summary>
   /// Enum Ok for value: ok
   /// </summary>
   [JsonPropertyName("ok")]
-  Ok = 5,
-
-  /// <summary>
-  /// Enum Discarded for value: discarded
-  /// </summary>
-  [JsonPropertyName("discarded")]
-  Discarded = 6,
+  Ok = 7,
 
   /// <summary>
   /// Enum Blocking for value: blocking
   /// </summary>
   [JsonPropertyName("blocking")]
-  Blocking = 7,
+  Blocking = 8,
+
+  /// <summary>
+  /// Enum Idle for value: idle
+  /// </summary>
+  [JsonPropertyName("idle")]
+  Idle = 9,
 }
