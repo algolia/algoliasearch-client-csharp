@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          global-json-file: global.json
+          dotnet-version: 10.0.100
 
       - name: Create Nugget package
         run: dotnet pack --configuration Release --output nugget
