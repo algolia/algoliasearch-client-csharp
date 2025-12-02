@@ -727,6 +727,48 @@ public interface ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
+
+  /// <summary>
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<TaskIDResponse> UpdateSortingStrategyCompositionAsync(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  TaskIDResponse UpdateSortingStrategyComposition(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
 
 /// <summary>
@@ -1497,5 +1539,52 @@ public partial class CompositionClient : ICompositionClient
         options,
         cancellationToken
       )
+    );
+
+  /// <inheritdoc />
+  public async Task<TaskIDResponse> UpdateSortingStrategyCompositionAsync(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
+    if (requestBody == null)
+      throw new ArgumentException(
+        "Parameter `requestBody` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = requestBody;
+    return await _transport
+      .ExecuteRequestAsync<TaskIDResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/sortingStrategy",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public TaskIDResponse UpdateSortingStrategyComposition(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateSortingStrategyCompositionAsync(compositionID, requestBody, options, cancellationToken)
     );
 }

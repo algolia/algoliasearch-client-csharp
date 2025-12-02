@@ -191,13 +191,6 @@ public partial class Params
   public string Query { get; set; }
 
   /// <summary>
-  /// Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
-  /// </summary>
-  /// <value>Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
-  [JsonPropertyName("relevancyStrictness")]
-  public int? RelevancyStrictness { get; set; }
-
-  /// <summary>
   /// Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
   /// </summary>
   /// <value>Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations). </value>
@@ -205,11 +198,25 @@ public partial class Params
   public List<SupportedLanguage> QueryLanguages { get; set; }
 
   /// <summary>
+  /// Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+  /// </summary>
+  /// <value>Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
+  [JsonPropertyName("relevancyStrictness")]
+  public int? RelevancyStrictness { get; set; }
+
+  /// <summary>
   /// Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
   /// </summary>
   /// <value>Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
   [JsonPropertyName("ruleContexts")]
   public List<string> RuleContexts { get; set; }
+
+  /// <summary>
+  /// Indicates which sorting strategy to apply for the request. The value must match one of the labels defined in the \"sortingStrategy\" mapping. For example, \"Price (asc)\", see Upsert Composition. At runtime, this label is used to look up the corresponding index or replica configured in \"sortingStrategy\", and the query is executed using that index instead of main's.  In addition to \"sortingStrategy\", this parameter is also used to apply a matching Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition Rules.  If no value is provided or an invalid value, no sorting strategy is applied.
+  /// </summary>
+  /// <value>Indicates which sorting strategy to apply for the request. The value must match one of the labels defined in the \"sortingStrategy\" mapping. For example, \"Price (asc)\", see Upsert Composition. At runtime, this label is used to look up the corresponding index or replica configured in \"sortingStrategy\", and the query is executed using that index instead of main's.  In addition to \"sortingStrategy\", this parameter is also used to apply a matching Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition Rules.  If no value is provided or an invalid value, no sorting strategy is applied. </value>
+  [JsonPropertyName("sortBy")]
+  public string SortBy { get; set; }
 
   /// <summary>
   /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
@@ -251,9 +258,10 @@ public partial class Params
     sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
-    sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
     sb.Append("  QueryLanguages: ").Append(QueryLanguages).Append("\n");
+    sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
     sb.Append("  RuleContexts: ").Append(RuleContexts).Append("\n");
+    sb.Append("  SortBy: ").Append(SortBy).Append("\n");
     sb.Append("  UserToken: ").Append(UserToken).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -359,14 +367,14 @@ public partial class Params
       && (Page == input.Page || Page.Equals(input.Page))
       && (Query == input.Query || (Query != null && Query.Equals(input.Query)))
       && (
-        RelevancyStrictness == input.RelevancyStrictness
-        || RelevancyStrictness.Equals(input.RelevancyStrictness)
-      )
-      && (
         QueryLanguages == input.QueryLanguages
         || QueryLanguages != null
           && input.QueryLanguages != null
           && QueryLanguages.SequenceEqual(input.QueryLanguages)
+      )
+      && (
+        RelevancyStrictness == input.RelevancyStrictness
+        || RelevancyStrictness.Equals(input.RelevancyStrictness)
       )
       && (
         RuleContexts == input.RuleContexts
@@ -374,6 +382,7 @@ public partial class Params
           && input.RuleContexts != null
           && RuleContexts.SequenceEqual(input.RuleContexts)
       )
+      && (SortBy == input.SortBy || (SortBy != null && SortBy.Equals(input.SortBy)))
       && (UserToken == input.UserToken || (UserToken != null && UserToken.Equals(input.UserToken)));
   }
 
@@ -453,14 +462,18 @@ public partial class Params
       {
         hashCode = (hashCode * 59) + Query.GetHashCode();
       }
-      hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
       if (QueryLanguages != null)
       {
         hashCode = (hashCode * 59) + QueryLanguages.GetHashCode();
       }
+      hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
       if (RuleContexts != null)
       {
         hashCode = (hashCode * 59) + RuleContexts.GetHashCode();
+      }
+      if (SortBy != null)
+      {
+        hashCode = (hashCode * 59) + SortBy.GetHashCode();
       }
       if (UserToken != null)
       {

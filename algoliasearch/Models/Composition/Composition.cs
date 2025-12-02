@@ -63,6 +63,13 @@ public partial class Composition
   public CompositionBehavior Behavior { get; set; }
 
   /// <summary>
+  /// A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+  /// </summary>
+  /// <value>A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined. </value>
+  [JsonPropertyName("sortingStrategy")]
+  public Dictionary<string, string> SortingStrategy { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -74,6 +81,7 @@ public partial class Composition
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  Behavior: ").Append(Behavior).Append("\n");
+    sb.Append("  SortingStrategy: ").Append(SortingStrategy).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -105,7 +113,13 @@ public partial class Composition
         Description == input.Description
         || (Description != null && Description.Equals(input.Description))
       )
-      && (Behavior == input.Behavior || (Behavior != null && Behavior.Equals(input.Behavior)));
+      && (Behavior == input.Behavior || (Behavior != null && Behavior.Equals(input.Behavior)))
+      && (
+        SortingStrategy == input.SortingStrategy
+        || SortingStrategy != null
+          && input.SortingStrategy != null
+          && SortingStrategy.SequenceEqual(input.SortingStrategy)
+      );
   }
 
   /// <summary>
@@ -132,6 +146,10 @@ public partial class Composition
       if (Behavior != null)
       {
         hashCode = (hashCode * 59) + Behavior.GetHashCode();
+      }
+      if (SortingStrategy != null)
+      {
+        hashCode = (hashCode * 59) + SortingStrategy.GetHashCode();
       }
       return hashCode;
     }
