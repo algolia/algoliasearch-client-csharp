@@ -49,6 +49,13 @@ public partial class Condition
   public string Filters { get; set; }
 
   /// <summary>
+  /// Sort criteria that trigger the rule.  You can trigger composition rules based on the selected sorting strategy set by the parameter `sortBy`. The rule will trigger if the value passed to `sortBy` matches the one defined in the condition.
+  /// </summary>
+  /// <value>Sort criteria that trigger the rule.  You can trigger composition rules based on the selected sorting strategy set by the parameter `sortBy`. The rule will trigger if the value passed to `sortBy` matches the one defined in the condition. </value>
+  [JsonPropertyName("sortBy")]
+  public string SortBy { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -60,6 +67,7 @@ public partial class Condition
     sb.Append("  Anchoring: ").Append(Anchoring).Append("\n");
     sb.Append("  Context: ").Append(Context).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
+    sb.Append("  SortBy: ").Append(SortBy).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -88,7 +96,8 @@ public partial class Condition
     return (Pattern == input.Pattern || (Pattern != null && Pattern.Equals(input.Pattern)))
       && (Anchoring == input.Anchoring || Anchoring.Equals(input.Anchoring))
       && (Context == input.Context || (Context != null && Context.Equals(input.Context)))
-      && (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters)));
+      && (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters)))
+      && (SortBy == input.SortBy || (SortBy != null && SortBy.Equals(input.SortBy)));
   }
 
   /// <summary>
@@ -112,6 +121,10 @@ public partial class Condition
       if (Filters != null)
       {
         hashCode = (hashCode * 59) + Filters.GetHashCode();
+      }
+      if (SortBy != null)
+      {
+        hashCode = (hashCode * 59) + SortBy.GetHashCode();
       }
       return hashCode;
     }
