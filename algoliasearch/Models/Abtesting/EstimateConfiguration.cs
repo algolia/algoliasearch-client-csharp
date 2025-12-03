@@ -33,6 +33,12 @@ public partial class EstimateConfiguration
   }
 
   /// <summary>
+  /// Gets or Sets FeatureFilters
+  /// </summary>
+  [JsonPropertyName("featureFilters")]
+  public FeatureFilters FeatureFilters { get; set; }
+
+  /// <summary>
   /// Gets or Sets Outliers
   /// </summary>
   [JsonPropertyName("outliers")]
@@ -58,6 +64,7 @@ public partial class EstimateConfiguration
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class EstimateConfiguration {\n");
+    sb.Append("  FeatureFilters: ").Append(FeatureFilters).Append("\n");
     sb.Append("  Outliers: ").Append(Outliers).Append("\n");
     sb.Append("  EmptySearch: ").Append(EmptySearch).Append("\n");
     sb.Append("  MinimumDetectableEffect: ").Append(MinimumDetectableEffect).Append("\n");
@@ -86,7 +93,11 @@ public partial class EstimateConfiguration
       return false;
     }
 
-    return (Outliers == input.Outliers || (Outliers != null && Outliers.Equals(input.Outliers)))
+    return (
+        FeatureFilters == input.FeatureFilters
+        || (FeatureFilters != null && FeatureFilters.Equals(input.FeatureFilters))
+      )
+      && (Outliers == input.Outliers || (Outliers != null && Outliers.Equals(input.Outliers)))
       && (
         EmptySearch == input.EmptySearch
         || (EmptySearch != null && EmptySearch.Equals(input.EmptySearch))
@@ -109,6 +120,10 @@ public partial class EstimateConfiguration
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (FeatureFilters != null)
+      {
+        hashCode = (hashCode * 59) + FeatureFilters.GetHashCode();
+      }
       if (Outliers != null)
       {
         hashCode = (hashCode * 59) + Outliers.GetHashCode();
