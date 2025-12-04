@@ -27,7 +27,7 @@ public sealed class CompositionConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   public CompositionConfig(string appId, string apiKey)
-    : base(appId, apiKey, "Composition", "7.34.0")
+    : base(appId, apiKey, "Composition", "7.35.0")
   {
     DefaultHosts = GetDefaultHosts(appId);
     Compression = CompressionType.None;
