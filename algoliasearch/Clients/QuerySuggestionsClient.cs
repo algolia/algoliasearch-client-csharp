@@ -59,6 +59,44 @@ public interface IQuerySuggestionsClient
   );
 
   /// <summary>
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="configurationWithIndex"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of BaseResponse</returns>
+  Task<AlgoliaHttpResponse> CreateConfigWithHTTPInfoAsync(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="configurationWithIndex"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>BaseResponse</returns>
+  AlgoliaHttpResponse CreateConfigWithHTTPInfo(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// This method lets you send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
@@ -105,6 +143,42 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -124,6 +198,42 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomGetWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     RequestOptions options = null,
@@ -182,6 +292,46 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -203,6 +353,46 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPutWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     object body = default,
@@ -249,6 +439,44 @@ public interface IQuerySuggestionsClient
   );
 
   /// <summary>
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of BaseResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteConfigWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>BaseResponse</returns>
+  AlgoliaHttpResponse DeleteConfigWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves all Query Suggestions configurations of your Algolia application.
   /// </summary>
   ///
@@ -278,6 +506,40 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{ConfigurationResponse}</returns>
   List<ConfigurationResponse> GetAllConfigs(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves all Query Suggestions configurations of your Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{ConfigurationResponse}</returns>
+  Task<AlgoliaHttpResponse> GetAllConfigsWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{ConfigurationResponse}</returns>
+  AlgoliaHttpResponse GetAllConfigsWithHTTPInfo(
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -315,6 +577,44 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ConfigurationResponse</returns>
   ConfigurationResponse GetConfig(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a single Query Suggestions configuration by its index name.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ConfigurationResponse</returns>
+  Task<AlgoliaHttpResponse> GetConfigWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ConfigurationResponse</returns>
+  AlgoliaHttpResponse GetConfigWithHTTPInfo(
     string indexName,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -359,6 +659,44 @@ public interface IQuerySuggestionsClient
   );
 
   /// <summary>
+  /// Reports the status of a Query Suggestions index.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ConfigStatus</returns>
+  Task<AlgoliaHttpResponse> GetConfigStatusWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Reports the status of a Query Suggestions index. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ConfigStatus</returns>
+  AlgoliaHttpResponse GetConfigStatusWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves the logs for a single Query Suggestions index.
   /// </summary>
   ///
@@ -391,6 +729,44 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>LogFile</returns>
   LogFile GetLogFile(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves the logs for a single Query Suggestions index.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of LogFile</returns>
+  Task<AlgoliaHttpResponse> GetLogFileWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>LogFile</returns>
+  AlgoliaHttpResponse GetLogFileWithHTTPInfo(
     string indexName,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -432,6 +808,48 @@ public interface IQuerySuggestionsClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>BaseResponse</returns>
   BaseResponse UpdateConfig(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a QuerySuggestions configuration.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="configuration"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of BaseResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateConfigWithHTTPInfoAsync(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a QuerySuggestions configuration. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Query Suggestions index name.</param>
+  /// <param name="configuration"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>BaseResponse</returns>
+  AlgoliaHttpResponse UpdateConfigWithHTTPInfo(
     string indexName,
     Configuration configuration,
     RequestOptions options = null,
@@ -560,6 +978,41 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateConfigWithHTTPInfoAsync(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (configurationWithIndex == null)
+      throw new ArgumentException(
+        "Parameter `configurationWithIndex` is required when calling `CreateConfig`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = configurationWithIndex;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/configs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateConfigWithHTTPInfo(
+    ConfigurationWithIndex configurationWithIndex,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateConfigWithHTTPInfoAsync(configurationWithIndex, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomDeleteAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -593,6 +1046,42 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomDeleteWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -624,6 +1113,42 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomGetWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomGetWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<object> CustomPostAsync(
@@ -663,6 +1188,45 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPostWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -700,6 +1264,45 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPutWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPutWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<BaseResponse> DeleteConfigAsync(
     string indexName,
     RequestOptions options = null,
@@ -731,6 +1334,38 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   ) => AsyncHelper.RunSync(() => DeleteConfigAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteConfigWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteConfigWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => DeleteConfigWithHTTPInfoAsync(indexName, options, cancellationToken));
+
+  /// <inheritdoc />
   public async Task<List<ConfigurationResponse>> GetAllConfigsAsync(
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -753,6 +1388,30 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetAllConfigsAsync(options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetAllConfigsWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/configs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetAllConfigsWithHTTPInfo(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetAllConfigsWithHTTPInfoAsync(options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<ConfigurationResponse> GetConfigAsync(
@@ -784,6 +1443,37 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetConfigAsync(indexName, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetConfigWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetConfigWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetConfigWithHTTPInfoAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<ConfigStatus> GetConfigStatusAsync(
@@ -819,6 +1509,42 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   ) => AsyncHelper.RunSync(() => GetConfigStatusAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetConfigStatusWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetConfigStatus`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/configs/{indexName}/status",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetConfigStatusWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetConfigStatusWithHTTPInfoAsync(indexName, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<LogFile> GetLogFileAsync(
     string indexName,
     RequestOptions options = null,
@@ -848,6 +1574,38 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetLogFileAsync(indexName, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetLogFileWithHTTPInfoAsync(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/logs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetLogFileWithHTTPInfo(
+    string indexName,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => GetLogFileWithHTTPInfoAsync(indexName, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<BaseResponse> UpdateConfigAsync(
@@ -889,5 +1647,47 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   ) =>
     AsyncHelper.RunSync(() =>
       UpdateConfigAsync(indexName, configuration, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateConfigWithHTTPInfoAsync(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
+
+    if (configuration == null)
+      throw new ArgumentException(
+        "Parameter `configuration` is required when calling `UpdateConfig`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    requestOptions.Data = configuration;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/configs/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateConfigWithHTTPInfo(
+    string indexName,
+    Configuration configuration,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateConfigWithHTTPInfoAsync(indexName, configuration, options, cancellationToken)
     );
 }

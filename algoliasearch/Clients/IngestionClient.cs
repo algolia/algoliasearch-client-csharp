@@ -63,6 +63,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Creates a new authentication resource.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of AuthenticationCreateResponse</returns>
+  Task<AlgoliaHttpResponse> CreateAuthenticationWithHTTPInfoAsync(
+    AuthenticationCreate authenticationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new authentication resource. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>AuthenticationCreateResponse</returns>
+  AlgoliaHttpResponse CreateAuthenticationWithHTTPInfo(
+    AuthenticationCreate authenticationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Creates a new destination.
   /// </summary>
   ///
@@ -99,6 +141,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DestinationCreateResponse</returns>
   DestinationCreateResponse CreateDestination(
+    DestinationCreate destinationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new destination.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DestinationCreateResponse</returns>
+  Task<AlgoliaHttpResponse> CreateDestinationWithHTTPInfoAsync(
+    DestinationCreate destinationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new destination. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DestinationCreateResponse</returns>
+  AlgoliaHttpResponse CreateDestinationWithHTTPInfo(
     DestinationCreate destinationCreate,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -147,6 +231,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Creates a new source.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of SourceCreateResponse</returns>
+  Task<AlgoliaHttpResponse> CreateSourceWithHTTPInfoAsync(
+    SourceCreate sourceCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new source. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SourceCreateResponse</returns>
+  AlgoliaHttpResponse CreateSourceWithHTTPInfo(
+    SourceCreate sourceCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Creates a new task.
   /// </summary>
   ///
@@ -183,6 +309,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskCreateResponse</returns>
   TaskCreateResponse CreateTask(
+    TaskCreate taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskCreate">Request body for creating a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskCreateResponse</returns>
+  Task<AlgoliaHttpResponse> CreateTaskWithHTTPInfoAsync(
+    TaskCreate taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskCreate">Request body for creating a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskCreateResponse</returns>
+  AlgoliaHttpResponse CreateTaskWithHTTPInfo(
     TaskCreate taskCreate,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -233,6 +401,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Creates a new task using the v1 endpoint, please use `createTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskCreate">Request body for creating a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskCreateResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> CreateTaskV1WithHTTPInfoAsync(
+    TaskCreateV1 taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new task using the v1 endpoint, please use `createTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskCreate">Request body for creating a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskCreateResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse CreateTaskV1WithHTTPInfo(
+    TaskCreateV1 taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Creates a new transformation.
   /// </summary>
   ///
@@ -269,6 +481,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationCreateResponse</returns>
   TransformationCreateResponse CreateTransformation(
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new transformation.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationCreate">Request body for creating a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationCreateResponse</returns>
+  Task<AlgoliaHttpResponse> CreateTransformationWithHTTPInfoAsync(
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Creates a new transformation. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationCreate">Request body for creating a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationCreateResponse</returns>
+  AlgoliaHttpResponse CreateTransformationWithHTTPInfo(
     TransformationCreate transformationCreate,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -321,6 +575,42 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -340,6 +630,42 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomGetWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     RequestOptions options = null,
@@ -398,6 +724,46 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -419,6 +785,46 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPutWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     object body = default,
@@ -469,6 +875,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  AlgoliaHttpResponse DeleteAuthenticationWithHTTPInfo(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
   /// </summary>
   ///
@@ -505,6 +953,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteResponse</returns>
   DeleteResponse DeleteDestination(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteDestinationWithHTTPInfoAsync(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  AlgoliaHttpResponse DeleteDestinationWithHTTPInfo(
     string destinationID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -553,6 +1043,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteSourceWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  AlgoliaHttpResponse DeleteSourceWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Deletes a task by its ID.
   /// </summary>
   ///
@@ -589,6 +1121,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteResponse</returns>
   DeleteResponse DeleteTask(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a task by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a task by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  AlgoliaHttpResponse DeleteTaskWithHTTPInfo(
     string taskID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -639,6 +1213,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> DeleteTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse DeleteTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Deletes a transformation by its ID.
   /// </summary>
   ///
@@ -681,6 +1299,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Deletes a transformation by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DeleteResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteTransformationWithHTTPInfoAsync(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deletes a transformation by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteResponse</returns>
+  AlgoliaHttpResponse DeleteTransformationWithHTTPInfo(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Disables a task.
   /// </summary>
   ///
@@ -717,6 +1377,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskUpdateResponse</returns>
   TaskUpdateResponse DisableTask(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Disables a task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> DisableTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Disables a task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  AlgoliaHttpResponse DisableTaskWithHTTPInfo(
     string taskID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -767,6 +1469,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Disables a task using the v1 endpoint, please use `disableTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> DisableTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Disables a task using the v1 endpoint, please use `disableTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse DisableTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Enables a task.
   /// </summary>
   ///
@@ -803,6 +1549,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskUpdateResponse</returns>
   TaskUpdateResponse EnableTask(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Enables a task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> EnableTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Enables a task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  AlgoliaHttpResponse EnableTaskWithHTTPInfo(
     string taskID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -853,6 +1641,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Enables a task using the v1 endpoint, please use `enableTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> EnableTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Enables a task using the v1 endpoint, please use `enableTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse EnableTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves an authentication resource by its ID.
   /// </summary>
   ///
@@ -895,6 +1727,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves an authentication resource by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Authentication</returns>
+  Task<AlgoliaHttpResponse> GetAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves an authentication resource by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Authentication</returns>
+  AlgoliaHttpResponse GetAuthenticationWithHTTPInfo(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a destination by its ID.
   /// </summary>
   ///
@@ -931,6 +1805,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Destination</returns>
   Destination GetDestination(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a destination by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Destination</returns>
+  Task<AlgoliaHttpResponse> GetDestinationWithHTTPInfoAsync(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a destination by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Destination</returns>
+  AlgoliaHttpResponse GetDestinationWithHTTPInfo(
     string destinationID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -983,6 +1899,52 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves a single task run event by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Event</returns>
+  Task<AlgoliaHttpResponse> GetEventWithHTTPInfoAsync(
+    string runID,
+    string eventID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a single task run event by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Event</returns>
+  AlgoliaHttpResponse GetEventWithHTTPInfo(
+    string runID,
+    string eventID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieve a single task run by its ID.
   /// </summary>
   ///
@@ -1019,6 +1981,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Run</returns>
   Run GetRun(
+    string runID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a single task run by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Run</returns>
+  Task<AlgoliaHttpResponse> GetRunWithHTTPInfoAsync(
+    string runID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a single task run by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Run</returns>
+  AlgoliaHttpResponse GetRunWithHTTPInfo(
     string runID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1067,6 +2071,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieve a source by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Source</returns>
+  Task<AlgoliaHttpResponse> GetSourceWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a source by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Source</returns>
+  AlgoliaHttpResponse GetSourceWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a task by its ID.
   /// </summary>
   ///
@@ -1103,6 +2149,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>IngestionTask</returns>
   IngestionTask GetTask(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a task by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of IngestionTask</returns>
+  Task<AlgoliaHttpResponse> GetTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a task by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>IngestionTask</returns>
+  AlgoliaHttpResponse GetTaskWithHTTPInfo(
     string taskID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1153,6 +2241,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskV1</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> GetTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskV1</returns>
+  [Obsolete]
+  AlgoliaHttpResponse GetTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a transformation by its ID.
   /// </summary>
   ///
@@ -1189,6 +2321,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Transformation</returns>
   Transformation GetTransformation(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a transformation by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Transformation</returns>
+  Task<AlgoliaHttpResponse> GetTransformationWithHTTPInfoAsync(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a transformation by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Transformation</returns>
+  AlgoliaHttpResponse GetTransformationWithHTTPInfo(
     string transformationID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1246,6 +2420,68 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListAuthenticationsResponse</returns>
   ListAuthenticationsResponse ListAuthentications(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<AuthenticationType> type = default,
+    List<PlatformWithNone> platform = default,
+    AuthenticationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of all authentication resources.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentications. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentications. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListAuthenticationsResponse</returns>
+  Task<AlgoliaHttpResponse> ListAuthenticationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<AuthenticationType> type = default,
+    List<PlatformWithNone> platform = default,
+    AuthenticationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of all authentication resources. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentications. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentications. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListAuthenticationsResponse</returns>
+  AlgoliaHttpResponse ListAuthenticationsWithHTTPInfo(
     int? itemsPerPage = default,
     int? page = default,
     List<AuthenticationType> type = default,
@@ -1323,6 +2559,72 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves a list of destinations.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="transformationID">Get the list of destinations used by a transformation. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListDestinationsResponse</returns>
+  Task<AlgoliaHttpResponse> ListDestinationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<DestinationType> type = default,
+    List<string> authenticationID = default,
+    string transformationID = default,
+    DestinationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of destinations. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="transformationID">Get the list of destinations used by a transformation. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListDestinationsResponse</returns>
+  AlgoliaHttpResponse ListDestinationsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<DestinationType> type = default,
+    List<string> authenticationID = default,
+    string transformationID = default,
+    DestinationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a list of events for a task run, identified by its ID.
   /// </summary>
   ///
@@ -1383,6 +2685,80 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListEventsResponse</returns>
   ListEventsResponse ListEvents(
+    string runID,
+    int? itemsPerPage = default,
+    int? page = default,
+    List<EventStatus> status = default,
+    List<EventType> type = default,
+    EventSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of events for a task run, identified by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListEventsResponse</returns>
+  Task<AlgoliaHttpResponse> ListEventsWithHTTPInfoAsync(
+    string runID,
+    int? itemsPerPage = default,
+    int? page = default,
+    List<EventStatus> status = default,
+    List<EventType> type = default,
+    EventSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of events for a task run, identified by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListEventsResponse</returns>
+  AlgoliaHttpResponse ListEventsWithHTTPInfo(
     string runID,
     int? itemsPerPage = default,
     int? page = default,
@@ -1471,6 +2847,80 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieve a list of task runs.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunListResponse</returns>
+  Task<AlgoliaHttpResponse> ListRunsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<RunStatus> status = default,
+    List<RunType> type = default,
+    string taskID = default,
+    RunSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a list of task runs. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunListResponse</returns>
+  AlgoliaHttpResponse ListRunsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<RunStatus> status = default,
+    List<RunType> type = default,
+    string taskID = default,
+    RunSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a list of sources.
   /// </summary>
   ///
@@ -1522,6 +2972,68 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListSourcesResponse</returns>
   ListSourcesResponse ListSources(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<SourceType> type = default,
+    List<string> authenticationID = default,
+    SourceSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of sources.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListSourcesResponse</returns>
+  Task<AlgoliaHttpResponse> ListSourcesWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<SourceType> type = default,
+    List<string> authenticationID = default,
+    SourceSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of sources. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListSourcesResponse</returns>
+  AlgoliaHttpResponse ListSourcesWithHTTPInfo(
     int? itemsPerPage = default,
     int? page = default,
     List<SourceType> type = default,
@@ -1615,6 +3127,88 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves a list of tasks.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="sourceType">Filters the tasks with the specified source type. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="withEmailNotifications">If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListTasksResponse</returns>
+  Task<AlgoliaHttpResponse> ListTasksWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<SourceType> sourceType = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    bool? withEmailNotifications = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of tasks. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="sourceType">Filters the tasks with the specified source type. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="withEmailNotifications">If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListTasksResponse</returns>
+  AlgoliaHttpResponse ListTasksWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<SourceType> sourceType = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    bool? withEmailNotifications = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
   /// </summary>
   ///
@@ -1691,6 +3285,82 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListTasksResponseV1</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> ListTasksV1WithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListTasksResponseV1</returns>
+  [Obsolete]
+  AlgoliaHttpResponse ListTasksV1WithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves a list of transformations.
   /// </summary>
   ///
@@ -1739,6 +3409,64 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListTransformationsResponse</returns>
   ListTransformationsResponse ListTransformations(
+    int? itemsPerPage = default,
+    int? page = default,
+    TransformationSortKeys? sort = default,
+    OrderKeys? order = default,
+    TransformationType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of transformations.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="type">Whether to filter the list of transformations by the type of transformation. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListTransformationsResponse</returns>
+  Task<AlgoliaHttpResponse> ListTransformationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    TransformationSortKeys? sort = default,
+    OrderKeys? order = default,
+    TransformationType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a list of transformations. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="type">Whether to filter the list of transformations by the type of transformation. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListTransformationsResponse</returns>
+  AlgoliaHttpResponse ListTransformationsWithHTTPInfo(
     int? itemsPerPage = default,
     int? page = default,
     TransformationSortKeys? sort = default,
@@ -1803,6 +3531,60 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="referenceIndexName">This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<AlgoliaHttpResponse> PushWithHTTPInfoAsync(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    string referenceIndexName = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="referenceIndexName">This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  AlgoliaHttpResponse PushWithHTTPInfo(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    string referenceIndexName = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
   /// </summary>
   ///
@@ -1845,6 +3627,56 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>WatchResponse</returns>
   WatchResponse PushTask(
+    string taskID,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<AlgoliaHttpResponse> PushTaskWithHTTPInfoAsync(
+    string taskID,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="pushTaskPayload"></param>
+  /// <param name="watch">When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  AlgoliaHttpResponse PushTaskWithHTTPInfo(
     string taskID,
     PushTaskPayload pushTaskPayload,
     bool? watch = default,
@@ -1899,6 +3731,52 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskReplace"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> ReplaceTaskWithHTTPInfoAsync(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskReplace"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  AlgoliaHttpResponse ReplaceTaskWithHTTPInfo(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
   /// </summary>
   ///
@@ -1945,6 +3823,52 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunSourceResponse</returns>
+  Task<AlgoliaHttpResponse> RunSourceWithHTTPInfoAsync(
+    string sourceID,
+    RunSourcePayload runSourcePayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunSourceResponse</returns>
+  AlgoliaHttpResponse RunSourceWithHTTPInfo(
+    string sourceID,
+    RunSourcePayload runSourcePayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Runs a task. You can check the status of task runs with the observability endpoints.
   /// </summary>
   ///
@@ -1984,6 +3908,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RunResponse</returns>
   RunResponse RunTask(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Runs a task. You can check the status of task runs with the observability endpoints.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunResponse</returns>
+  Task<AlgoliaHttpResponse> RunTaskWithHTTPInfoAsync(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Runs a task. You can check the status of task runs with the observability endpoints. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunResponse</returns>
+  AlgoliaHttpResponse RunTaskWithHTTPInfo(
     string taskID,
     RunTaskPayload runTaskPayload = default,
     RequestOptions options = null,
@@ -2039,6 +4009,54 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> RunTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="runTaskPayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse RunTaskV1WithHTTPInfo(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Searches for authentication resources.
   /// </summary>
   ///
@@ -2075,6 +4093,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{Authentication}</returns>
   List<Authentication> SearchAuthentications(
+    AuthenticationSearch authenticationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for authentication resources.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{Authentication}</returns>
+  Task<AlgoliaHttpResponse> SearchAuthenticationsWithHTTPInfoAsync(
+    AuthenticationSearch authenticationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for authentication resources. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{Authentication}</returns>
+  AlgoliaHttpResponse SearchAuthenticationsWithHTTPInfo(
     AuthenticationSearch authenticationSearch,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2123,6 +4183,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Searches for destinations.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{Destination}</returns>
+  Task<AlgoliaHttpResponse> SearchDestinationsWithHTTPInfoAsync(
+    DestinationSearch destinationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for destinations. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{Destination}</returns>
+  AlgoliaHttpResponse SearchDestinationsWithHTTPInfo(
+    DestinationSearch destinationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Searches for sources.
   /// </summary>
   ///
@@ -2165,6 +4267,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Searches for sources.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{Source}</returns>
+  Task<AlgoliaHttpResponse> SearchSourcesWithHTTPInfoAsync(
+    SourceSearch sourceSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for sources. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{Source}</returns>
+  AlgoliaHttpResponse SearchSourcesWithHTTPInfo(
+    SourceSearch sourceSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Searches for tasks.
   /// </summary>
   ///
@@ -2201,6 +4345,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{IngestionTask}</returns>
   List<IngestionTask> SearchTasks(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for tasks.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{IngestionTask}</returns>
+  Task<AlgoliaHttpResponse> SearchTasksWithHTTPInfoAsync(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for tasks. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{IngestionTask}</returns>
+  AlgoliaHttpResponse SearchTasksWithHTTPInfo(
     TaskSearch taskSearch,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2251,6 +4437,50 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{TaskV1}</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> SearchTasksV1WithHTTPInfoAsync(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{TaskV1}</returns>
+  [Obsolete]
+  AlgoliaHttpResponse SearchTasksV1WithHTTPInfo(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Searches for transformations.
   /// </summary>
   ///
@@ -2287,6 +4517,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>List{Transformation}</returns>
   List<Transformation> SearchTransformations(
+    TransformationSearch transformationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for transformations.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of List{Transformation}</returns>
+  Task<AlgoliaHttpResponse> SearchTransformationsWithHTTPInfoAsync(
+    TransformationSearch transformationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for transformations. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationSearch"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>List{Transformation}</returns>
+  AlgoliaHttpResponse SearchTransformationsWithHTTPInfo(
     TransformationSearch transformationSearch,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2335,6 +4607,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<AlgoliaHttpResponse> TriggerDockerSourceDiscoverWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  AlgoliaHttpResponse TriggerDockerSourceDiscoverWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Try a transformation before creating it.
   /// </summary>
   ///
@@ -2371,6 +4685,48 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationTryResponse</returns>
   TransformationTryResponse TryTransformation(
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Try a transformation before creating it.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationTry"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationTryResponse</returns>
+  Task<AlgoliaHttpResponse> TryTransformationWithHTTPInfoAsync(
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Try a transformation before creating it. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationTry"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationTryResponse</returns>
+  AlgoliaHttpResponse TryTransformationWithHTTPInfo(
     TransformationTry transformationTry,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2416,6 +4772,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationTryResponse</returns>
   TransformationTryResponse TryTransformationBeforeUpdate(
+    string transformationID,
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Try a transformation before updating it.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="transformationTry"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationTryResponse</returns>
+  Task<AlgoliaHttpResponse> TryTransformationBeforeUpdateWithHTTPInfoAsync(
+    string transformationID,
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Try a transformation before updating it. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="transformationTry"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationTryResponse</returns>
+  AlgoliaHttpResponse TryTransformationBeforeUpdateWithHTTPInfo(
     string transformationID,
     TransformationTry transformationTry,
     RequestOptions options = null,
@@ -2469,6 +4871,52 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Updates an authentication resource.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="authenticationUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of AuthenticationUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    AuthenticationUpdate authenticationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates an authentication resource. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
+  /// <param name="authenticationUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>AuthenticationUpdateResponse</returns>
+  AlgoliaHttpResponse UpdateAuthenticationWithHTTPInfo(
+    string authenticationID,
+    AuthenticationUpdate authenticationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Updates the destination by its ID.
   /// </summary>
   ///
@@ -2508,6 +4956,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DestinationUpdateResponse</returns>
   DestinationUpdateResponse UpdateDestination(
+    string destinationID,
+    DestinationUpdate destinationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates the destination by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="destinationUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of DestinationUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateDestinationWithHTTPInfoAsync(
+    string destinationID,
+    DestinationUpdate destinationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates the destination by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="destinationID">Unique identifier of a destination.</param>
+  /// <param name="destinationUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DestinationUpdateResponse</returns>
+  AlgoliaHttpResponse UpdateDestinationWithHTTPInfo(
     string destinationID,
     DestinationUpdate destinationUpdate,
     RequestOptions options = null,
@@ -2561,6 +5055,52 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Updates a source by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="sourceUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of SourceUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateSourceWithHTTPInfoAsync(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a source by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="sourceUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SourceUpdateResponse</returns>
+  AlgoliaHttpResponse UpdateSourceWithHTTPInfo(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Partially updates a task by its ID.
   /// </summary>
   ///
@@ -2600,6 +5140,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskUpdateResponse</returns>
   TaskUpdateResponse UpdateTask(
+    string taskID,
+    TaskUpdate taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Partially updates a task by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateTaskWithHTTPInfoAsync(
+    string taskID,
+    TaskUpdate taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Partially updates a task by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  AlgoliaHttpResponse UpdateTaskWithHTTPInfo(
     string taskID,
     TaskUpdate taskUpdate,
     RequestOptions options = null,
@@ -2655,6 +5241,54 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskUpdateResponse</returns>
+  [Obsolete]
+  Task<AlgoliaHttpResponse> UpdateTaskV1WithHTTPInfoAsync(
+    string taskID,
+    TaskUpdateV1 taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="taskUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskUpdateResponse</returns>
+  [Obsolete]
+  AlgoliaHttpResponse UpdateTaskV1WithHTTPInfo(
+    string taskID,
+    TaskUpdateV1 taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Updates a transformation by its ID.
   /// </summary>
   ///
@@ -2694,6 +5328,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationUpdateResponse</returns>
   TransformationUpdateResponse UpdateTransformation(
+    string transformationID,
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a transformation by its ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="transformationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationUpdateResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateTransformationWithHTTPInfoAsync(
+    string transformationID,
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates a transformation by its ID. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="transformationID">Unique identifier of a transformation.</param>
+  /// <param name="transformationCreate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationUpdateResponse</returns>
+  AlgoliaHttpResponse UpdateTransformationWithHTTPInfo(
     string transformationID,
     TransformationCreate transformationCreate,
     RequestOptions options = null,
@@ -2743,6 +5423,48 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
+  /// Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceCreate"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<AlgoliaHttpResponse> ValidateSourceWithHTTPInfoAsync(
+    SourceCreate sourceCreate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceCreate"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  AlgoliaHttpResponse ValidateSourceWithHTTPInfo(
+    SourceCreate sourceCreate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
   /// </summary>
   ///
@@ -2782,6 +5504,52 @@ public partial interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>WatchResponse</returns>
   WatchResponse ValidateSourceBeforeUpdate(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="sourceUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of WatchResponse</returns>
+  Task<AlgoliaHttpResponse> ValidateSourceBeforeUpdateWithHTTPInfoAsync(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="sourceUpdate"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>WatchResponse</returns>
+  AlgoliaHttpResponse ValidateSourceBeforeUpdateWithHTTPInfo(
     string sourceID,
     SourceUpdate sourceUpdate,
     RequestOptions options = null,
@@ -2910,6 +5678,41 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateAuthenticationWithHTTPInfoAsync(
+    AuthenticationCreate authenticationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (authenticationCreate == null)
+      throw new ArgumentException(
+        "Parameter `authenticationCreate` is required when calling `CreateAuthentication`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = authenticationCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/authentications",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateAuthenticationWithHTTPInfo(
+    AuthenticationCreate authenticationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateAuthenticationWithHTTPInfoAsync(authenticationCreate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<DestinationCreateResponse> CreateDestinationAsync(
     DestinationCreate destinationCreate,
     RequestOptions options = null,
@@ -2945,6 +5748,41 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateDestinationWithHTTPInfoAsync(
+    DestinationCreate destinationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (destinationCreate == null)
+      throw new ArgumentException(
+        "Parameter `destinationCreate` is required when calling `CreateDestination`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = destinationCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/destinations",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateDestinationWithHTTPInfo(
+    DestinationCreate destinationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateDestinationWithHTTPInfoAsync(destinationCreate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<SourceCreateResponse> CreateSourceAsync(
     SourceCreate sourceCreate,
     RequestOptions options = null,
@@ -2977,6 +5815,41 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => CreateSourceAsync(sourceCreate, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateSourceWithHTTPInfoAsync(
+    SourceCreate sourceCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceCreate == null)
+      throw new ArgumentException(
+        "Parameter `sourceCreate` is required when calling `CreateSource`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = sourceCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateSourceWithHTTPInfo(
+    SourceCreate sourceCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateSourceWithHTTPInfoAsync(sourceCreate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TaskCreateResponse> CreateTaskAsync(
     TaskCreate taskCreate,
     RequestOptions options = null,
@@ -3005,6 +5878,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => CreateTaskAsync(taskCreate, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateTaskWithHTTPInfoAsync(
+    TaskCreate taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskCreate == null)
+      throw new ArgumentException("Parameter `taskCreate` is required when calling `CreateTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = taskCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/2/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateTaskWithHTTPInfo(
+    TaskCreate taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => CreateTaskWithHTTPInfoAsync(taskCreate, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
@@ -3039,6 +5943,43 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => CreateTaskV1Async(taskCreate, options, cancellationToken));
+
+  /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> CreateTaskV1WithHTTPInfoAsync(
+    TaskCreateV1 taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskCreate == null)
+      throw new ArgumentException(
+        "Parameter `taskCreate` is required when calling `CreateTaskV1`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = taskCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse CreateTaskV1WithHTTPInfo(
+    TaskCreateV1 taskCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateTaskV1WithHTTPInfoAsync(taskCreate, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<TransformationCreateResponse> CreateTransformationAsync(
@@ -3076,6 +6017,41 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateTransformationWithHTTPInfoAsync(
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationCreate == null)
+      throw new ArgumentException(
+        "Parameter `transformationCreate` is required when calling `CreateTransformation`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = transformationCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/transformations",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateTransformationWithHTTPInfo(
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateTransformationWithHTTPInfoAsync(transformationCreate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomDeleteAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -3109,6 +6085,42 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomDeleteWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -3140,6 +6152,42 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomGetWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomGetWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<object> CustomPostAsync(
@@ -3179,6 +6227,45 @@ public partial class IngestionClient : IIngestionClient
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPostWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -3214,6 +6301,45 @@ public partial class IngestionClient : IIngestionClient
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPutWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPutWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<DeleteResponse> DeleteAuthenticationAsync(
@@ -3255,6 +6381,45 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (authenticationID == null)
+      throw new ArgumentException(
+        "Parameter `authenticationID` is required when calling `DeleteAuthentication`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "authenticationID",
+      QueryStringHelper.ParameterToString(authenticationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/authentications/{authenticationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteAuthenticationWithHTTPInfo(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteAuthenticationWithHTTPInfoAsync(authenticationID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<DeleteResponse> DeleteDestinationAsync(
     string destinationID,
     RequestOptions options = null,
@@ -3291,6 +6456,45 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => DeleteDestinationAsync(destinationID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteDestinationWithHTTPInfoAsync(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (destinationID == null)
+      throw new ArgumentException(
+        "Parameter `destinationID` is required when calling `DeleteDestination`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "destinationID",
+      QueryStringHelper.ParameterToString(destinationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/destinations/{destinationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteDestinationWithHTTPInfo(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteDestinationWithHTTPInfoAsync(destinationID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<DeleteResponse> DeleteSourceAsync(
     string sourceID,
     RequestOptions options = null,
@@ -3320,6 +6524,38 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => DeleteSourceAsync(sourceID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteSourceWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException("Parameter `sourceID` is required when calling `DeleteSource`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/sources/{sourceID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteSourceWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => DeleteSourceWithHTTPInfoAsync(sourceID, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<DeleteResponse> DeleteTaskAsync(
@@ -3353,6 +6589,37 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => DeleteTaskAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `DeleteTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/2/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteTaskWithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteTaskWithHTTPInfoAsync(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
   [Obsolete]
   public async Task<DeleteResponse> DeleteTaskV1Async(
     string taskID,
@@ -3384,6 +6651,39 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => DeleteTaskV1Async(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> DeleteTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `DeleteTaskV1`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse DeleteTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DeleteTaskV1WithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<DeleteResponse> DeleteTransformationAsync(
@@ -3425,6 +6725,45 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteTransformationWithHTTPInfoAsync(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationID == null)
+      throw new ArgumentException(
+        "Parameter `transformationID` is required when calling `DeleteTransformation`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "transformationID",
+      QueryStringHelper.ParameterToString(transformationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/transformations/{transformationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteTransformationWithHTTPInfo(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteTransformationWithHTTPInfoAsync(transformationID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TaskUpdateResponse> DisableTaskAsync(
     string taskID,
     RequestOptions options = null,
@@ -3454,6 +6793,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => DisableTaskAsync(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DisableTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `DisableTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/2/tasks/{taskID}/disable",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DisableTaskWithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => DisableTaskWithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
@@ -3489,6 +6859,40 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => DisableTaskV1Async(taskID, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> DisableTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `DisableTaskV1`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/tasks/{taskID}/disable",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse DisableTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => DisableTaskV1WithHTTPInfoAsync(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
   public async Task<TaskUpdateResponse> EnableTaskAsync(
     string taskID,
     RequestOptions options = null,
@@ -3518,6 +6922,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => EnableTaskAsync(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> EnableTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `EnableTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/2/tasks/{taskID}/enable",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse EnableTaskWithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => EnableTaskWithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
@@ -3551,6 +6986,39 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => EnableTaskV1Async(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> EnableTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `EnableTaskV1`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/tasks/{taskID}/enable",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse EnableTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => EnableTaskV1WithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<Authentication> GetAuthenticationAsync(
@@ -3590,6 +7058,45 @@ public partial class IngestionClient : IIngestionClient
     AsyncHelper.RunSync(() => GetAuthenticationAsync(authenticationID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (authenticationID == null)
+      throw new ArgumentException(
+        "Parameter `authenticationID` is required when calling `GetAuthentication`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "authenticationID",
+      QueryStringHelper.ParameterToString(authenticationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/authentications/{authenticationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetAuthenticationWithHTTPInfo(
+    string authenticationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetAuthenticationWithHTTPInfoAsync(authenticationID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<Destination> GetDestinationAsync(
     string destinationID,
     RequestOptions options = null,
@@ -3624,6 +7131,45 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetDestinationAsync(destinationID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetDestinationWithHTTPInfoAsync(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (destinationID == null)
+      throw new ArgumentException(
+        "Parameter `destinationID` is required when calling `GetDestination`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "destinationID",
+      QueryStringHelper.ParameterToString(destinationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/destinations/{destinationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetDestinationWithHTTPInfo(
+    string destinationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetDestinationWithHTTPInfoAsync(destinationID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<Event> GetEventAsync(
@@ -3663,6 +7209,46 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => GetEventAsync(runID, eventID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetEventWithHTTPInfoAsync(
+    string runID,
+    string eventID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (runID == null)
+      throw new ArgumentException("Parameter `runID` is required when calling `GetEvent`.");
+
+    if (eventID == null)
+      throw new ArgumentException("Parameter `eventID` is required when calling `GetEvent`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
+    requestOptions.PathParameters.Add("eventID", QueryStringHelper.ParameterToString(eventID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/runs/{runID}/events/{eventID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetEventWithHTTPInfo(
+    string runID,
+    string eventID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetEventWithHTTPInfoAsync(runID, eventID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<Run> GetRunAsync(
     string runID,
     RequestOptions options = null,
@@ -3692,6 +7278,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetRunAsync(runID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetRunWithHTTPInfoAsync(
+    string runID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (runID == null)
+      throw new ArgumentException("Parameter `runID` is required when calling `GetRun`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/runs/{runID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetRunWithHTTPInfo(
+    string runID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetRunWithHTTPInfoAsync(runID, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<Source> GetSourceAsync(
@@ -3725,6 +7342,37 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => GetSourceAsync(sourceID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetSourceWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException("Parameter `sourceID` is required when calling `GetSource`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/sources/{sourceID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetSourceWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetSourceWithHTTPInfoAsync(sourceID, options, cancellationToken));
+
+  /// <inheritdoc />
   public async Task<IngestionTask> GetTaskAsync(
     string taskID,
     RequestOptions options = null,
@@ -3754,6 +7402,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetTaskAsync(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetTaskWithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `GetTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/2/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetTaskWithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetTaskWithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
@@ -3787,6 +7466,39 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetTaskV1Async(taskID, options, cancellationToken));
+
+  /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> GetTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `GetTaskV1`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse GetTaskV1WithHTTPInfo(
+    string taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetTaskV1WithHTTPInfoAsync(taskID, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<Transformation> GetTransformationAsync(
@@ -3824,6 +7536,45 @@ public partial class IngestionClient : IIngestionClient
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() => GetTransformationAsync(transformationID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetTransformationWithHTTPInfoAsync(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationID == null)
+      throw new ArgumentException(
+        "Parameter `transformationID` is required when calling `GetTransformation`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "transformationID",
+      QueryStringHelper.ParameterToString(transformationID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/transformations/{transformationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetTransformationWithHTTPInfo(
+    string transformationID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTransformationWithHTTPInfoAsync(transformationID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<ListAuthenticationsResponse> ListAuthenticationsAsync(
@@ -3868,6 +7619,60 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ListAuthenticationsAsync(
+        itemsPerPage,
+        page,
+        type,
+        platform,
+        sort,
+        order,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListAuthenticationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<AuthenticationType> type = default,
+    List<PlatformWithNone> platform = default,
+    AuthenticationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("type", type);
+    requestOptions.AddQueryParameter("platform", platform);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/authentications",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListAuthenticationsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<AuthenticationType> type = default,
+    List<PlatformWithNone> platform = default,
+    AuthenticationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListAuthenticationsWithHTTPInfoAsync(
         itemsPerPage,
         page,
         type,
@@ -3925,6 +7730,64 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ListDestinationsAsync(
+        itemsPerPage,
+        page,
+        type,
+        authenticationID,
+        transformationID,
+        sort,
+        order,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListDestinationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<DestinationType> type = default,
+    List<string> authenticationID = default,
+    string transformationID = default,
+    DestinationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("type", type);
+    requestOptions.AddQueryParameter("authenticationID", authenticationID);
+    requestOptions.AddQueryParameter("transformationID", transformationID);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/destinations",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListDestinationsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<DestinationType> type = default,
+    List<string> authenticationID = default,
+    string transformationID = default,
+    DestinationSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListDestinationsWithHTTPInfoAsync(
         itemsPerPage,
         page,
         type,
@@ -4008,6 +7871,76 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListEventsWithHTTPInfoAsync(
+    string runID,
+    int? itemsPerPage = default,
+    int? page = default,
+    List<EventStatus> status = default,
+    List<EventType> type = default,
+    EventSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (runID == null)
+      throw new ArgumentException("Parameter `runID` is required when calling `ListEvents`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("status", status);
+    requestOptions.AddQueryParameter("type", type);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    requestOptions.AddQueryParameter("startDate", startDate);
+    requestOptions.AddQueryParameter("endDate", endDate);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/runs/{runID}/events",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListEventsWithHTTPInfo(
+    string runID,
+    int? itemsPerPage = default,
+    int? page = default,
+    List<EventStatus> status = default,
+    List<EventType> type = default,
+    EventSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListEventsWithHTTPInfoAsync(
+        runID,
+        itemsPerPage,
+        page,
+        status,
+        type,
+        sort,
+        order,
+        startDate,
+        endDate,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<RunListResponse> ListRunsAsync(
     int? itemsPerPage = default,
     int? page = default,
@@ -4074,6 +8007,72 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListRunsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<RunStatus> status = default,
+    List<RunType> type = default,
+    string taskID = default,
+    RunSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("status", status);
+    requestOptions.AddQueryParameter("type", type);
+    requestOptions.AddQueryParameter("taskID", taskID);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    requestOptions.AddQueryParameter("startDate", startDate);
+    requestOptions.AddQueryParameter("endDate", endDate);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/runs",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListRunsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<RunStatus> status = default,
+    List<RunType> type = default,
+    string taskID = default,
+    RunSortKeys? sort = default,
+    OrderKeys? order = default,
+    string startDate = default,
+    string endDate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListRunsWithHTTPInfoAsync(
+        itemsPerPage,
+        page,
+        status,
+        type,
+        taskID,
+        sort,
+        order,
+        startDate,
+        endDate,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<ListSourcesResponse> ListSourcesAsync(
     int? itemsPerPage = default,
     int? page = default,
@@ -4116,6 +8115,60 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ListSourcesAsync(
+        itemsPerPage,
+        page,
+        type,
+        authenticationID,
+        sort,
+        order,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListSourcesWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<SourceType> type = default,
+    List<string> authenticationID = default,
+    SourceSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("type", type);
+    requestOptions.AddQueryParameter("authenticationID", authenticationID);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/sources",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListSourcesWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<SourceType> type = default,
+    List<string> authenticationID = default,
+    SourceSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListSourcesWithHTTPInfoAsync(
         itemsPerPage,
         page,
         type,
@@ -4202,6 +8255,80 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListTasksWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<SourceType> sourceType = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    bool? withEmailNotifications = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("action", action);
+    requestOptions.AddQueryParameter("enabled", enabled);
+    requestOptions.AddQueryParameter("sourceID", sourceID);
+    requestOptions.AddQueryParameter("sourceType", sourceType);
+    requestOptions.AddQueryParameter("destinationID", destinationID);
+    requestOptions.AddQueryParameter("triggerType", triggerType);
+    requestOptions.AddQueryParameter("withEmailNotifications", withEmailNotifications);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/2/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListTasksWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<SourceType> sourceType = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    bool? withEmailNotifications = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListTasksWithHTTPInfoAsync(
+        itemsPerPage,
+        page,
+        action,
+        enabled,
+        sourceID,
+        sourceType,
+        destinationID,
+        triggerType,
+        withEmailNotifications,
+        sort,
+        order,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   [Obsolete]
   public async Task<ListTasksResponseV1> ListTasksV1Async(
     int? itemsPerPage = default,
@@ -4270,6 +8397,74 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> ListTasksV1WithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("action", action);
+    requestOptions.AddQueryParameter("enabled", enabled);
+    requestOptions.AddQueryParameter("sourceID", sourceID);
+    requestOptions.AddQueryParameter("destinationID", destinationID);
+    requestOptions.AddQueryParameter("triggerType", triggerType);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse ListTasksV1WithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    List<ActionType> action = default,
+    bool? enabled = default,
+    List<string> sourceID = default,
+    List<string> destinationID = default,
+    List<TriggerType> triggerType = default,
+    TaskSortKeys? sort = default,
+    OrderKeys? order = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListTasksV1WithHTTPInfoAsync(
+        itemsPerPage,
+        page,
+        action,
+        enabled,
+        sourceID,
+        destinationID,
+        triggerType,
+        sort,
+        order,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<ListTransformationsResponse> ListTransformationsAsync(
     int? itemsPerPage = default,
     int? page = default,
@@ -4309,6 +8504,56 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ListTransformationsAsync(itemsPerPage, page, sort, order, type, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListTransformationsWithHTTPInfoAsync(
+    int? itemsPerPage = default,
+    int? page = default,
+    TransformationSortKeys? sort = default,
+    OrderKeys? order = default,
+    TransformationType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("sort", sort);
+    requestOptions.AddQueryParameter("order", order);
+    requestOptions.AddQueryParameter("type", type);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/transformations",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListTransformationsWithHTTPInfo(
+    int? itemsPerPage = default,
+    int? page = default,
+    TransformationSortKeys? sort = default,
+    OrderKeys? order = default,
+    TransformationType? type = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListTransformationsWithHTTPInfoAsync(
+        itemsPerPage,
+        page,
+        sort,
+        order,
+        type,
+        options,
+        cancellationToken
+      )
     );
 
   /// <inheritdoc />
@@ -4361,6 +8606,62 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> PushWithHTTPInfoAsync(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    string referenceIndexName = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `Push`.");
+
+    if (pushTaskPayload == null)
+      throw new ArgumentException("Parameter `pushTaskPayload` is required when calling `Push`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+
+    requestOptions.AddQueryParameter("watch", watch);
+    requestOptions.AddQueryParameter("referenceIndexName", referenceIndexName);
+    requestOptions.Data = pushTaskPayload;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/push/{indexName}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse PushWithHTTPInfo(
+    string indexName,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    string referenceIndexName = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PushWithHTTPInfoAsync(
+        indexName,
+        pushTaskPayload,
+        watch,
+        referenceIndexName,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<WatchResponse> PushTaskAsync(
     string taskID,
     PushTaskPayload pushTaskPayload,
@@ -4409,6 +8710,54 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> PushTaskWithHTTPInfoAsync(
+    string taskID,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `PushTask`.");
+
+    if (pushTaskPayload == null)
+      throw new ArgumentException(
+        "Parameter `pushTaskPayload` is required when calling `PushTask`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.AddQueryParameter("watch", watch);
+    requestOptions.Data = pushTaskPayload;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/2/tasks/{taskID}/push",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse PushTaskWithHTTPInfo(
+    string taskID,
+    PushTaskPayload pushTaskPayload,
+    bool? watch = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PushTaskWithHTTPInfoAsync(taskID, pushTaskPayload, watch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TaskUpdateResponse> ReplaceTaskAsync(
     string taskID,
     TaskReplace taskReplace,
@@ -4448,6 +8797,48 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => ReplaceTaskAsync(taskID, taskReplace, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ReplaceTaskWithHTTPInfoAsync(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `ReplaceTask`.");
+
+    if (taskReplace == null)
+      throw new ArgumentException(
+        "Parameter `taskReplace` is required when calling `ReplaceTask`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = taskReplace;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/2/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ReplaceTaskWithHTTPInfo(
+    string taskID,
+    TaskReplace taskReplace,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ReplaceTaskWithHTTPInfoAsync(taskID, taskReplace, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<RunSourceResponse> RunSourceAsync(
     string sourceID,
     RunSourcePayload runSourcePayload = default,
@@ -4485,6 +8876,43 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> RunSourceWithHTTPInfoAsync(
+    string sourceID,
+    RunSourcePayload runSourcePayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException("Parameter `sourceID` is required when calling `RunSource`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    requestOptions.Data = runSourcePayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources/{sourceID}/run",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse RunSourceWithHTTPInfo(
+    string sourceID,
+    RunSourcePayload runSourcePayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      RunSourceWithHTTPInfoAsync(sourceID, runSourcePayload, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<RunResponse> RunTaskAsync(
     string taskID,
     RunTaskPayload runTaskPayload = default,
@@ -4517,6 +8945,43 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => RunTaskAsync(taskID, runTaskPayload, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> RunTaskWithHTTPInfoAsync(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `RunTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = runTaskPayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/2/tasks/{taskID}/run",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse RunTaskWithHTTPInfo(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      RunTaskWithHTTPInfoAsync(taskID, runTaskPayload, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   [Obsolete]
@@ -4556,6 +9021,45 @@ public partial class IngestionClient : IIngestionClient
     AsyncHelper.RunSync(() => RunTaskV1Async(taskID, runTaskPayload, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> RunTaskV1WithHTTPInfoAsync(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `RunTaskV1`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = runTaskPayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/tasks/{taskID}/run",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse RunTaskV1WithHTTPInfo(
+    string taskID,
+    RunTaskPayload runTaskPayload = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      RunTaskV1WithHTTPInfoAsync(taskID, runTaskPayload, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<List<Authentication>> SearchAuthenticationsAsync(
     AuthenticationSearch authenticationSearch,
     RequestOptions options = null,
@@ -4588,6 +9092,41 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       SearchAuthenticationsAsync(authenticationSearch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchAuthenticationsWithHTTPInfoAsync(
+    AuthenticationSearch authenticationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (authenticationSearch == null)
+      throw new ArgumentException(
+        "Parameter `authenticationSearch` is required when calling `SearchAuthentications`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = authenticationSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/authentications/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchAuthenticationsWithHTTPInfo(
+    AuthenticationSearch authenticationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchAuthenticationsWithHTTPInfoAsync(authenticationSearch, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4626,6 +9165,41 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchDestinationsWithHTTPInfoAsync(
+    DestinationSearch destinationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (destinationSearch == null)
+      throw new ArgumentException(
+        "Parameter `destinationSearch` is required when calling `SearchDestinations`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = destinationSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/destinations/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchDestinationsWithHTTPInfo(
+    DestinationSearch destinationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchDestinationsWithHTTPInfoAsync(destinationSearch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<List<Source>> SearchSourcesAsync(
     SourceSearch sourceSearch,
     RequestOptions options = null,
@@ -4658,6 +9232,41 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => SearchSourcesAsync(sourceSearch, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchSourcesWithHTTPInfoAsync(
+    SourceSearch sourceSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceSearch == null)
+      throw new ArgumentException(
+        "Parameter `sourceSearch` is required when calling `SearchSources`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = sourceSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchSourcesWithHTTPInfo(
+    SourceSearch sourceSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchSourcesWithHTTPInfoAsync(sourceSearch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<List<IngestionTask>> SearchTasksAsync(
     TaskSearch taskSearch,
     RequestOptions options = null,
@@ -4686,6 +9295,37 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => SearchTasksAsync(taskSearch, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchTasksWithHTTPInfoAsync(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskSearch == null)
+      throw new ArgumentException("Parameter `taskSearch` is required when calling `SearchTasks`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = taskSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/2/tasks/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchTasksWithHTTPInfo(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => SearchTasksWithHTTPInfoAsync(taskSearch, options, cancellationToken));
 
   /// <inheritdoc />
   [Obsolete]
@@ -4722,6 +9362,43 @@ public partial class IngestionClient : IIngestionClient
   ) => AsyncHelper.RunSync(() => SearchTasksV1Async(taskSearch, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> SearchTasksV1WithHTTPInfoAsync(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskSearch == null)
+      throw new ArgumentException(
+        "Parameter `taskSearch` is required when calling `SearchTasksV1`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = taskSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/tasks/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse SearchTasksV1WithHTTPInfo(
+    TaskSearch taskSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchTasksV1WithHTTPInfoAsync(taskSearch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<List<Transformation>> SearchTransformationsAsync(
     TransformationSearch transformationSearch,
     RequestOptions options = null,
@@ -4754,6 +9431,41 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       SearchTransformationsAsync(transformationSearch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchTransformationsWithHTTPInfoAsync(
+    TransformationSearch transformationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationSearch == null)
+      throw new ArgumentException(
+        "Parameter `transformationSearch` is required when calling `SearchTransformations`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = transformationSearch;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/transformations/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchTransformationsWithHTTPInfo(
+    TransformationSearch transformationSearch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchTransformationsWithHTTPInfoAsync(transformationSearch, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4796,6 +9508,45 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> TriggerDockerSourceDiscoverWithHTTPInfoAsync(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException(
+        "Parameter `sourceID` is required when calling `TriggerDockerSourceDiscover`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources/{sourceID}/discover",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse TriggerDockerSourceDiscoverWithHTTPInfo(
+    string sourceID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      TriggerDockerSourceDiscoverWithHTTPInfoAsync(sourceID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TransformationTryResponse> TryTransformationAsync(
     TransformationTry transformationTry,
     RequestOptions options = null,
@@ -4828,6 +9579,41 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       TryTransformationAsync(transformationTry, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> TryTransformationWithHTTPInfoAsync(
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationTry == null)
+      throw new ArgumentException(
+        "Parameter `transformationTry` is required when calling `TryTransformation`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = transformationTry;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/transformations/try",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse TryTransformationWithHTTPInfo(
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      TryTransformationWithHTTPInfoAsync(transformationTry, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -4883,6 +9669,58 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> TryTransformationBeforeUpdateWithHTTPInfoAsync(
+    string transformationID,
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationID == null)
+      throw new ArgumentException(
+        "Parameter `transformationID` is required when calling `TryTransformationBeforeUpdate`."
+      );
+
+    if (transformationTry == null)
+      throw new ArgumentException(
+        "Parameter `transformationTry` is required when calling `TryTransformationBeforeUpdate`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "transformationID",
+      QueryStringHelper.ParameterToString(transformationID)
+    );
+
+    requestOptions.Data = transformationTry;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/transformations/{transformationID}/try",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse TryTransformationBeforeUpdateWithHTTPInfo(
+    string transformationID,
+    TransformationTry transformationTry,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      TryTransformationBeforeUpdateWithHTTPInfoAsync(
+        transformationID,
+        transformationTry,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<AuthenticationUpdateResponse> UpdateAuthenticationAsync(
     string authenticationID,
     AuthenticationUpdate authenticationUpdate,
@@ -4927,6 +9765,58 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       UpdateAuthenticationAsync(authenticationID, authenticationUpdate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateAuthenticationWithHTTPInfoAsync(
+    string authenticationID,
+    AuthenticationUpdate authenticationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (authenticationID == null)
+      throw new ArgumentException(
+        "Parameter `authenticationID` is required when calling `UpdateAuthentication`."
+      );
+
+    if (authenticationUpdate == null)
+      throw new ArgumentException(
+        "Parameter `authenticationUpdate` is required when calling `UpdateAuthentication`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "authenticationID",
+      QueryStringHelper.ParameterToString(authenticationID)
+    );
+
+    requestOptions.Data = authenticationUpdate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/1/authentications/{authenticationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateAuthenticationWithHTTPInfo(
+    string authenticationID,
+    AuthenticationUpdate authenticationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateAuthenticationWithHTTPInfoAsync(
+        authenticationID,
+        authenticationUpdate,
+        options,
+        cancellationToken
+      )
     );
 
   /// <inheritdoc />
@@ -4977,6 +9867,58 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateDestinationWithHTTPInfoAsync(
+    string destinationID,
+    DestinationUpdate destinationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (destinationID == null)
+      throw new ArgumentException(
+        "Parameter `destinationID` is required when calling `UpdateDestination`."
+      );
+
+    if (destinationUpdate == null)
+      throw new ArgumentException(
+        "Parameter `destinationUpdate` is required when calling `UpdateDestination`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "destinationID",
+      QueryStringHelper.ParameterToString(destinationID)
+    );
+
+    requestOptions.Data = destinationUpdate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/1/destinations/{destinationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateDestinationWithHTTPInfo(
+    string destinationID,
+    DestinationUpdate destinationUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateDestinationWithHTTPInfoAsync(
+        destinationID,
+        destinationUpdate,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<SourceUpdateResponse> UpdateSourceAsync(
     string sourceID,
     SourceUpdate sourceUpdate,
@@ -5019,6 +9961,48 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateSourceWithHTTPInfoAsync(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException("Parameter `sourceID` is required when calling `UpdateSource`.");
+
+    if (sourceUpdate == null)
+      throw new ArgumentException(
+        "Parameter `sourceUpdate` is required when calling `UpdateSource`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    requestOptions.Data = sourceUpdate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/1/sources/{sourceID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateSourceWithHTTPInfo(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateSourceWithHTTPInfoAsync(sourceID, sourceUpdate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TaskUpdateResponse> UpdateTaskAsync(
     string taskID,
     TaskUpdate taskUpdate,
@@ -5054,6 +10038,46 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => UpdateTaskAsync(taskID, taskUpdate, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateTaskWithHTTPInfoAsync(
+    string taskID,
+    TaskUpdate taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `UpdateTask`.");
+
+    if (taskUpdate == null)
+      throw new ArgumentException("Parameter `taskUpdate` is required when calling `UpdateTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = taskUpdate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/2/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateTaskWithHTTPInfo(
+    string taskID,
+    TaskUpdate taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateTaskWithHTTPInfoAsync(taskID, taskUpdate, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   [Obsolete]
@@ -5095,6 +10119,50 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => UpdateTaskV1Async(taskID, taskUpdate, options, cancellationToken));
+
+  /// <inheritdoc />
+  [Obsolete]
+  public async Task<AlgoliaHttpResponse> UpdateTaskV1WithHTTPInfoAsync(
+    string taskID,
+    TaskUpdateV1 taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `UpdateTaskV1`.");
+
+    if (taskUpdate == null)
+      throw new ArgumentException(
+        "Parameter `taskUpdate` is required when calling `UpdateTaskV1`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = taskUpdate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/1/tasks/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  [Obsolete]
+  public AlgoliaHttpResponse UpdateTaskV1WithHTTPInfo(
+    string taskID,
+    TaskUpdateV1 taskUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateTaskV1WithHTTPInfoAsync(taskID, taskUpdate, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<TransformationUpdateResponse> UpdateTransformationAsync(
@@ -5144,6 +10212,58 @@ public partial class IngestionClient : IIngestionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateTransformationWithHTTPInfoAsync(
+    string transformationID,
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (transformationID == null)
+      throw new ArgumentException(
+        "Parameter `transformationID` is required when calling `UpdateTransformation`."
+      );
+
+    if (transformationCreate == null)
+      throw new ArgumentException(
+        "Parameter `transformationCreate` is required when calling `UpdateTransformation`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "transformationID",
+      QueryStringHelper.ParameterToString(transformationID)
+    );
+
+    requestOptions.Data = transformationCreate;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/transformations/{transformationID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateTransformationWithHTTPInfo(
+    string transformationID,
+    TransformationCreate transformationCreate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateTransformationWithHTTPInfoAsync(
+        transformationID,
+        transformationCreate,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<WatchResponse> ValidateSourceAsync(
     SourceCreate sourceCreate = default,
     RequestOptions options = null,
@@ -5172,6 +10292,39 @@ public partial class IngestionClient : IIngestionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => ValidateSourceAsync(sourceCreate, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ValidateSourceWithHTTPInfoAsync(
+    SourceCreate sourceCreate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = sourceCreate;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources/validate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ValidateSourceWithHTTPInfo(
+    SourceCreate sourceCreate = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ValidateSourceWithHTTPInfoAsync(sourceCreate, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<WatchResponse> ValidateSourceBeforeUpdateAsync(
@@ -5218,5 +10371,57 @@ public partial class IngestionClient : IIngestionClient
   ) =>
     AsyncHelper.RunSync(() =>
       ValidateSourceBeforeUpdateAsync(sourceID, sourceUpdate, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ValidateSourceBeforeUpdateWithHTTPInfoAsync(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (sourceID == null)
+      throw new ArgumentException(
+        "Parameter `sourceID` is required when calling `ValidateSourceBeforeUpdate`."
+      );
+
+    if (sourceUpdate == null)
+      throw new ArgumentException(
+        "Parameter `sourceUpdate` is required when calling `ValidateSourceBeforeUpdate`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    requestOptions.Data = sourceUpdate;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/sources/{sourceID}/validate",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ValidateSourceBeforeUpdateWithHTTPInfo(
+    string sourceID,
+    SourceUpdate sourceUpdate,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ValidateSourceBeforeUpdateWithHTTPInfoAsync(
+        sourceID,
+        sourceUpdate,
+        options,
+        cancellationToken
+      )
     );
 }

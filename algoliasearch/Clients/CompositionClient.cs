@@ -67,6 +67,42 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -86,6 +122,42 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomGet(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomGetWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     RequestOptions options = null,
@@ -144,6 +216,46 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
   Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -165,6 +277,46 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>object</returns>
   object CustomPut(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API.
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of object</returns>
+  Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, for example `1/newFeature`.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  AlgoliaHttpResponse CustomPutWithHTTPInfo(
     string path,
     Dictionary<string, object> parameters = default,
     object body = default,
@@ -205,6 +357,44 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskIDResponse</returns>
   TaskIDResponse DeleteComposition(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Delete a composition from the current Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteCompositionWithHTTPInfoAsync(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Delete a composition from the current Algolia application.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  AlgoliaHttpResponse DeleteCompositionWithHTTPInfo(
     string compositionID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -253,6 +443,48 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// Delete a Composition Rule from the specified Composition ID.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<AlgoliaHttpResponse> DeleteCompositionRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Delete a Composition Rule from the specified Composition ID.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  AlgoliaHttpResponse DeleteCompositionRuleWithHTTPInfo(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieve a single composition in the current Algolia application.
   /// </summary>
   ///
@@ -287,6 +519,46 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Composition</returns>
   Composition GetComposition(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a single composition in the current Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Composition</returns>
+  Task<AlgoliaHttpResponse> GetCompositionWithHTTPInfoAsync(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieve a single composition in the current Algolia application.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Composition</returns>
+  AlgoliaHttpResponse GetCompositionWithHTTPInfo(
     string compositionID,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -330,6 +602,50 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CompositionRule</returns>
   CompositionRule GetRule(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of CompositionRule</returns>
+  Task<AlgoliaHttpResponse> GetRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>CompositionRule</returns>
+  AlgoliaHttpResponse GetRuleWithHTTPInfo(
     string compositionID,
     string objectID,
     RequestOptions options = null,
@@ -387,6 +703,56 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// Checks the status of a given task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  ///   - addObject
+  ///   - deleteObject
+  ///   - deleteIndex
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of GetTaskResponse</returns>
+  Task<AlgoliaHttpResponse> GetTaskWithHTTPInfoAsync(
+    string compositionID,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Checks the status of a given task.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  ///   - addObject
+  ///   - deleteObject
+  ///   - deleteIndex
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetTaskResponse</returns>
+  AlgoliaHttpResponse GetTaskWithHTTPInfo(
+    string compositionID,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Lists all compositions in the current Algolia application.
   /// </summary>
   ///
@@ -424,6 +790,50 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListCompositionsResponse</returns>
   ListCompositionsResponse ListCompositions(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Lists all compositions in the current Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="page">Requested page of the API response. If `null`, the API response is not paginated.  (optional)</param>
+  /// <param name="hitsPerPage">Number of hits per page. (optional, default to 100)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ListCompositionsResponse</returns>
+  Task<AlgoliaHttpResponse> ListCompositionsWithHTTPInfoAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Lists all compositions in the current Algolia application.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  ///   - settings
+  /// <param name="page">Requested page of the API response. If `null`, the API response is not paginated.  (optional)</param>
+  /// <param name="hitsPerPage">Number of hits per page. (optional, default to 100)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ListCompositionsResponse</returns>
+  AlgoliaHttpResponse ListCompositionsWithHTTPInfo(
     int? page = default,
     int? hitsPerPage = default,
     RequestOptions options = null,
@@ -469,6 +879,44 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// Adds, updates, or deletes compositions with a single API request.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="batchParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of MultipleBatchResponse</returns>
+  Task<AlgoliaHttpResponse> MultipleBatchWithHTTPInfoAsync(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Adds, updates, or deletes compositions with a single API request.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="batchParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>MultipleBatchResponse</returns>
+  AlgoliaHttpResponse MultipleBatchWithHTTPInfo(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Update and insert a composition in the current Algolia application.
   /// </summary>
   ///
@@ -504,6 +952,48 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskIDResponse</returns>
   TaskIDResponse PutComposition(
+    string compositionID,
+    Composition composition,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update and insert a composition in the current Algolia application.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="composition"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<AlgoliaHttpResponse> PutCompositionWithHTTPInfoAsync(
+    string compositionID,
+    Composition composition,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update and insert a composition in the current Algolia application.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="composition"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  AlgoliaHttpResponse PutCompositionWithHTTPInfo(
     string compositionID,
     Composition composition,
     RequestOptions options = null,
@@ -557,6 +1047,52 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="compositionRule"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<AlgoliaHttpResponse> PutCompositionRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    CompositionRule compositionRule,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="objectID">Unique identifier of a rule object.</param>
+  /// <param name="compositionRule"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  AlgoliaHttpResponse PutCompositionRuleWithHTTPInfo(
+    string compositionID,
+    string objectID,
+    CompositionRule compositionRule,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Create or update or delete multiple composition rules.
   /// </summary>
   ///
@@ -592,6 +1128,48 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RulesMultipleBatchResponse</returns>
   RulesMultipleBatchResponse SaveRules(
+    string compositionID,
+    CompositionRulesBatchParams rules,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Create or update or delete multiple composition rules.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="rules"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RulesMultipleBatchResponse</returns>
+  Task<AlgoliaHttpResponse> SaveRulesWithHTTPInfoAsync(
+    string compositionID,
+    CompositionRulesBatchParams rules,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Create or update or delete multiple composition rules.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="rules"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RulesMultipleBatchResponse</returns>
+  AlgoliaHttpResponse SaveRulesWithHTTPInfo(
     string compositionID,
     CompositionRulesBatchParams rules,
     RequestOptions options = null,
@@ -641,6 +1219,48 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// Runs a query on a single composition and returns matching results.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of SearchResponse{T}</returns>
+  Task<AlgoliaHttpResponse> SearchWithHTTPInfoAsync(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Runs a query on a single composition and returns matching results. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SearchResponse{T}</returns>
+  AlgoliaHttpResponse SearchWithHTTPInfo(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Searches for composition rules in your index.
   /// </summary>
   ///
@@ -676,6 +1296,48 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchCompositionRulesResponse</returns>
   SearchCompositionRulesResponse SearchCompositionRules(
+    string compositionID,
+    SearchCompositionRulesParams searchCompositionRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for composition rules in your index.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="searchCompositionRulesParams"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of SearchCompositionRulesResponse</returns>
+  Task<AlgoliaHttpResponse> SearchCompositionRulesWithHTTPInfoAsync(
+    string compositionID,
+    SearchCompositionRulesParams searchCompositionRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for composition rules in your index. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="searchCompositionRulesParams"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SearchCompositionRulesResponse</returns>
+  AlgoliaHttpResponse SearchCompositionRulesWithHTTPInfo(
     string compositionID,
     SearchCompositionRulesParams searchCompositionRulesParams = default,
     RequestOptions options = null,
@@ -729,6 +1391,52 @@ public interface ICompositionClient
   );
 
   /// <summary>
+  /// Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="facetName">Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. </param>
+  /// <param name="searchForFacetValuesRequest"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of SearchForFacetValuesResponse</returns>
+  Task<AlgoliaHttpResponse> SearchForFacetValuesWithHTTPInfoAsync(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="facetName">Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. </param>
+  /// <param name="searchForFacetValuesRequest"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SearchForFacetValuesResponse</returns>
+  AlgoliaHttpResponse SearchForFacetValuesWithHTTPInfo(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
   /// </summary>
   ///
@@ -764,6 +1472,48 @@ public interface ICompositionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TaskIDResponse</returns>
   TaskIDResponse UpdateSortingStrategyComposition(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskIDResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateSortingStrategyCompositionWithHTTPInfoAsync(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="compositionID">Unique Composition ObjectID.</param>
+  /// <param name="requestBody"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskIDResponse</returns>
+  AlgoliaHttpResponse UpdateSortingStrategyCompositionWithHTTPInfo(
     string compositionID,
     Dictionary<string, string> requestBody,
     RequestOptions options = null,
@@ -884,6 +1634,42 @@ public partial class CompositionClient : ICompositionClient
   ) => AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomDeleteWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomDeleteWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomDeleteWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -915,6 +1701,42 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomGetWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomGetWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomGetWithHTTPInfoAsync(path, parameters, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<object> CustomPostAsync(
@@ -954,6 +1776,45 @@ public partial class CompositionClient : ICompositionClient
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPostWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPostWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPostWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(
     string path,
     Dictionary<string, object> parameters = default,
@@ -991,6 +1852,45 @@ public partial class CompositionClient : ICompositionClient
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CustomPutWithHTTPInfoAsync(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (path == null)
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
+
+    requestOptions.AddCustomQueryParameters(parameters);
+    requestOptions.Data = body;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/{path}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CustomPutWithHTTPInfo(
+    string path,
+    Dictionary<string, object> parameters = default,
+    object body = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CustomPutWithHTTPInfoAsync(path, parameters, body, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<TaskIDResponse> DeleteCompositionAsync(
     string compositionID,
     RequestOptions options = null,
@@ -1025,6 +1925,45 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => DeleteCompositionAsync(compositionID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteCompositionWithHTTPInfoAsync(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteComposition`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/compositions/{compositionID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteCompositionWithHTTPInfo(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteCompositionWithHTTPInfoAsync(compositionID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<TaskIDResponse> DeleteCompositionRuleAsync(
@@ -1074,6 +2013,53 @@ public partial class CompositionClient : ICompositionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> DeleteCompositionRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteCompositionRule`."
+      );
+
+    if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteCompositionRule`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("DELETE"),
+        "/1/compositions/{compositionID}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse DeleteCompositionRuleWithHTTPInfo(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      DeleteCompositionRuleWithHTTPInfoAsync(compositionID, objectID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<Composition> GetCompositionAsync(
     string compositionID,
     RequestOptions options = null,
@@ -1108,6 +2094,45 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => GetCompositionAsync(compositionID, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetCompositionWithHTTPInfoAsync(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `GetComposition`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/compositions/{compositionID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetCompositionWithHTTPInfo(
+    string compositionID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetCompositionWithHTTPInfoAsync(compositionID, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<CompositionRule> GetRuleAsync(
@@ -1150,6 +2175,49 @@ public partial class CompositionClient : ICompositionClient
   ) => AsyncHelper.RunSync(() => GetRuleAsync(compositionID, objectID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetRule`.");
+
+    if (objectID == null)
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/compositions/{compositionID}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetRuleWithHTTPInfo(
+    string compositionID,
+    string objectID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetRuleWithHTTPInfoAsync(compositionID, objectID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<GetTaskResponse> GetTaskAsync(
     string compositionID,
     long taskID,
@@ -1187,6 +2255,46 @@ public partial class CompositionClient : ICompositionClient
   ) => AsyncHelper.RunSync(() => GetTaskAsync(compositionID, taskID, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetTaskWithHTTPInfoAsync(
+    string compositionID,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/compositions/{compositionID}/task/{taskID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetTaskWithHTTPInfo(
+    string compositionID,
+    long taskID,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      GetTaskWithHTTPInfoAsync(compositionID, taskID, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<ListCompositionsResponse> ListCompositionsAsync(
     int? page = default,
     int? hitsPerPage = default,
@@ -1216,6 +2324,39 @@ public partial class CompositionClient : ICompositionClient
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() => ListCompositionsAsync(page, hitsPerPage, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListCompositionsWithHTTPInfoAsync(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("page", page);
+    requestOptions.AddQueryParameter("hitsPerPage", hitsPerPage);
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/1/compositions",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListCompositionsWithHTTPInfo(
+    int? page = default,
+    int? hitsPerPage = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      ListCompositionsWithHTTPInfoAsync(page, hitsPerPage, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<MultipleBatchResponse> MultipleBatchAsync(
@@ -1248,6 +2389,41 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => MultipleBatchAsync(batchParams, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> MultipleBatchWithHTTPInfoAsync(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (batchParams == null)
+      throw new ArgumentException(
+        "Parameter `batchParams` is required when calling `MultipleBatch`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = batchParams;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/*/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse MultipleBatchWithHTTPInfo(
+    BatchParams batchParams,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      MultipleBatchWithHTTPInfoAsync(batchParams, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<TaskIDResponse> PutCompositionAsync(
@@ -1294,6 +2470,53 @@ public partial class CompositionClient : ICompositionClient
   ) =>
     AsyncHelper.RunSync(() =>
       PutCompositionAsync(compositionID, composition, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> PutCompositionWithHTTPInfoAsync(
+    string compositionID,
+    Composition composition,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutComposition`."
+      );
+
+    if (composition == null)
+      throw new ArgumentException(
+        "Parameter `composition` is required when calling `PutComposition`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = composition;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/compositions/{compositionID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse PutCompositionWithHTTPInfo(
+    string compositionID,
+    Composition composition,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PutCompositionWithHTTPInfoAsync(compositionID, composition, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -1352,6 +2575,67 @@ public partial class CompositionClient : ICompositionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> PutCompositionRuleWithHTTPInfoAsync(
+    string compositionID,
+    string objectID,
+    CompositionRule compositionRule,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutCompositionRule`."
+      );
+
+    if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PutCompositionRule`."
+      );
+
+    if (compositionRule == null)
+      throw new ArgumentException(
+        "Parameter `compositionRule` is required when calling `PutCompositionRule`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
+
+    requestOptions.Data = compositionRule;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PUT"),
+        "/1/compositions/{compositionID}/rules/{objectID}",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse PutCompositionRuleWithHTTPInfo(
+    string compositionID,
+    string objectID,
+    CompositionRule compositionRule,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      PutCompositionRuleWithHTTPInfoAsync(
+        compositionID,
+        objectID,
+        compositionRule,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<RulesMultipleBatchResponse> SaveRulesAsync(
     string compositionID,
     CompositionRulesBatchParams rules,
@@ -1392,6 +2676,51 @@ public partial class CompositionClient : ICompositionClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) => AsyncHelper.RunSync(() => SaveRulesAsync(compositionID, rules, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SaveRulesWithHTTPInfoAsync(
+    string compositionID,
+    CompositionRulesBatchParams rules,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SaveRules`."
+      );
+
+    if (rules == null)
+      throw new ArgumentException("Parameter `rules` is required when calling `SaveRules`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = rules;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/rules/batch",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SaveRulesWithHTTPInfo(
+    string compositionID,
+    CompositionRulesBatchParams rules,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SaveRulesWithHTTPInfoAsync(compositionID, rules, options, cancellationToken)
+    );
 
   /// <inheritdoc />
   public async Task<SearchResponse<T>> SearchAsync<T>(
@@ -1438,6 +2767,50 @@ public partial class CompositionClient : ICompositionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchWithHTTPInfoAsync(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
+
+    if (requestBody == null)
+      throw new ArgumentException("Parameter `requestBody` is required when calling `Search`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = requestBody;
+    requestOptions.UseReadTransporter = true;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/run",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchWithHTTPInfo(
+    string compositionID,
+    RequestBody requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchWithHTTPInfoAsync(compositionID, requestBody, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<SearchCompositionRulesResponse> SearchCompositionRulesAsync(
     string compositionID,
     SearchCompositionRulesParams searchCompositionRulesParams = default,
@@ -1477,6 +2850,53 @@ public partial class CompositionClient : ICompositionClient
   ) =>
     AsyncHelper.RunSync(() =>
       SearchCompositionRulesAsync(
+        compositionID,
+        searchCompositionRulesParams,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchCompositionRulesWithHTTPInfoAsync(
+    string compositionID,
+    SearchCompositionRulesParams searchCompositionRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchCompositionRules`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = searchCompositionRulesParams;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/rules/search",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchCompositionRulesWithHTTPInfo(
+    string compositionID,
+    SearchCompositionRulesParams searchCompositionRulesParams = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchCompositionRulesWithHTTPInfoAsync(
         compositionID,
         searchCompositionRulesParams,
         options,
@@ -1542,6 +2962,63 @@ public partial class CompositionClient : ICompositionClient
     );
 
   /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> SearchForFacetValuesWithHTTPInfoAsync(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchForFacetValues`."
+      );
+
+    if (facetName == null)
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+    requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
+
+    requestOptions.Data = searchForFacetValuesRequest;
+    requestOptions.UseReadTransporter = true;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/facets/{facetName}/query",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse SearchForFacetValuesWithHTTPInfo(
+    string compositionID,
+    string facetName,
+    SearchForFacetValuesRequest searchForFacetValuesRequest = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      SearchForFacetValuesWithHTTPInfoAsync(
+        compositionID,
+        facetName,
+        searchForFacetValuesRequest,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
   public async Task<TaskIDResponse> UpdateSortingStrategyCompositionAsync(
     string compositionID,
     Dictionary<string, string> requestBody,
@@ -1586,5 +3063,57 @@ public partial class CompositionClient : ICompositionClient
   ) =>
     AsyncHelper.RunSync(() =>
       UpdateSortingStrategyCompositionAsync(compositionID, requestBody, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateSortingStrategyCompositionWithHTTPInfoAsync(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
+    if (requestBody == null)
+      throw new ArgumentException(
+        "Parameter `requestBody` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add(
+      "compositionID",
+      QueryStringHelper.ParameterToString(compositionID)
+    );
+
+    requestOptions.Data = requestBody;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/1/compositions/{compositionID}/sortingStrategy",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateSortingStrategyCompositionWithHTTPInfo(
+    string compositionID,
+    Dictionary<string, string> requestBody,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateSortingStrategyCompositionWithHTTPInfoAsync(
+        compositionID,
+        requestBody,
+        options,
+        cancellationToken
+      )
     );
 }

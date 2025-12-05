@@ -180,6 +180,12 @@ internal class HttpTransport
             response.Body.Seek(0, SeekOrigin.Begin);
           }
 
+          // Returns the raw response when using `*WithHTTPInfo` methods.
+          if (typeof(TResult) == typeof(AlgoliaHttpResponse))
+          {
+            return response as TResult;
+          }
+
           var deserialized = await _serializer
             .Deserialize<TResult>(response.Body)
             .ConfigureAwait(false);
