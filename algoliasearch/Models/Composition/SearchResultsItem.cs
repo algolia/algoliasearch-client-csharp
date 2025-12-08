@@ -25,12 +25,12 @@ public partial class SearchResultsItem<T>
   /// <summary>
   /// Initializes a new instance of the SearchResultsItem class.
   /// </summary>
-  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
+  /// <param name="page">The current page of the results. (required).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
   /// <param name="nbPages">Number of pages of results. (required).</param>
-  /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
+  /// <param name="hitsPerPage">Number of hits returned per page. (required).</param>
   /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
-  /// <param name="query">Search query. (required) (default to "").</param>
+  /// <param name="query">The search query string. (required).</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
   /// <param name="compositions">compositions (required).</param>
   public SearchResultsItem(
@@ -237,9 +237,9 @@ public partial class SearchResultsItem<T>
   public bool? AutomaticInsights { get; set; }
 
   /// <summary>
-  /// Page of search results to retrieve.
+  /// The current page of the results.
   /// </summary>
-  /// <value>Page of search results to retrieve.</value>
+  /// <value>The current page of the results.</value>
   [JsonPropertyName("page")]
   public int Page { get; set; }
 
@@ -258,9 +258,9 @@ public partial class SearchResultsItem<T>
   public int NbPages { get; set; }
 
   /// <summary>
-  /// Number of hits per page.
+  /// Number of hits returned per page.
   /// </summary>
-  /// <value>Number of hits per page.</value>
+  /// <value>Number of hits returned per page.</value>
   [JsonPropertyName("hitsPerPage")]
   public int HitsPerPage { get; set; }
 
@@ -272,9 +272,9 @@ public partial class SearchResultsItem<T>
   public List<T> Hits { get; set; }
 
   /// <summary>
-  /// Search query.
+  /// The search query string.
   /// </summary>
-  /// <value>Search query.</value>
+  /// <value>The search query string.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
