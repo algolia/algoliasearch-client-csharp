@@ -32,12 +32,14 @@ internal class DefaultJsonSerializer(ILoggerFactory logger) : ISerializer
     }
     catch (Exception ex)
     {
+      var dataType = data?.GetType()?.ToString() ?? "unknown";
+
       if (_logger.IsEnabled(LogLevel.Error))
       {
-        _logger.LogError(ex, "Error while serializing object of type {Type}", data.GetType());
+        _logger.LogError(ex, "Error while serializing object of type {Type}", dataType);
       }
 
-      throw new AlgoliaException($"Error while serializing object of type {data.GetType()}", ex);
+      throw new AlgoliaException($"Error while serializing object of type {dataType}", ex);
     }
   }
 
