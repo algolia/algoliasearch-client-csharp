@@ -25,16 +25,16 @@ public partial class CompositionRunAppliedRules
   /// <summary>
   /// Initializes a new instance of the CompositionRunAppliedRules class.
   /// </summary>
-  /// <param name="objectID">Unique record identifier. (required).</param>
+  /// <param name="objectID">The objectID of the applied composition rule on this query. (required).</param>
   public CompositionRunAppliedRules(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Unique record identifier.
+  /// The objectID of the applied composition rule on this query.
   /// </summary>
-  /// <value>Unique record identifier.</value>
+  /// <value>The objectID of the applied composition rule on this query.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

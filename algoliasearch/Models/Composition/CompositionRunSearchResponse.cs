@@ -28,7 +28,7 @@ public partial class CompositionRunSearchResponse
   /// <summary>
   /// Initializes a new instance of the CompositionRunSearchResponse class.
   /// </summary>
-  /// <param name="objectID">Unique record identifier. (required).</param>
+  /// <param name="objectID">The objectID of the composition which generated this result set. (required).</param>
   public CompositionRunSearchResponse(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -36,9 +36,9 @@ public partial class CompositionRunSearchResponse
   }
 
   /// <summary>
-  /// Unique record identifier.
+  /// The objectID of the composition which generated this result set.
   /// </summary>
-  /// <value>Unique record identifier.</value>
+  /// <value>The objectID of the composition which generated this result set.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

@@ -28,7 +28,7 @@ public partial class ResultsInjectedItemInfoResponse
   /// <summary>
   /// Initializes a new instance of the ResultsInjectedItemInfoResponse class.
   /// </summary>
-  /// <param name="key">key (required).</param>
+  /// <param name="key">The key of the injected group. (required).</param>
   public ResultsInjectedItemInfoResponse(string key)
   {
     Key = key ?? throw new ArgumentNullException(nameof(key));
@@ -36,8 +36,9 @@ public partial class ResultsInjectedItemInfoResponse
   }
 
   /// <summary>
-  /// Gets or Sets Key
+  /// The key of the injected group.
   /// </summary>
+  /// <value>The key of the injected group.</value>
   [JsonPropertyName("key")]
   public string Key { get; set; }
 

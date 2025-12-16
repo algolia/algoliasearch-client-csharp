@@ -25,16 +25,16 @@ public partial class ResultsInjectedItemAppliedRulesInfoResponse
   /// <summary>
   /// Initializes a new instance of the ResultsInjectedItemAppliedRulesInfoResponse class.
   /// </summary>
-  /// <param name="objectID">Unique record identifier. (required).</param>
+  /// <param name="objectID">The objectID of the applied index level rule on this injected group. (required).</param>
   public ResultsInjectedItemAppliedRulesInfoResponse(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Unique record identifier.
+  /// The objectID of the applied index level rule on this injected group.
   /// </summary>
-  /// <value>Unique record identifier.</value>
+  /// <value>The objectID of the applied index level rule on this injected group.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
