@@ -1,3 +1,12 @@
+## [7.36.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.35.0...7.36.0)
+
+- [0e5f42bbd](https://github.com/algolia/api-clients-automation/commit/0e5f42bbd) feat(csharp): Add WithHTTPInfo method derivatives ([#5715](https://github.com/algolia/api-clients-automation/pull/5715)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+- [54606b3b2](https://github.com/algolia/api-clients-automation/commit/54606b3b2) refactor(specs): extract `results` field in a dedicated directory ([#5739](https://github.com/algolia/api-clients-automation/pull/5739)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+- [3296a5033](https://github.com/algolia/api-clients-automation/commit/3296a5033) chore(deps): dependencies 2025-11-24 ([#5653](https://github.com/algolia/api-clients-automation/pull/5653)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [5dabdc540](https://github.com/algolia/api-clients-automation/commit/5dabdc540) refactor(specs): re-organise response for Composition API ([#5744](https://github.com/algolia/api-clients-automation/pull/5744)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+- [7ac705685](https://github.com/algolia/api-clients-automation/commit/7ac705685) chore(csharp): improve error logging in DefaultSerializer ([#5768](https://github.com/algolia/api-clients-automation/pull/5768)) by [@Fluf22](https://github.com/Fluf22/)
+- [3d86676b0](https://github.com/algolia/api-clients-automation/commit/3d86676b0) fix(specs): update list with NLU permissions ([#5769](https://github.com/algolia/api-clients-automation/pull/5769)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+
 ## [7.35.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.34.0...7.35.0)
 
 - [5335918a5](https://github.com/algolia/api-clients-automation/commit/5335918a5) chore(scripts): update the jira action ([#5678](https://github.com/algolia/api-clients-automation/pull/5678)) by [@millotp](https://github.com/millotp/)
