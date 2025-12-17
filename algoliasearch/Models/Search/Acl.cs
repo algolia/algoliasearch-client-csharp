@@ -107,4 +107,52 @@ public enum Acl
   /// </summary>
   [JsonPropertyName("usage")]
   Usage = 15,
+
+  /// <summary>
+  /// Enum NluWriteProject for value: nluWriteProject
+  /// </summary>
+  [JsonPropertyName("nluWriteProject")]
+  NluWriteProject = 16,
+
+  /// <summary>
+  /// Enum NluReadProject for value: nluReadProject
+  /// </summary>
+  [JsonPropertyName("nluReadProject")]
+  NluReadProject = 17,
+
+  /// <summary>
+  /// Enum NluWriteEntity for value: nluWriteEntity
+  /// </summary>
+  [JsonPropertyName("nluWriteEntity")]
+  NluWriteEntity = 18,
+
+  /// <summary>
+  /// Enum NluReadEntity for value: nluReadEntity
+  /// </summary>
+  [JsonPropertyName("nluReadEntity")]
+  NluReadEntity = 19,
+
+  /// <summary>
+  /// Enum NluWriteIntent for value: nluWriteIntent
+  /// </summary>
+  [JsonPropertyName("nluWriteIntent")]
+  NluWriteIntent = 20,
+
+  /// <summary>
+  /// Enum NluReadIntent for value: nluReadIntent
+  /// </summary>
+  [JsonPropertyName("nluReadIntent")]
+  NluReadIntent = 21,
+
+  /// <summary>
+  /// Enum NluPrediction for value: nluPrediction
+  /// </summary>
+  [JsonPropertyName("nluPrediction")]
+  NluPrediction = 22,
+
+  /// <summary>
+  /// Enum NluReadAnswers for value: nluReadAnswers
+  /// </summary>
+  [JsonPropertyName("nluReadAnswers")]
+  NluReadAnswers = 23,
 }
