@@ -25,32 +25,9 @@ public partial class SearchResultsItem<T>
   /// <summary>
   /// Initializes a new instance of the SearchResultsItem class.
   /// </summary>
-  /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
-  /// <param name="hitsPerPage">Number of hits returned per page. (required).</param>
-  /// <param name="nbHits">Number of results (hits). (required).</param>
-  /// <param name="nbPages">Number of pages of results. (required).</param>
-  /// <param name="page">The current page of the results. (required).</param>
-  /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-  /// <param name="query">The search query string. (required).</param>
   /// <param name="compositions">compositions (required).</param>
-  public SearchResultsItem(
-    List<T> hits,
-    int hitsPerPage,
-    int nbHits,
-    int nbPages,
-    int page,
-    string varParams,
-    string query,
-    Dictionary<string, ResultsCompositionInfoResponse> compositions
-  )
+  public SearchResultsItem(Dictionary<string, ResultsCompositionInfoResponse> compositions)
   {
-    Hits = hits ?? throw new ArgumentNullException(nameof(hits));
-    HitsPerPage = hitsPerPage;
-    NbHits = nbHits;
-    NbPages = nbPages;
-    Page = page;
-    Params = varParams ?? throw new ArgumentNullException(nameof(varParams));
-    Query = query ?? throw new ArgumentNullException(nameof(query));
     Compositions = compositions ?? throw new ArgumentNullException(nameof(compositions));
   }
 
@@ -248,28 +225,28 @@ public partial class SearchResultsItem<T>
   /// </summary>
   /// <value>Number of hits returned per page.</value>
   [JsonPropertyName("hitsPerPage")]
-  public int HitsPerPage { get; set; }
+  public int? HitsPerPage { get; set; }
 
   /// <summary>
   /// Number of results (hits).
   /// </summary>
   /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
-  public int NbHits { get; set; }
+  public int? NbHits { get; set; }
 
   /// <summary>
   /// Number of pages of results.
   /// </summary>
   /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
-  public int NbPages { get; set; }
+  public int? NbPages { get; set; }
 
   /// <summary>
   /// The current page of the results.
   /// </summary>
   /// <value>The current page of the results.</value>
   [JsonPropertyName("page")]
-  public int Page { get; set; }
+  public int? Page { get; set; }
 
   /// <summary>
   /// URL-encoded string of all search parameters.
