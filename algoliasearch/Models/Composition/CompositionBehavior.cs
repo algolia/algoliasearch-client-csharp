@@ -12,30 +12,26 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// CompositionBehavior
+/// An object containing either an `injection` or `multifeed` behavior schema, but not both.
 /// </summary>
 public partial class CompositionBehavior
 {
   /// <summary>
   /// Initializes a new instance of the CompositionBehavior class.
   /// </summary>
-  [JsonConstructor]
   public CompositionBehavior() { }
-
-  /// <summary>
-  /// Initializes a new instance of the CompositionBehavior class.
-  /// </summary>
-  /// <param name="injection">injection (required).</param>
-  public CompositionBehavior(Injection injection)
-  {
-    Injection = injection ?? throw new ArgumentNullException(nameof(injection));
-  }
 
   /// <summary>
   /// Gets or Sets Injection
   /// </summary>
   [JsonPropertyName("injection")]
   public Injection Injection { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Multifeed
+  /// </summary>
+  [JsonPropertyName("multifeed")]
+  public Multifeed Multifeed { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -46,6 +42,7 @@ public partial class CompositionBehavior
     StringBuilder sb = new StringBuilder();
     sb.Append("class CompositionBehavior {\n");
     sb.Append("  Injection: ").Append(Injection).Append("\n");
+    sb.Append("  Multifeed: ").Append(Multifeed).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -72,8 +69,9 @@ public partial class CompositionBehavior
     }
 
     return (
-      Injection == input.Injection || (Injection != null && Injection.Equals(input.Injection))
-    );
+        Injection == input.Injection || (Injection != null && Injection.Equals(input.Injection))
+      )
+      && (Multifeed == input.Multifeed || (Multifeed != null && Multifeed.Equals(input.Multifeed)));
   }
 
   /// <summary>
@@ -88,6 +86,10 @@ public partial class CompositionBehavior
       if (Injection != null)
       {
         hashCode = (hashCode * 59) + Injection.GetHashCode();
+      }
+      if (Multifeed != null)
+      {
+        hashCode = (hashCode * 59) + Multifeed.GetHashCode();
       }
       return hashCode;
     }
