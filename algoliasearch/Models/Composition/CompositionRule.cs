@@ -26,16 +26,10 @@ public partial class CompositionRule
   /// Initializes a new instance of the CompositionRule class.
   /// </summary>
   /// <param name="objectID">Composition rule unique identifier. (required).</param>
-  /// <param name="conditions">Conditions that trigger a composition rule. (required).</param>
   /// <param name="consequence">consequence (required).</param>
-  public CompositionRule(
-    string objectID,
-    List<Condition> conditions,
-    CompositionRuleConsequence consequence
-  )
+  public CompositionRule(string objectID, CompositionRuleConsequence consequence)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
-    Conditions = conditions ?? throw new ArgumentNullException(nameof(conditions));
     Consequence = consequence ?? throw new ArgumentNullException(nameof(consequence));
   }
 
