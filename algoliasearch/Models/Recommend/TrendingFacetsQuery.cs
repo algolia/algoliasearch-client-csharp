@@ -70,23 +70,11 @@ public partial class TrendingFacetsQuery
   public int? MaxRecommendations { get; set; }
 
   /// <summary>
-  /// Gets or Sets QueryParameters
-  /// </summary>
-  [JsonPropertyName("queryParameters")]
-  public RecommendSearchParams QueryParameters { get; set; }
-
-  /// <summary>
   /// Facet attribute for which to retrieve trending facet values.
   /// </summary>
   /// <value>Facet attribute for which to retrieve trending facet values.</value>
   [JsonPropertyName("facetName")]
   public string FacetName { get; set; }
-
-  /// <summary>
-  /// Gets or Sets FallbackParameters
-  /// </summary>
-  [JsonPropertyName("fallbackParameters")]
-  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -99,10 +87,8 @@ public partial class TrendingFacetsQuery
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
     sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
-    sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -136,16 +122,8 @@ public partial class TrendingFacetsQuery
         MaxRecommendations == input.MaxRecommendations
         || MaxRecommendations.Equals(input.MaxRecommendations)
       )
-      && (
-        QueryParameters == input.QueryParameters
-        || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))
-      )
       && (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName)))
-      && (Model == input.Model || Model.Equals(input.Model))
-      && (
-        FallbackParameters == input.FallbackParameters
-        || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters))
-      );
+      && (Model == input.Model || Model.Equals(input.Model));
   }
 
   /// <summary>
@@ -163,19 +141,11 @@ public partial class TrendingFacetsQuery
       }
       hashCode = (hashCode * 59) + Threshold.GetHashCode();
       hashCode = (hashCode * 59) + MaxRecommendations.GetHashCode();
-      if (QueryParameters != null)
-      {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
-      }
       if (FacetName != null)
       {
         hashCode = (hashCode * 59) + FacetName.GetHashCode();
       }
       hashCode = (hashCode * 59) + Model.GetHashCode();
-      if (FallbackParameters != null)
-      {
-        hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();
-      }
       return hashCode;
     }
   }
