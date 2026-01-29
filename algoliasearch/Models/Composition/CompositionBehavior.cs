@@ -3,10 +3,13 @@
 //
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 
 namespace Algolia.Search.Models.Composition;
@@ -14,24 +17,73 @@ namespace Algolia.Search.Models.Composition;
 /// <summary>
 /// An object containing either an `injection` or `multifeed` behavior schema, but not both.
 /// </summary>
-public partial class CompositionBehavior
+[JsonConverter(typeof(CompositionBehaviorJsonConverter))]
+public partial class CompositionBehavior : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the CompositionBehavior class.
+  /// Initializes a new instance of the CompositionBehavior class
+  /// with a CompositionInjectionBehavior
   /// </summary>
-  public CompositionBehavior() { }
+  /// <param name="actualInstance">An instance of CompositionInjectionBehavior.</param>
+  public CompositionBehavior(CompositionInjectionBehavior actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
 
   /// <summary>
-  /// Gets or Sets Injection
+  /// Initializes a new instance of the CompositionBehavior class
+  /// with a CompositionMultifeedBehavior
   /// </summary>
-  [JsonPropertyName("injection")]
-  public Injection Injection { get; set; }
+  /// <param name="actualInstance">An instance of CompositionMultifeedBehavior.</param>
+  public CompositionBehavior(CompositionMultifeedBehavior actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
 
   /// <summary>
-  /// Gets or Sets Multifeed
+  /// Gets or Sets ActualInstance
   /// </summary>
-  [JsonPropertyName("multifeed")]
-  public Multifeed Multifeed { get; set; }
+  public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `CompositionInjectionBehavior`. If the actual instance is not `CompositionInjectionBehavior`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of CompositionInjectionBehavior</returns>
+  public CompositionInjectionBehavior AsCompositionInjectionBehavior()
+  {
+    return (CompositionInjectionBehavior)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `CompositionMultifeedBehavior`. If the actual instance is not `CompositionMultifeedBehavior`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of CompositionMultifeedBehavior</returns>
+  public CompositionMultifeedBehavior AsCompositionMultifeedBehavior()
+  {
+    return (CompositionMultifeedBehavior)ActualInstance;
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `CompositionInjectionBehavior` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsCompositionInjectionBehavior()
+  {
+    return ActualInstance.GetType() == typeof(CompositionInjectionBehavior);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `CompositionMultifeedBehavior` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsCompositionMultifeedBehavior()
+  {
+    return ActualInstance.GetType() == typeof(CompositionMultifeedBehavior);
+  }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -39,10 +91,9 @@ public partial class CompositionBehavior
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
-    StringBuilder sb = new StringBuilder();
+    var sb = new StringBuilder();
     sb.Append("class CompositionBehavior {\n");
-    sb.Append("  Injection: ").Append(Injection).Append("\n");
-    sb.Append("  Multifeed: ").Append(Multifeed).Append("\n");
+    sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -51,9 +102,9 @@ public partial class CompositionBehavior
   /// Returns the JSON string presentation of the object
   /// </summary>
   /// <returns>JSON string presentation of the object</returns>
-  public virtual string ToJson()
+  public override string ToJson()
   {
-    return JsonSerializer.Serialize(this, JsonConfig.Options);
+    return JsonSerializer.Serialize(ActualInstance, JsonConfig.Options);
   }
 
   /// <summary>
@@ -68,10 +119,7 @@ public partial class CompositionBehavior
       return false;
     }
 
-    return (
-        Injection == input.Injection || (Injection != null && Injection.Equals(input.Injection))
-      )
-      && (Multifeed == input.Multifeed || (Multifeed != null && Multifeed.Equals(input.Multifeed)));
+    return ActualInstance.Equals(input.ActualInstance);
   }
 
   /// <summary>
@@ -83,15 +131,92 @@ public partial class CompositionBehavior
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Injection != null)
-      {
-        hashCode = (hashCode * 59) + Injection.GetHashCode();
-      }
-      if (Multifeed != null)
-      {
-        hashCode = (hashCode * 59) + Multifeed.GetHashCode();
-      }
+      if (ActualInstance != null)
+        hashCode = hashCode * 59 + ActualInstance.GetHashCode();
       return hashCode;
     }
+  }
+}
+
+/// <summary>
+/// Custom JSON converter for CompositionBehavior
+/// </summary>
+public class CompositionBehaviorJsonConverter : JsonConverter<CompositionBehavior>
+{
+  /// <summary>
+  /// Check if the object can be converted
+  /// </summary>
+  /// <param name="objectType">Object type</param>
+  /// <returns>True if the object can be converted</returns>
+  public override bool CanConvert(Type objectType)
+  {
+    return objectType == typeof(CompositionBehavior);
+  }
+
+  /// <summary>
+  /// To convert a JSON string into an object
+  /// </summary>
+  /// <param name="reader">JSON reader</param>
+  /// <param name="typeToConvert">Object type</param>
+  /// <param name="options">Serializer options</param>
+  /// <returns>The object converted from the JSON string</returns>
+  public override CompositionBehavior Read(
+    ref Utf8JsonReader reader,
+    Type typeToConvert,
+    JsonSerializerOptions options
+  )
+  {
+    var jsonDocument = JsonDocument.ParseValue(ref reader);
+    var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new CompositionBehavior(
+          jsonDocument.Deserialize<CompositionInjectionBehavior>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into CompositionInjectionBehavior: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new CompositionBehavior(
+          jsonDocument.Deserialize<CompositionMultifeedBehavior>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into CompositionMultifeedBehavior: {exception}"
+        );
+      }
+    }
+    throw new InvalidDataException(
+      $"The JSON string cannot be deserialized into any schema defined."
+    );
+  }
+
+  /// <summary>
+  /// To write the JSON string
+  /// </summary>
+  /// <param name="writer">JSON writer</param>
+  /// <param name="value">CompositionBehavior to be converted into a JSON string</param>
+  /// <param name="options">JSON Serializer options</param>
+  public override void Write(
+    Utf8JsonWriter writer,
+    CompositionBehavior value,
+    JsonSerializerOptions options
+  )
+  {
+    writer.WriteRawValue(value.ToJson());
   }
 }
