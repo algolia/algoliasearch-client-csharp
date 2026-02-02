@@ -972,7 +972,7 @@ public partial class SearchClient : ISearchClient
       await DeleteIndexAsync(tmpIndexName, cancellationToken: cancellationToken)
         .ConfigureAwait(false);
 
-      throw ex;
+      throw;
     }
   }
 
@@ -1234,7 +1234,7 @@ public partial class SearchClient : ISearchClient
     }
     catch (Exception ex)
     {
-      throw ex;
+      throw;
     }
 
     return await Task.FromResult(true);

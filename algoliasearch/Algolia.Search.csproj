@@ -21,7 +21,7 @@
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Version>7.36.2</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net9.0</TargetFrameworks>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -40,6 +40,25 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="[8.0, 11.0)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="[8.0, 11.0)" />
     <PackageReference Include="System.Text.Json" Version="[8.0.5, 11.0)" />
+  </ItemGroup>
+
+  <!-- Test dependencies only for net9.0 target -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Exclude Tests directory from netstandard builds -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
+    <Compile Remove="Tests/**/*.cs" />
   </ItemGroup>
 
   <ItemGroup>

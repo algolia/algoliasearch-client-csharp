@@ -6,6 +6,7 @@ using Algolia.Search.Clients;
 using Algolia.Search.Http;
 
 [assembly: InternalsVisibleTo("Algolia.Search.Tests")]
+[assembly: InternalsVisibleTo("Algolia.Search.IntegrationTests")]
 
 namespace Algolia.Search.Transport;
 
@@ -71,8 +72,7 @@ internal class RetryStrategy
     {
       if (!response.IsTimedOut && IsSuccess(response))
       {
-        tryableHost.Up = true;
-        tryableHost.LastUse = DateTime.UtcNow;
+        Reset(tryableHost);
         return RetryOutcomeType.Success;
       }
 

@@ -73,7 +73,8 @@ internal class AlgoliaHttpRequester : IHttpRequester
     }
 
     httpRequestMessage.Headers.Fill(request.Headers);
-    httpRequestMessage.SetTimeout(requestTimeout + connectTimeout);
+
+    httpRequestMessage.SetTimeout(connectTimeout);
 
     try
     {
