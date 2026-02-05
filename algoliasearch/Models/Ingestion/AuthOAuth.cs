@@ -26,13 +26,9 @@ public partial class AuthOAuth
   /// Initializes a new instance of the AuthOAuth class.
   /// </summary>
   /// <param name="url">URL for the OAuth endpoint. (required).</param>
-  /// <param name="clientId">Client ID. (required).</param>
-  /// <param name="clientSecret">Client secret. This field is `null` in the API response. (required).</param>
-  public AuthOAuth(string url, string clientId, string clientSecret)
+  public AuthOAuth(string url)
   {
     Url = url ?? throw new ArgumentNullException(nameof(url));
-    ClientId = clientId ?? throw new ArgumentNullException(nameof(clientId));
-    ClientSecret = clientSecret ?? throw new ArgumentNullException(nameof(clientSecret));
   }
 
   /// <summary>
@@ -57,6 +53,13 @@ public partial class AuthOAuth
   public string ClientSecret { get; set; }
 
   /// <summary>
+  /// Authorization code. Used during an `authorization_code` grant type flow, to request an access_token when creating/updating the authentication. This field is not returned in the API response.
+  /// </summary>
+  /// <value>Authorization code. Used during an `authorization_code` grant type flow, to request an access_token when creating/updating the authentication. This field is not returned in the API response. </value>
+  [JsonPropertyName("code")]
+  public string Code { get; set; }
+
+  /// <summary>
   /// OAuth scope.
   /// </summary>
   /// <value>OAuth scope.</value>
@@ -74,6 +77,7 @@ public partial class AuthOAuth
     sb.Append("  Url: ").Append(Url).Append("\n");
     sb.Append("  ClientId: ").Append(ClientId).Append("\n");
     sb.Append("  ClientSecret: ").Append(ClientSecret).Append("\n");
+    sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Scope: ").Append(Scope).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -106,6 +110,7 @@ public partial class AuthOAuth
         ClientSecret == input.ClientSecret
         || (ClientSecret != null && ClientSecret.Equals(input.ClientSecret))
       )
+      && (Code == input.Code || (Code != null && Code.Equals(input.Code)))
       && (Scope == input.Scope || (Scope != null && Scope.Equals(input.Scope)));
   }
 
@@ -129,6 +134,10 @@ public partial class AuthOAuth
       if (ClientSecret != null)
       {
         hashCode = (hashCode * 59) + ClientSecret.GetHashCode();
+      }
+      if (Code != null)
+      {
+        hashCode = (hashCode * 59) + Code.GetHashCode();
       }
       if (Scope != null)
       {

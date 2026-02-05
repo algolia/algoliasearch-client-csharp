@@ -322,6 +322,7 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
       && root.TryGetProperty("url", out _)
       && root.TryGetProperty("client_id", out _)
       && root.TryGetProperty("client_secret", out _)
+      && root.TryGetProperty("code", out _)
     )
     {
       try
