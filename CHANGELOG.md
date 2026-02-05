@@ -1,3 +1,7 @@
+## [7.37.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.37.0...7.37.1)
+
+- [0e2b0eb1e](https://github.com/algolia/api-clients-automation/commit/0e2b0eb1e) refactor(csharp): move timeout integration tests to tests/output folder ([#5932](https://github.com/algolia/api-clients-automation/pull/5932)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [7.37.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.36.2...7.37.0)
 
 BREAKING CHANGES: this minor version includes multiple breaking changes related to fixes on different APIs. See below for more details.
