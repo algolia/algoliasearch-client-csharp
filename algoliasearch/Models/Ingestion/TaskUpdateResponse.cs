@@ -26,7 +26,7 @@ public partial class TaskUpdateResponse
   /// Initializes a new instance of the TaskUpdateResponse class.
   /// </summary>
   /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public TaskUpdateResponse(string taskID, string updatedAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -41,9 +41,9 @@ public partial class TaskUpdateResponse
   public string TaskID { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC 3339 format.
+  /// Date and time when the resource was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

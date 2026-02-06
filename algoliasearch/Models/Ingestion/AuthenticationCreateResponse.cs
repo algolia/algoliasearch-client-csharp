@@ -27,7 +27,7 @@ public partial class AuthenticationCreateResponse
   /// </summary>
   /// <param name="authenticationID">Universally unique identifier (UUID) of an authentication resource. (required).</param>
   /// <param name="name">Descriptive name for the resource. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public AuthenticationCreateResponse(string authenticationID, string name, string createdAt)
   {
     AuthenticationID =
@@ -51,9 +51,9 @@ public partial class AuthenticationCreateResponse
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

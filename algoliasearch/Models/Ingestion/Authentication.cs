@@ -41,8 +41,8 @@ public partial class Authentication
   /// <param name="type">type (required).</param>
   /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
+  /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public Authentication(
     string authenticationID,
     AuthenticationType? type,
@@ -89,16 +89,16 @@ public partial class Authentication
   public AuthInputPartial Input { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC 3339 format.
+  /// Date and time when the resource was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for updating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
+/// API request body for updating a task using the V1 shape. Use methods and types that don't contain the V1 suffix.
 /// </summary>
 public partial class TaskUpdateV1
 {

@@ -22,16 +22,16 @@ public partial class TimeRange
   public TimeRange() { }
 
   /// <summary>
-  /// When the rule should start to be active, in Unix epoch time.
+  /// Timestamp when the rule should start to be active, measured in seconds since the Unix epoch.
   /// </summary>
-  /// <value>When the rule should start to be active, in Unix epoch time.</value>
+  /// <value>Timestamp when the rule should start to be active, measured in seconds since the Unix epoch.</value>
   [JsonPropertyName("from")]
   public long? From { get; set; }
 
   /// <summary>
-  /// When the rule should stop to be active, in Unix epoch time.
+  /// Timestamp when the rule should stop to be active, measured in seconds since the Unix epoch.
   /// </summary>
-  /// <value>When the rule should stop to be active, in Unix epoch time.</value>
+  /// <value>Timestamp when the rule should stop to be active, measured in seconds since the Unix epoch.</value>
   [JsonPropertyName("until")]
   public long? Until { get; set; }
 

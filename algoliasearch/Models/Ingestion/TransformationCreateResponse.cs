@@ -26,7 +26,7 @@ public partial class TransformationCreateResponse
   /// Initializes a new instance of the TransformationCreateResponse class.
   /// </summary>
   /// <param name="transformationID">Universally unique identifier (UUID) of a transformation. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public TransformationCreateResponse(string transformationID, string createdAt)
   {
     TransformationID =
@@ -42,9 +42,9 @@ public partial class TransformationCreateResponse
   public string TransformationID { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

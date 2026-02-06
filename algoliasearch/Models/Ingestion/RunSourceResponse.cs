@@ -26,7 +26,7 @@ public partial class RunSourceResponse
   /// Initializes a new instance of the RunSourceResponse class.
   /// </summary>
   /// <param name="taskWithRunID">Map of taskID sent for reindex with the corresponding runID. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public RunSourceResponse(Dictionary<string, string> taskWithRunID, string createdAt)
   {
     TaskWithRunID = taskWithRunID ?? throw new ArgumentNullException(nameof(taskWithRunID));
@@ -41,9 +41,9 @@ public partial class RunSourceResponse
   public Dictionary<string, string> TaskWithRunID { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

@@ -67,9 +67,9 @@ public partial class WatchResponse
   public string Message { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

@@ -89,9 +89,9 @@ public partial class TaskCreate
   public TaskInput Input { get; set; }
 
   /// <summary>
-  /// Date of the last cursor in RFC 3339 format.
+  /// Date and time when the last cursor was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of the last cursor in RFC 3339 format.</value>
+  /// <value>Date and time when the last cursor was created, in RFC 3339 format.</value>
   [JsonPropertyName("cursor")]
   public string Cursor { get; set; }
 

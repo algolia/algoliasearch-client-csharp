@@ -26,7 +26,7 @@ public partial class TransformationUpdateResponse
   /// Initializes a new instance of the TransformationUpdateResponse class.
   /// </summary>
   /// <param name="transformationID">Universally unique identifier (UUID) of a transformation. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public TransformationUpdateResponse(string transformationID, string updatedAt)
   {
     TransformationID =
@@ -42,9 +42,9 @@ public partial class TransformationUpdateResponse
   public string TransformationID { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC 3339 format.
+  /// Date and time when the resource was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

@@ -26,7 +26,7 @@ public partial class RunResponse
   /// Initializes a new instance of the RunResponse class.
   /// </summary>
   /// <param name="runID">Universally unique identifier (UUID) of a task run. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public RunResponse(string runID, string createdAt)
   {
     RunID = runID ?? throw new ArgumentNullException(nameof(runID));
@@ -41,9 +41,9 @@ public partial class RunResponse
   public string RunID { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

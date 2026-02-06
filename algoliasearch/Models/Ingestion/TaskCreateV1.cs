@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for creating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
+/// API request body for creating a task using the V1 shape. Use methods and types that don't contain the V1 suffix.
 /// </summary>
 public partial class TaskCreateV1
 {
@@ -89,9 +89,9 @@ public partial class TaskCreateV1
   public TaskInput Input { get; set; }
 
   /// <summary>
-  /// Date of the last cursor in RFC 3339 format.
+  /// Date and time when the last cursor was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of the last cursor in RFC 3339 format.</value>
+  /// <value>Date and time when the last cursor was created, in RFC 3339 format.</value>
   [JsonPropertyName("cursor")]
   public string Cursor { get; set; }
 

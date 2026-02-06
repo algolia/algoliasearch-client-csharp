@@ -15,7 +15,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Treat singular, plurals, and other forms of declensions as equivalent. You should only use this feature for the languages used in your index.
+/// Treat singular, plurals, and other forms of declensions as equivalent. Only use this feature for the languages used in your index.
 /// </summary>
 [JsonConverter(typeof(IgnorePluralsJsonConverter))]
 public partial class IgnorePlurals : AbstractSchema

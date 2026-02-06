@@ -15,7 +15,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Removes stop words from the search query.  Stop words are common words like articles, conjunctions, prepositions, or pronouns that have little or no meaning on their own. In English, \"the\", \"a\", or \"and\" are stop words.  You should only use this feature for the languages used in your index.
+/// Removes stop words from the search query.  Stop words are common words like articles, conjunctions, prepositions, or pronouns that have little or no meaning on their own. In English, \"the\", \"a\", or \"and\" are stop words.  Only use this feature for the languages used in your index.
 /// </summary>
 [JsonConverter(typeof(RemoveStopWordsJsonConverter))]
 public partial class RemoveStopWords : AbstractSchema

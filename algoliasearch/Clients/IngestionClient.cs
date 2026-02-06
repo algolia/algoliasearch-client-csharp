@@ -357,7 +357,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Creates a new task using the v1 endpoint, please use `createTask` instead.
+  /// Creates a new task using the v1 endpoint. Use `createTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -379,7 +379,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Creates a new task using the v1 endpoint, please use `createTask` instead. (Synchronous version)
+  /// Creates a new task using the v1 endpoint. Use `createTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -401,7 +401,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Creates a new task using the v1 endpoint, please use `createTask` instead.
+  /// Creates a new task using the v1 endpoint. Use `createTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -423,7 +423,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Creates a new task using the v1 endpoint, please use `createTask` instead. (Synchronous version)
+  /// Creates a new task using the v1 endpoint. Use `createTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1169,7 +1169,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+  /// Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1191,7 +1191,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead. (Synchronous version)
+  /// Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1213,7 +1213,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+  /// Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1235,7 +1235,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead. (Synchronous version)
+  /// Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1425,7 +1425,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Disables a task using the v1 endpoint, please use `disableTask` instead.
+  /// Disables a task using the v1 endpoint. Use `disableTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1447,7 +1447,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Disables a task using the v1 endpoint, please use `disableTask` instead. (Synchronous version)
+  /// Disables a task using the v1 endpoint. Use `disableTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1469,7 +1469,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Disables a task using the v1 endpoint, please use `disableTask` instead.
+  /// Disables a task using the v1 endpoint. Use `disableTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1491,7 +1491,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Disables a task using the v1 endpoint, please use `disableTask` instead. (Synchronous version)
+  /// Disables a task using the v1 endpoint. Use `disableTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1597,7 +1597,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Enables a task using the v1 endpoint, please use `enableTask` instead.
+  /// Enables a task using the v1 endpoint. Use `enableTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1619,7 +1619,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Enables a task using the v1 endpoint, please use `enableTask` instead. (Synchronous version)
+  /// Enables a task using the v1 endpoint. Use `enableTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1641,7 +1641,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Enables a task using the v1 endpoint, please use `enableTask` instead.
+  /// Enables a task using the v1 endpoint. Use `enableTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1663,7 +1663,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Enables a task using the v1 endpoint, please use `enableTask` instead. (Synchronous version)
+  /// Enables a task using the v1 endpoint. Use `enableTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2197,7 +2197,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+  /// Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2219,7 +2219,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead. (Synchronous version)
+  /// Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2241,7 +2241,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+  /// Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2263,7 +2263,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead. (Synchronous version)
+  /// Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2787,8 +2787,8 @@ public partial interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2824,8 +2824,8 @@ public partial interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2861,8 +2861,8 @@ public partial interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2898,8 +2898,8 @@ public partial interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -3209,7 +3209,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+  /// Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3247,7 +3247,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead. (Synchronous version)
+  /// Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3285,7 +3285,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+  /// Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3323,7 +3323,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead. (Synchronous version)
+  /// Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3961,7 +3961,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+  /// Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3985,7 +3985,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints. (Synchronous version)
+  /// Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4009,7 +4009,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+  /// Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4033,7 +4033,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints. (Synchronous version)
+  /// Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4393,7 +4393,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+  /// Searches for tasks using the v1 endpoint. Use `searchTasks` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4415,7 +4415,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead. (Synchronous version)
+  /// Searches for tasks using the v1 endpoint. Use `searchTasks` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4437,7 +4437,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+  /// Searches for tasks using the v1 endpoint. Use `searchTasks` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -4459,7 +4459,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Searches for tasks using the v1 endpoint, please use `searchTasks` instead. (Synchronous version)
+  /// Searches for tasks using the v1 endpoint. Use `searchTasks` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -5193,7 +5193,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+  /// Updates a task by its ID using the v1 endpoint. Use `updateTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -5217,7 +5217,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead. (Synchronous version)
+  /// Updates a task by its ID using the v1 endpoint. Use `updateTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -5241,7 +5241,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+  /// Updates a task by its ID using the v1 endpoint. Use `updateTask` instead.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -5265,7 +5265,7 @@ public partial interface IIngestionClient
   );
 
   /// <summary>
-  /// Updates a task by its ID using the v1 endpoint, please use `updateTask` instead. (Synchronous version)
+  /// Updates a task by its ID using the v1 endpoint. Use `updateTask` instead. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

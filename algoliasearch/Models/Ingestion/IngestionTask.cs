@@ -41,8 +41,8 @@ public partial class IngestionTask
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
+  /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public IngestionTask(
     string taskID,
     string sourceID,
@@ -130,9 +130,9 @@ public partial class IngestionTask
   public int? FailureThreshold { get; set; }
 
   /// <summary>
-  /// Date of the last cursor in RFC 3339 format.
+  /// Date and time when the last cursor was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of the last cursor in RFC 3339 format.</value>
+  /// <value>Date and time when the last cursor was created, in RFC 3339 format.</value>
   [JsonPropertyName("cursor")]
   public string Cursor { get; set; }
 
@@ -149,16 +149,16 @@ public partial class IngestionTask
   public Policies Policies { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC 3339 format.
+  /// Date and time when the resource was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

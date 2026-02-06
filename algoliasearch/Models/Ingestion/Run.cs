@@ -54,7 +54,7 @@ public partial class Run
   /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
   /// <param name="status">status (required).</param>
   /// <param name="type">type (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public Run(
     string runID,
     string appID,
@@ -113,23 +113,23 @@ public partial class Run
   public string Reason { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of start in RFC 3339 format.
+  /// Date and time when the task started, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of start in RFC 3339 format.</value>
+  /// <value>Date and time when the task started, in RFC 3339 format.</value>
   [JsonPropertyName("startedAt")]
   public string StartedAt { get; set; }
 
   /// <summary>
-  /// Date of finish in RFC 3339 format.
+  /// Date and time when the task finished, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of finish in RFC 3339 format.</value>
+  /// <value>Date and time when the task finished, in RFC 3339 format.</value>
   [JsonPropertyName("finishedAt")]
   public string FinishedAt { get; set; }
 

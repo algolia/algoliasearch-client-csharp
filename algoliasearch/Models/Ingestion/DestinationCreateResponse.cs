@@ -27,7 +27,7 @@ public partial class DestinationCreateResponse
   /// </summary>
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="name">Descriptive name for the resource. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public DestinationCreateResponse(string destinationID, string name, string createdAt)
   {
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
@@ -50,9 +50,9 @@ public partial class DestinationCreateResponse
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

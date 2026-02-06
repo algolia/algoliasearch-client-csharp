@@ -1437,7 +1437,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1458,7 +1458,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1479,7 +1479,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1500,7 +1500,7 @@ public interface ICompositionClient
   );
 
   /// <summary>
-  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
+  /// Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

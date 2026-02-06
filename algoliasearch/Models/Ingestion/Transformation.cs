@@ -34,8 +34,8 @@ public partial class Transformation
   /// <param name="transformationID">Universally unique identifier (UUID) of a transformation. (required).</param>
   /// <param name="code">It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required).</param>
   /// <param name="name">The uniquely identified name of your transformation. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
+  /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public Transformation(
     string transformationID,
     string code,
@@ -102,16 +102,16 @@ public partial class Transformation
   public string Owner { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC 3339 format.
+  /// Date and time when the resource was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

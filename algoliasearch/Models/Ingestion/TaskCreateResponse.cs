@@ -26,7 +26,7 @@ public partial class TaskCreateResponse
   /// Initializes a new instance of the TaskCreateResponse class.
   /// </summary>
   /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
-  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public TaskCreateResponse(string taskID, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -41,9 +41,9 @@ public partial class TaskCreateResponse
   public string TaskID { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC 3339 format.
+  /// Date and time when the resource was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC 3339 format.</value>
+  /// <value>Date and time when the resource was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

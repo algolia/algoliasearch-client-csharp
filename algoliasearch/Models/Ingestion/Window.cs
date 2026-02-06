@@ -25,8 +25,8 @@ public partial class Window
   /// <summary>
   /// Initializes a new instance of the Window class.
   /// </summary>
-  /// <param name="startDate">Date in RFC 3339 format representing the oldest data in the time window. (required).</param>
-  /// <param name="endDate">Date in RFC 3339 format representing the newest data in the time window. (required).</param>
+  /// <param name="startDate">Date and time representing the oldest data in the time window, in RFC 3339 format. (required).</param>
+  /// <param name="endDate">Date and time representing the newest data in the time window, in RFC 3339 format. (required).</param>
   public Window(string startDate, string endDate)
   {
     StartDate = startDate ?? throw new ArgumentNullException(nameof(startDate));
@@ -34,16 +34,16 @@ public partial class Window
   }
 
   /// <summary>
-  /// Date in RFC 3339 format representing the oldest data in the time window.
+  /// Date and time representing the oldest data in the time window, in RFC 3339 format.
   /// </summary>
-  /// <value>Date in RFC 3339 format representing the oldest data in the time window.</value>
+  /// <value>Date and time representing the oldest data in the time window, in RFC 3339 format.</value>
   [JsonPropertyName("startDate")]
   public string StartDate { get; set; }
 
   /// <summary>
-  /// Date in RFC 3339 format representing the newest data in the time window.
+  /// Date and time representing the newest data in the time window, in RFC 3339 format.
   /// </summary>
-  /// <value>Date in RFC 3339 format representing the newest data in the time window.</value>
+  /// <value>Date and time representing the newest data in the time window, in RFC 3339 format.</value>
   [JsonPropertyName("endDate")]
   public string EndDate { get; set; }
 
