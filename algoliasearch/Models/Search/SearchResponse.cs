@@ -29,13 +29,9 @@ public partial class SearchResponse<T>
   /// Initializes a new instance of the SearchResponse class.
   /// </summary>
   /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
-  /// <param name="query">Search query. (required) (default to "").</param>
-  /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-  public SearchResponse(List<T> hits, string query, string varParams)
+  public SearchResponse(List<T> hits)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
-    Query = query ?? throw new ArgumentNullException(nameof(query));
-    Params = varParams ?? throw new ArgumentNullException(nameof(varParams));
     AdditionalProperties = new Dictionary<string, object>();
   }
 
