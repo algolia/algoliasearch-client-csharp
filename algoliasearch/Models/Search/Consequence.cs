@@ -49,6 +49,12 @@ public partial class Consequence
   public List<ConsequenceHide> Hide { get; set; }
 
   /// <summary>
+  /// Gets or Sets Redirect
+  /// </summary>
+  [JsonPropertyName("redirect")]
+  public ConsequenceRedirect Redirect { get; set; }
+
+  /// <summary>
   /// A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
   /// </summary>
   /// <value>A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON. </value>
@@ -67,6 +73,7 @@ public partial class Consequence
     sb.Append("  Promote: ").Append(Promote).Append("\n");
     sb.Append("  FilterPromotes: ").Append(FilterPromotes).Append("\n");
     sb.Append("  Hide: ").Append(Hide).Append("\n");
+    sb.Append("  Redirect: ").Append(Redirect).Append("\n");
     sb.Append("  UserData: ").Append(UserData).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -102,6 +109,7 @@ public partial class Consequence
       && (
         Hide == input.Hide || Hide != null && input.Hide != null && Hide.SequenceEqual(input.Hide)
       )
+      && (Redirect == input.Redirect || (Redirect != null && Redirect.Equals(input.Redirect)))
       && (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData)));
   }
 
@@ -126,6 +134,10 @@ public partial class Consequence
       if (Hide != null)
       {
         hashCode = (hashCode * 59) + Hide.GetHashCode();
+      }
+      if (Redirect != null)
+      {
+        hashCode = (hashCode * 59) + Redirect.GetHashCode();
       }
       if (UserData != null)
       {
