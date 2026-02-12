@@ -27,7 +27,7 @@ public sealed class MonitoringConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   public MonitoringConfig(string appId, string apiKey)
-    : base(appId, apiKey, "Monitoring", "7.37.1")
+    : base(appId, apiKey, "Monitoring", "7.37.2")
   {
     DefaultHosts = GetDefaultHosts();
     Compression = CompressionType.None;

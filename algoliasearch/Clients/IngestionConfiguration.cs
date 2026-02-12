@@ -28,7 +28,7 @@ public sealed class IngestionConfig : AlgoliaConfig
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region </param>
   public IngestionConfig(string appId, string apiKey, string region)
-    : base(appId, apiKey, "Ingestion", "7.37.1")
+    : base(appId, apiKey, "Ingestion", "7.37.2")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
