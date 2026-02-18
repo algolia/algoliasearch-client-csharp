@@ -263,6 +263,13 @@ public partial class SearchResultsItem<T>
   public string Query { get; set; }
 
   /// <summary>
+  /// The ID of the feed.
+  /// </summary>
+  /// <value>The ID of the feed.</value>
+  [JsonPropertyName("feedID")]
+  public string FeedID { get; set; }
+
+  /// <summary>
   /// Gets or Sets Compositions
   /// </summary>
   [JsonPropertyName("compositions")]
@@ -309,6 +316,7 @@ public partial class SearchResultsItem<T>
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
+    sb.Append("  FeedID: ").Append(FeedID).Append("\n");
     sb.Append("  Compositions: ").Append(Compositions).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -419,6 +427,7 @@ public partial class SearchResultsItem<T>
       && (Page == input.Page || Page.Equals(input.Page))
       && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
       && (Query == input.Query || (Query != null && Query.Equals(input.Query)))
+      && (FeedID == input.FeedID || (FeedID != null && FeedID.Equals(input.FeedID)))
       && (
         Compositions == input.Compositions
         || Compositions != null
@@ -528,6 +537,10 @@ public partial class SearchResultsItem<T>
       if (Query != null)
       {
         hashCode = (hashCode * 59) + Query.GetHashCode();
+      }
+      if (FeedID != null)
+      {
+        hashCode = (hashCode * 59) + FeedID.GetHashCode();
       }
       if (Compositions != null)
       {
