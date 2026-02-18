@@ -26,7 +26,7 @@ public partial class Multifeed
   /// Initializes a new instance of the Multifeed class.
   /// </summary>
   /// <param name="feeds">A key-value store of Feed ID to Feed. Currently, the only supported Feed type is an Injection. (required).</param>
-  public Multifeed(Dictionary<string, Injection> feeds)
+  public Multifeed(Dictionary<string, FeedInjection> feeds)
   {
     Feeds = feeds ?? throw new ArgumentNullException(nameof(feeds));
   }
@@ -36,7 +36,7 @@ public partial class Multifeed
   /// </summary>
   /// <value>A key-value store of Feed ID to Feed. Currently, the only supported Feed type is an Injection.</value>
   [JsonPropertyName("feeds")]
-  public Dictionary<string, Injection> Feeds { get; set; }
+  public Dictionary<string, FeedInjection> Feeds { get; set; }
 
   /// <summary>
   /// A list of Feed IDs that specifies the order in which to order the results in the response. The IDs should be a subset of those in the Feeds object, and only those specified will be processed. When this field is not set, all Feeds are processed and returned with a default ordering.
