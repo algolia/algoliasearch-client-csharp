@@ -87,6 +87,12 @@ public partial class Rule
   public string Scope { get; set; }
 
   /// <summary>
+  /// Gets or Sets Condition
+  /// </summary>
+  [JsonPropertyName("condition")]
+  public Condition Condition { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -102,6 +108,7 @@ public partial class Rule
     sb.Append("  Validity: ").Append(Validity).Append("\n");
     sb.Append("  Tags: ").Append(Tags).Append("\n");
     sb.Append("  Scope: ").Append(Scope).Append("\n");
+    sb.Append("  Condition: ").Append(Condition).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -150,7 +157,8 @@ public partial class Rule
       && (
         Tags == input.Tags || Tags != null && input.Tags != null && Tags.SequenceEqual(input.Tags)
       )
-      && (Scope == input.Scope || (Scope != null && Scope.Equals(input.Scope)));
+      && (Scope == input.Scope || (Scope != null && Scope.Equals(input.Scope)))
+      && (Condition == input.Condition || (Condition != null && Condition.Equals(input.Condition)));
   }
 
   /// <summary>
@@ -190,6 +198,10 @@ public partial class Rule
       if (Scope != null)
       {
         hashCode = (hashCode * 59) + Scope.GetHashCode();
+      }
+      if (Condition != null)
+      {
+        hashCode = (hashCode * 59) + Condition.GetHashCode();
       }
       return hashCode;
     }
