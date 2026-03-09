@@ -1,3 +1,7 @@
+## [7.38.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.38.1...7.38.2)
+
+- [1cf56b025c](https://github.com/algolia/api-clients-automation/commit/1cf56b025c) chore(release): enable OIDC token issuance and update NuGet publish step ([#6087](https://github.com/algolia/api-clients-automation/pull/6087)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [7.38.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.38.0...7.38.1)
 
 - [505136c9d](https://github.com/algolia/api-clients-automation/commit/505136c9d) fix(specs): add deprecated field `condition` in rule schemas ([#5983](https://github.com/algolia/api-clients-automation/pull/5983)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
