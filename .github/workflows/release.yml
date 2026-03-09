@@ -10,6 +10,8 @@ jobs:
     name: Publish
     runs-on: ubuntu-22.04
     if: "startsWith(github.event.head_commit.message, 'chore: release')"
+    permissions:
+      id-token: write  # enable GitHub OIDC token issuance for this job
     steps:
       - uses: actions/checkout@v6
 
@@ -21,5 +23,11 @@ jobs:
       - name: Create Nugget package
         run: dotnet pack --configuration Release --output nugget
 
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Publish NuGet package
-        run: dotnet nuget push "nugget/*.nupkg" --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push "nugget/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
