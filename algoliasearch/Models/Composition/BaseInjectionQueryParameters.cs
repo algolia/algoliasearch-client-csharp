@@ -68,13 +68,6 @@ public partial class BaseInjectionQueryParameters
   public List<AlternativesAsExact> AlternativesAsExact { get; set; }
 
   /// <summary>
-  /// Whether this search will be included in Analytics.
-  /// </summary>
-  /// <value>Whether this search will be included in Analytics.</value>
-  [JsonPropertyName("analytics")]
-  public bool? Analytics { get; set; }
-
-  /// <summary>
   /// Whether the best matching attribute should be determined by minimum proximity This setting only affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute is selected based on the minimum proximity of multiple matches. Otherwise, the best matching attribute is determined by the order in the `searchableAttributes` setting.
   /// </summary>
   /// <value>Whether the best matching attribute should be determined by minimum proximity This setting only affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute is selected based on the minimum proximity of multiple matches. Otherwise, the best matching attribute is determined by the order in the `searchableAttributes` setting. </value>
@@ -108,13 +101,6 @@ public partial class BaseInjectionQueryParameters
   /// <value>Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started). </value>
   [JsonPropertyName("clickAnalytics")]
   public bool? ClickAnalytics { get; set; }
-
-  /// <summary>
-  /// Whether to split compound words in the query into their building blocks For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
-  /// </summary>
-  /// <value>Whether to split compound words in the query into their building blocks For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). </value>
-  [JsonPropertyName("decompoundQuery")]
-  public bool? DecompoundQuery { get; set; }
 
   /// <summary>
   /// Searchable attributes for which you want to [turn off the Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes). Attribute names are case-sensitive This can be useful for attributes with long values, where the likelihood of an exact match is high, such as product descriptions. Turning off the Exact ranking criterion for these attributes favors exact matching on other attributes. This reduces the impact of individual attributes with a lot of content on ranking.
@@ -203,13 +189,6 @@ public partial class BaseInjectionQueryParameters
   /// </summary>
   [JsonPropertyName("ignorePlurals")]
   public IgnorePlurals IgnorePlurals { get; set; }
-
-  /// <summary>
-  /// Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-  /// </summary>
-  /// <value>Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
-  [JsonPropertyName("maxFacetHits")]
-  public int? MaxFacetHits { get; set; }
 
   /// <summary>
   /// Minimum proximity score for two matching words This adjusts the [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity) by equally scoring matches that are farther apart For example, if `minProximity` is 2, neighboring matches and matches with one word between them would have the same score.
@@ -351,7 +330,6 @@ public partial class BaseInjectionQueryParameters
     sb.Append("  AdvancedSyntaxFeatures: ").Append(AdvancedSyntaxFeatures).Append("\n");
     sb.Append("  AllowTyposOnNumericTokens: ").Append(AllowTyposOnNumericTokens).Append("\n");
     sb.Append("  AlternativesAsExact: ").Append(AlternativesAsExact).Append("\n");
-    sb.Append("  Analytics: ").Append(Analytics).Append("\n");
     sb.Append("  AttributeCriteriaComputedByMinProximity: ")
       .Append(AttributeCriteriaComputedByMinProximity)
       .Append("\n");
@@ -359,7 +337,6 @@ public partial class BaseInjectionQueryParameters
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  AttributesToSnippet: ").Append(AttributesToSnippet).Append("\n");
     sb.Append("  ClickAnalytics: ").Append(ClickAnalytics).Append("\n");
-    sb.Append("  DecompoundQuery: ").Append(DecompoundQuery).Append("\n");
     sb.Append("  DisableExactOnAttributes: ").Append(DisableExactOnAttributes).Append("\n");
     sb.Append("  DisableTypoToleranceOnAttributes: ")
       .Append(DisableTypoToleranceOnAttributes)
@@ -376,7 +353,6 @@ public partial class BaseInjectionQueryParameters
     sb.Append("  HighlightPostTag: ").Append(HighlightPostTag).Append("\n");
     sb.Append("  HighlightPreTag: ").Append(HighlightPreTag).Append("\n");
     sb.Append("  IgnorePlurals: ").Append(IgnorePlurals).Append("\n");
-    sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
     sb.Append("  MinProximity: ").Append(MinProximity).Append("\n");
     sb.Append("  MinWordSizefor1Typo: ").Append(MinWordSizefor1Typo).Append("\n");
     sb.Append("  MinWordSizefor2Typos: ").Append(MinWordSizefor2Typos).Append("\n");
@@ -442,7 +418,6 @@ public partial class BaseInjectionQueryParameters
           && input.AlternativesAsExact != null
           && AlternativesAsExact.SequenceEqual(input.AlternativesAsExact)
       )
-      && (Analytics == input.Analytics || Analytics.Equals(input.Analytics))
       && (
         AttributeCriteriaComputedByMinProximity == input.AttributeCriteriaComputedByMinProximity
         || AttributeCriteriaComputedByMinProximity.Equals(
@@ -468,7 +443,6 @@ public partial class BaseInjectionQueryParameters
           && AttributesToSnippet.SequenceEqual(input.AttributesToSnippet)
       )
       && (ClickAnalytics == input.ClickAnalytics || ClickAnalytics.Equals(input.ClickAnalytics))
-      && (DecompoundQuery == input.DecompoundQuery || DecompoundQuery.Equals(input.DecompoundQuery))
       && (
         DisableExactOnAttributes == input.DisableExactOnAttributes
         || DisableExactOnAttributes != null
@@ -511,7 +485,6 @@ public partial class BaseInjectionQueryParameters
         IgnorePlurals == input.IgnorePlurals
         || (IgnorePlurals != null && IgnorePlurals.Equals(input.IgnorePlurals))
       )
-      && (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits))
       && (MinProximity == input.MinProximity || MinProximity.Equals(input.MinProximity))
       && (
         MinWordSizefor1Typo == input.MinWordSizefor1Typo
@@ -618,7 +591,6 @@ public partial class BaseInjectionQueryParameters
       {
         hashCode = (hashCode * 59) + AlternativesAsExact.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Analytics.GetHashCode();
       hashCode = (hashCode * 59) + AttributeCriteriaComputedByMinProximity.GetHashCode();
       if (AttributesToHighlight != null)
       {
@@ -633,7 +605,6 @@ public partial class BaseInjectionQueryParameters
         hashCode = (hashCode * 59) + AttributesToSnippet.GetHashCode();
       }
       hashCode = (hashCode * 59) + ClickAnalytics.GetHashCode();
-      hashCode = (hashCode * 59) + DecompoundQuery.GetHashCode();
       if (DisableExactOnAttributes != null)
       {
         hashCode = (hashCode * 59) + DisableExactOnAttributes.GetHashCode();
@@ -672,7 +643,6 @@ public partial class BaseInjectionQueryParameters
       {
         hashCode = (hashCode * 59) + IgnorePlurals.GetHashCode();
       }
-      hashCode = (hashCode * 59) + MaxFacetHits.GetHashCode();
       hashCode = (hashCode * 59) + MinProximity.GetHashCode();
       hashCode = (hashCode * 59) + MinWordSizefor1Typo.GetHashCode();
       hashCode = (hashCode * 59) + MinWordSizefor2Typos.GetHashCode();
