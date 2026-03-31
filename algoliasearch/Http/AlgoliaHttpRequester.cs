@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -85,12 +87,18 @@ internal class AlgoliaHttpRequester : IHttpRequester
       {
         using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
         {
+          var responseHeaders = response.Headers.ToDictionary(
+            h => h.Key,
+            h => string.Join(", ", h.Value)
+          );
+
           if (!response.IsSuccessStatusCode)
           {
             return new AlgoliaHttpResponse
             {
               Error = await StreamToStringAsync(stream),
               HttpStatusCode = (int)response.StatusCode,
+              ResponseHeaders = responseHeaders,
             };
           }
 
@@ -102,6 +110,7 @@ internal class AlgoliaHttpRequester : IHttpRequester
           {
             Body = outputStream,
             HttpStatusCode = (int)response.StatusCode,
+            ResponseHeaders = responseHeaders,
           };
         }
       }

@@ -928,7 +928,20 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
     {
-      _logger.LogInformation("Algolia QuerySuggestions client is initialized.");
+      _logger.LogInformation(
+        "Algolia QuerySuggestions client initialized (appId: {AppId})",
+        config.AppId
+      );
+    }
+
+    if (
+      _logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug)
+      && AlgoliaConfig.TryMarkDebugWarningLogged(factory)
+    )
+    {
+      _logger.LogDebug(
+        "WARNING: DEBUG level logging is enabled. This logs full request/response bodies which may contain sensitive data. Only use in local development."
+      );
     }
   }
 

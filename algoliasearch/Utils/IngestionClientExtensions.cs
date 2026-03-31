@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -9,6 +10,7 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.Ingestion;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace Algolia.Search.Clients;
 
@@ -72,9 +74,22 @@ public partial class IngestionClient : IIngestionClient
   )
   {
     var objectsList = objects.ToList();
+    var totalObjects = objectsList.Count;
     var responses = new List<WatchResponse>();
     var waitBatchSize = Math.Max(batchSize / 10, 1);
     var offset = 0;
+    var processedObjects = 0;
+
+    var sw = Stopwatch.StartNew();
+    if (_logger.IsEnabled(LogLevel.Information))
+    {
+      _logger.LogInformation(
+        "Batch operation started: {Action} on {Index} ({Total} objects)",
+        action,
+        indexName,
+        totalObjects
+      );
+    }
 
     for (var i = 0; i < objectsList.Count; i += batchSize)
     {
@@ -101,6 +116,16 @@ public partial class IngestionClient : IIngestionClient
         .ConfigureAwait(false);
 
       responses.Add(response);
+      processedObjects += Math.Min(batchSize, objectsList.Count - i);
+
+      if (_logger.IsEnabled(LogLevel.Information))
+      {
+        _logger.LogInformation(
+          "Batch progress: {Processed}/{Total} objects processed",
+          processedObjects,
+          totalObjects
+        );
+      }
 
       if (
         waitForTasks
@@ -144,6 +169,16 @@ public partial class IngestionClient : IIngestionClient
         }
         offset = responses.Count;
       }
+    }
+
+    sw.Stop();
+    if (_logger.IsEnabled(LogLevel.Information))
+    {
+      _logger.LogInformation(
+        "Batch operation completed: {Total} objects in {Duration}ms",
+        totalObjects,
+        sw.ElapsedMilliseconds
+      );
     }
 
     return responses;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 
 namespace Algolia.Search.Http;
@@ -7,6 +8,11 @@ namespace Algolia.Search.Http;
 /// </summary>
 public class AlgoliaHttpResponse
 {
+  /// <summary>
+  /// Http response headers
+  /// </summary>
+  public IDictionary<string, string> ResponseHeaders { get; set; }
+
   /// <summary>
   /// Http response code
   /// </summary>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +13,7 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
+using Microsoft.Extensions.Logging;
 using Action = Algolia.Search.Models.Search.Action;
 
 namespace Algolia.Search.Clients;
@@ -900,6 +902,12 @@ public partial class SearchClient : ISearchClient
     var randomSuffix = (Math.Abs(BitConverter.ToInt32(bytes, 0)) % 900001) + 100000;
     var tmpIndexName = $"{indexName}_tmp_{randomSuffix}";
 
+    var sw = Stopwatch.StartNew();
+    if (_logger.IsEnabled(LogLevel.Information))
+    {
+      _logger.LogInformation("Batch operation started: replaceAllObjects on {Index}", indexName);
+    }
+
     try
     {
       var copyResponse = await OperationIndexAsync(
@@ -960,6 +968,18 @@ public partial class SearchClient : ISearchClient
         )
         .ConfigureAwait(false);
 
+      sw.Stop();
+      var totalObjects = batchResponse.Sum(b => b.ObjectIDs?.Count ?? 0);
+      if (_logger.IsEnabled(LogLevel.Information))
+      {
+        _logger.LogInformation(
+          "Batch operation completed: replaceAllObjects on {Index} — {Total} objects in {Duration}ms",
+          indexName,
+          totalObjects,
+          sw.ElapsedMilliseconds
+        );
+      }
+
       return new ReplaceAllObjectsResponse
       {
         CopyOperationResponse = copyResponse,
@@ -1002,12 +1022,26 @@ public partial class SearchClient : ISearchClient
   )
     where T : class
   {
-    var batchCount = (int)Math.Ceiling((double)objects.Count() / batchSize);
+    var objectsList = objects.ToList();
+    var totalObjects = objectsList.Count;
+    var batchCount = (int)Math.Ceiling((double)totalObjects / batchSize);
     var responses = new List<BatchResponse>();
+    var processedObjects = 0;
+
+    var sw = Stopwatch.StartNew();
+    if (_logger.IsEnabled(LogLevel.Information))
+    {
+      _logger.LogInformation(
+        "Batch operation started: {Action} on {Index} ({Total} objects)",
+        action,
+        indexName,
+        totalObjects
+      );
+    }
 
     for (var i = 0; i < batchCount; i++)
     {
-      var chunk = objects.Skip(i * batchSize).Take(batchSize);
+      var chunk = objectsList.Skip(i * batchSize).Take(batchSize).ToList();
       var batchResponse = await BatchAsync(
           indexName,
           new BatchWriteParams(chunk.Select(x => new BatchRequest(action, x)).ToList()),
@@ -1017,6 +1051,16 @@ public partial class SearchClient : ISearchClient
         .ConfigureAwait(false);
 
       responses.Add(batchResponse);
+      processedObjects += chunk.Count;
+
+      if (_logger.IsEnabled(LogLevel.Information))
+      {
+        _logger.LogInformation(
+          "Batch progress: {Processed}/{Total} objects processed",
+          processedObjects,
+          totalObjects
+        );
+      }
     }
 
     if (waitForTasks)
@@ -1031,6 +1075,16 @@ public partial class SearchClient : ISearchClient
           )
           .ConfigureAwait(false);
       }
+    }
+
+    sw.Stop();
+    if (_logger.IsEnabled(LogLevel.Information))
+    {
+      _logger.LogInformation(
+        "Batch operation completed: {Total} objects in {Duration}ms",
+        totalObjects,
+        sw.ElapsedMilliseconds
+      );
     }
 
     return responses;

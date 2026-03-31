@@ -2588,7 +2588,17 @@ public partial class AnalyticsClient : IAnalyticsClient
 
     if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
     {
-      _logger.LogInformation("Algolia Analytics client is initialized.");
+      _logger.LogInformation("Algolia Analytics client initialized (appId: {AppId})", config.AppId);
+    }
+
+    if (
+      _logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug)
+      && AlgoliaConfig.TryMarkDebugWarningLogged(factory)
+    )
+    {
+      _logger.LogDebug(
+        "WARNING: DEBUG level logging is enabled. This logs full request/response bodies which may contain sensitive data. Only use in local development."
+      );
     }
   }
 

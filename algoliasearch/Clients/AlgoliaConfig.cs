@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace Algolia.Search.Clients
 {
@@ -107,6 +110,16 @@ namespace Algolia.Search.Clients
     {
       ApiKey = apiKey;
       DefaultHeaders[Defaults.AlgoliaApiKeyHeader.ToLowerInvariant()] = apiKey;
+    }
+
+    private static readonly ConcurrentDictionary<int, byte> _warnedFactories = new();
+
+    /// <summary>
+    /// Returns true the first time a given loggerFactory triggers the debug warning, false on subsequent calls.
+    /// </summary>
+    internal static bool TryMarkDebugWarningLogged(ILoggerFactory loggerFactory)
+    {
+      return _warnedFactories.TryAdd(RuntimeHelpers.GetHashCode(loggerFactory), 0);
     }
   }
 }

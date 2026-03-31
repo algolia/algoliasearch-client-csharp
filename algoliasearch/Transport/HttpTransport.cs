@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -122,8 +123,14 @@ internal class HttpTransport
         ? CallType.Read
         : CallType.Write;
 
-    foreach (var host in _retryStrategy.GetTryableHost(callType))
+    var tryableHosts = _retryStrategy.GetTryableHost(callType).ToList();
+    var maxAttempts = tryableHosts.Count;
+    var attemptNumber = 0;
+    var overallStopwatch = Stopwatch.StartNew();
+
+    foreach (var host in tryableHosts)
     {
+      attemptNumber++;
       request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress, _logger);
       request.Uri = BuildUri(
         host,
@@ -144,35 +151,78 @@ internal class HttpTransport
 
       if (_logger.IsEnabled(LogLevel.Trace))
       {
-        _logger.LogTrace("Sending request to {Method} {Uri}", request.Method, request.Uri);
+        _logger.LogTrace(
+          "Sending request: {Method} {Uri}",
+          request.Method,
+          SanitizeUrl(request.Uri)
+        );
         _logger.LogTrace("Request timeout: {RequestTimeout} (s)", requestTimeout.TotalSeconds);
         _logger.LogTrace("Connect timeout: {ConnectTimeout} (s)", connectTimeout.TotalSeconds);
-        foreach (var header in request.Headers)
+        foreach (var header in FilterHeaders(request.Headers))
         {
-          _logger.LogTrace("Header: {HeaderName} : {HeaderValue}", header.Key, header.Value);
+          _logger.LogTrace("Header: {HeaderName}: {HeaderValue}", header.Key, header.Value);
         }
       }
 
+      var requestStopwatch = Stopwatch.StartNew();
       var response = await _httpClient
         .SendRequestAsync(request, requestTimeout, connectTimeout, ct)
         .ConfigureAwait(false);
+      requestStopwatch.Stop();
 
       _errorMessage = response.Error;
 
       switch (_retryStrategy.Decide(host, response))
       {
         case RetryOutcomeType.Success:
-          if (typeof(TResult) == typeof(VoidResult))
+          if (_logger.IsEnabled(LogLevel.Information))
           {
-            return new VoidResult() as TResult;
+            _logger.LogInformation(
+              "{Method} {SanitizedUrl} - {StatusCode} ({Duration}ms)",
+              request.Method,
+              SanitizeUrl(request.Uri),
+              response.HttpStatusCode,
+              requestStopwatch.ElapsedMilliseconds
+            );
+
+            if (attemptNumber > 1)
+            {
+              overallStopwatch.Stop();
+              _logger.LogInformation(
+                "Request completed on attempt {Attempt}/{MaxAttempts} (total: {TotalDuration}ms)",
+                attemptNumber,
+                maxAttempts,
+                overallStopwatch.ElapsedMilliseconds
+              );
+            }
           }
 
           if (_logger.IsEnabled(LogLevel.Trace))
           {
-            var reader = new StreamReader(response.Body);
-            var json = await reader.ReadToEndAsync().ConfigureAwait(false);
-            _logger.LogTrace("Response HTTP {HttpCode}: {Json}", response.HttpStatusCode, json);
-            response.Body.Seek(0, SeekOrigin.Begin);
+            if (response.ResponseHeaders != null)
+            {
+              foreach (var header in response.ResponseHeaders)
+              {
+                _logger.LogTrace(
+                  "Response header: {HeaderName}: {HeaderValue}",
+                  header.Key,
+                  header.Value
+                );
+              }
+            }
+
+            if (response.Body != null)
+            {
+              var reader = new StreamReader(response.Body);
+              var json = await reader.ReadToEndAsync().ConfigureAwait(false);
+              _logger.LogTrace("Response HTTP {HttpCode}: {Json}", response.HttpStatusCode, json);
+              response.Body.Seek(0, SeekOrigin.Begin);
+            }
+          }
+
+          if (typeof(TResult) == typeof(VoidResult))
+          {
+            return new VoidResult() as TResult;
           }
 
           // Returns the raw response when using `*WithHTTPInfo` methods.
@@ -185,13 +235,24 @@ internal class HttpTransport
             .Deserialize<TResult>(response.Body)
             .ConfigureAwait(false);
 
-          if (_logger.IsEnabled(LogLevel.Trace))
+          if (_logger.IsEnabled(LogLevel.Debug))
           {
-            _logger.LogTrace("Object created: {objectCreated}", deserialized);
+            _logger.LogDebug("Object created: {ObjectCreated}", deserialized);
           }
 
           return deserialized;
         case RetryOutcomeType.Retry:
+          if (_logger.IsEnabled(LogLevel.Information))
+          {
+            _logger.LogInformation(
+              "Retry {RetryCount}/{MaxRetries}: Timeout on {Host} after {ConnectTimeout}ms",
+              attemptNumber,
+              maxAttempts - 1,
+              host.Url,
+              (int)connectTimeout.TotalMilliseconds
+            );
+          }
+
           if (_logger.IsEnabled(LogLevel.Debug))
           {
             _logger.LogDebug(
@@ -220,7 +281,11 @@ internal class HttpTransport
 
     if (_logger.IsEnabled(LogLevel.Error))
     {
-      _logger.LogError("Retry strategy failed: {ErrorMessage}", _errorMessage);
+      _logger.LogError(
+        "Request failed after {MaxAttempts} attempts: {ErrorMessage}",
+        maxAttempts,
+        _errorMessage
+      );
     }
 
     throw new AlgoliaUnreachableHostException(
@@ -243,10 +308,56 @@ internal class HttpTransport
 
     if (_logger.IsEnabled(LogLevel.Trace))
     {
-      logger.LogTrace("Serialized request data: {Json}", serializedData);
+      logger.LogTrace("Request body: {Json}", serializedData);
     }
 
     return data == null ? null : Compression.CreateStream(serializedData, compress);
+  }
+
+  private static readonly string[] _sensitiveHeaders = { "x-algolia-api-key", "authorization" };
+
+  private static IDictionary<string, string> FilterHeaders(IDictionary<string, string> headers)
+  {
+    if (headers == null)
+      return new Dictionary<string, string>();
+
+    var filtered = new Dictionary<string, string>(headers);
+    foreach (var key in _sensitiveHeaders)
+    {
+      if (filtered.ContainsKey(key))
+        filtered[key] = "[FILTERED]";
+    }
+    return filtered;
+  }
+
+  private static string SanitizeUrl(Uri uri)
+  {
+    if (uri == null)
+      return string.Empty;
+
+    if (string.IsNullOrEmpty(uri.Query))
+      return uri.ToString();
+
+    var parts = uri.Query.TrimStart('?').Split('&');
+    var sanitized = parts.Select(p =>
+    {
+      var kv = p.Split(new[] { '=' }, 2);
+      if (
+        kv.Length == 2
+        && (
+          kv[0].Equals("x-algolia-api-key", StringComparison.OrdinalIgnoreCase)
+          || kv[0].Equals("apiKey", StringComparison.OrdinalIgnoreCase)
+          || kv[0].Equals("api_key", StringComparison.OrdinalIgnoreCase)
+        )
+      )
+      {
+        return kv[0] + "=[FILTERED]";
+      }
+      return p;
+    });
+
+    var builder = new UriBuilder(uri) { Query = string.Join("&", sanitized) };
+    return builder.Uri.ToString();
   }
 
   /// <summary>
