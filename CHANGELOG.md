@@ -1,3 +1,7 @@
+## [7.39.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.38.3...7.39.0)
+
+- [256cc59650](https://github.com/algolia/api-clients-automation/commit/256cc59650) feat(csharp): Add logs ([#6090](https://github.com/algolia/api-clients-automation/pull/6090)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+
 ## [7.38.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.38.2...7.38.3)
 
 - [600f157a13](https://github.com/algolia/api-clients-automation/commit/600f157a13) fix(specs): remove query parameter that are not accepted by the Composition API ([#6128](https://github.com/algolia/api-clients-automation/pull/6128)) by [@ClaraMuller](https://github.com/ClaraMuller/)
