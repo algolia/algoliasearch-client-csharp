@@ -168,7 +168,7 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("search", out _))
     {
       try
       {
@@ -180,7 +180,7 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SearchSource: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("external", out _))
     {
       try
       {
