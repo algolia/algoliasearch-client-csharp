@@ -22,6 +22,17 @@ public partial class TaskInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the TaskInput class
+  /// with a ShopifyInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of ShopifyInput.</param>
+  public TaskInput(ShopifyInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the TaskInput class
   /// with a StreamingInput
   /// </summary>
   /// <param name="actualInstance">An instance of StreamingInput.</param>
@@ -43,20 +54,19 @@ public partial class TaskInput : AbstractSchema
   }
 
   /// <summary>
-  /// Initializes a new instance of the TaskInput class
-  /// with a ShopifyInput
-  /// </summary>
-  /// <param name="actualInstance">An instance of ShopifyInput.</param>
-  public TaskInput(ShopifyInput actualInstance)
-  {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `ShopifyInput`. If the actual instance is not `ShopifyInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of ShopifyInput</returns>
+  public ShopifyInput AsShopifyInput()
+  {
+    return (ShopifyInput)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `StreamingInput`. If the actual instance is not `StreamingInput`,
@@ -79,13 +89,12 @@ public partial class TaskInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `ShopifyInput`. If the actual instance is not `ShopifyInput`,
-  /// the InvalidClassException will be thrown
+  /// Check if the actual instance is of `ShopifyInput` type.
   /// </summary>
-  /// <returns>An instance of ShopifyInput</returns>
-  public ShopifyInput AsShopifyInput()
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsShopifyInput()
   {
-    return (ShopifyInput)ActualInstance;
+    return ActualInstance.GetType() == typeof(ShopifyInput);
   }
 
   /// <summary>
@@ -104,15 +113,6 @@ public partial class TaskInput : AbstractSchema
   public bool IsDockerStreamsInput()
   {
     return ActualInstance.GetType() == typeof(DockerStreamsInput);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `ShopifyInput` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsShopifyInput()
-  {
-    return ActualInstance.GetType() == typeof(ShopifyInput);
   }
 
   /// <summary>
@@ -198,6 +198,22 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (
+      root.ValueKind == JsonValueKind.Object
+      && root.TryGetProperty("market", out _)
+      && root.TryGetProperty("metafields", out _)
+    )
+    {
+      try
+      {
+        return new TaskInput(jsonDocument.Deserialize<ShopifyInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ShopifyInput: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("mapping", out _))
     {
       try
@@ -224,18 +240,6 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into DockerStreamsInput: {exception}"
         );
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new TaskInput(jsonDocument.Deserialize<ShopifyInput>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ShopifyInput: {exception}");
       }
     }
     throw new InvalidDataException(

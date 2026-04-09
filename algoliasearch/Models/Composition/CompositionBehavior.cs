@@ -168,7 +168,7 @@ public class CompositionBehaviorJsonConverter : JsonConverter<CompositionBehavio
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("injection", out _))
     {
       try
       {
@@ -184,7 +184,7 @@ public class CompositionBehaviorJsonConverter : JsonConverter<CompositionBehavio
         );
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("multifeed", out _))
     {
       try
       {

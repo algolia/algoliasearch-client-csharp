@@ -168,7 +168,11 @@ public class BatchCompositionActionJsonConverter : JsonConverter<BatchCompositio
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (
+      root.ValueKind == JsonValueKind.Object
+      && root.TryGetProperty("behavior", out _)
+      && root.TryGetProperty("name", out _)
+    )
     {
       try
       {

@@ -168,7 +168,7 @@ public class RulesBatchCompositionActionJsonConverter : JsonConverter<RulesBatch
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("consequence", out _))
     {
       try
       {

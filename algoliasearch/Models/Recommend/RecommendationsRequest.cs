@@ -22,6 +22,17 @@ public partial class RecommendationsRequest : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the RecommendationsRequest class
+  /// with a TrendingFacetsQuery
+  /// </summary>
+  /// <param name="actualInstance">An instance of TrendingFacetsQuery.</param>
+  public RecommendationsRequest(TrendingFacetsQuery actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the RecommendationsRequest class
   /// with a BoughtTogetherQuery
   /// </summary>
   /// <param name="actualInstance">An instance of BoughtTogetherQuery.</param>
@@ -55,17 +66,6 @@ public partial class RecommendationsRequest : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the RecommendationsRequest class
-  /// with a TrendingFacetsQuery
-  /// </summary>
-  /// <param name="actualInstance">An instance of TrendingFacetsQuery.</param>
-  public RecommendationsRequest(TrendingFacetsQuery actualInstance)
-  {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the RecommendationsRequest class
   /// with a LookingSimilarQuery
   /// </summary>
   /// <param name="actualInstance">An instance of LookingSimilarQuery.</param>
@@ -79,6 +79,16 @@ public partial class RecommendationsRequest : AbstractSchema
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `TrendingFacetsQuery`. If the actual instance is not `TrendingFacetsQuery`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of TrendingFacetsQuery</returns>
+  public TrendingFacetsQuery AsTrendingFacetsQuery()
+  {
+    return (TrendingFacetsQuery)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `BoughtTogetherQuery`. If the actual instance is not `BoughtTogetherQuery`,
@@ -111,16 +121,6 @@ public partial class RecommendationsRequest : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `TrendingFacetsQuery`. If the actual instance is not `TrendingFacetsQuery`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of TrendingFacetsQuery</returns>
-  public TrendingFacetsQuery AsTrendingFacetsQuery()
-  {
-    return (TrendingFacetsQuery)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `LookingSimilarQuery`. If the actual instance is not `LookingSimilarQuery`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -128,6 +128,15 @@ public partial class RecommendationsRequest : AbstractSchema
   public LookingSimilarQuery AsLookingSimilarQuery()
   {
     return (LookingSimilarQuery)ActualInstance;
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `TrendingFacetsQuery` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsTrendingFacetsQuery()
+  {
+    return ActualInstance.GetType() == typeof(TrendingFacetsQuery);
   }
 
   /// <summary>
@@ -155,15 +164,6 @@ public partial class RecommendationsRequest : AbstractSchema
   public bool IsTrendingItemsQuery()
   {
     return ActualInstance.GetType() == typeof(TrendingItemsQuery);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `TrendingFacetsQuery` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsTrendingFacetsQuery()
-  {
-    return ActualInstance.GetType() == typeof(TrendingFacetsQuery);
   }
 
   /// <summary>
@@ -258,6 +258,22 @@ public class RecommendationsRequestJsonConverter : JsonConverter<Recommendations
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("facetName", out _))
+    {
+      try
+      {
+        return new RecommendationsRequest(
+          jsonDocument.Deserialize<TrendingFacetsQuery>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into TrendingFacetsQuery: {exception}"
+        );
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -301,22 +317,6 @@ public class RecommendationsRequestJsonConverter : JsonConverter<Recommendations
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into TrendingItemsQuery: {exception}"
-        );
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new RecommendationsRequest(
-          jsonDocument.Deserialize<TrendingFacetsQuery>(JsonConfig.Options)
-        );
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into TrendingFacetsQuery: {exception}"
         );
       }
     }

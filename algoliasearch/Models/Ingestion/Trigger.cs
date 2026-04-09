@@ -22,10 +22,10 @@ public partial class Trigger : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the Trigger class
-  /// with a OnDemandTrigger
+  /// with a ScheduleTrigger
   /// </summary>
-  /// <param name="actualInstance">An instance of OnDemandTrigger.</param>
-  public Trigger(OnDemandTrigger actualInstance)
+  /// <param name="actualInstance">An instance of ScheduleTrigger.</param>
+  public Trigger(ScheduleTrigger actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -33,10 +33,10 @@ public partial class Trigger : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the Trigger class
-  /// with a ScheduleTrigger
+  /// with a OnDemandTrigger
   /// </summary>
-  /// <param name="actualInstance">An instance of ScheduleTrigger.</param>
-  public Trigger(ScheduleTrigger actualInstance)
+  /// <param name="actualInstance">An instance of OnDemandTrigger.</param>
+  public Trigger(OnDemandTrigger actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -70,16 +70,6 @@ public partial class Trigger : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `OnDemandTrigger`. If the actual instance is not `OnDemandTrigger`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of OnDemandTrigger</returns>
-  public OnDemandTrigger AsOnDemandTrigger()
-  {
-    return (OnDemandTrigger)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `ScheduleTrigger`. If the actual instance is not `ScheduleTrigger`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -87,6 +77,16 @@ public partial class Trigger : AbstractSchema
   public ScheduleTrigger AsScheduleTrigger()
   {
     return (ScheduleTrigger)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `OnDemandTrigger`. If the actual instance is not `OnDemandTrigger`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of OnDemandTrigger</returns>
+  public OnDemandTrigger AsOnDemandTrigger()
+  {
+    return (OnDemandTrigger)ActualInstance;
   }
 
   /// <summary>
@@ -110,21 +110,21 @@ public partial class Trigger : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `OnDemandTrigger` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsOnDemandTrigger()
-  {
-    return ActualInstance.GetType() == typeof(OnDemandTrigger);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `ScheduleTrigger` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsScheduleTrigger()
   {
     return ActualInstance.GetType() == typeof(ScheduleTrigger);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `OnDemandTrigger` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsOnDemandTrigger()
+  {
+    return ActualInstance.GetType() == typeof(OnDemandTrigger);
   }
 
   /// <summary>
@@ -228,6 +228,24 @@ public class TriggerJsonConverter : JsonConverter<Trigger>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (
+      root.ValueKind == JsonValueKind.Object
+      && root.TryGetProperty("cron", out _)
+      && root.TryGetProperty("nextRun", out _)
+    )
+    {
+      try
+      {
+        return new Trigger(jsonDocument.Deserialize<ScheduleTrigger>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into ScheduleTrigger: {exception}"
+        );
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -239,20 +257,6 @@ public class TriggerJsonConverter : JsonConverter<Trigger>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into OnDemandTrigger: {exception}"
-        );
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new Trigger(jsonDocument.Deserialize<ScheduleTrigger>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into ScheduleTrigger: {exception}"
         );
       }
     }

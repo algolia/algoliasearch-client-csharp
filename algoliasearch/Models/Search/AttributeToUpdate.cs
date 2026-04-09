@@ -22,17 +22,6 @@ public partial class AttributeToUpdate : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the AttributeToUpdate class
-  /// with a string
-  /// </summary>
-  /// <param name="actualInstance">An instance of string.</param>
-  public AttributeToUpdate(string actualInstance)
-  {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the AttributeToUpdate class
   /// with a BuiltInOperation
   /// </summary>
   /// <param name="actualInstance">An instance of BuiltInOperation.</param>
@@ -43,19 +32,20 @@ public partial class AttributeToUpdate : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the AttributeToUpdate class
+  /// with a string
+  /// </summary>
+  /// <param name="actualInstance">An instance of string.</param>
+  public AttributeToUpdate(string actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
-
-  /// <summary>
-  /// Get the actual instance of `string`. If the actual instance is not `string`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of string</returns>
-  public string AsString()
-  {
-    return (string)ActualInstance;
-  }
 
   /// <summary>
   /// Get the actual instance of `BuiltInOperation`. If the actual instance is not `BuiltInOperation`,
@@ -68,12 +58,13 @@ public partial class AttributeToUpdate : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `string` type.
+  /// Get the actual instance of `string`. If the actual instance is not `string`,
+  /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsString()
+  /// <returns>An instance of string</returns>
+  public string AsString()
   {
-    return ActualInstance.GetType() == typeof(string);
+    return (string)ActualInstance;
   }
 
   /// <summary>
@@ -83,6 +74,15 @@ public partial class AttributeToUpdate : AbstractSchema
   public bool IsBuiltInOperation()
   {
     return ActualInstance.GetType() == typeof(BuiltInOperation);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `string` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsString()
+  {
+    return ActualInstance.GetType() == typeof(string);
   }
 
   /// <summary>
@@ -168,19 +168,11 @@ public class AttributeToUpdateJsonConverter : JsonConverter<AttributeToUpdate>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.String)
-    {
-      try
-      {
-        return new AttributeToUpdate(jsonDocument.Deserialize<string>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into string: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (
+      root.ValueKind == JsonValueKind.Object
+      && root.TryGetProperty("_operation", out _)
+      && root.TryGetProperty("value", out _)
+    )
     {
       try
       {
@@ -194,6 +186,18 @@ public class AttributeToUpdateJsonConverter : JsonConverter<AttributeToUpdate>
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into BuiltInOperation: {exception}"
         );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.String)
+    {
+      try
+      {
+        return new AttributeToUpdate(jsonDocument.Deserialize<string>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into string: {exception}");
       }
     }
     throw new InvalidDataException(
