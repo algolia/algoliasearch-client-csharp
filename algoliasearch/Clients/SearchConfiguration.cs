@@ -27,7 +27,7 @@ public sealed class SearchConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   public SearchConfig(string appId, string apiKey)
-    : base(appId, apiKey, "Search", "7.39.0")
+    : base(appId, apiKey, "Search", "7.39.1")
   {
     DefaultHosts = GetDefaultHosts(appId);
     Compression = CompressionType.None;
