@@ -12,30 +12,37 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Injected items will originate from a search request performed on the specified index.
+/// MainSearch
 /// </summary>
-public partial class SearchSource
+public partial class MainSearch
 {
   /// <summary>
-  /// Initializes a new instance of the SearchSource class.
+  /// Initializes a new instance of the MainSearch class.
   /// </summary>
   [JsonConstructor]
-  public SearchSource() { }
+  public MainSearch() { }
 
   /// <summary>
-  /// Initializes a new instance of the SearchSource class.
+  /// Initializes a new instance of the MainSearch class.
   /// </summary>
-  /// <param name="search">search (required).</param>
-  public SearchSource(Search search)
+  /// <param name="index">Targeted index name. (required).</param>
+  public MainSearch(string index)
   {
-    Search = search ?? throw new ArgumentNullException(nameof(search));
+    Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Gets or Sets Search
+  /// Targeted index name.
   /// </summary>
-  [JsonPropertyName("search")]
-  public Search Search { get; set; }
+  /// <value>Targeted index name.</value>
+  [JsonPropertyName("index")]
+  public string Index { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Params
+  /// </summary>
+  [JsonPropertyName("params")]
+  public MainInjectionQueryParameters Params { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +51,9 @@ public partial class SearchSource
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchSource {\n");
-    sb.Append("  Search: ").Append(Search).Append("\n");
+    sb.Append("class MainSearch {\n");
+    sb.Append("  Index: ").Append(Index).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,12 +74,13 @@ public partial class SearchSource
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchSource input)
+    if (obj is not MainSearch input)
     {
       return false;
     }
 
-    return (Search == input.Search || (Search != null && Search.Equals(input.Search)));
+    return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
+      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -83,9 +92,13 @@ public partial class SearchSource
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Search != null)
+      if (Index != null)
       {
-        hashCode = (hashCode * 59) + Search.GetHashCode();
+        hashCode = (hashCode * 59) + Index.GetHashCode();
+      }
+      if (Params != null)
+      {
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       return hashCode;
     }

@@ -26,7 +26,7 @@ public partial class Injection
   /// Initializes a new instance of the Injection class.
   /// </summary>
   /// <param name="main">main (required).</param>
-  public Injection(Main main)
+  public Injection(InjectionMain main)
   {
     Main = main ?? throw new ArgumentNullException(nameof(main));
   }
@@ -35,14 +35,14 @@ public partial class Injection
   /// Gets or Sets Main
   /// </summary>
   [JsonPropertyName("main")]
-  public Main Main { get; set; }
+  public InjectionMain Main { get; set; }
 
   /// <summary>
   /// list of injected items of the current Composition.
   /// </summary>
   /// <value>list of injected items of the current Composition.</value>
   [JsonPropertyName("injectedItems")]
-  public List<InjectedItem> InjectedItems { get; set; }
+  public List<InjectionInjectedItem> InjectedItems { get; set; }
 
   /// <summary>
   /// Gets or Sets Deduplication

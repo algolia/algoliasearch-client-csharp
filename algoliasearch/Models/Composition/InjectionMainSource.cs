@@ -15,28 +15,28 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// InjectedItemSource
+/// Source to be used to retrieve organic result set.
 /// </summary>
-[JsonConverter(typeof(InjectedItemSourceJsonConverter))]
-public partial class InjectedItemSource : AbstractSchema
+[JsonConverter(typeof(InjectionMainSourceJsonConverter))]
+public partial class InjectionMainSource : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the InjectedItemSource class
-  /// with a InjectedItemSearchSource
+  /// Initializes a new instance of the InjectionMainSource class
+  /// with a InjectionMainSearchSource
   /// </summary>
-  /// <param name="actualInstance">An instance of InjectedItemSearchSource.</param>
-  public InjectedItemSource(InjectedItemSearchSource actualInstance)
+  /// <param name="actualInstance">An instance of InjectionMainSearchSource.</param>
+  public InjectionMainSource(InjectionMainSearchSource actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the InjectedItemSource class
-  /// with a InjectedItemExternalSource
+  /// Initializes a new instance of the InjectionMainSource class
+  /// with a InjectionMainRecommendSource
   /// </summary>
-  /// <param name="actualInstance">An instance of InjectedItemExternalSource.</param>
-  public InjectedItemSource(InjectedItemExternalSource actualInstance)
+  /// <param name="actualInstance">An instance of InjectionMainRecommendSource.</param>
+  public InjectionMainSource(InjectionMainRecommendSource actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -48,41 +48,41 @@ public partial class InjectedItemSource : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `InjectedItemSearchSource`. If the actual instance is not `InjectedItemSearchSource`,
+  /// Get the actual instance of `InjectionMainSearchSource`. If the actual instance is not `InjectionMainSearchSource`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of InjectedItemSearchSource</returns>
-  public InjectedItemSearchSource AsInjectedItemSearchSource()
+  /// <returns>An instance of InjectionMainSearchSource</returns>
+  public InjectionMainSearchSource AsInjectionMainSearchSource()
   {
-    return (InjectedItemSearchSource)ActualInstance;
+    return (InjectionMainSearchSource)ActualInstance;
   }
 
   /// <summary>
-  /// Get the actual instance of `InjectedItemExternalSource`. If the actual instance is not `InjectedItemExternalSource`,
+  /// Get the actual instance of `InjectionMainRecommendSource`. If the actual instance is not `InjectionMainRecommendSource`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of InjectedItemExternalSource</returns>
-  public InjectedItemExternalSource AsInjectedItemExternalSource()
+  /// <returns>An instance of InjectionMainRecommendSource</returns>
+  public InjectionMainRecommendSource AsInjectionMainRecommendSource()
   {
-    return (InjectedItemExternalSource)ActualInstance;
+    return (InjectionMainRecommendSource)ActualInstance;
   }
 
   /// <summary>
-  /// Check if the actual instance is of `InjectedItemSearchSource` type.
+  /// Check if the actual instance is of `InjectionMainSearchSource` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsInjectedItemSearchSource()
+  public bool IsInjectionMainSearchSource()
   {
-    return ActualInstance.GetType() == typeof(InjectedItemSearchSource);
+    return ActualInstance.GetType() == typeof(InjectionMainSearchSource);
   }
 
   /// <summary>
-  /// Check if the actual instance is of `InjectedItemExternalSource` type.
+  /// Check if the actual instance is of `InjectionMainRecommendSource` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsInjectedItemExternalSource()
+  public bool IsInjectionMainRecommendSource()
   {
-    return ActualInstance.GetType() == typeof(InjectedItemExternalSource);
+    return ActualInstance.GetType() == typeof(InjectionMainRecommendSource);
   }
 
   /// <summary>
@@ -92,7 +92,7 @@ public partial class InjectedItemSource : AbstractSchema
   public override string ToString()
   {
     var sb = new StringBuilder();
-    sb.Append("class InjectedItemSource {\n");
+    sb.Append("class InjectionMainSource {\n");
     sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -114,7 +114,7 @@ public partial class InjectedItemSource : AbstractSchema
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not InjectedItemSource input)
+    if (obj is not InjectionMainSource input)
     {
       return false;
     }
@@ -139,9 +139,9 @@ public partial class InjectedItemSource : AbstractSchema
 }
 
 /// <summary>
-/// Custom JSON converter for InjectedItemSource
+/// Custom JSON converter for InjectionMainSource
 /// </summary>
-public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
+public class InjectionMainSourceJsonConverter : JsonConverter<InjectionMainSource>
 {
   /// <summary>
   /// Check if the object can be converted
@@ -150,7 +150,7 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
   /// <returns>True if the object can be converted</returns>
   public override bool CanConvert(Type objectType)
   {
-    return objectType == typeof(InjectedItemSource);
+    return objectType == typeof(InjectionMainSource);
   }
 
   /// <summary>
@@ -160,7 +160,7 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
   /// <param name="typeToConvert">Object type</param>
   /// <param name="options">Serializer options</param>
   /// <returns>The object converted from the JSON string</returns>
-  public override InjectedItemSource Read(
+  public override InjectionMainSource Read(
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
@@ -172,31 +172,31 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
     {
       try
       {
-        return new InjectedItemSource(
-          jsonDocument.Deserialize<InjectedItemSearchSource>(JsonConfig.Options)
+        return new InjectionMainSource(
+          jsonDocument.Deserialize<InjectionMainSearchSource>(JsonConfig.Options)
         );
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into InjectedItemSearchSource: {exception}"
+          $"Failed to deserialize into InjectionMainSearchSource: {exception}"
         );
       }
     }
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("external", out _))
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("recommend", out _))
     {
       try
       {
-        return new InjectedItemSource(
-          jsonDocument.Deserialize<InjectedItemExternalSource>(JsonConfig.Options)
+        return new InjectionMainSource(
+          jsonDocument.Deserialize<InjectionMainRecommendSource>(JsonConfig.Options)
         );
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into InjectedItemExternalSource: {exception}"
+          $"Failed to deserialize into InjectionMainRecommendSource: {exception}"
         );
       }
     }
@@ -209,11 +209,11 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
   /// To write the JSON string
   /// </summary>
   /// <param name="writer">JSON writer</param>
-  /// <param name="value">InjectedItemSource to be converted into a JSON string</param>
+  /// <param name="value">InjectionMainSource to be converted into a JSON string</param>
   /// <param name="options">JSON Serializer options</param>
   public override void Write(
     Utf8JsonWriter writer,
-    InjectedItemSource value,
+    InjectionMainSource value,
     JsonSerializerOptions options
   )
   {

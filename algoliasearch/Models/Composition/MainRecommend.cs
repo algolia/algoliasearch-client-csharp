@@ -12,30 +12,31 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Main
+/// MainRecommend
 /// </summary>
-public partial class Main
+public partial class MainRecommend
 {
   /// <summary>
-  /// Initializes a new instance of the Main class.
+  /// Initializes a new instance of the MainRecommend class.
   /// </summary>
   [JsonConstructor]
-  public Main() { }
+  public MainRecommend() { }
 
   /// <summary>
-  /// Initializes a new instance of the Main class.
+  /// Initializes a new instance of the MainRecommend class.
   /// </summary>
-  /// <param name="source">source (required).</param>
-  public Main(CompositionSource source)
+  /// <param name="index">Targeted index name. (required).</param>
+  public MainRecommend(string index)
   {
-    Source = source ?? throw new ArgumentNullException(nameof(source));
+    Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Gets or Sets Source
+  /// Targeted index name.
   /// </summary>
-  [JsonPropertyName("source")]
-  public CompositionSource Source { get; set; }
+  /// <value>Targeted index name.</value>
+  [JsonPropertyName("index")]
+  public string Index { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +45,8 @@ public partial class Main
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Main {\n");
-    sb.Append("  Source: ").Append(Source).Append("\n");
+    sb.Append("class MainRecommend {\n");
+    sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,12 +67,12 @@ public partial class Main
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Main input)
+    if (obj is not MainRecommend input)
     {
       return false;
     }
 
-    return (Source == input.Source || (Source != null && Source.Equals(input.Source)));
+    return (Index == input.Index || (Index != null && Index.Equals(input.Index)));
   }
 
   /// <summary>
@@ -83,9 +84,9 @@ public partial class Main
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Source != null)
+      if (Index != null)
       {
-        hashCode = (hashCode * 59) + Source.GetHashCode();
+        hashCode = (hashCode * 59) + Index.GetHashCode();
       }
       return hashCode;
     }

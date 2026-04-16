@@ -12,37 +12,30 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Search
+/// Organic result set will originate from a search request performed on the specified index.
 /// </summary>
-public partial class Search
+public partial class InjectionMainSearchSource
 {
   /// <summary>
-  /// Initializes a new instance of the Search class.
+  /// Initializes a new instance of the InjectionMainSearchSource class.
   /// </summary>
   [JsonConstructor]
-  public Search() { }
+  public InjectionMainSearchSource() { }
 
   /// <summary>
-  /// Initializes a new instance of the Search class.
+  /// Initializes a new instance of the InjectionMainSearchSource class.
   /// </summary>
-  /// <param name="index">Composition Index name. (required).</param>
-  public Search(string index)
+  /// <param name="search">search (required).</param>
+  public InjectionMainSearchSource(MainSearch search)
   {
-    Index = index ?? throw new ArgumentNullException(nameof(index));
+    Search = search ?? throw new ArgumentNullException(nameof(search));
   }
 
   /// <summary>
-  /// Composition Index name.
+  /// Gets or Sets Search
   /// </summary>
-  /// <value>Composition Index name.</value>
-  [JsonPropertyName("index")]
-  public string Index { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Params
-  /// </summary>
-  [JsonPropertyName("params")]
-  public BaseInjectionQueryParameters Params { get; set; }
+  [JsonPropertyName("search")]
+  public MainSearch Search { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -51,9 +44,8 @@ public partial class Search
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Search {\n");
-    sb.Append("  Index: ").Append(Index).Append("\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("class InjectionMainSearchSource {\n");
+    sb.Append("  Search: ").Append(Search).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -74,13 +66,12 @@ public partial class Search
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Search input)
+    if (obj is not InjectionMainSearchSource input)
     {
       return false;
     }
 
-    return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+    return (Search == input.Search || (Search != null && Search.Equals(input.Search)));
   }
 
   /// <summary>
@@ -92,13 +83,9 @@ public partial class Search
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Index != null)
+      if (Search != null)
       {
-        hashCode = (hashCode * 59) + Index.GetHashCode();
-      }
-      if (Params != null)
-      {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
+        hashCode = (hashCode * 59) + Search.GetHashCode();
       }
       return hashCode;
     }

@@ -12,43 +12,30 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// External
+/// Injected items will originate from externally provided objectIDs (that must exist in the index) given at runtime in the run request payload.
 /// </summary>
-public partial class External
+public partial class InjectedItemExternalSource
 {
   /// <summary>
-  /// Gets or Sets Ordering
-  /// </summary>
-  [JsonPropertyName("ordering")]
-  public ExternalOrdering? Ordering { get; set; }
-
-  /// <summary>
-  /// Initializes a new instance of the External class.
+  /// Initializes a new instance of the InjectedItemExternalSource class.
   /// </summary>
   [JsonConstructor]
-  public External() { }
+  public InjectedItemExternalSource() { }
 
   /// <summary>
-  /// Initializes a new instance of the External class.
+  /// Initializes a new instance of the InjectedItemExternalSource class.
   /// </summary>
-  /// <param name="index">Composition Index name. (required).</param>
-  public External(string index)
+  /// <param name="external">external (required).</param>
+  public InjectedItemExternalSource(InjectedItemExternal external)
   {
-    Index = index ?? throw new ArgumentNullException(nameof(index));
+    External = external ?? throw new ArgumentNullException(nameof(external));
   }
 
   /// <summary>
-  /// Composition Index name.
+  /// Gets or Sets External
   /// </summary>
-  /// <value>Composition Index name.</value>
-  [JsonPropertyName("index")]
-  public string Index { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Params
-  /// </summary>
-  [JsonPropertyName("params")]
-  public BaseInjectionQueryParameters Params { get; set; }
+  [JsonPropertyName("external")]
+  public InjectedItemExternal External { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -57,10 +44,8 @@ public partial class External
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class External {\n");
-    sb.Append("  Index: ").Append(Index).Append("\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
-    sb.Append("  Ordering: ").Append(Ordering).Append("\n");
+    sb.Append("class InjectedItemExternalSource {\n");
+    sb.Append("  External: ").Append(External).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -81,14 +66,12 @@ public partial class External
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not External input)
+    if (obj is not InjectedItemExternalSource input)
     {
       return false;
     }
 
-    return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
-      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering));
+    return (External == input.External || (External != null && External.Equals(input.External)));
   }
 
   /// <summary>
@@ -100,15 +83,10 @@ public partial class External
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Index != null)
+      if (External != null)
       {
-        hashCode = (hashCode * 59) + Index.GetHashCode();
+        hashCode = (hashCode * 59) + External.GetHashCode();
       }
-      if (Params != null)
-      {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
-      }
-      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       return hashCode;
     }
   }

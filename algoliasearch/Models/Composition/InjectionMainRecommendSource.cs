@@ -12,30 +12,30 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Injected items will originate from externally provided objectIDs (that must exist in the index) given at runtime in the run request payload.
+/// Organic result set will originate from a recommend request.
 /// </summary>
-public partial class ExternalSource
+public partial class InjectionMainRecommendSource
 {
   /// <summary>
-  /// Initializes a new instance of the ExternalSource class.
+  /// Initializes a new instance of the InjectionMainRecommendSource class.
   /// </summary>
   [JsonConstructor]
-  public ExternalSource() { }
+  public InjectionMainRecommendSource() { }
 
   /// <summary>
-  /// Initializes a new instance of the ExternalSource class.
+  /// Initializes a new instance of the InjectionMainRecommendSource class.
   /// </summary>
-  /// <param name="external">external (required).</param>
-  public ExternalSource(External external)
+  /// <param name="recommend">recommend (required).</param>
+  public InjectionMainRecommendSource(MainRecommend recommend)
   {
-    External = external ?? throw new ArgumentNullException(nameof(external));
+    Recommend = recommend ?? throw new ArgumentNullException(nameof(recommend));
   }
 
   /// <summary>
-  /// Gets or Sets External
+  /// Gets or Sets Recommend
   /// </summary>
-  [JsonPropertyName("external")]
-  public External External { get; set; }
+  [JsonPropertyName("recommend")]
+  public MainRecommend Recommend { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +44,8 @@ public partial class ExternalSource
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ExternalSource {\n");
-    sb.Append("  External: ").Append(External).Append("\n");
+    sb.Append("class InjectionMainRecommendSource {\n");
+    sb.Append("  Recommend: ").Append(Recommend).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,12 +66,14 @@ public partial class ExternalSource
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ExternalSource input)
+    if (obj is not InjectionMainRecommendSource input)
     {
       return false;
     }
 
-    return (External == input.External || (External != null && External.Equals(input.External)));
+    return (
+      Recommend == input.Recommend || (Recommend != null && Recommend.Equals(input.Recommend))
+    );
   }
 
   /// <summary>
@@ -83,9 +85,9 @@ public partial class ExternalSource
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (External != null)
+      if (Recommend != null)
       {
-        hashCode = (hashCode * 59) + External.GetHashCode();
+        hashCode = (hashCode * 59) + Recommend.GetHashCode();
       }
       return hashCode;
     }

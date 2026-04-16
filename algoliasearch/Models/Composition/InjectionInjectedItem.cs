@@ -12,24 +12,24 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// InjectedItem
+/// InjectionInjectedItem
 /// </summary>
-public partial class InjectedItem
+public partial class InjectionInjectedItem
 {
   /// <summary>
-  /// Initializes a new instance of the InjectedItem class.
+  /// Initializes a new instance of the InjectionInjectedItem class.
   /// </summary>
   [JsonConstructor]
-  public InjectedItem() { }
+  public InjectionInjectedItem() { }
 
   /// <summary>
-  /// Initializes a new instance of the InjectedItem class.
+  /// Initializes a new instance of the InjectionInjectedItem class.
   /// </summary>
   /// <param name="key">injected Item unique identifier. (required).</param>
   /// <param name="source">source (required).</param>
   /// <param name="position">position (required).</param>
   /// <param name="length">length (required).</param>
-  public InjectedItem(string key, InjectedItemSource source, int position, int length)
+  public InjectionInjectedItem(string key, InjectedItemSource source, int position, int length)
   {
     Key = key ?? throw new ArgumentNullException(nameof(key));
     Source = source ?? throw new ArgumentNullException(nameof(source));
@@ -75,7 +75,7 @@ public partial class InjectedItem
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class InjectedItem {\n");
+    sb.Append("class InjectionInjectedItem {\n");
     sb.Append("  Key: ").Append(Key).Append("\n");
     sb.Append("  Source: ").Append(Source).Append("\n");
     sb.Append("  Position: ").Append(Position).Append("\n");
@@ -101,7 +101,7 @@ public partial class InjectedItem
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not InjectedItem input)
+    if (obj is not InjectionInjectedItem input)
     {
       return false;
     }

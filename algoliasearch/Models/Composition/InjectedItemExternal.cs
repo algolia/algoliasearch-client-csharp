@@ -12,29 +12,35 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// CompositionSourceSearch
+/// InjectedItemExternal
 /// </summary>
-public partial class CompositionSourceSearch
+public partial class InjectedItemExternal
 {
   /// <summary>
-  /// Initializes a new instance of the CompositionSourceSearch class.
+  /// Gets or Sets Ordering
   /// </summary>
-  [JsonConstructor]
-  public CompositionSourceSearch() { }
+  [JsonPropertyName("ordering")]
+  public ExternalOrdering? Ordering { get; set; }
 
   /// <summary>
-  /// Initializes a new instance of the CompositionSourceSearch class.
+  /// Initializes a new instance of the InjectedItemExternal class.
   /// </summary>
-  /// <param name="index">Composition Main Index name. (required).</param>
-  public CompositionSourceSearch(string index)
+  [JsonConstructor]
+  public InjectedItemExternal() { }
+
+  /// <summary>
+  /// Initializes a new instance of the InjectedItemExternal class.
+  /// </summary>
+  /// <param name="index">Composition Index name. (required).</param>
+  public InjectedItemExternal(string index)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Composition Main Index name.
+  /// Composition Index name.
   /// </summary>
-  /// <value>Composition Main Index name.</value>
+  /// <value>Composition Index name.</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 
@@ -42,7 +48,7 @@ public partial class CompositionSourceSearch
   /// Gets or Sets Params
   /// </summary>
   [JsonPropertyName("params")]
-  public MainInjectionQueryParameters Params { get; set; }
+  public BaseInjectionQueryParameters Params { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -51,9 +57,10 @@ public partial class CompositionSourceSearch
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CompositionSourceSearch {\n");
+    sb.Append("class InjectedItemExternal {\n");
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("  Ordering: ").Append(Ordering).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -74,13 +81,14 @@ public partial class CompositionSourceSearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CompositionSourceSearch input)
+    if (obj is not InjectedItemExternal input)
     {
       return false;
     }
 
     return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+      && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
+      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering));
   }
 
   /// <summary>
@@ -100,6 +108,7 @@ public partial class CompositionSourceSearch
       {
         hashCode = (hashCode * 59) + Params.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       return hashCode;
     }
   }

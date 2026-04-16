@@ -12,30 +12,37 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// CompositionSource
+/// InjectedItemSearch
 /// </summary>
-public partial class CompositionSource
+public partial class InjectedItemSearch
 {
   /// <summary>
-  /// Initializes a new instance of the CompositionSource class.
+  /// Initializes a new instance of the InjectedItemSearch class.
   /// </summary>
   [JsonConstructor]
-  public CompositionSource() { }
+  public InjectedItemSearch() { }
 
   /// <summary>
-  /// Initializes a new instance of the CompositionSource class.
+  /// Initializes a new instance of the InjectedItemSearch class.
   /// </summary>
-  /// <param name="search">search (required).</param>
-  public CompositionSource(CompositionSourceSearch search)
+  /// <param name="index">Composition Index name. (required).</param>
+  public InjectedItemSearch(string index)
   {
-    Search = search ?? throw new ArgumentNullException(nameof(search));
+    Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Gets or Sets Search
+  /// Composition Index name.
   /// </summary>
-  [JsonPropertyName("search")]
-  public CompositionSourceSearch Search { get; set; }
+  /// <value>Composition Index name.</value>
+  [JsonPropertyName("index")]
+  public string Index { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Params
+  /// </summary>
+  [JsonPropertyName("params")]
+  public BaseInjectionQueryParameters Params { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +51,9 @@ public partial class CompositionSource
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CompositionSource {\n");
-    sb.Append("  Search: ").Append(Search).Append("\n");
+    sb.Append("class InjectedItemSearch {\n");
+    sb.Append("  Index: ").Append(Index).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,12 +74,13 @@ public partial class CompositionSource
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CompositionSource input)
+    if (obj is not InjectedItemSearch input)
     {
       return false;
     }
 
-    return (Search == input.Search || (Search != null && Search.Equals(input.Search)));
+    return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
+      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -83,9 +92,13 @@ public partial class CompositionSource
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Search != null)
+      if (Index != null)
       {
-        hashCode = (hashCode * 59) + Search.GetHashCode();
+        hashCode = (hashCode * 59) + Index.GetHashCode();
+      }
+      if (Params != null)
+      {
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       return hashCode;
     }
