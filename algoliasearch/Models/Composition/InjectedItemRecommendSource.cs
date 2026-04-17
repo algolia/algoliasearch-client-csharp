@@ -12,37 +12,30 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// MainSearch
+/// Injected items will originate from a recommendation request performed on the specified index.
 /// </summary>
-public partial class MainSearch
+public partial class InjectedItemRecommendSource
 {
   /// <summary>
-  /// Initializes a new instance of the MainSearch class.
+  /// Initializes a new instance of the InjectedItemRecommendSource class.
   /// </summary>
   [JsonConstructor]
-  public MainSearch() { }
+  public InjectedItemRecommendSource() { }
 
   /// <summary>
-  /// Initializes a new instance of the MainSearch class.
+  /// Initializes a new instance of the InjectedItemRecommendSource class.
   /// </summary>
-  /// <param name="index">Index to retrieve search results from. (required).</param>
-  public MainSearch(string index)
+  /// <param name="recommend">recommend (required).</param>
+  public InjectedItemRecommendSource(Recommend recommend)
   {
-    Index = index ?? throw new ArgumentNullException(nameof(index));
+    Recommend = recommend ?? throw new ArgumentNullException(nameof(recommend));
   }
 
   /// <summary>
-  /// Index to retrieve search results from.
+  /// Gets or Sets Recommend
   /// </summary>
-  /// <value>Index to retrieve search results from.</value>
-  [JsonPropertyName("index")]
-  public string Index { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Params
-  /// </summary>
-  [JsonPropertyName("params")]
-  public MainInjectionQueryParameters Params { get; set; }
+  [JsonPropertyName("recommend")]
+  public Recommend Recommend { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -51,9 +44,8 @@ public partial class MainSearch
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class MainSearch {\n");
-    sb.Append("  Index: ").Append(Index).Append("\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("class InjectedItemRecommendSource {\n");
+    sb.Append("  Recommend: ").Append(Recommend).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -74,13 +66,14 @@ public partial class MainSearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not MainSearch input)
+    if (obj is not InjectedItemRecommendSource input)
     {
       return false;
     }
 
-    return (Index == input.Index || (Index != null && Index.Equals(input.Index)))
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+    return (
+      Recommend == input.Recommend || (Recommend != null && Recommend.Equals(input.Recommend))
+    );
   }
 
   /// <summary>
@@ -92,13 +85,9 @@ public partial class MainSearch
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Index != null)
+      if (Recommend != null)
       {
-        hashCode = (hashCode * 59) + Index.GetHashCode();
-      }
-      if (Params != null)
-      {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
+        hashCode = (hashCode * 59) + Recommend.GetHashCode();
       }
       return hashCode;
     }
