@@ -544,6 +544,12 @@ public partial class SearchForHits
   public string IndexName { get; set; }
 
   /// <summary>
+  /// Gets or Sets Extensions
+  /// </summary>
+  [JsonPropertyName("extensions")]
+  public SearchExtensions Extensions { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -633,6 +639,7 @@ public partial class SearchForHits
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
+    sb.Append("  Extensions: ").Append(Extensions).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -922,7 +929,11 @@ public partial class SearchForHits
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
       )
       && (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName)))
-      && (Type == input.Type || Type.Equals(input.Type));
+      && (Type == input.Type || Type.Equals(input.Type))
+      && (
+        Extensions == input.Extensions
+        || (Extensions != null && Extensions.Equals(input.Extensions))
+      );
   }
 
   /// <summary>
@@ -1136,6 +1147,10 @@ public partial class SearchForHits
         hashCode = (hashCode * 59) + IndexName.GetHashCode();
       }
       hashCode = (hashCode * 59) + Type.GetHashCode();
+      if (Extensions != null)
+      {
+        hashCode = (hashCode * 59) + Extensions.GetHashCode();
+      }
       return hashCode;
     }
   }

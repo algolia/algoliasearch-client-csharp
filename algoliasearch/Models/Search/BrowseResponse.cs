@@ -263,6 +263,12 @@ public partial class BrowseResponse<T>
   public string Params { get; set; }
 
   /// <summary>
+  /// Gets or Sets Extensions
+  /// </summary>
+  [JsonPropertyName("extensions")]
+  public ResponseExtensions Extensions { get; set; }
+
+  /// <summary>
   /// Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute.
   /// </summary>
   /// <value>Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute. </value>
@@ -310,6 +316,7 @@ public partial class BrowseResponse<T>
     sb.Append("  Hits: ").Append(Hits).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("  Extensions: ").Append(Extensions).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -420,6 +427,10 @@ public partial class BrowseResponse<T>
       )
       && (Query == input.Query || (Query != null && Query.Equals(input.Query)))
       && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
+      && (
+        Extensions == input.Extensions
+        || (Extensions != null && Extensions.Equals(input.Extensions))
+      )
       && (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
   }
 
@@ -524,6 +535,10 @@ public partial class BrowseResponse<T>
       if (Params != null)
       {
         hashCode = (hashCode * 59) + Params.GetHashCode();
+      }
+      if (Extensions != null)
+      {
+        hashCode = (hashCode * 59) + Extensions.GetHashCode();
       }
       if (Cursor != null)
       {
