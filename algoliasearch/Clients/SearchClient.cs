@@ -4302,12 +4302,12 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.
+  /// Runs multiple search queries against one or more indices in a single API request.  Use cases include:  - Searching different indices, such as products and marketing content. - Run multiple queries on the same index with different parameters or filters.  If you know the expected result type, use the `searchForHits` or `searchForFacets` helper to simplify the response format.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - search
-  /// <param name="searchMethodParams">Muli-search request body. Results are returned in the same order as the requests.</param>
+  /// <param name="searchMethodParams">Multi-query search request body. Results are returned in the same order as the requests.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -4321,12 +4321,12 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.  (Synchronous version)
+  /// Runs multiple search queries against one or more indices in a single API request.  Use cases include:  - Searching different indices, such as products and marketing content. - Run multiple queries on the same index with different parameters or filters.  If you know the expected result type, use the `searchForHits` or `searchForFacets` helper to simplify the response format.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - search
-  /// <param name="searchMethodParams">Muli-search request body. Results are returned in the same order as the requests.</param>
+  /// <param name="searchMethodParams">Multi-query search request body. Results are returned in the same order as the requests.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -4340,12 +4340,12 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.
+  /// Runs multiple search queries against one or more indices in a single API request.  Use cases include:  - Searching different indices, such as products and marketing content. - Run multiple queries on the same index with different parameters or filters.  If you know the expected result type, use the `searchForHits` or `searchForFacets` helper to simplify the response format.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - search
-  /// <param name="searchMethodParams">Muli-search request body. Results are returned in the same order as the requests.</param>
+  /// <param name="searchMethodParams">Multi-query search request body. Results are returned in the same order as the requests.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -4359,12 +4359,12 @@ public partial interface ISearchClient
   );
 
   /// <summary>
-  /// Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.  (Synchronous version)
+  /// Runs multiple search queries against one or more indices in a single API request.  Use cases include:  - Searching different indices, such as products and marketing content. - Run multiple queries on the same index with different parameters or filters.  If you know the expected result type, use the `searchForHits` or `searchForFacets` helper to simplify the response format.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - search
-  /// <param name="searchMethodParams">Muli-search request body. Results are returned in the same order as the requests.</param>
+  /// <param name="searchMethodParams">Multi-query search request body. Results are returned in the same order as the requests.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>

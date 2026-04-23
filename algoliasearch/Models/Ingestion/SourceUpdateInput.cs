@@ -98,6 +98,17 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the SourceUpdateInput class
+  /// with a SourceUpdateAlgoliaIndex
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceUpdateAlgoliaIndex.</param>
+  public SourceUpdateInput(SourceUpdateAlgoliaIndex actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
@@ -173,6 +184,16 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `SourceUpdateAlgoliaIndex`. If the actual instance is not `SourceUpdateAlgoliaIndex`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceUpdateAlgoliaIndex</returns>
+  public SourceUpdateAlgoliaIndex AsSourceUpdateAlgoliaIndex()
+  {
+    return (SourceUpdateAlgoliaIndex)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -233,6 +254,15 @@ public partial class SourceUpdateInput : AbstractSchema
   public bool IsSourceUpdateShopify()
   {
     return ActualInstance.GetType() == typeof(SourceUpdateShopify);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceUpdateAlgoliaIndex` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceUpdateAlgoliaIndex()
+  {
+    return ActualInstance.GetType() == typeof(SourceUpdateAlgoliaIndex);
   }
 
   /// <summary>
@@ -422,6 +452,22 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into SourceUpdateShopify: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new SourceUpdateInput(
+          jsonDocument.Deserialize<SourceUpdateAlgoliaIndex>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into SourceUpdateAlgoliaIndex: {exception}"
         );
       }
     }

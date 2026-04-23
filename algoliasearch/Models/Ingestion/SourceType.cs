@@ -18,56 +18,62 @@ namespace Algolia.Search.Models.Ingestion;
 public enum SourceType
 {
   /// <summary>
+  /// Enum AlgoliaIndex for value: algoliaIndex
+  /// </summary>
+  [JsonPropertyName("algoliaIndex")]
+  AlgoliaIndex = 1,
+
+  /// <summary>
   /// Enum Bigcommerce for value: bigcommerce
   /// </summary>
   [JsonPropertyName("bigcommerce")]
-  Bigcommerce = 1,
+  Bigcommerce = 2,
 
   /// <summary>
   /// Enum Bigquery for value: bigquery
   /// </summary>
   [JsonPropertyName("bigquery")]
-  Bigquery = 2,
+  Bigquery = 3,
 
   /// <summary>
   /// Enum Commercetools for value: commercetools
   /// </summary>
   [JsonPropertyName("commercetools")]
-  Commercetools = 3,
+  Commercetools = 4,
 
   /// <summary>
   /// Enum Csv for value: csv
   /// </summary>
   [JsonPropertyName("csv")]
-  Csv = 4,
+  Csv = 5,
 
   /// <summary>
   /// Enum Docker for value: docker
   /// </summary>
   [JsonPropertyName("docker")]
-  Docker = 5,
+  Docker = 6,
 
   /// <summary>
   /// Enum Ga4BigqueryExport for value: ga4BigqueryExport
   /// </summary>
   [JsonPropertyName("ga4BigqueryExport")]
-  Ga4BigqueryExport = 6,
+  Ga4BigqueryExport = 7,
 
   /// <summary>
   /// Enum Json for value: json
   /// </summary>
   [JsonPropertyName("json")]
-  Json = 7,
+  Json = 8,
 
   /// <summary>
   /// Enum Shopify for value: shopify
   /// </summary>
   [JsonPropertyName("shopify")]
-  Shopify = 8,
+  Shopify = 9,
 
   /// <summary>
   /// Enum Push for value: push
   /// </summary>
   [JsonPropertyName("push")]
-  Push = 9,
+  Push = 10,
 }

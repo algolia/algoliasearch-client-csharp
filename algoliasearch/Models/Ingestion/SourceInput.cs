@@ -88,6 +88,17 @@ public partial class SourceInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceInput class
+  /// with a SourceAlgoliaIndex
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceAlgoliaIndex.</param>
+  public SourceInput(SourceAlgoliaIndex actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceInput class
   /// with a SourceJSON
   /// </summary>
   /// <param name="actualInstance">An instance of SourceJSON.</param>
@@ -174,6 +185,16 @@ public partial class SourceInput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `SourceAlgoliaIndex`. If the actual instance is not `SourceAlgoliaIndex`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceAlgoliaIndex</returns>
+  public SourceAlgoliaIndex AsSourceAlgoliaIndex()
+  {
+    return (SourceAlgoliaIndex)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `SourceJSON`. If the actual instance is not `SourceJSON`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -245,6 +266,15 @@ public partial class SourceInput : AbstractSchema
   public bool IsSourceShopify()
   {
     return ActualInstance.GetType() == typeof(SourceShopify);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceAlgoliaIndex` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceAlgoliaIndex()
+  {
+    return ActualInstance.GetType() == typeof(SourceAlgoliaIndex);
   }
 
   /// <summary>
@@ -438,6 +468,20 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into SourceShopify: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("indexName", out _))
+    {
+      try
+      {
+        return new SourceInput(jsonDocument.Deserialize<SourceAlgoliaIndex>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into SourceAlgoliaIndex: {exception}"
         );
       }
     }
