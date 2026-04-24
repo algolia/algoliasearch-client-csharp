@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// ExternalInjectedItem
+/// Contains a list of objects to inject from an external source.
 /// </summary>
 public partial class ExternalInjectedItem
 {

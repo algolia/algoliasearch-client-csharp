@@ -25,16 +25,16 @@ public partial class ExternalInjection
   /// <summary>
   /// Initializes a new instance of the ExternalInjection class.
   /// </summary>
-  /// <param name="objectID">An objectID injected into an external source. (required).</param>
+  /// <param name="objectID">An objectID injected from an external source and also present in the targeted index. (required).</param>
   public ExternalInjection(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// An objectID injected into an external source.
+  /// An objectID injected from an external source and also present in the targeted index.
   /// </summary>
-  /// <value>An objectID injected into an external source.</value>
+  /// <value>An objectID injected from an external source and also present in the targeted index.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

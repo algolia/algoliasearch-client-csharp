@@ -131,9 +131,9 @@ public partial class Params
   public int? HitsPerPage { get; set; }
 
   /// <summary>
-  /// A list of extenrally injected objectID groups into from an external source.
+  /// An object containing keys corresponding to the `key`s from an injection's `injectedItems` and values containing a list of hits to inject.
   /// </summary>
-  /// <value>A list of extenrally injected objectID groups into from an external source. </value>
+  /// <value>An object containing keys corresponding to the `key`s from an injection's `injectedItems` and values containing a list of hits to inject. </value>
   [JsonPropertyName("injectedItems")]
   public Dictionary<string, ExternalInjectedItem> InjectedItems { get; set; }
 
