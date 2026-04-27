@@ -163,6 +163,7 @@ public partial class IngestionClient : IIngestionClient
               },
               eventResponse => eventResponse != null,
               maxRetries: 50,
+              timeout: retryCount => Math.Min(retryCount * 1500, 5000),
               ct: cancellationToken
             )
             .ConfigureAwait(false);
