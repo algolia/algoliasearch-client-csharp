@@ -28,6 +28,13 @@ public partial class RequestBody
   public Params Params { get; set; }
 
   /// <summary>
+  /// A list of Feed IDs that specifies the order in which to order the results in the response.  The IDs should be a subset of those in the `feeds` object of the targeted `multifeed` Composition / Composition Rule, and only those specified will be processed.   The value overrides the value in the defined behavior, and when unspecified, the value defined in the behavior is used. When neither value is present, all feeds are processed.
+  /// </summary>
+  /// <value>A list of Feed IDs that specifies the order in which to order the results in the response.  The IDs should be a subset of those in the `feeds` object of the targeted `multifeed` Composition / Composition Rule, and only those specified will be processed.   The value overrides the value in the defined behavior, and when unspecified, the value defined in the behavior is used. When neither value is present, all feeds are processed. </value>
+  [JsonPropertyName("feedsOrder")]
+  public List<string> FeedsOrder { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -36,6 +43,7 @@ public partial class RequestBody
     StringBuilder sb = new StringBuilder();
     sb.Append("class RequestBody {\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("  FeedsOrder: ").Append(FeedsOrder).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -61,7 +69,13 @@ public partial class RequestBody
       return false;
     }
 
-    return (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+    return (Params == input.Params || (Params != null && Params.Equals(input.Params)))
+      && (
+        FeedsOrder == input.FeedsOrder
+        || FeedsOrder != null
+          && input.FeedsOrder != null
+          && FeedsOrder.SequenceEqual(input.FeedsOrder)
+      );
   }
 
   /// <summary>
@@ -76,6 +90,10 @@ public partial class RequestBody
       if (Params != null)
       {
         hashCode = (hashCode * 59) + Params.GetHashCode();
+      }
+      if (FeedsOrder != null)
+      {
+        hashCode = (hashCode * 59) + FeedsOrder.GetHashCode();
       }
       return hashCode;
     }
