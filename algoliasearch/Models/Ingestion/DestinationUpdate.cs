@@ -17,12 +17,6 @@ namespace Algolia.Search.Models.Ingestion;
 public partial class DestinationUpdate
 {
   /// <summary>
-  /// Gets or Sets Type
-  /// </summary>
-  [JsonPropertyName("type")]
-  public DestinationType? Type { get; set; }
-
-  /// <summary>
   /// Initializes a new instance of the DestinationUpdate class.
   /// </summary>
   public DestinationUpdate() { }
@@ -38,7 +32,7 @@ public partial class DestinationUpdate
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
-  public DestinationInput Input { get; set; }
+  public DestinationUpdateInput Input { get; set; }
 
   /// <summary>
   /// Universally unique identifier (UUID) of an authentication resource.
@@ -61,7 +55,6 @@ public partial class DestinationUpdate
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class DestinationUpdate {\n");
-    sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  AuthenticationID: ").Append(AuthenticationID).Append("\n");
@@ -91,8 +84,7 @@ public partial class DestinationUpdate
       return false;
     }
 
-    return (Type == input.Type || Type.Equals(input.Type))
-      && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
+    return (Name == input.Name || (Name != null && Name.Equals(input.Name)))
       && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
       && (
         AuthenticationID == input.AuthenticationID
@@ -115,7 +107,6 @@ public partial class DestinationUpdate
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Type.GetHashCode();
       if (Name != null)
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
