@@ -988,6 +988,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1021,6 +1023,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1057,6 +1061,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1090,6 +1096,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1127,6 +1135,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1164,6 +1174,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1203,6 +1215,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1240,6 +1254,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1279,6 +1295,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetClusterIncidents`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterIncidents`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1312,6 +1332,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetClusterIncidents`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterIncidents`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1348,6 +1372,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetClusterStatus`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterStatus`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1381,6 +1409,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetClusterStatus`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetClusterStatus`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1465,6 +1497,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetIndexingTime`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetIndexingTime`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1498,6 +1534,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetIndexingTime`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetIndexingTime`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1532,6 +1572,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (clusters == null)
       throw new ArgumentException("Parameter `clusters` is required when calling `GetLatency`.");
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException("Parameter `clusters` is required when calling `GetLatency`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1563,6 +1605,8 @@ public partial class MonitoringClient : IMonitoringClient
     if (clusters == null)
       throw new ArgumentException("Parameter `clusters` is required when calling `GetLatency`.");
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException("Parameter `clusters` is required when calling `GetLatency`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1661,6 +1705,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetReachability`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetReachability`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
@@ -1694,6 +1742,10 @@ public partial class MonitoringClient : IMonitoringClient
         "Parameter `clusters` is required when calling `GetReachability`."
       );
 
+    if (string.IsNullOrWhiteSpace(clusters))
+      throw new ArgumentException(
+        "Parameter `clusters` is required when calling `GetReachability`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));

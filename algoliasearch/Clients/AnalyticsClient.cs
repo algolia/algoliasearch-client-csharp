@@ -2623,6 +2623,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2656,6 +2658,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2692,6 +2696,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2725,6 +2731,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2762,6 +2770,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2799,6 +2809,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2838,6 +2850,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2875,6 +2889,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -2915,6 +2931,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetAddToCartRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetAddToCartRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -2957,6 +2975,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetAddToCartRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetAddToCartRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3001,6 +3021,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetAverageClickPosition`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetAverageClickPosition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3045,6 +3069,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetAverageClickPosition`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetAverageClickPosition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3096,6 +3124,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetClickPositions`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickPositions`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3140,6 +3172,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetClickPositions`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickPositions`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3191,6 +3227,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetClickThroughRate`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickThroughRate`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3235,6 +3275,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetClickThroughRate`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetClickThroughRate`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3286,6 +3330,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetConversionRate`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetConversionRate`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3330,6 +3378,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetConversionRate`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetConversionRate`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3379,6 +3431,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoClickRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetNoClickRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3421,6 +3475,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoClickRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetNoClickRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3463,6 +3519,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoResultsRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetNoResultsRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3505,6 +3563,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetNoResultsRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetNoResultsRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3547,6 +3607,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetPurchaseRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetPurchaseRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3589,6 +3651,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetPurchaseRate`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetPurchaseRate`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3631,6 +3695,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetRevenue`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetRevenue`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3673,6 +3739,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetRevenue`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetRevenue`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3715,6 +3783,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetSearchesCount`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetSearchesCount`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3757,6 +3827,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetSearchesCount`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetSearchesCount`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3803,6 +3875,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetSearchesNoClicks`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoClicks`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3862,6 +3938,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetSearchesNoClicks`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoClicks`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3921,6 +4001,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetSearchesNoResults`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoResults`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -3980,6 +4064,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetSearchesNoResults`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetSearchesNoResults`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4032,6 +4120,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetStatus`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetStatus`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4062,6 +4152,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetStatus`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetStatus`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4097,6 +4189,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopCountries`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopCountries`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4154,6 +4248,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopCountries`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopCountries`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4214,6 +4310,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetTopFilterAttributes`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterAttributes`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4277,6 +4377,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetTopFilterAttributes`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterAttributes`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4341,11 +4445,20 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `attribute` is required when calling `GetTopFilterForAttribute`."
       );
 
+    if (string.IsNullOrWhiteSpace(attribute))
+      throw new ArgumentException(
+        "Parameter `attribute` is required when calling `GetTopFilterForAttribute`."
+      );
+
     if (index == null)
       throw new ArgumentException(
         "Parameter `index` is required when calling `GetTopFilterForAttribute`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterForAttribute`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("attribute", QueryStringHelper.ParameterToString(attribute));
@@ -4414,11 +4527,20 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `attribute` is required when calling `GetTopFilterForAttribute`."
       );
 
+    if (string.IsNullOrWhiteSpace(attribute))
+      throw new ArgumentException(
+        "Parameter `attribute` is required when calling `GetTopFilterForAttribute`."
+      );
+
     if (index == null)
       throw new ArgumentException(
         "Parameter `index` is required when calling `GetTopFilterForAttribute`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFilterForAttribute`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("attribute", QueryStringHelper.ParameterToString(attribute));
@@ -4486,6 +4608,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetTopFiltersNoResults`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFiltersNoResults`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4549,6 +4675,10 @@ public partial class AnalyticsClient : IAnalyticsClient
         "Parameter `index` is required when calling `GetTopFiltersNoResults`."
       );
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException(
+        "Parameter `index` is required when calling `GetTopFiltersNoResults`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4612,6 +4742,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopHits`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopHits`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4681,6 +4813,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopHits`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopHits`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4751,6 +4885,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopSearches`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopSearches`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4824,6 +4960,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetTopSearches`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetTopSearches`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4891,6 +5029,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetUsersCount`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetUsersCount`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);
@@ -4933,6 +5073,8 @@ public partial class AnalyticsClient : IAnalyticsClient
     if (index == null)
       throw new ArgumentException("Parameter `index` is required when calling `GetUsersCount`.");
 
+    if (string.IsNullOrWhiteSpace(index))
+      throw new ArgumentException("Parameter `index` is required when calling `GetUsersCount`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.AddQueryParameter("index", index);

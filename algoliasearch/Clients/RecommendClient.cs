@@ -964,6 +964,11 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `BatchRecommendRules`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `BatchRecommendRules`."
+      );
+
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1002,6 +1007,11 @@ public partial class RecommendClient : IRecommendClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `BatchRecommendRules`."
+      );
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException(
         "Parameter `indexName` is required when calling `BatchRecommendRules`."
       );
@@ -1051,6 +1061,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1084,6 +1096,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1120,6 +1134,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1153,6 +1169,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1190,6 +1208,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1227,6 +1247,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1266,6 +1288,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1303,6 +1327,8 @@ public partial class RecommendClient : IRecommendClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1344,11 +1370,20 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `DeleteRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteRecommendRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `DeleteRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteRecommendRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1391,11 +1426,20 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `DeleteRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteRecommendRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `DeleteRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteRecommendRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1438,11 +1482,20 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `GetRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `GetRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `GetRecommendRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1485,11 +1538,20 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `GetRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `GetRecommendRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `GetRecommendRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1532,6 +1594,11 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `GetRecommendStatus`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendStatus`."
+      );
+
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1570,6 +1637,11 @@ public partial class RecommendClient : IRecommendClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetRecommendStatus`."
+      );
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException(
         "Parameter `indexName` is required when calling `GetRecommendStatus`."
       );
@@ -1688,6 +1760,11 @@ public partial class RecommendClient : IRecommendClient
         "Parameter `indexName` is required when calling `SearchRecommendRules`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchRecommendRules`."
+      );
+
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1733,6 +1810,11 @@ public partial class RecommendClient : IRecommendClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchRecommendRules`."
+      );
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException(
         "Parameter `indexName` is required when calling `SearchRecommendRules`."
       );

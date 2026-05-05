@@ -1624,6 +1624,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1657,6 +1659,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1693,6 +1697,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1726,6 +1732,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1763,6 +1771,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1800,6 +1810,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1839,6 +1851,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1876,6 +1890,8 @@ public partial class CompositionClient : ICompositionClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1915,6 +1931,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `DeleteComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteComposition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -1951,6 +1971,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `DeleteComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteComposition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -1991,11 +2015,20 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `DeleteCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteCompositionRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `DeleteCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteCompositionRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2038,11 +2071,20 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `DeleteCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `DeleteCompositionRule`."
+      );
+
     if (objectID == null)
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `DeleteCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `DeleteCompositionRule`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2084,6 +2126,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `GetComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `GetComposition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2120,6 +2166,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `GetComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `GetComposition`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2158,9 +2208,14 @@ public partial class CompositionClient : ICompositionClient
     if (compositionID == null)
       throw new ArgumentException("Parameter `compositionID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2198,9 +2253,14 @@ public partial class CompositionClient : ICompositionClient
     if (compositionID == null)
       throw new ArgumentException("Parameter `compositionID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2241,6 +2301,9 @@ public partial class CompositionClient : ICompositionClient
     if (compositionID == null)
       throw new ArgumentException("Parameter `compositionID` is required when calling `GetTask`.");
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetTask`.");
+
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2276,6 +2339,9 @@ public partial class CompositionClient : ICompositionClient
   )
   {
     if (compositionID == null)
+      throw new ArgumentException("Parameter `compositionID` is required when calling `GetTask`.");
+
+    if (string.IsNullOrWhiteSpace(compositionID))
       throw new ArgumentException("Parameter `compositionID` is required when calling `GetTask`.");
 
     var requestOptions = new InternalRequestOptions(options);
@@ -2451,6 +2517,11 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `PutComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutComposition`."
+      );
+
     if (composition == null)
       throw new ArgumentException(
         "Parameter `composition` is required when calling `PutComposition`."
@@ -2494,6 +2565,11 @@ public partial class CompositionClient : ICompositionClient
   )
   {
     if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutComposition`."
+      );
+
+    if (string.IsNullOrWhiteSpace(compositionID))
       throw new ArgumentException(
         "Parameter `compositionID` is required when calling `PutComposition`."
       );
@@ -2546,7 +2622,17 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `PutCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutCompositionRule`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PutCompositionRule`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `PutCompositionRule`."
       );
@@ -2601,7 +2687,17 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `PutCompositionRule`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `PutCompositionRule`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PutCompositionRule`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `PutCompositionRule`."
       );
@@ -2661,6 +2757,11 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `SaveRules`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SaveRules`."
+      );
+
     if (rules == null)
       throw new ArgumentException("Parameter `rules` is required when calling `SaveRules`.");
 
@@ -2699,6 +2800,11 @@ public partial class CompositionClient : ICompositionClient
   )
   {
     if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SaveRules`."
+      );
+
+    if (string.IsNullOrWhiteSpace(compositionID))
       throw new ArgumentException(
         "Parameter `compositionID` is required when calling `SaveRules`."
       );
@@ -2746,6 +2852,9 @@ public partial class CompositionClient : ICompositionClient
     if (compositionID == null)
       throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
+
     if (requestBody == null)
       throw new ArgumentException("Parameter `requestBody` is required when calling `Search`.");
 
@@ -2788,6 +2897,9 @@ public partial class CompositionClient : ICompositionClient
   )
   {
     if (compositionID == null)
+      throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
+
+    if (string.IsNullOrWhiteSpace(compositionID))
       throw new ArgumentException("Parameter `compositionID` is required when calling `Search`.");
 
     if (requestBody == null)
@@ -2836,6 +2948,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `SearchCompositionRules`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchCompositionRules`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2883,6 +2999,10 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `SearchCompositionRules`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchCompositionRules`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2931,11 +3051,20 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchForFacetValues`."
+      );
+
     if (facetName == null)
       throw new ArgumentException(
         "Parameter `facetName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(facetName))
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -2988,11 +3117,20 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `SearchForFacetValues`."
+      );
+
     if (facetName == null)
       throw new ArgumentException(
         "Parameter `facetName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(facetName))
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add(
@@ -3044,6 +3182,11 @@ public partial class CompositionClient : ICompositionClient
         "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
       );
 
+    if (string.IsNullOrWhiteSpace(compositionID))
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
     if (requestBody == null)
       throw new ArgumentException(
         "Parameter `requestBody` is required when calling `UpdateSortingStrategyComposition`."
@@ -3087,6 +3230,11 @@ public partial class CompositionClient : ICompositionClient
   )
   {
     if (compositionID == null)
+      throw new ArgumentException(
+        "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
+      );
+
+    if (string.IsNullOrWhiteSpace(compositionID))
       throw new ArgumentException(
         "Parameter `compositionID` is required when calling `UpdateSortingStrategyComposition`."
       );

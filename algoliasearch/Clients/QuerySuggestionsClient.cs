@@ -1036,6 +1036,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1069,6 +1071,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1105,6 +1109,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1138,6 +1144,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1175,6 +1183,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1212,6 +1222,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1251,6 +1263,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1288,6 +1302,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -1325,6 +1341,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1356,6 +1374,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteConfig`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1436,6 +1456,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1467,6 +1489,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetConfig`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1500,6 +1524,10 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
         "Parameter `indexName` is required when calling `GetConfigStatus`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetConfigStatus`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1533,6 +1561,10 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
         "Parameter `indexName` is required when calling `GetConfigStatus`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `GetConfigStatus`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1567,6 +1599,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1598,6 +1632,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetLogFile`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -1629,6 +1665,9 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
 
     if (configuration == null)
@@ -1671,6 +1710,9 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `UpdateConfig`.");
 
     if (configuration == null)

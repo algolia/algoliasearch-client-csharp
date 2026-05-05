@@ -5339,7 +5339,17 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `AddOrUpdateObject`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `AddOrUpdateObject`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `AddOrUpdateObject`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `AddOrUpdateObject`."
       );
@@ -5389,7 +5399,17 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `AddOrUpdateObject`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `AddOrUpdateObject`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `AddOrUpdateObject`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `AddOrUpdateObject`."
       );
@@ -5499,6 +5519,11 @@ public partial class SearchClient : ISearchClient
         "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`."
       );
 
+    if (string.IsNullOrWhiteSpace(xAlgoliaUserID))
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`."
+      );
+
     if (assignUserIdParams == null)
       throw new ArgumentException(
         "Parameter `assignUserIdParams` is required when calling `AssignUserId`."
@@ -5543,6 +5568,11 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (xAlgoliaUserID == null)
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`."
+      );
+
+    if (string.IsNullOrWhiteSpace(xAlgoliaUserID))
       throw new ArgumentException(
         "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`."
       );
@@ -5592,6 +5622,9 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `Batch`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `Batch`.");
+
     if (batchWriteParams == null)
       throw new ArgumentException("Parameter `batchWriteParams` is required when calling `Batch`.");
 
@@ -5628,6 +5661,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `Batch`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `Batch`.");
 
     if (batchWriteParams == null)
@@ -5669,6 +5705,11 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (xAlgoliaUserID == null)
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`."
+      );
+
+    if (string.IsNullOrWhiteSpace(xAlgoliaUserID))
       throw new ArgumentException(
         "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`."
       );
@@ -5717,6 +5758,11 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (xAlgoliaUserID == null)
+      throw new ArgumentException(
+        "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`."
+      );
+
+    if (string.IsNullOrWhiteSpace(xAlgoliaUserID))
       throw new ArgumentException(
         "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`."
       );
@@ -5865,6 +5911,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `Browse`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `Browse`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -5901,6 +5949,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `Browse`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `Browse`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -5938,6 +5988,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearObjects`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `ClearObjects`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -5969,6 +6021,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearObjects`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `ClearObjects`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6002,6 +6056,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearRules`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `ClearRules`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6039,6 +6095,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `ClearRules`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `ClearRules`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6078,6 +6136,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `ClearSynonyms`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `ClearSynonyms`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6117,6 +6179,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `ClearSynonyms`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `ClearSynonyms`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6154,6 +6220,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6187,6 +6255,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6223,6 +6293,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6256,6 +6328,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6293,6 +6367,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6330,6 +6406,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6369,6 +6447,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6406,6 +6486,8 @@ public partial class SearchClient : ISearchClient
     if (path == null)
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
+    if (string.IsNullOrWhiteSpace(path))
+      throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
     var requestOptions = new InternalRequestOptions(options);
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
@@ -6443,6 +6525,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `DeleteApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `DeleteApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -6474,6 +6558,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `DeleteApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `DeleteApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -6504,6 +6590,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteBy`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteBy`.");
 
     if (deleteByParams == null)
@@ -6544,6 +6633,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteBy`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteBy`.");
 
     if (deleteByParams == null)
@@ -6587,6 +6679,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteIndex`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteIndex`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6618,6 +6712,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteIndex`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteIndex`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6651,9 +6747,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteObject`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteObject`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteObject`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteObject`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6689,9 +6790,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteObject`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteObject`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteObject`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteObject`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6730,9 +6836,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6773,9 +6884,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `DeleteRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6820,6 +6936,8 @@ public partial class SearchClient : ISearchClient
     if (source == null)
       throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
 
+    if (string.IsNullOrWhiteSpace(source))
+      throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(source));
@@ -6851,6 +6969,8 @@ public partial class SearchClient : ISearchClient
     if (source == null)
       throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
 
+    if (string.IsNullOrWhiteSpace(source))
+      throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(source));
@@ -6886,9 +7006,16 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `DeleteSynonym`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteSynonym`."
+      );
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteSynonym`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6931,9 +7058,16 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `DeleteSynonym`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `DeleteSynonym`."
+      );
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `DeleteSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `DeleteSynonym`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -6978,6 +7112,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `GetApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `GetApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -7009,6 +7145,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `GetApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `GetApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -7274,9 +7412,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetObject`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetObject`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetObject`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetObject`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7317,9 +7460,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetObject`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetObject`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetObject`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetObject`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7434,9 +7582,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7471,9 +7624,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetRule`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetRule`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7511,6 +7669,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSettings`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetSettings`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7546,6 +7706,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSettings`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetSettings`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7631,9 +7793,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetSynonym`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetSynonym`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7668,9 +7835,14 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetSynonym`.");
+
     if (objectID == null)
       throw new ArgumentException("Parameter `objectID` is required when calling `GetSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(objectID))
+      throw new ArgumentException("Parameter `objectID` is required when calling `GetSynonym`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7708,6 +7880,9 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `GetTask`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetTask`.");
+
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -7740,6 +7915,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `GetTask`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `GetTask`.");
 
     var requestOptions = new InternalRequestOptions(options);
@@ -7831,6 +8009,8 @@ public partial class SearchClient : ISearchClient
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `GetUserId`.");
 
+    if (string.IsNullOrWhiteSpace(userID))
+      throw new ArgumentException("Parameter `userID` is required when calling `GetUserId`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
@@ -7864,6 +8044,8 @@ public partial class SearchClient : ISearchClient
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `GetUserId`.");
 
+    if (string.IsNullOrWhiteSpace(userID))
+      throw new ArgumentException("Parameter `userID` is required when calling `GetUserId`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
@@ -8257,6 +8439,11 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `OperationIndex`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `OperationIndex`."
+      );
+
     if (operationIndexParams == null)
       throw new ArgumentException(
         "Parameter `operationIndexParams` is required when calling `OperationIndex`."
@@ -8297,6 +8484,11 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `OperationIndex`."
+      );
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException(
         "Parameter `indexName` is required when calling `OperationIndex`."
       );
@@ -8347,7 +8539,17 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `PartialUpdateObject`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `PartialUpdateObject`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PartialUpdateObject`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `PartialUpdateObject`."
       );
@@ -8409,7 +8611,17 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `PartialUpdateObject`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `PartialUpdateObject`."
+      );
+
     if (objectID == null)
+      throw new ArgumentException(
+        "Parameter `objectID` is required when calling `PartialUpdateObject`."
+      );
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException(
         "Parameter `objectID` is required when calling `PartialUpdateObject`."
       );
@@ -8467,6 +8679,8 @@ public partial class SearchClient : ISearchClient
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `RemoveUserId`.");
 
+    if (string.IsNullOrWhiteSpace(userID))
+      throw new ArgumentException("Parameter `userID` is required when calling `RemoveUserId`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
@@ -8500,6 +8714,8 @@ public partial class SearchClient : ISearchClient
     if (userID == null)
       throw new ArgumentException("Parameter `userID` is required when calling `RemoveUserId`.");
 
+    if (string.IsNullOrWhiteSpace(userID))
+      throw new ArgumentException("Parameter `userID` is required when calling `RemoveUserId`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
@@ -8593,6 +8809,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `RestoreApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `RestoreApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -8624,6 +8842,8 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `RestoreApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `RestoreApiKey`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
@@ -8654,6 +8874,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveObject`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveObject`.");
 
     if (body == null)
@@ -8691,6 +8914,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveObject`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveObject`.");
 
     if (body == null)
@@ -8735,7 +8961,13 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveRule`.");
+
     if (objectID == null)
+      throw new ArgumentException("Parameter `objectID` is required when calling `SaveRule`.");
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveRule`.");
 
     if (rule == null)
@@ -8784,7 +9016,13 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRule`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveRule`.");
+
     if (objectID == null)
+      throw new ArgumentException("Parameter `objectID` is required when calling `SaveRule`.");
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveRule`.");
 
     if (rule == null)
@@ -8840,6 +9078,9 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRules`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveRules`.");
+
     if (rules == null)
       throw new ArgumentException("Parameter `rules` is required when calling `SaveRules`.");
 
@@ -8891,6 +9132,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveRules`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveRules`.");
 
     if (rules == null)
@@ -8946,7 +9190,13 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonym`.");
+
     if (objectID == null)
+      throw new ArgumentException("Parameter `objectID` is required when calling `SaveSynonym`.");
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveSynonym`.");
 
     if (synonymHit == null)
@@ -9002,7 +9252,13 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonym`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonym`.");
+
     if (objectID == null)
+      throw new ArgumentException("Parameter `objectID` is required when calling `SaveSynonym`.");
+
+    if (string.IsNullOrWhiteSpace(objectID))
       throw new ArgumentException("Parameter `objectID` is required when calling `SaveSynonym`.");
 
     if (synonymHit == null)
@@ -9058,6 +9314,9 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonyms`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonyms`.");
+
     if (synonymHit == null)
       throw new ArgumentException(
         "Parameter `synonymHit` is required when calling `SaveSynonyms`."
@@ -9111,6 +9370,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonyms`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `SaveSynonyms`.");
 
     if (synonymHit == null)
@@ -9334,11 +9596,20 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchForFacetValues`."
+      );
+
     if (facetName == null)
       throw new ArgumentException(
         "Parameter `facetName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(facetName))
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9388,11 +9659,20 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchForFacetValues`."
+      );
+
     if (facetName == null)
       throw new ArgumentException(
         "Parameter `facetName` is required when calling `SearchForFacetValues`."
       );
 
+    if (string.IsNullOrWhiteSpace(facetName))
+      throw new ArgumentException(
+        "Parameter `facetName` is required when calling `SearchForFacetValues`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9439,6 +9719,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SearchRules`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SearchRules`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9477,6 +9759,8 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SearchRules`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SearchRules`.");
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9517,6 +9801,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchSingleIndex`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSingleIndex`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9557,6 +9845,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchSingleIndex`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSingleIndex`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9597,6 +9889,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchSynonyms`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSynonyms`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9637,6 +9933,10 @@ public partial class SearchClient : ISearchClient
         "Parameter `indexName` is required when calling `SearchSynonyms`."
       );
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException(
+        "Parameter `indexName` is required when calling `SearchSynonyms`."
+      );
     var requestOptions = new InternalRequestOptions(options);
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
@@ -9820,6 +10120,9 @@ public partial class SearchClient : ISearchClient
     if (indexName == null)
       throw new ArgumentException("Parameter `indexName` is required when calling `SetSettings`.");
 
+    if (string.IsNullOrWhiteSpace(indexName))
+      throw new ArgumentException("Parameter `indexName` is required when calling `SetSettings`.");
+
     if (indexSettings == null)
       throw new ArgumentException(
         "Parameter `indexSettings` is required when calling `SetSettings`."
@@ -9863,6 +10166,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `SetSettings`.");
+
+    if (string.IsNullOrWhiteSpace(indexName))
       throw new ArgumentException("Parameter `indexName` is required when calling `SetSettings`.");
 
     if (indexSettings == null)
@@ -9915,6 +10221,9 @@ public partial class SearchClient : ISearchClient
     if (key == null)
       throw new ArgumentException("Parameter `key` is required when calling `UpdateApiKey`.");
 
+    if (string.IsNullOrWhiteSpace(key))
+      throw new ArgumentException("Parameter `key` is required when calling `UpdateApiKey`.");
+
     if (apiKey == null)
       throw new ArgumentException("Parameter `apiKey` is required when calling `UpdateApiKey`.");
 
@@ -9950,6 +10259,9 @@ public partial class SearchClient : ISearchClient
   )
   {
     if (key == null)
+      throw new ArgumentException("Parameter `key` is required when calling `UpdateApiKey`.");
+
+    if (string.IsNullOrWhiteSpace(key))
       throw new ArgumentException("Parameter `key` is required when calling `UpdateApiKey`.");
 
     if (apiKey == null)
