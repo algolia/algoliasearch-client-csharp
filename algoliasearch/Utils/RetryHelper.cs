@@ -13,7 +13,7 @@ public static class RetryHelper
   /// <summary>
   /// The default maximum number of retries
   /// </summary>
-  public const int DefaultMaxRetries = 50;
+  public const int DefaultMaxRetries = 100;
 
   /// <summary>
   /// Retry the given function until the validation function returns true or the maximum number of retries is reached
