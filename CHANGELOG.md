@@ -1,3 +1,11 @@
+## [7.42.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.41.0...7.42.0)
+
+- [363cc2d91b](https://github.com/algolia/api-clients-automation/commit/363cc2d91b) fix(specs): Ingestion API - update destination payload ([#6320](https://github.com/algolia/api-clients-automation/pull/6320)) by [@sbellone](https://github.com/sbellone/)
+- [4d2ae79e73](https://github.com/algolia/api-clients-automation/commit/4d2ae79e73) chore(deps): dependencies 2026-04-20 ([#6259](https://github.com/algolia/api-clients-automation/pull/6259)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [7c344d49a8](https://github.com/algolia/api-clients-automation/commit/7c344d49a8) feat(csharp): configurable retries on chunked helpers via ChunkedHelperOptions ([#6318](https://github.com/algolia/api-clients-automation/pull/6318)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [cd419fd6e8](https://github.com/algolia/api-clients-automation/commit/cd419fd6e8) fix(clients): validate empty string for required string parameters ([#6338](https://github.com/algolia/api-clients-automation/pull/6338)) by [@Fluf22](https://github.com/Fluf22/)
+- [7178fa2e3b](https://github.com/algolia/api-clients-automation/commit/7178fa2e3b) chore(deps): dependencies 2026-05-04 ([#6322](https://github.com/algolia/api-clients-automation/pull/6322)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [7.41.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.40.0...7.41.0)
 
 - [d275af4e18](https://github.com/algolia/api-clients-automation/commit/d275af4e18) feat(specs): add Algolia Index as a native connector in ingestion client ([#6290](https://github.com/algolia/api-clients-automation/pull/6290)) by [@morganleroi](https://github.com/morganleroi/)
