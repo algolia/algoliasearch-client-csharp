@@ -5146,6 +5146,7 @@ public partial class SearchClient : ISearchClient
   internal HttpTransport _transport;
   private readonly ILogger<SearchClient> _logger;
   private IIngestionClient _ingestionTransporter;
+  private ILoggerFactory _loggerFactory;
 
   /// <summary>
   /// Create a new Search client for the given appID and apiKey.
@@ -5216,6 +5217,8 @@ public partial class SearchClient : ISearchClient
         "WARNING: DEBUG level logging is enabled. This logs full request/response bodies which may contain sensitive data. Only use in local development."
       );
     }
+
+    _loggerFactory = factory;
   }
 
   /// <summary>
@@ -5229,27 +5232,64 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Sets the region of the transformation pipeline. This is required to be called
-  /// if you wish to leverage the transformation pipeline (via the *WithTransformation methods).
+  /// Sets (or replaces) the ingestion transporter used by *WithTransformation helpers.
+  /// The ingestion transporter is created using the region from <paramref name="transformationOptions"/>
+  /// and Ingestion API defaults; only fields explicitly set on <paramref name="transformationOptions"/>
+  /// replace those defaults.
+  /// See https://www.algolia.com/doc/libraries/sdk/methods/ingestion
+  /// </summary>
+  /// <param name="transformationOptions">The transformation options including region and optional ingestion transporter overrides.</param>
+  public void SetTransformationOptions(TransformationOptions transformationOptions)
+  {
+    if (transformationOptions == null)
+      throw new ArgumentNullException(nameof(transformationOptions));
+
+    var ingestionConfig = new IngestionConfig(
+      _transport._algoliaConfig.AppId,
+      _transport._algoliaConfig.ApiKey,
+      transformationOptions.Region
+    );
+
+    if (transformationOptions.CustomHosts != null)
+      ingestionConfig.CustomHosts = transformationOptions.CustomHosts;
+    if (transformationOptions.ConnectTimeout.HasValue)
+      ingestionConfig.ConnectTimeout = transformationOptions.ConnectTimeout;
+    if (transformationOptions.ReadTimeout.HasValue)
+      ingestionConfig.ReadTimeout = transformationOptions.ReadTimeout;
+    if (transformationOptions.WriteTimeout.HasValue)
+      ingestionConfig.WriteTimeout = transformationOptions.WriteTimeout;
+    if (transformationOptions.Compression.HasValue)
+      ingestionConfig.Compression = transformationOptions.Compression.Value;
+    if (transformationOptions.DefaultHeaders != null)
+    {
+      foreach (var kvp in transformationOptions.DefaultHeaders)
+        ingestionConfig.DefaultHeaders[kvp.Key] = kvp.Value;
+    }
+
+    _ingestionTransporter = new IngestionClient(ingestionConfig, _loggerFactory);
+  }
+
+  /// <summary>
+  /// Sets the region of the transformation pipeline.
   /// </summary>
   /// <param name="region">The region ("us" or "eu")</param>
-  /// <param name="factory">Logger factory</param>
+  /// <param name="factory">Logger factory.</param>
+  [Obsolete(
+    "SetTransformationRegion is deprecated. Use SetTransformationOptions instead. "
+      + "See https://www.algolia.com/doc/libraries/sdk/methods/ingestion"
+  )]
   public void SetTransformationRegion(string region, ILoggerFactory factory = null)
   {
     if (string.IsNullOrWhiteSpace(region))
-    {
       throw new ArgumentException(
         "`region` must be provided when leveraging the transformation pipeline"
       );
-    }
 
     if (
       string.IsNullOrWhiteSpace(_transport._algoliaConfig.AppId)
       || string.IsNullOrWhiteSpace(_transport._algoliaConfig.ApiKey)
     )
-    {
       throw new ArgumentException("AppId and ApiKey are required for transformation pipeline");
-    }
 
     _ingestionTransporter = new IngestionClient(
       new IngestionConfig(_transport._algoliaConfig.AppId, _transport._algoliaConfig.ApiKey, region)
@@ -5261,8 +5301,55 @@ public partial class SearchClient : ISearchClient
         Compression = _transport._algoliaConfig.Compression,
         CustomHosts = _transport._algoliaConfig.CustomHosts,
       },
-      factory
+      factory ?? _loggerFactory
     );
+  }
+
+  /// <summary>
+  /// Creates a <see cref="SearchClient"/> configured with <see cref="TransformationOptions"/> for use
+  /// with <c>*WithTransformation</c> helpers. The ingestion transporter is initialised eagerly using
+  /// Ingestion API defaults; set override fields on <see cref="TransformationOptions"/> to change
+  /// specific defaults.
+  /// See https://www.algolia.com/doc/libraries/sdk/methods/ingestion
+  /// </summary>
+  /// <param name="appId">Your Algolia application ID.</param>
+  /// <param name="apiKey">Your Algolia API key.</param>
+  /// <param name="transformationOptions">The transformation options including region and optional ingestion transporter overrides.</param>
+  /// <param name="loggerFactory">Logger factory.</param>
+  public static SearchClient WithTransformation(
+    string appId,
+    string apiKey,
+    TransformationOptions transformationOptions,
+    ILoggerFactory loggerFactory = null
+  )
+  {
+    if (transformationOptions == null)
+      throw new ArgumentNullException(nameof(transformationOptions));
+    var client = new SearchClient(appId, apiKey, loggerFactory);
+    client.SetTransformationOptions(transformationOptions);
+    return client;
+  }
+
+  /// <summary>
+  /// Creates a <see cref="SearchClient"/> configured with <see cref="TransformationOptions"/> for use
+  /// with <c>*WithTransformation</c> helpers, using a custom <see cref="SearchConfig"/> for the search
+  /// transporter.
+  /// See https://www.algolia.com/doc/libraries/sdk/methods/ingestion
+  /// </summary>
+  /// <param name="searchConfig">Custom search transporter configuration.</param>
+  /// <param name="transformationOptions">The transformation options including region and optional ingestion transporter overrides.</param>
+  /// <param name="loggerFactory">Logger factory.</param>
+  public static SearchClient WithTransformation(
+    SearchConfig searchConfig,
+    TransformationOptions transformationOptions,
+    ILoggerFactory loggerFactory = null
+  )
+  {
+    if (transformationOptions == null)
+      throw new ArgumentNullException(nameof(transformationOptions));
+    var client = new SearchClient(searchConfig, loggerFactory);
+    client.SetTransformationOptions(transformationOptions);
+    return client;
   }
 
   /// <inheritdoc />
