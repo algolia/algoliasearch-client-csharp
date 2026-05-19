@@ -29,7 +29,7 @@ public partial class ConfigurationResponse
   /// <param name="indexName">Name of the Query Suggestions index (case-sensitive). (required).</param>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
   /// <param name="languages">languages (required).</param>
-  /// <param name="exclude">exclude (required).</param>
+  /// <param name="exclude">Words or regular expressions to exclude from the suggestions. (required).</param>
   /// <param name="enablePersonalization">Whether to turn on personalized query suggestions. (required) (default to false).</param>
   /// <param name="allowSpecialCharacters">Whether to include suggestions with special characters. (required) (default to false).</param>
   public ConfigurationResponse(
@@ -79,8 +79,9 @@ public partial class ConfigurationResponse
   public Languages Languages { get; set; }
 
   /// <summary>
-  /// Gets or Sets Exclude
+  /// Words or regular expressions to exclude from the suggestions.
   /// </summary>
+  /// <value>Words or regular expressions to exclude from the suggestions.</value>
   [JsonPropertyName("exclude")]
   public List<string> Exclude { get; set; }
 

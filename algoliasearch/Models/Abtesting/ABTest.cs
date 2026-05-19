@@ -65,32 +65,37 @@ public partial class ABTest
   public int AbTestID { get; set; }
 
   /// <summary>
-  /// Gets or Sets ClickSignificance
+  /// A/B test significance calculated from click events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. Lower values have a.
   /// </summary>
+  /// <value>A/B test significance calculated from click events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. Lower values have a. </value>
   [JsonPropertyName("clickSignificance")]
   public double? ClickSignificance { get; set; }
 
   /// <summary>
-  /// Gets or Sets ConversionSignificance
+  /// A/B test significance calculated from conversion events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
   /// </summary>
+  /// <value>A/B test significance calculated from conversion events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. </value>
   [JsonPropertyName("conversionSignificance")]
   public double? ConversionSignificance { get; set; }
 
   /// <summary>
-  /// Gets or Sets AddToCartSignificance
+  /// A/B test significance calculated from add-to-cart events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
   /// </summary>
+  /// <value>A/B test significance calculated from add-to-cart events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. </value>
   [JsonPropertyName("addToCartSignificance")]
   public double? AddToCartSignificance { get; set; }
 
   /// <summary>
-  /// Gets or Sets PurchaseSignificance
+  /// A/B test significance calculated from purchase events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
   /// </summary>
+  /// <value>A/B test significance calculated from purchase events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. </value>
   [JsonPropertyName("purchaseSignificance")]
   public double? PurchaseSignificance { get; set; }
 
   /// <summary>
-  /// Gets or Sets RevenueSignificance
+  /// A/B test significance calculated from revenue data.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
   /// </summary>
+  /// <value>A/B test significance calculated from revenue data.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. </value>
   [JsonPropertyName("revenueSignificance")]
   public Dictionary<string, double> RevenueSignificance { get; set; }
 

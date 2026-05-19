@@ -46,14 +46,16 @@ public partial class SourceIndex
   public bool? Replicas { get; set; }
 
   /// <summary>
-  /// Gets or Sets AnalyticsTags
+  /// Analytics tags for filtering the popular searches. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
   /// </summary>
+  /// <value>Analytics tags for filtering the popular searches. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). </value>
   [JsonPropertyName("analyticsTags")]
   public List<string> AnalyticsTags { get; set; }
 
   /// <summary>
-  /// Gets or Sets Facets
+  /// Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
   /// </summary>
+  /// <value>Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. </value>
   [JsonPropertyName("facets")]
   public List<Facet> Facets { get; set; }
 
@@ -72,14 +74,16 @@ public partial class SourceIndex
   public int? MinLetters { get; set; }
 
   /// <summary>
-  /// Gets or Sets Generate
+  /// Facets used for generating query suggestions from facet values.  For example, if you set `generate: [\"color\", \"brand\"]`, combinations from the facet values are added as query suggestions, such as \"blue adidas\", \"red adidas\", \"blue nike\", \"red nike\", etc.  You can include nested lists.
   /// </summary>
+  /// <value>Facets used for generating query suggestions from facet values.  For example, if you set `generate: [\"color\", \"brand\"]`, combinations from the facet values are added as query suggestions, such as \"blue adidas\", \"red adidas\", \"blue nike\", \"red nike\", etc.  You can include nested lists. </value>
   [JsonPropertyName("generate")]
   public List<List<string>> Generate { get; set; }
 
   /// <summary>
-  /// Gets or Sets External
+  /// Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:  - `query`: search query which will be added as a suggestion - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics provider, such as Google Analytics or Adobe Analytics, and feed this data into an Algolia index. You can use this index to generate query suggestions until your Algolia Analytics has collected enough data.
   /// </summary>
+  /// <value>Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:  - `query`: search query which will be added as a suggestion - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics provider, such as Google Analytics or Adobe Analytics, and feed this data into an Algolia index. You can use this index to generate query suggestions until your Algolia Analytics has collected enough data. </value>
   [JsonPropertyName("external")]
   public List<string> External { get; set; }
 

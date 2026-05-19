@@ -47,8 +47,9 @@ public partial class ConfigurationWithIndex
   public Languages Languages { get; set; }
 
   /// <summary>
-  /// Gets or Sets Exclude
+  /// Words or regular expressions to exclude from the suggestions.
   /// </summary>
+  /// <value>Words or regular expressions to exclude from the suggestions.</value>
   [JsonPropertyName("exclude")]
   public List<string> Exclude { get; set; }
 
