@@ -41,13 +41,6 @@ public partial class FetchedIndexAbTest
   public int Id { get; set; }
 
   /// <summary>
-  /// Whether the A/B test is a dark test (server-side measured, not user-facing). Only present when true.
-  /// </summary>
-  /// <value>Whether the A/B test is a dark test (server-side measured, not user-facing). Only present when true.</value>
-  [JsonPropertyName("isDark")]
-  public bool? IsDark { get; set; }
-
-  /// <summary>
   /// A/B test schema version. Only present for v2 and later tests.
   /// </summary>
   /// <value>A/B test schema version. Only present for v2 and later tests.</value>
@@ -83,7 +76,6 @@ public partial class FetchedIndexAbTest
     StringBuilder sb = new StringBuilder();
     sb.Append("class FetchedIndexAbTest {\n");
     sb.Append("  Id: ").Append(Id).Append("\n");
-    sb.Append("  IsDark: ").Append(IsDark).Append("\n");
     sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  Target: ").Append(Target).Append("\n");
@@ -114,7 +106,6 @@ public partial class FetchedIndexAbTest
     }
 
     return (Id == input.Id || Id.Equals(input.Id))
-      && (IsDark == input.IsDark || IsDark.Equals(input.IsDark))
       && (VarVersion == input.VarVersion || VarVersion.Equals(input.VarVersion))
       && (Type == input.Type || (Type != null && Type.Equals(input.Type)))
       && (Target == input.Target || (Target != null && Target.Equals(input.Target)))
@@ -134,7 +125,6 @@ public partial class FetchedIndexAbTest
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + Id.GetHashCode();
-      hashCode = (hashCode * 59) + IsDark.GetHashCode();
       hashCode = (hashCode * 59) + VarVersion.GetHashCode();
       if (Type != null)
       {
