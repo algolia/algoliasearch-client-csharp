@@ -142,6 +142,19 @@ public partial class FetchedIndex
   public bool? Virtual { get; set; }
 
   /// <summary>
+  /// Gets or Sets AbTest
+  /// </summary>
+  [JsonPropertyName("abTest")]
+  public FetchedIndexAbTest AbTest { get; set; }
+
+  /// <summary>
+  /// Name of the index that owns the A/B test configuration. Only present when this index participates in an A/B test configured on another index.
+  /// </summary>
+  /// <value>Name of the index that owns the A/B test configuration. Only present when this index participates in an A/B test configured on another index.</value>
+  [JsonPropertyName("sourceABTest")]
+  public string SourceABTest { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -161,6 +174,8 @@ public partial class FetchedIndex
     sb.Append("  Primary: ").Append(Primary).Append("\n");
     sb.Append("  Replicas: ").Append(Replicas).Append("\n");
     sb.Append("  Virtual: ").Append(Virtual).Append("\n");
+    sb.Append("  AbTest: ").Append(AbTest).Append("\n");
+    sb.Append("  SourceABTest: ").Append(SourceABTest).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -203,7 +218,12 @@ public partial class FetchedIndex
         Replicas == input.Replicas
         || Replicas != null && input.Replicas != null && Replicas.SequenceEqual(input.Replicas)
       )
-      && (Virtual == input.Virtual || Virtual.Equals(input.Virtual));
+      && (Virtual == input.Virtual || Virtual.Equals(input.Virtual))
+      && (AbTest == input.AbTest || (AbTest != null && AbTest.Equals(input.AbTest)))
+      && (
+        SourceABTest == input.SourceABTest
+        || (SourceABTest != null && SourceABTest.Equals(input.SourceABTest))
+      );
   }
 
   /// <summary>
@@ -242,6 +262,14 @@ public partial class FetchedIndex
         hashCode = (hashCode * 59) + Replicas.GetHashCode();
       }
       hashCode = (hashCode * 59) + Virtual.GetHashCode();
+      if (AbTest != null)
+      {
+        hashCode = (hashCode * 59) + AbTest.GetHashCode();
+      }
+      if (SourceABTest != null)
+      {
+        hashCode = (hashCode * 59) + SourceABTest.GetHashCode();
+      }
       return hashCode;
     }
   }
