@@ -1,3 +1,7 @@
+## [7.44.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.43.0...7.44.0)
+
+- [7f2ce8cd3a](https://github.com/algolia/api-clients-automation/commit/7f2ce8cd3a) feat(clients): Agent Studio v1 ([#6097](https://github.com/algolia/api-clients-automation/pull/6097)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [7.43.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.42.0...7.43.0)
 
 - [df08087fd2](https://github.com/algolia/api-clients-automation/commit/df08087fd2) feat(csharp): add TransformationOptions for ingestion transporter configuration ([#6292](https://github.com/algolia/api-clients-automation/pull/6292)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
