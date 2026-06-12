@@ -860,7 +860,7 @@ public interface IQuerySuggestionsClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class QuerySuggestionsClient : IQuerySuggestionsClient
+public partial class QuerySuggestionsClient : IQuerySuggestionsClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<QuerySuggestionsClient> _logger;
@@ -953,6 +953,15 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

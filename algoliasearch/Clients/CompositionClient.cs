@@ -1524,7 +1524,7 @@ public interface ICompositionClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class CompositionClient : ICompositionClient
+public partial class CompositionClient : ICompositionClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<CompositionClient> _logger;
@@ -1611,6 +1611,15 @@ public partial class CompositionClient : ICompositionClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

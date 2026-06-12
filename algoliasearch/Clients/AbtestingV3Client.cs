@@ -916,7 +916,7 @@ public interface IAbtestingV3Client
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class AbtestingV3Client : IAbtestingV3Client
+public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<AbtestingV3Client> _logger;
@@ -1009,6 +1009,15 @@ public partial class AbtestingV3Client : IAbtestingV3Client
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

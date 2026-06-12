@@ -15,7 +15,7 @@ namespace Algolia.Search.Http;
 /// Algolia's HTTP requester
 /// You can inject your own by implementing IHttpRequester
 /// </summary>
-internal class AlgoliaHttpRequester : IHttpRequester
+internal class AlgoliaHttpRequester : IHttpRequester, IDisposable
 {
   /// <summary>
   /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
@@ -146,5 +146,14 @@ internal class AlgoliaHttpRequester : IHttpRequester
     var content = await sr.ReadToEndAsync().ConfigureAwait(false);
 
     return content;
+  }
+
+  /// <summary>
+  /// Disposes the underlying <see cref="HttpClient"/>.
+  /// </summary>
+  public void Dispose()
+  {
+    _httpClient?.Dispose();
+    GC.SuppressFinalize(this);
   }
 }

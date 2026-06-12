@@ -5560,7 +5560,7 @@ public partial interface IIngestionClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class IngestionClient : IIngestionClient
+public partial class IngestionClient : IIngestionClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<IngestionClient> _logger;
@@ -5650,6 +5650,15 @@ public partial class IngestionClient : IIngestionClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

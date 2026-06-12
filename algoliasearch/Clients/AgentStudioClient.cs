@@ -3408,7 +3408,7 @@ public interface IAgentStudioClient
   "Agent Studio API is in beta and subject to breaking changes. See https://www.algolia.com/doc/rest-api/agent-studio",
   false
 )]
-public partial class AgentStudioClient : IAgentStudioClient
+public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<AgentStudioClient> _logger;
@@ -3495,6 +3495,15 @@ public partial class AgentStudioClient : IAgentStudioClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

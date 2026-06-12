@@ -624,7 +624,7 @@ public interface IPersonalizationClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class PersonalizationClient : IPersonalizationClient
+public partial class PersonalizationClient : IPersonalizationClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<PersonalizationClient> _logger;
@@ -717,6 +717,15 @@ public partial class PersonalizationClient : IPersonalizationClient
   public void SetClientApiKey(string apiKey)
   {
     _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
+  /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport).
+  /// </summary>
+  public void Dispose()
+  {
+    _transport?.Dispose();
+    GC.SuppressFinalize(this);
   }
 
   /// <inheritdoc />

@@ -5141,7 +5141,7 @@ public partial interface ISearchClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-public partial class SearchClient : ISearchClient
+public partial class SearchClient : ISearchClient, IDisposable
 {
   internal HttpTransport _transport;
   private readonly ILogger<SearchClient> _logger;
@@ -5232,6 +5232,22 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
+  /// Disposes the client and its underlying resources (the HTTP transport and, if set, the ingestion transporter).
+  /// </summary>
+  public void Dispose()
+  {
+    try
+    {
+      (_ingestionTransporter as IDisposable)?.Dispose();
+    }
+    finally
+    {
+      _transport?.Dispose();
+    }
+    GC.SuppressFinalize(this);
+  }
+
+  /// <summary>
   /// Sets (or replaces) the ingestion transporter used by *WithTransformation helpers.
   /// The ingestion transporter is created using the region from <paramref name="transformationOptions"/>
   /// and Ingestion API defaults; only fields explicitly set on <paramref name="transformationOptions"/>
@@ -5266,7 +5282,9 @@ public partial class SearchClient : ISearchClient
         ingestionConfig.DefaultHeaders[kvp.Key] = kvp.Value;
     }
 
+    var previous = _ingestionTransporter;
     _ingestionTransporter = new IngestionClient(ingestionConfig, _loggerFactory);
+    (previous as IDisposable)?.Dispose();
   }
 
   /// <summary>
@@ -5291,6 +5309,7 @@ public partial class SearchClient : ISearchClient
     )
       throw new ArgumentException("AppId and ApiKey are required for transformation pipeline");
 
+    var previous = _ingestionTransporter;
     _ingestionTransporter = new IngestionClient(
       new IngestionConfig(_transport._algoliaConfig.AppId, _transport._algoliaConfig.ApiKey, region)
       {
@@ -5303,6 +5322,7 @@ public partial class SearchClient : ISearchClient
       },
       factory ?? _loggerFactory
     );
+    (previous as IDisposable)?.Dispose();
   }
 
   /// <summary>
