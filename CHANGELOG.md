@@ -1,3 +1,9 @@
+## [7.45.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.44.0...7.45.0)
+
+- [6a786c100e](https://github.com/algolia/api-clients-automation/commit/6a786c100e) feat(csharp): add IDisposable support and dispose the ingestion transporter on replacement ([#6492](https://github.com/algolia/api-clients-automation/pull/6492)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+- [fcd0a861a7](https://github.com/algolia/api-clients-automation/commit/fcd0a861a7) fix(specs): improve Agent Studio API docs metadata ([#6505](https://github.com/algolia/api-clients-automation/pull/6505)) by [@Fluf22](https://github.com/Fluf22/)
+- [b46947d657](https://github.com/algolia/api-clients-automation/commit/b46947d657) fix(specs): link to ecosystem page ([#6506](https://github.com/algolia/api-clients-automation/pull/6506)) by [@kai687](https://github.com/kai687/)
+
 ## [7.44.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.43.0...7.44.0)
 
 - [7f2ce8cd3a](https://github.com/algolia/api-clients-automation/commit/7f2ce8cd3a) feat(clients): Agent Studio v1 ([#6097](https://github.com/algolia/api-clients-automation/pull/6097)) by [@Fluf22](https://github.com/Fluf22/)
