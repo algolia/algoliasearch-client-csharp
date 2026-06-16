@@ -3404,10 +3404,6 @@ public interface IAgentStudioClient
 /// <summary>
 /// Represents a collection of functions to interact with the API endpoints
 /// </summary>
-[System.Obsolete(
-  "Agent Studio API is in beta and subject to breaking changes. See https://www.algolia.com/doc/rest-api/agent-studio",
-  false
-)]
 public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 {
   internal HttpTransport _transport;
