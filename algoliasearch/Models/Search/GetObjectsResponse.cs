@@ -26,7 +26,7 @@ public partial class GetObjectsResponse<T>
   /// Initializes a new instance of the GetObjectsResponse class.
   /// </summary>
   /// <param name="results">Retrieved records. (required).</param>
-  public GetObjectsResponse(List<T> results)
+  public GetObjectsResponse(List<T?> results)
   {
     Results = results ?? throw new ArgumentNullException(nameof(results));
   }
@@ -43,7 +43,7 @@ public partial class GetObjectsResponse<T>
   /// </summary>
   /// <value>Retrieved records.</value>
   [JsonPropertyName("results")]
-  public List<T> Results { get; set; }
+  public List<T?> Results { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
