@@ -27,7 +27,7 @@ public sealed class AgentStudioConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   public AgentStudioConfig(string appId, string apiKey)
-    : base(appId, apiKey, "AgentStudio", "7.46.0")
+    : base(appId, apiKey, "AgentStudio", "7.46.1")
   {
     DefaultHosts = GetDefaultHosts(appId);
     Compression = CompressionType.None;
