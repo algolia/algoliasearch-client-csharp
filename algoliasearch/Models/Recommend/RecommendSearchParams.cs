@@ -54,12 +54,6 @@ public partial class RecommendSearchParams
   public string Filters { get; set; }
 
   /// <summary>
-  /// Gets or Sets FacetFilters
-  /// </summary>
-  [JsonPropertyName("facetFilters")]
-  public FacetFilters FacetFilters { get; set; }
-
-  /// <summary>
   /// Gets or Sets OptionalFilters
   /// </summary>
   [JsonPropertyName("optionalFilters")]
@@ -222,13 +216,6 @@ public partial class RecommendSearchParams
   public bool? PercentileComputation { get; set; }
 
   /// <summary>
-  /// Whether to enable A/B testing for this search.
-  /// </summary>
-  /// <value>Whether to enable A/B testing for this search.</value>
-  [JsonPropertyName("enableABTest")]
-  public bool? EnableABTest { get; set; }
-
-  /// <summary>
   /// Search query.
   /// </summary>
   /// <value>Search query.</value>
@@ -383,13 +370,6 @@ public partial class RecommendSearchParams
   public List<string> AttributesToRetrieve { get; set; }
 
   /// <summary>
-  /// Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
-  /// </summary>
-  /// <value>Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing). </value>
-  [JsonPropertyName("ranking")]
-  public List<string> Ranking { get; set; }
-
-  /// <summary>
   /// Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
   /// </summary>
   /// <value>Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
@@ -497,13 +477,6 @@ public partial class RecommendSearchParams
   /// <value>Whether to split compound words in the query into their building blocks For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). </value>
   [JsonPropertyName("decompoundQuery")]
   public bool? DecompoundQuery { get; set; }
-
-  /// <summary>
-  /// Whether to enable rules.
-  /// </summary>
-  /// <value>Whether to enable rules.</value>
-  [JsonPropertyName("enableRules")]
-  public bool? EnableRules { get; set; }
 
   /// <summary>
   /// Whether to enable Personalization.
@@ -614,6 +587,13 @@ public partial class RecommendSearchParams
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
+  /// Whether to enable rules.
+  /// </summary>
+  /// <value>Whether to enable rules.</value>
+  [JsonPropertyName("enableRules")]
+  public bool? EnableRules { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -623,7 +603,6 @@ public partial class RecommendSearchParams
     sb.Append("class RecommendSearchParams {\n");
     sb.Append("  SimilarQuery: ").Append(SimilarQuery).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
-    sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
     sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
     sb.Append("  NumericFilters: ").Append(NumericFilters).Append("\n");
     sb.Append("  TagFilters: ").Append(TagFilters).Append("\n");
@@ -648,7 +627,6 @@ public partial class RecommendSearchParams
     sb.Append("  Analytics: ").Append(Analytics).Append("\n");
     sb.Append("  AnalyticsTags: ").Append(AnalyticsTags).Append("\n");
     sb.Append("  PercentileComputation: ").Append(PercentileComputation).Append("\n");
-    sb.Append("  EnableABTest: ").Append(EnableABTest).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  AttributesForFaceting: ").Append(AttributesForFaceting).Append("\n");
     sb.Append("  Replicas: ").Append(Replicas).Append("\n");
@@ -675,7 +653,6 @@ public partial class RecommendSearchParams
     sb.Append("  KeepDiacriticsOnCharacters: ").Append(KeepDiacriticsOnCharacters).Append("\n");
     sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
-    sb.Append("  Ranking: ").Append(Ranking).Append("\n");
     sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
     sb.Append("  AttributesToHighlight: ").Append(AttributesToHighlight).Append("\n");
     sb.Append("  AttributesToSnippet: ").Append(AttributesToSnippet).Append("\n");
@@ -696,7 +673,6 @@ public partial class RecommendSearchParams
     sb.Append("  RemoveStopWords: ").Append(RemoveStopWords).Append("\n");
     sb.Append("  QueryLanguages: ").Append(QueryLanguages).Append("\n");
     sb.Append("  DecompoundQuery: ").Append(DecompoundQuery).Append("\n");
-    sb.Append("  EnableRules: ").Append(EnableRules).Append("\n");
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  QueryType: ").Append(QueryType).Append("\n");
     sb.Append("  RemoveWordsIfNoResults: ").Append(RemoveWordsIfNoResults).Append("\n");
@@ -718,6 +694,7 @@ public partial class RecommendSearchParams
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
+    sb.Append("  EnableRules: ").Append(EnableRules).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -748,10 +725,6 @@ public partial class RecommendSearchParams
         || (SimilarQuery != null && SimilarQuery.Equals(input.SimilarQuery))
       )
       && (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters)))
-      && (
-        FacetFilters == input.FacetFilters
-        || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))
-      )
       && (
         OptionalFilters == input.OptionalFilters
         || (OptionalFilters != null && OptionalFilters.Equals(input.OptionalFilters))
@@ -843,7 +816,6 @@ public partial class RecommendSearchParams
         PercentileComputation == input.PercentileComputation
         || PercentileComputation.Equals(input.PercentileComputation)
       )
-      && (EnableABTest == input.EnableABTest || EnableABTest.Equals(input.EnableABTest))
       && (Query == input.Query || (Query != null && Query.Equals(input.Query)))
       && (
         AttributesForFaceting == input.AttributesForFaceting
@@ -954,10 +926,6 @@ public partial class RecommendSearchParams
           && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)
       )
       && (
-        Ranking == input.Ranking
-        || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)
-      )
-      && (
         RelevancyStrictness == input.RelevancyStrictness
         || RelevancyStrictness.Equals(input.RelevancyStrictness)
       )
@@ -1026,7 +994,6 @@ public partial class RecommendSearchParams
           && QueryLanguages.SequenceEqual(input.QueryLanguages)
       )
       && (DecompoundQuery == input.DecompoundQuery || DecompoundQuery.Equals(input.DecompoundQuery))
-      && (EnableRules == input.EnableRules || EnableRules.Equals(input.EnableRules))
       && (
         EnablePersonalization == input.EnablePersonalization
         || EnablePersonalization.Equals(input.EnablePersonalization)
@@ -1097,7 +1064,8 @@ public partial class RecommendSearchParams
       && (
         ReRankingApplyFilter == input.ReRankingApplyFilter
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
-      );
+      )
+      && (EnableRules == input.EnableRules || EnableRules.Equals(input.EnableRules));
   }
 
   /// <summary>
@@ -1116,10 +1084,6 @@ public partial class RecommendSearchParams
       if (Filters != null)
       {
         hashCode = (hashCode * 59) + Filters.GetHashCode();
-      }
-      if (FacetFilters != null)
-      {
-        hashCode = (hashCode * 59) + FacetFilters.GetHashCode();
       }
       if (OptionalFilters != null)
       {
@@ -1187,7 +1151,6 @@ public partial class RecommendSearchParams
         hashCode = (hashCode * 59) + AnalyticsTags.GetHashCode();
       }
       hashCode = (hashCode * 59) + PercentileComputation.GetHashCode();
-      hashCode = (hashCode * 59) + EnableABTest.GetHashCode();
       if (Query != null)
       {
         hashCode = (hashCode * 59) + Query.GetHashCode();
@@ -1267,10 +1230,6 @@ public partial class RecommendSearchParams
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();
       }
-      if (Ranking != null)
-      {
-        hashCode = (hashCode * 59) + Ranking.GetHashCode();
-      }
       hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
       if (AttributesToHighlight != null)
       {
@@ -1317,7 +1276,6 @@ public partial class RecommendSearchParams
         hashCode = (hashCode * 59) + QueryLanguages.GetHashCode();
       }
       hashCode = (hashCode * 59) + DecompoundQuery.GetHashCode();
-      hashCode = (hashCode * 59) + EnableRules.GetHashCode();
       hashCode = (hashCode * 59) + EnablePersonalization.GetHashCode();
       hashCode = (hashCode * 59) + QueryType.GetHashCode();
       hashCode = (hashCode * 59) + RemoveWordsIfNoResults.GetHashCode();
@@ -1364,6 +1322,7 @@ public partial class RecommendSearchParams
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
       }
+      hashCode = (hashCode * 59) + EnableRules.GetHashCode();
       return hashCode;
     }
   }
