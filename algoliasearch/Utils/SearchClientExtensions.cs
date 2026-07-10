@@ -237,6 +237,9 @@ public partial interface ISearchClient
   /// Finally, the temporary one replaces the existing index.
   /// See https://api-clients-automation.netlify.app/docs/custom-helpers/#replaceallobjects for implementation details.
   /// </summary>
+  /// <remarks>
+  /// Warning: calling this method with an empty `objects` list replaces the index with an empty one, deleting all existing records.
+  /// </remarks>
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
   /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
@@ -517,6 +520,9 @@ public partial interface ISearchClient
   /// <see cref="TransformationOptions"/> must have been set via <see cref="SearchClient.SetTransformationOptions"/> or <see cref="SearchClient.WithTransformation"/>.
   /// A temporary index is created during this process in order to backup your data.
   /// </summary>
+  /// <remarks>
+  /// Warning: calling this method with an empty `objects` list replaces the index with an empty one, deleting all existing records.
+  /// </remarks>
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
   /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `objects.length / batchSize`. Defaults to 1000.</param>
@@ -918,6 +924,14 @@ public partial class SearchClient : ISearchClient
     if (objects == null)
     {
       throw new ArgumentNullException(nameof(objects));
+    }
+
+    if (objects is IReadOnlyCollection<T> collection && collection.Count == 0)
+    {
+      _logger.LogWarning(
+        "ReplaceAllObjects was called with an empty list of objects, which will delete all records currently in the \"{Index}\" index.",
+        indexName
+      );
     }
 
     if (scopes == null)
@@ -1519,6 +1533,14 @@ public partial class SearchClient : ISearchClient
     {
       throw new AlgoliaException(
         "TransformationOptions must be set in the client config before calling this method. It defaults to the Ingestion API defaults. See https://www.algolia.com/doc/libraries/sdk/methods/ingestion"
+      );
+    }
+
+    if (objects is IReadOnlyCollection<object> collection && collection.Count == 0)
+    {
+      _logger.LogWarning(
+        "ReplaceAllObjectsWithTransformation was called with an empty list of objects, which will delete all records currently in the \"{Index}\" index.",
+        indexName
       );
     }
 
