@@ -587,6 +587,12 @@ public partial class FallbackParams
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
+  /// Gets or Sets FacetFilters
+  /// </summary>
+  [JsonPropertyName("facetFilters")]
+  public FacetFilters FacetFilters { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -687,6 +693,7 @@ public partial class FallbackParams
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
+    sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -1056,6 +1063,10 @@ public partial class FallbackParams
       && (
         ReRankingApplyFilter == input.ReRankingApplyFilter
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
+      )
+      && (
+        FacetFilters == input.FacetFilters
+        || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))
       );
   }
 
@@ -1312,6 +1323,10 @@ public partial class FallbackParams
       if (ReRankingApplyFilter != null)
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
+      }
+      if (FacetFilters != null)
+      {
+        hashCode = (hashCode * 59) + FacetFilters.GetHashCode();
       }
       return hashCode;
     }
