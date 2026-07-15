@@ -1,3 +1,9 @@
+## [7.46.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.46.2...7.46.3)
+
+- [38283179ee](https://github.com/algolia/api-clients-automation/commit/38283179ee) docs(specs): document the Correlation-ID and Request-ID headers ([#6690](https://github.com/algolia/api-clients-automation/pull/6690)) by [@xroche](https://github.com/xroche/)
+- [372ab5f466](https://github.com/algolia/api-clients-automation/commit/372ab5f466) fix(csharp): add warning in ReplaceAllObjects for empty objects ([#6617](https://github.com/algolia/api-clients-automation/pull/6617)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [ac68c1a79c](https://github.com/algolia/api-clients-automation/commit/ac68c1a79c) fix(specs): add facetFilters back to recommend fallbackParameters ([#6727](https://github.com/algolia/api-clients-automation/pull/6727)) by [@raed667](https://github.com/raed667/)
+
 ## [7.46.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.46.1...7.46.2)
 
 - [035c03ecad](https://github.com/algolia/api-clients-automation/commit/035c03ecad) fix(specs): BREAKING CHANGE – remove recommend query params overridden by the API ([#6604](https://github.com/algolia/api-clients-automation/pull/6604)) by [@raed667](https://github.com/raed667/)
