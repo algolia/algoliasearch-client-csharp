@@ -12,48 +12,32 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Insights;
 
 /// <summary>
-/// Click event after an Algolia request. Use this event to track when users click items in the search results. If you're building your category pages with Algolia, you'll also use this event.
+/// Instantsearch
 /// </summary>
-public partial class ClickedObjectIDsAfterSearch
+public partial class Instantsearch
 {
   /// <summary>
   /// Gets or Sets EventType
   /// </summary>
   [JsonPropertyName("eventType")]
-  public ClickEvent? EventType { get; set; }
+  public InstantsearchEvent? EventType { get; set; }
 
   /// <summary>
-  /// Initializes a new instance of the ClickedObjectIDsAfterSearch class.
+  /// Initializes a new instance of the Instantsearch class.
   /// </summary>
   [JsonConstructor]
-  public ClickedObjectIDsAfterSearch() { }
+  public Instantsearch() { }
 
   /// <summary>
-  /// Initializes a new instance of the ClickedObjectIDsAfterSearch class.
+  /// Initializes a new instance of the Instantsearch class.
   /// </summary>
   /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
-  /// <param name="index">Index name (case-sensitive) to which the event's items belong. (required).</param>
-  /// <param name="objectIDs">Object IDs of the records that are part of the event. (required).</param>
-  /// <param name="positions">Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`.  (required).</param>
-  /// <param name="queryID">Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response. For agentic analytics events, the query ID may be prefixed with `message_` followed by any printable string.  (required).</param>
   /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  (required).</param>
-  public ClickedObjectIDsAfterSearch(
-    string eventName,
-    ClickEvent? eventType,
-    string index,
-    List<string> objectIDs,
-    List<int> positions,
-    string queryID,
-    string userToken
-  )
+  public Instantsearch(string eventName, InstantsearchEvent? eventType, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
     EventType = eventType;
-    Index = index ?? throw new ArgumentNullException(nameof(index));
-    ObjectIDs = objectIDs ?? throw new ArgumentNullException(nameof(objectIDs));
-    Positions = positions ?? throw new ArgumentNullException(nameof(positions));
-    QueryID = queryID ?? throw new ArgumentNullException(nameof(queryID));
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
   }
 
@@ -63,34 +47,6 @@ public partial class ClickedObjectIDsAfterSearch
   /// <value>Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
   [JsonPropertyName("eventName")]
   public string EventName { get; set; }
-
-  /// <summary>
-  /// Index name (case-sensitive) to which the event's items belong.
-  /// </summary>
-  /// <value>Index name (case-sensitive) to which the event's items belong.</value>
-  [JsonPropertyName("index")]
-  public string Index { get; set; }
-
-  /// <summary>
-  /// Object IDs of the records that are part of the event.
-  /// </summary>
-  /// <value>Object IDs of the records that are part of the event.</value>
-  [JsonPropertyName("objectIDs")]
-  public List<string> ObjectIDs { get; set; }
-
-  /// <summary>
-  /// Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`.
-  /// </summary>
-  /// <value>Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`. </value>
-  [JsonPropertyName("positions")]
-  public List<int> Positions { get; set; }
-
-  /// <summary>
-  /// Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response. For agentic analytics events, the query ID may be prefixed with `message_` followed by any printable string.
-  /// </summary>
-  /// <value>Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response. For agentic analytics events, the query ID may be prefixed with `message_` followed by any printable string. </value>
-  [JsonPropertyName("queryID")]
-  public string QueryID { get; set; }
 
   /// <summary>
   /// Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
@@ -114,22 +70,26 @@ public partial class ClickedObjectIDsAfterSearch
   public long? Timestamp { get; set; }
 
   /// <summary>
+  /// Unique identifier for an agent session. Used to correlate instantsearch events with a specific agent interaction.
+  /// </summary>
+  /// <value>Unique identifier for an agent session. Used to correlate instantsearch events with a specific agent interaction. </value>
+  [JsonPropertyName("agentID")]
+  public string AgentID { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ClickedObjectIDsAfterSearch {\n");
+    sb.Append("class Instantsearch {\n");
     sb.Append("  EventName: ").Append(EventName).Append("\n");
     sb.Append("  EventType: ").Append(EventType).Append("\n");
-    sb.Append("  Index: ").Append(Index).Append("\n");
-    sb.Append("  ObjectIDs: ").Append(ObjectIDs).Append("\n");
-    sb.Append("  Positions: ").Append(Positions).Append("\n");
-    sb.Append("  QueryID: ").Append(QueryID).Append("\n");
     sb.Append("  UserToken: ").Append(UserToken).Append("\n");
     sb.Append("  AuthenticatedUserToken: ").Append(AuthenticatedUserToken).Append("\n");
     sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+    sb.Append("  AgentID: ").Append(AgentID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -150,7 +110,7 @@ public partial class ClickedObjectIDsAfterSearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ClickedObjectIDsAfterSearch input)
+    if (obj is not Instantsearch input)
     {
       return false;
     }
@@ -159,16 +119,6 @@ public partial class ClickedObjectIDsAfterSearch
         EventName == input.EventName || (EventName != null && EventName.Equals(input.EventName))
       )
       && (EventType == input.EventType || EventType.Equals(input.EventType))
-      && (Index == input.Index || (Index != null && Index.Equals(input.Index)))
-      && (
-        ObjectIDs == input.ObjectIDs
-        || ObjectIDs != null && input.ObjectIDs != null && ObjectIDs.SequenceEqual(input.ObjectIDs)
-      )
-      && (
-        Positions == input.Positions
-        || Positions != null && input.Positions != null && Positions.SequenceEqual(input.Positions)
-      )
-      && (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID)))
       && (UserToken == input.UserToken || (UserToken != null && UserToken.Equals(input.UserToken)))
       && (
         AuthenticatedUserToken == input.AuthenticatedUserToken
@@ -177,7 +127,8 @@ public partial class ClickedObjectIDsAfterSearch
           && AuthenticatedUserToken.Equals(input.AuthenticatedUserToken)
         )
       )
-      && (Timestamp == input.Timestamp || Timestamp.Equals(input.Timestamp));
+      && (Timestamp == input.Timestamp || Timestamp.Equals(input.Timestamp))
+      && (AgentID == input.AgentID || (AgentID != null && AgentID.Equals(input.AgentID)));
   }
 
   /// <summary>
@@ -194,22 +145,6 @@ public partial class ClickedObjectIDsAfterSearch
         hashCode = (hashCode * 59) + EventName.GetHashCode();
       }
       hashCode = (hashCode * 59) + EventType.GetHashCode();
-      if (Index != null)
-      {
-        hashCode = (hashCode * 59) + Index.GetHashCode();
-      }
-      if (ObjectIDs != null)
-      {
-        hashCode = (hashCode * 59) + ObjectIDs.GetHashCode();
-      }
-      if (Positions != null)
-      {
-        hashCode = (hashCode * 59) + Positions.GetHashCode();
-      }
-      if (QueryID != null)
-      {
-        hashCode = (hashCode * 59) + QueryID.GetHashCode();
-      }
       if (UserToken != null)
       {
         hashCode = (hashCode * 59) + UserToken.GetHashCode();
@@ -219,6 +154,10 @@ public partial class ClickedObjectIDsAfterSearch
         hashCode = (hashCode * 59) + AuthenticatedUserToken.GetHashCode();
       }
       hashCode = (hashCode * 59) + Timestamp.GetHashCode();
+      if (AgentID != null)
+      {
+        hashCode = (hashCode * 59) + AgentID.GetHashCode();
+      }
       return hashCode;
     }
   }
