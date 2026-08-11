@@ -120,6 +120,12 @@ public partial class ABTest
   public int? MigratedAbTestID { get; set; }
 
   /// <summary>
+  /// Gets or Sets Decision
+  /// </summary>
+  [JsonPropertyName("decision")]
+  public Decision Decision { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -137,6 +143,7 @@ public partial class ABTest
     sb.Append("  Variants: ").Append(Variants).Append("\n");
     sb.Append("  Configuration: ").Append(Configuration).Append("\n");
     sb.Append("  MigratedAbTestID: ").Append(MigratedAbTestID).Append("\n");
+    sb.Append("  Decision: ").Append(Decision).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -180,7 +187,8 @@ public partial class ABTest
       && (
         MigratedAbTestID == input.MigratedAbTestID
         || MigratedAbTestID.Equals(input.MigratedAbTestID)
-      );
+      )
+      && (Decision == input.Decision || (Decision != null && Decision.Equals(input.Decision)));
   }
 
   /// <summary>
@@ -223,6 +231,10 @@ public partial class ABTest
         hashCode = (hashCode * 59) + Configuration.GetHashCode();
       }
       hashCode = (hashCode * 59) + MigratedAbTestID.GetHashCode();
+      if (Decision != null)
+      {
+        hashCode = (hashCode * 59) + Decision.GetHashCode();
+      }
       return hashCode;
     }
   }
