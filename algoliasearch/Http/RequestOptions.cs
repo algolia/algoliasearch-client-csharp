@@ -42,4 +42,10 @@ public class RequestOptions
     QueryParameters = new Dictionary<string, object>();
     Headers = new Dictionary<string, string>();
   }
+
+  /// <summary>
+  /// Returns a shallow copy carrying every property, present and future, so
+  /// helpers can adjust options without mutating the caller's instance.
+  /// </summary>
+  internal RequestOptions ShallowCopy() => (RequestOptions)MemberwiseClone();
 }

@@ -26,7 +26,6 @@ internal class HttpTransport : IDisposable
   private readonly ISerializer _serializer;
   private readonly RetryStrategy _retryStrategy;
   internal AlgoliaConfig _algoliaConfig;
-  private string _errorMessage;
   private readonly ILogger<HttpTransport> _logger;
 
   private class VoidResult { }
@@ -117,6 +116,19 @@ internal class HttpTransport : IDisposable
       Compression = _algoliaConfig.Compression,
     };
 
+    if (
+      _algoliaConfig.RequestIdEnabled
+      && !RequestIdHelper.HasRequestId(request.Headers)
+      && !RequestIdHelper.HasRequestIdQueryParameter(requestOptions?.QueryParameters)
+    )
+    {
+      // GenerateHeaders returns the live DefaultHeaders alias, so copy before injecting.
+      request.Headers = new Dictionary<string, string>(request.Headers)
+      {
+        [Defaults.RequestIdHeader] = RequestIdHelper.Generate(),
+      };
+    }
+
     var callType =
       (requestOptions?.UseReadTransporter != null && requestOptions.UseReadTransporter.Value)
       || method == HttpMethod.Get
@@ -127,6 +139,11 @@ internal class HttpTransport : IDisposable
     var maxAttempts = tryableHosts.Count;
     var attemptNumber = 0;
     var overallStopwatch = Stopwatch.StartNew();
+    // The Correlation-ID of the last attempt whose response carried one,
+    // surfaced on the exhaustion exception for support tickets. Both are
+    // locals so concurrent requests on one client cannot mix their values.
+    string lastCorrelationId = null;
+    string errorMessage = null;
 
     foreach (var host in tryableHosts)
     {
@@ -170,7 +187,8 @@ internal class HttpTransport : IDisposable
         .ConfigureAwait(false);
       requestStopwatch.Stop();
 
-      _errorMessage = response.Error;
+      errorMessage = response.Error;
+      lastCorrelationId = GetCorrelationId(response) ?? lastCorrelationId;
 
       switch (_retryStrategy.Decide(host, response))
       {
@@ -231,9 +249,18 @@ internal class HttpTransport : IDisposable
             return response as TResult;
           }
 
-          var deserialized = await _serializer
-            .Deserialize<TResult>(response.Body)
-            .ConfigureAwait(false);
+          TResult deserialized;
+          try
+          {
+            deserialized = await _serializer
+              .Deserialize<TResult>(response.Body)
+              .ConfigureAwait(false);
+          }
+          catch (AlgoliaException ex)
+          {
+            ex.CorrelationId = GetCorrelationId(response);
+            throw;
+          }
 
           if (_logger.IsEnabled(LogLevel.Debug))
           {
@@ -273,7 +300,11 @@ internal class HttpTransport : IDisposable
             );
           }
 
-          throw new AlgoliaApiException(response.Error, response.HttpStatusCode);
+          throw new AlgoliaApiException(
+            response.Error,
+            response.HttpStatusCode,
+            GetCorrelationId(response)
+          );
         default:
           throw new ArgumentOutOfRangeException();
       }
@@ -284,13 +315,14 @@ internal class HttpTransport : IDisposable
       _logger.LogError(
         "Request failed after {MaxAttempts} attempts: {ErrorMessage}",
         maxAttempts,
-        _errorMessage
+        errorMessage
       );
     }
 
     throw new AlgoliaUnreachableHostException(
       "RetryStrategy failed to connect to Algolia. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support Reason: "
-        + _errorMessage
+        + errorMessage,
+      lastCorrelationId
     );
   }
 
@@ -358,6 +390,29 @@ internal class HttpTransport : IDisposable
 
     var builder = new UriBuilder(uri) { Query = string.Join("&", sanitized) };
     return builder.Uri.ToString();
+  }
+
+  /// <summary>
+  /// Read the Correlation-ID header of a failed response; the unrelated
+  /// X-Algolia-RequestID edge header must never be read instead. Headers are
+  /// null on timeout and network failures.
+  /// </summary>
+  private static string GetCorrelationId(AlgoliaHttpResponse response)
+  {
+    if (response.ResponseHeaders == null)
+    {
+      return null;
+    }
+
+    foreach (var header in response.ResponseHeaders)
+    {
+      if (header.Key.Equals(Defaults.CorrelationIdHeader, StringComparison.OrdinalIgnoreCase))
+      {
+        return header.Value;
+      }
+    }
+
+    return null;
   }
 
   /// <summary>

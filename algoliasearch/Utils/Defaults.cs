@@ -31,4 +31,6 @@ internal static class Defaults
   public const string ContentType = "Content-Type";
   public const string ApplicationJson = "application/json; charset=utf-8";
   public const string GzipEncoding = "gzip";
+  public const string RequestIdHeader = "request-id";
+  public const string CorrelationIdHeader = "Correlation-ID";
 }

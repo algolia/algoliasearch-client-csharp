@@ -35,6 +35,9 @@ public sealed class IngestionConfig : AlgoliaConfig
     ReadTimeout = TimeSpan.FromMilliseconds(25000);
     WriteTimeout = TimeSpan.FromMilliseconds(25000);
     ConnectTimeout = TimeSpan.FromMilliseconds(25000);
+    // Request-ID tracing is only supported by the search, recommend and
+    // composition APIs.
+    RequestIdEnabled = false;
   }
 
   private static List<StatefulHost> GetDefaultHosts(string region)
