@@ -1025,6 +1025,62 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Catalog</returns>
+  Task<Catalog> GetPatternsFieldsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Catalog</returns>
+  Catalog GetPatternsFields(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Catalog</returns>
+  Task<AlgoliaHttpResponse> GetPatternsFieldsWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Catalog</returns>
+  AlgoliaHttpResponse GetPatternsFieldsWithHTTPInfo(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days, including the current day.  The rate is purchase conversion events divided by tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which includes searches where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries. Algolia didn't receive any events, so the purchase rate is null. - **0** means there were queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
   /// </summary>
   ///
@@ -2515,6 +2571,342 @@ public interface IAnalyticsClient
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="distributionPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Dictionary{string, object}</returns>
+  Task<Dictionary<string, object>> QueryPatternsDistributionAsync(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="distributionPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Dictionary{string, object}</returns>
+  Dictionary<string, object> QueryPatternsDistribution(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="distributionPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Dictionary{string, object}</returns>
+  Task<AlgoliaHttpResponse> QueryPatternsDistributionWithHTTPInfoAsync(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="distributionPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Dictionary{string, object}</returns>
+  AlgoliaHttpResponse QueryPatternsDistributionWithHTTPInfo(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="scalarPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Dictionary{string, object}</returns>
+  Task<Dictionary<string, object>> QueryPatternsScalarAsync(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="scalarPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Dictionary{string, object}</returns>
+  Dictionary<string, object> QueryPatternsScalar(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="scalarPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of Dictionary{string, object}</returns>
+  Task<AlgoliaHttpResponse> QueryPatternsScalarWithHTTPInfoAsync(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="scalarPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Dictionary{string, object}</returns>
+  AlgoliaHttpResponse QueryPatternsScalarWithHTTPInfo(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="tablePayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TableResponse</returns>
+  Task<TableResponse> QueryPatternsTableAsync(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="tablePayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TableResponse</returns>
+  TableResponse QueryPatternsTable(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="tablePayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TableResponse</returns>
+  Task<AlgoliaHttpResponse> QueryPatternsTableWithHTTPInfoAsync(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="tablePayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TableResponse</returns>
+  AlgoliaHttpResponse QueryPatternsTableWithHTTPInfo(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="timeseriesPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TimeseriesResponse</returns>
+  Task<TimeseriesResponse> QueryPatternsTimeseriesAsync(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="timeseriesPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TimeseriesResponse</returns>
+  TimeseriesResponse QueryPatternsTimeseries(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="timeseriesPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TimeseriesResponse</returns>
+  Task<AlgoliaHttpResponse> QueryPatternsTimeseriesWithHTTPInfoAsync(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="timeseriesPayload"></param>
+  /// <param name="index">Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys.  (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TimeseriesResponse</returns>
+  AlgoliaHttpResponse QueryPatternsTimeseriesWithHTTPInfo(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
 }
 
 /// <summary>
@@ -3602,6 +3994,54 @@ public partial class AnalyticsClient : IAnalyticsClient, IDisposable
     AsyncHelper.RunSync(() =>
       GetNoResultsRateWithHTTPInfoAsync(index, startDate, endDate, tags, options, cancellationToken)
     );
+
+  /// <inheritdoc />
+  public async Task<Catalog> GetPatternsFieldsAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    return await _transport
+      .ExecuteRequestAsync<Catalog>(
+        new HttpMethod("GET"),
+        "/3/patterns/fields",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public Catalog GetPatternsFields(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetPatternsFieldsAsync(options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> GetPatternsFieldsWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/3/patterns/fields",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse GetPatternsFieldsWithHTTPInfo(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => GetPatternsFieldsWithHTTPInfoAsync(options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<GetPurchaseRateResponse> GetPurchaseRateAsync(
@@ -5111,5 +5551,314 @@ public partial class AnalyticsClient : IAnalyticsClient, IDisposable
   ) =>
     AsyncHelper.RunSync(() =>
       GetUsersCountWithHTTPInfoAsync(index, startDate, endDate, tags, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<Dictionary<string, object>> QueryPatternsDistributionAsync(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (distributionPayload == null)
+      throw new ArgumentException(
+        "Parameter `distributionPayload` is required when calling `QueryPatternsDistribution`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = distributionPayload;
+    return await _transport
+      .ExecuteRequestAsync<Dictionary<string, object>>(
+        new HttpMethod("POST"),
+        "/3/patterns/distribution",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public Dictionary<string, object> QueryPatternsDistribution(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsDistributionAsync(distributionPayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> QueryPatternsDistributionWithHTTPInfoAsync(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (distributionPayload == null)
+      throw new ArgumentException(
+        "Parameter `distributionPayload` is required when calling `QueryPatternsDistribution`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = distributionPayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/distribution",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse QueryPatternsDistributionWithHTTPInfo(
+    DistributionPayload distributionPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsDistributionWithHTTPInfoAsync(
+        distributionPayload,
+        index,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<Dictionary<string, object>> QueryPatternsScalarAsync(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (scalarPayload == null)
+      throw new ArgumentException(
+        "Parameter `scalarPayload` is required when calling `QueryPatternsScalar`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = scalarPayload;
+    return await _transport
+      .ExecuteRequestAsync<Dictionary<string, object>>(
+        new HttpMethod("POST"),
+        "/3/patterns/scalar",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public Dictionary<string, object> QueryPatternsScalar(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsScalarAsync(scalarPayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> QueryPatternsScalarWithHTTPInfoAsync(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (scalarPayload == null)
+      throw new ArgumentException(
+        "Parameter `scalarPayload` is required when calling `QueryPatternsScalar`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = scalarPayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/scalar",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse QueryPatternsScalarWithHTTPInfo(
+    ScalarPayload scalarPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsScalarWithHTTPInfoAsync(scalarPayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<TableResponse> QueryPatternsTableAsync(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (tablePayload == null)
+      throw new ArgumentException(
+        "Parameter `tablePayload` is required when calling `QueryPatternsTable`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = tablePayload;
+    return await _transport
+      .ExecuteRequestAsync<TableResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/table",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public TableResponse QueryPatternsTable(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsTableAsync(tablePayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> QueryPatternsTableWithHTTPInfoAsync(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (tablePayload == null)
+      throw new ArgumentException(
+        "Parameter `tablePayload` is required when calling `QueryPatternsTable`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = tablePayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/table",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse QueryPatternsTableWithHTTPInfo(
+    TablePayload tablePayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsTableWithHTTPInfoAsync(tablePayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<TimeseriesResponse> QueryPatternsTimeseriesAsync(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (timeseriesPayload == null)
+      throw new ArgumentException(
+        "Parameter `timeseriesPayload` is required when calling `QueryPatternsTimeseries`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = timeseriesPayload;
+    return await _transport
+      .ExecuteRequestAsync<TimeseriesResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/timeseries",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public TimeseriesResponse QueryPatternsTimeseries(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsTimeseriesAsync(timeseriesPayload, index, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> QueryPatternsTimeseriesWithHTTPInfoAsync(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (timeseriesPayload == null)
+      throw new ArgumentException(
+        "Parameter `timeseriesPayload` is required when calling `QueryPatternsTimeseries`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.AddQueryParameter("index", index);
+    requestOptions.Data = timeseriesPayload;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/3/patterns/timeseries",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse QueryPatternsTimeseriesWithHTTPInfo(
+    TimeseriesPayload timeseriesPayload,
+    string index = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      QueryPatternsTimeseriesWithHTTPInfoAsync(timeseriesPayload, index, options, cancellationToken)
     );
 }
