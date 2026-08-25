@@ -21,7 +21,7 @@ namespace Algolia.Search.Clients;
 public interface IAbtestingClient
 {
   /// <summary>
-  /// Creates a new A/B test.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -33,6 +33,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<ABTestResponse> AddABTestsAsync(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -40,7 +41,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Creates a new A/B test. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -52,6 +53,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   ABTestResponse AddABTests(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -59,7 +61,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Creates a new A/B test.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -71,6 +73,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> AddABTestsWithHTTPInfoAsync(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -78,7 +81,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Creates a new A/B test. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -90,6 +93,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   AlgoliaHttpResponse AddABTestsWithHTTPInfo(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -401,7 +405,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Deletes an A/B test by its ID.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -413,6 +417,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<ABTestResponse> DeleteABTestAsync(
     int id,
     RequestOptions options = null,
@@ -420,7 +425,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Deletes an A/B test by its ID. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -432,6 +437,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   ABTestResponse DeleteABTest(
     int id,
     RequestOptions options = null,
@@ -439,7 +445,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Deletes an A/B test by its ID.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -451,6 +457,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> DeleteABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -458,7 +465,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Deletes an A/B test by its ID. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -470,6 +477,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   AlgoliaHttpResponse DeleteABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
@@ -477,7 +485,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -489,6 +497,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of EstimateABTestResponse</returns>
+  [Obsolete]
   Task<EstimateABTestResponse> EstimateABTestAsync(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -496,7 +505,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -508,6 +517,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>EstimateABTestResponse</returns>
+  [Obsolete]
   EstimateABTestResponse EstimateABTest(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -515,7 +525,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -527,6 +537,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of EstimateABTestResponse</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> EstimateABTestWithHTTPInfoAsync(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -534,7 +545,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -546,6 +557,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>EstimateABTestResponse</returns>
+  [Obsolete]
   AlgoliaHttpResponse EstimateABTestWithHTTPInfo(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -553,7 +565,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Retrieves the details for an A/B test by its ID.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -565,6 +577,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTest</returns>
+  [Obsolete]
   Task<ABTest> GetABTestAsync(
     int id,
     RequestOptions options = null,
@@ -572,7 +585,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Retrieves the details for an A/B test by its ID. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -584,6 +597,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTest</returns>
+  [Obsolete]
   ABTest GetABTest(
     int id,
     RequestOptions options = null,
@@ -591,7 +605,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Retrieves the details for an A/B test by its ID.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -603,6 +617,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTest</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> GetABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -610,7 +625,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Retrieves the details for an A/B test by its ID. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -622,6 +637,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTest</returns>
+  [Obsolete]
   AlgoliaHttpResponse GetABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
@@ -629,7 +645,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Lists all A/B tests you configured for this application.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -644,6 +660,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListABTestsResponse</returns>
+  [Obsolete]
   Task<ListABTestsResponse> ListABTestsAsync(
     int? offset = default,
     int? limit = default,
@@ -654,7 +671,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Lists all A/B tests you configured for this application. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -669,6 +686,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListABTestsResponse</returns>
+  [Obsolete]
   ListABTestsResponse ListABTests(
     int? offset = default,
     int? limit = default,
@@ -679,7 +697,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Lists all A/B tests you configured for this application.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -694,6 +712,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListABTestsResponse</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> ListABTestsWithHTTPInfoAsync(
     int? offset = default,
     int? limit = default,
@@ -704,7 +723,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Lists all A/B tests you configured for this application. (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -719,6 +738,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListABTestsResponse</returns>
+  [Obsolete]
   AlgoliaHttpResponse ListABTestsWithHTTPInfo(
     int? offset = default,
     int? limit = default,
@@ -729,7 +749,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -741,6 +761,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<ABTestResponse> StopABTestAsync(
     int id,
     RequestOptions options = null,
@@ -748,7 +769,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -760,6 +781,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   ABTestResponse StopABTest(
     int id,
     RequestOptions options = null,
@@ -767,7 +789,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -779,6 +801,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ABTestResponse</returns>
+  [Obsolete]
   Task<AlgoliaHttpResponse> StopABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -786,7 +809,7 @@ public interface IAbtestingClient
   );
 
   /// <summary>
-  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
+  /// This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -798,6 +821,7 @@ public interface IAbtestingClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ABTestResponse</returns>
+  [Obsolete]
   AlgoliaHttpResponse StopABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
@@ -910,6 +934,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ABTestResponse> AddABTestsAsync(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -935,6 +960,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public ABTestResponse AddABTests(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -942,6 +968,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => AddABTestsAsync(addABTestsRequest, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> AddABTestsWithHTTPInfoAsync(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -967,6 +994,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse AddABTestsWithHTTPInfo(
     AddABTestsRequest addABTestsRequest,
     RequestOptions options = null,
@@ -1283,6 +1311,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
     );
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ABTestResponse> DeleteABTestAsync(
     int id,
     RequestOptions options = null,
@@ -1304,6 +1333,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public ABTestResponse DeleteABTest(
     int id,
     RequestOptions options = null,
@@ -1311,6 +1341,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => DeleteABTestAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> DeleteABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -1332,6 +1363,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse DeleteABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
@@ -1339,6 +1371,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => DeleteABTestWithHTTPInfoAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<EstimateABTestResponse> EstimateABTestAsync(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -1364,6 +1397,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public EstimateABTestResponse EstimateABTest(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -1374,6 +1408,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
     );
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> EstimateABTestWithHTTPInfoAsync(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -1399,6 +1434,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse EstimateABTestWithHTTPInfo(
     EstimateABTestRequest estimateABTestRequest,
     RequestOptions options = null,
@@ -1409,6 +1445,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
     );
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ABTest> GetABTestAsync(
     int id,
     RequestOptions options = null,
@@ -1430,6 +1467,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public ABTest GetABTest(
     int id,
     RequestOptions options = null,
@@ -1437,6 +1475,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => GetABTestAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> GetABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -1458,6 +1497,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse GetABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
@@ -1465,6 +1505,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => GetABTestWithHTTPInfoAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ListABTestsResponse> ListABTestsAsync(
     int? offset = default,
     int? limit = default,
@@ -1491,6 +1532,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public ListABTestsResponse ListABTests(
     int? offset = default,
     int? limit = default,
@@ -1504,6 +1546,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
     );
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> ListABTestsWithHTTPInfoAsync(
     int? offset = default,
     int? limit = default,
@@ -1530,6 +1573,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse ListABTestsWithHTTPInfo(
     int? offset = default,
     int? limit = default,
@@ -1550,6 +1594,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
     );
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ABTestResponse> StopABTestAsync(
     int id,
     RequestOptions options = null,
@@ -1571,6 +1616,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public ABTestResponse StopABTest(
     int id,
     RequestOptions options = null,
@@ -1578,6 +1624,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   ) => AsyncHelper.RunSync(() => StopABTestAsync(id, options, cancellationToken));
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<AlgoliaHttpResponse> StopABTestWithHTTPInfoAsync(
     int id,
     RequestOptions options = null,
@@ -1599,6 +1646,7 @@ public partial class AbtestingClient : IAbtestingClient, IDisposable
   }
 
   /// <inheritdoc />
+  [Obsolete]
   public AlgoliaHttpResponse StopABTestWithHTTPInfo(
     int id,
     RequestOptions options = null,
