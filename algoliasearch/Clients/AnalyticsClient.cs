@@ -1025,7 +1025,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+  /// Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1039,7 +1039,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
+  /// Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1053,7 +1053,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+  /// Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1067,7 +1067,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
+  /// Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.  (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2573,7 +2573,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2594,7 +2594,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2615,7 +2615,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2636,7 +2636,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2657,7 +2657,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2678,7 +2678,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2699,7 +2699,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2720,7 +2720,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2741,7 +2741,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2762,7 +2762,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2783,7 +2783,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2804,7 +2804,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2825,7 +2825,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2846,7 +2846,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2867,7 +2867,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+  /// Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2888,7 +2888,7 @@ public interface IAnalyticsClient
   );
 
   /// <summary>
-  /// **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
+  /// Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
