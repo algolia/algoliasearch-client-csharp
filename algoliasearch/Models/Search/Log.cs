@@ -62,6 +62,13 @@ public partial class Log
   }
 
   /// <summary>
+  /// Correlation ID of the logged API request, also returned in that request's `Correlation-ID` response header.
+  /// </summary>
+  /// <value>Correlation ID of the logged API request, also returned in that request's `Correlation-ID` response header.</value>
+  [JsonPropertyName("cid")]
+  public string Cid { get; set; }
+
+  /// <summary>
   /// Date and time of the API request, in RFC 3339 format.
   /// </summary>
   /// <value>Date and time of the API request, in RFC 3339 format.</value>
@@ -174,6 +181,7 @@ public partial class Log
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class Log {\n");
+    sb.Append("  Cid: ").Append(Cid).Append("\n");
     sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
     sb.Append("  Method: ").Append(Method).Append("\n");
     sb.Append("  AnswerCode: ").Append(AnswerCode).Append("\n");
@@ -214,9 +222,8 @@ public partial class Log
       return false;
     }
 
-    return (
-        Timestamp == input.Timestamp || (Timestamp != null && Timestamp.Equals(input.Timestamp))
-      )
+    return (Cid == input.Cid || (Cid != null && Cid.Equals(input.Cid)))
+      && (Timestamp == input.Timestamp || (Timestamp != null && Timestamp.Equals(input.Timestamp)))
       && (Method == input.Method || (Method != null && Method.Equals(input.Method)))
       && (
         AnswerCode == input.AnswerCode
@@ -265,6 +272,10 @@ public partial class Log
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (Cid != null)
+      {
+        hashCode = (hashCode * 59) + Cid.GetHashCode();
+      }
       if (Timestamp != null)
       {
         hashCode = (hashCode * 59) + Timestamp.GetHashCode();
