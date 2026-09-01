@@ -40,7 +40,7 @@ internal class AlgoliaHttpRequester : IHttpRequester, IDisposable
   /// Send request to the REST API
   /// </summary>
   /// <param name="request">Request</param>
-  /// <param name="requestTimeout">Request timeout</param>
+  /// <param name="requestTimeout">Read or write timeout, depending on the request type</param>
   /// <param name="connectTimeout">Connect timeout</param>
   /// <param name="ct">Optional cancellation token</param>
   /// <returns></returns>
@@ -76,7 +76,7 @@ internal class AlgoliaHttpRequester : IHttpRequester, IDisposable
 
     httpRequestMessage.Headers.Fill(request.Headers);
 
-    httpRequestMessage.SetTimeout(connectTimeout);
+    httpRequestMessage.SetTimeout(connectTimeout + requestTimeout);
 
     try
     {
