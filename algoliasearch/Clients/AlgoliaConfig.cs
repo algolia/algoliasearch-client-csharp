@@ -92,6 +92,13 @@ namespace Algolia.Search.Clients
     public bool RequestIdEnabled { get; set; }
 
     /// <summary>
+    /// How many times a 429 is waited out on the same host. Default 3; 0 fails
+    /// on the first 429. The wait is Retry-After in whole seconds, or 1 second
+    /// when the header is missing or invalid.
+    /// </summary>
+    public int MaxRateLimitRetries { get; set; } = 3;
+
+    /// <summary>
     /// Configurations hosts
     /// </summary>
     protected internal List<StatefulHost> DefaultHosts { get; set; }

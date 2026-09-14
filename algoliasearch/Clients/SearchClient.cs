@@ -5276,6 +5276,8 @@ public partial class SearchClient : ISearchClient, IDisposable
       ingestionConfig.WriteTimeout = transformationOptions.WriteTimeout;
     if (transformationOptions.Compression.HasValue)
       ingestionConfig.Compression = transformationOptions.Compression.Value;
+    if (transformationOptions.MaxRateLimitRetries.HasValue)
+      ingestionConfig.MaxRateLimitRetries = transformationOptions.MaxRateLimitRetries.Value;
     if (transformationOptions.DefaultHeaders != null)
     {
       foreach (var kvp in transformationOptions.DefaultHeaders)
@@ -5319,6 +5321,7 @@ public partial class SearchClient : ISearchClient, IDisposable
         WriteTimeout = _transport._algoliaConfig.WriteTimeout,
         Compression = _transport._algoliaConfig.Compression,
         CustomHosts = _transport._algoliaConfig.CustomHosts,
+        MaxRateLimitRetries = _transport._algoliaConfig.MaxRateLimitRetries,
       },
       factory ?? _loggerFactory
     );
