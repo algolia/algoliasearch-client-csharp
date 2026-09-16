@@ -28,7 +28,7 @@ public partial class CatalogEntry
   /// <param name="kind">Field identifier. (required).</param>
   /// <param name="description">Human-readable description of the field. (required).</param>
   /// <param name="roots">Root stages the field depends on. Two fields are combinable in one query only when their roots intersect. (required).</param>
-  /// <param name="requires">Public ACL identifiers required to read the field, for example `clickAnalyticsEnabled`. (required).</param>
+  /// <param name="requires">Public ACL identifiers required to read the field, for example `revenueAnalyticsEnabled`. (required).</param>
   public CatalogEntry(string kind, string description, List<string> roots, List<string> requires)
   {
     Kind = kind ?? throw new ArgumentNullException(nameof(kind));
@@ -59,9 +59,9 @@ public partial class CatalogEntry
   public List<string> Roots { get; set; }
 
   /// <summary>
-  /// Public ACL identifiers required to read the field, for example `clickAnalyticsEnabled`.
+  /// Public ACL identifiers required to read the field, for example `revenueAnalyticsEnabled`.
   /// </summary>
-  /// <value>Public ACL identifiers required to read the field, for example `clickAnalyticsEnabled`.</value>
+  /// <value>Public ACL identifiers required to read the field, for example `revenueAnalyticsEnabled`.</value>
   [JsonPropertyName("requires")]
   public List<string> Requires { get; set; }
 
