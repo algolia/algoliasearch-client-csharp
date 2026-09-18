@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// - `default`: perform a search query - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+/// - `default`: perform a search query. - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
 /// </summary>
-/// <value>- `default`: perform a search query - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). </value>
+/// <value>- `default`: perform a search query. - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). </value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<SearchTypeFacet>))]
 public enum SearchTypeFacet
 {

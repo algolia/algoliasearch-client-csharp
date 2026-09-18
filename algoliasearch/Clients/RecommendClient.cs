@@ -21,7 +21,7 @@ namespace Algolia.Search.Clients;
 public interface IRecommendClient
 {
   /// <summary>
-  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
+  /// Create or update a batch of Recommend Rules.  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -44,7 +44,7 @@ public interface IRecommendClient
   );
 
   /// <summary>
-  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
+  /// Create or update a batch of Recommend Rules.  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -67,7 +67,7 @@ public interface IRecommendClient
   );
 
   /// <summary>
-  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
+  /// Create or update a batch of Recommend Rules.  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -90,7 +90,7 @@ public interface IRecommendClient
   );
 
   /// <summary>
-  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
+  /// Create or update a batch of Recommend Rules.  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -983,7 +983,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
-    requestOptions.Data = recommendRule;
+    requestOptions.Data = recommendRule ?? new object();
     return await _transport
       .ExecuteRequestAsync<RecommendUpdatedAtResponse>(
         new HttpMethod("POST"),
@@ -1030,7 +1030,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
-    requestOptions.Data = recommendRule;
+    requestOptions.Data = recommendRule ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -1223,7 +1223,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("POST"),
@@ -1262,7 +1262,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -1303,7 +1303,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("PUT"),
@@ -1342,7 +1342,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("PUT"),
@@ -1779,7 +1779,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
-    requestOptions.Data = searchRecommendRulesParams;
+    requestOptions.Data = searchRecommendRulesParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchRecommendRulesResponse>(
@@ -1833,7 +1833,7 @@ public partial class RecommendClient : IRecommendClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
-    requestOptions.Data = searchRecommendRulesParams;
+    requestOptions.Data = searchRecommendRulesParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(

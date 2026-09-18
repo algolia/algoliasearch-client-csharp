@@ -1786,7 +1786,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("POST"),
@@ -1825,7 +1825,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -1866,7 +1866,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("PUT"),
@@ -1905,7 +1905,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("PUT"),
@@ -2968,7 +2968,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
       QueryStringHelper.ParameterToString(compositionID)
     );
 
-    requestOptions.Data = searchCompositionRulesParams;
+    requestOptions.Data = searchCompositionRulesParams ?? new object();
     return await _transport
       .ExecuteRequestAsync<SearchCompositionRulesResponse>(
         new HttpMethod("POST"),
@@ -3019,7 +3019,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
       QueryStringHelper.ParameterToString(compositionID)
     );
 
-    requestOptions.Data = searchCompositionRulesParams;
+    requestOptions.Data = searchCompositionRulesParams ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -3082,7 +3082,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     );
     requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
-    requestOptions.Data = searchForFacetValuesRequest;
+    requestOptions.Data = searchForFacetValuesRequest ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchForFacetValuesResponse>(
@@ -3148,7 +3148,7 @@ public partial class CompositionClient : ICompositionClient, IDisposable
     );
     requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
-    requestOptions.Data = searchForFacetValuesRequest;
+    requestOptions.Data = searchForFacetValuesRequest ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(

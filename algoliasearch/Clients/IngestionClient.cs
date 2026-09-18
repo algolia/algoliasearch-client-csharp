@@ -6234,7 +6234,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("POST"),
@@ -6273,7 +6273,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -6314,7 +6314,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("PUT"),
@@ -6353,7 +6353,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("PUT"),
@@ -9014,7 +9014,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
-    requestOptions.Data = runSourcePayload;
+    requestOptions.Data = runSourcePayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<RunSourceResponse>(
         new HttpMethod("POST"),
@@ -9053,7 +9053,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
-    requestOptions.Data = runSourcePayload;
+    requestOptions.Data = runSourcePayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -9092,7 +9092,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    requestOptions.Data = runTaskPayload;
+    requestOptions.Data = runTaskPayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<RunResponse>(
         new HttpMethod("POST"),
@@ -9128,7 +9128,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    requestOptions.Data = runTaskPayload;
+    requestOptions.Data = runTaskPayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -9168,7 +9168,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    requestOptions.Data = runTaskPayload;
+    requestOptions.Data = runTaskPayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<RunResponse>(
         new HttpMethod("POST"),
@@ -9207,7 +9207,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
 
     requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
-    requestOptions.Data = runTaskPayload;
+    requestOptions.Data = runTaskPayload ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -10509,7 +10509,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
   {
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.Data = sourceCreate;
+    requestOptions.Data = sourceCreate ?? new object();
     requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
     requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
     requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
@@ -10539,7 +10539,7 @@ public partial class IngestionClient : IIngestionClient, IDisposable
   {
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.Data = sourceCreate;
+    requestOptions.Data = sourceCreate ?? new object();
     requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
     requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
     requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);

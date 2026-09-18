@@ -62,9 +62,9 @@ public partial class Params
   public AroundPrecision AroundPrecision { get; set; }
 
   /// <summary>
-  /// Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
+  /// Whether to include a `queryID` attribute in the response. The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
   /// </summary>
-  /// <value>Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started). </value>
+  /// <value>Whether to include a `queryID` attribute in the response. The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started). </value>
   [JsonPropertyName("clickAnalytics")]
   public bool? ClickAnalytics { get; set; }
 
@@ -83,9 +83,9 @@ public partial class Params
   public bool? EnablePersonalization { get; set; }
 
   /// <summary>
-  /// Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+  /// Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
   /// </summary>
-  /// <value>Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard. </value>
+  /// <value>Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard. </value>
   [JsonPropertyName("enableReRanking")]
   public bool? EnableReRanking { get; set; }
 
@@ -103,9 +103,9 @@ public partial class Params
   public FacetFilters FacetFilters { get; set; }
 
   /// <summary>
-  /// Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+  /// Facets for which to retrieve facet values that match the search criteria and the number of matching facet values. To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
   /// </summary>
-  /// <value>Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting). </value>
+  /// <value>Facets for which to retrieve facet values that match the search criteria and the number of matching facet values. To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting). </value>
   [JsonPropertyName("facets")]
   public List<string> Facets { get; set; }
 
@@ -158,9 +158,9 @@ public partial class Params
   public int? MinimumAroundRadius { get; set; }
 
   /// <summary>
-  /// ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+  /// ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches). - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
   /// </summary>
-  /// <value>ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`. </value>
+  /// <value>ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches). - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`. </value>
   [JsonPropertyName("naturalLanguages")]
   public List<SupportedLanguage> NaturalLanguages { get; set; }
 
@@ -198,16 +198,16 @@ public partial class Params
   public List<SupportedLanguage> QueryLanguages { get; set; }
 
   /// <summary>
-  /// Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+  /// Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
   /// </summary>
-  /// <value>Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
+  /// <value>Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
   [JsonPropertyName("relevancyStrictness")]
   public int? RelevancyStrictness { get; set; }
 
   /// <summary>
-  /// Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+  /// Assigns a rule context to the run query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
   /// </summary>
-  /// <value>Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
+  /// <value>Assigns a rule context to the run query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
   [JsonPropertyName("ruleContexts")]
   public List<string> RuleContexts { get; set; }
 

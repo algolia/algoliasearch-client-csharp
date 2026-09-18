@@ -6027,7 +6027,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = browseParams;
+    requestOptions.Data = browseParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<BrowseResponse<T>>(
@@ -6065,7 +6065,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = browseParams;
+    requestOptions.Data = browseParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
@@ -6483,7 +6483,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("POST"),
@@ -6522,7 +6522,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -6563,7 +6563,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("PUT"),
@@ -6602,7 +6602,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("PUT"),
@@ -9725,7 +9725,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
-    requestOptions.Data = searchForFacetValuesRequest;
+    requestOptions.Data = searchForFacetValuesRequest ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchForFacetValuesResponse>(
@@ -9788,7 +9788,7 @@ public partial class SearchClient : ISearchClient, IDisposable
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
     requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
-    requestOptions.Data = searchForFacetValuesRequest;
+    requestOptions.Data = searchForFacetValuesRequest ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
@@ -9835,7 +9835,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchRulesParams;
+    requestOptions.Data = searchRulesParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchRulesResponse>(
@@ -9875,7 +9875,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchRulesParams;
+    requestOptions.Data = searchRulesParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
@@ -9919,7 +9919,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchParams;
+    requestOptions.Data = searchParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchResponse<T>>(
@@ -9963,7 +9963,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchParams;
+    requestOptions.Data = searchParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
@@ -10007,7 +10007,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchSynonymsParams;
+    requestOptions.Data = searchSynonymsParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<SearchSynonymsResponse>(
@@ -10051,7 +10051,7 @@ public partial class SearchClient : ISearchClient, IDisposable
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    requestOptions.Data = searchSynonymsParams;
+    requestOptions.Data = searchSynonymsParams ?? new object();
     requestOptions.UseReadTransporter = true;
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(

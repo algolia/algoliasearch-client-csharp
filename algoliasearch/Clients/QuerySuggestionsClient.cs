@@ -1198,7 +1198,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient, IDisposab
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("POST"),
@@ -1237,7 +1237,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient, IDisposab
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("POST"),
@@ -1278,7 +1278,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient, IDisposab
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<object>(
         new HttpMethod("PUT"),
@@ -1317,7 +1317,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient, IDisposab
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    requestOptions.Data = body;
+    requestOptions.Data = body ?? new object();
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("PUT"),

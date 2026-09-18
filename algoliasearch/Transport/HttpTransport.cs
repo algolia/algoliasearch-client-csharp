@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
@@ -171,11 +170,6 @@ internal class HttpTransport : IDisposable
       while (!moveToNextHost)
       {
         request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress, _logger);
-
-        if (request.Body == null && (method == HttpMethod.Post || method == HttpMethod.Put))
-        {
-          request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{}"));
-        }
 
         if (_logger.IsEnabled(LogLevel.Trace))
         {
