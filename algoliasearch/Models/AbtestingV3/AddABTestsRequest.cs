@@ -50,6 +50,13 @@ public partial class AddABTestsRequest
   public string Name { get; set; }
 
   /// <summary>
+  /// Expected outcome of the A/B test.
+  /// </summary>
+  /// <value>Expected outcome of the A/B test.</value>
+  [JsonPropertyName("hypothesis")]
+  public string Hypothesis { get; set; }
+
+  /// <summary>
   /// A/B test variants.
   /// </summary>
   /// <value>A/B test variants.</value>
@@ -85,6 +92,7 @@ public partial class AddABTestsRequest
     StringBuilder sb = new StringBuilder();
     sb.Append("class AddABTestsRequest {\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
+    sb.Append("  Hypothesis: ").Append(Hypothesis).Append("\n");
     sb.Append("  Variants: ").Append(Variants).Append("\n");
     sb.Append("  Metrics: ").Append(Metrics).Append("\n");
     sb.Append("  Configuration: ").Append(Configuration).Append("\n");
@@ -116,6 +124,10 @@ public partial class AddABTestsRequest
 
     return (Name == input.Name || (Name != null && Name.Equals(input.Name)))
       && (
+        Hypothesis == input.Hypothesis
+        || (Hypothesis != null && Hypothesis.Equals(input.Hypothesis))
+      )
+      && (
         Variants == input.Variants
         || Variants != null && input.Variants != null && Variants.SequenceEqual(input.Variants)
       )
@@ -142,6 +154,10 @@ public partial class AddABTestsRequest
       if (Name != null)
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
+      }
+      if (Hypothesis != null)
+      {
+        hashCode = (hashCode * 59) + Hypothesis.GetHashCode();
       }
       if (Variants != null)
       {

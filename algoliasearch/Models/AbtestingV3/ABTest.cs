@@ -36,6 +36,7 @@ public partial class ABTest
   /// <param name="createdAt">Date and time when the A/B test was created, in RFC 3339 format. (required).</param>
   /// <param name="endAt">End date and time of the A/B test, in RFC 3339 format. (required).</param>
   /// <param name="name">A/B test name. (required).</param>
+  /// <param name="hypothesis">Expected outcome of the A/B test. (required).</param>
   /// <param name="status">status (required).</param>
   /// <param name="variants">A/B test variants.  The first variant is your _control_ index, typically your production index. All of the additional variants are indexes with changed settings that you want to test against the control.  (required).</param>
   public ABTest(
@@ -44,6 +45,7 @@ public partial class ABTest
     string createdAt,
     string endAt,
     string name,
+    string hypothesis,
     Status? status,
     List<Variant> variants
   )
@@ -53,6 +55,7 @@ public partial class ABTest
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
     EndAt = endAt ?? throw new ArgumentNullException(nameof(endAt));
     Name = name ?? throw new ArgumentNullException(nameof(name));
+    Hypothesis = hypothesis ?? throw new ArgumentNullException(nameof(hypothesis));
     Status = status;
     Variants = variants ?? throw new ArgumentNullException(nameof(variants));
   }
@@ -100,6 +103,13 @@ public partial class ABTest
   public string Name { get; set; }
 
   /// <summary>
+  /// Expected outcome of the A/B test.
+  /// </summary>
+  /// <value>Expected outcome of the A/B test.</value>
+  [JsonPropertyName("hypothesis")]
+  public string Hypothesis { get; set; }
+
+  /// <summary>
   /// A/B test variants.  The first variant is your _control_ index, typically your production index. All of the additional variants are indexes with changed settings that you want to test against the control.
   /// </summary>
   /// <value>A/B test variants.  The first variant is your _control_ index, typically your production index. All of the additional variants are indexes with changed settings that you want to test against the control. </value>
@@ -132,6 +142,7 @@ public partial class ABTest
     sb.Append("  EndAt: ").Append(EndAt).Append("\n");
     sb.Append("  StoppedAt: ").Append(StoppedAt).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
+    sb.Append("  Hypothesis: ").Append(Hypothesis).Append("\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
     sb.Append("  Variants: ").Append(Variants).Append("\n");
     sb.Append("  Configuration: ").Append(Configuration).Append("\n");
@@ -167,6 +178,10 @@ public partial class ABTest
       && (EndAt == input.EndAt || (EndAt != null && EndAt.Equals(input.EndAt)))
       && (StoppedAt == input.StoppedAt || (StoppedAt != null && StoppedAt.Equals(input.StoppedAt)))
       && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
+      && (
+        Hypothesis == input.Hypothesis
+        || (Hypothesis != null && Hypothesis.Equals(input.Hypothesis))
+      )
       && (Status == input.Status || Status.Equals(input.Status))
       && (
         Variants == input.Variants
@@ -208,6 +223,10 @@ public partial class ABTest
       if (Name != null)
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
+      }
+      if (Hypothesis != null)
+      {
+        hashCode = (hashCode * 59) + Hypothesis.GetHashCode();
       }
       hashCode = (hashCode * 59) + Status.GetHashCode();
       if (Variants != null)
