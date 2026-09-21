@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AbtestingV3;
 
 /// <summary>
-/// Configuration for the smallest difference between test variants you want to detect.
+/// Configuration for the smallest difference between test variants you want to detect, used to estimate the required sample size.
 /// </summary>
 public partial class MinimumDetectableEffect
 {

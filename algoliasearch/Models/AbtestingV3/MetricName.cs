@@ -48,62 +48,80 @@ public enum MetricName
   NoResultCount = 5,
 
   /// <summary>
+  /// Enum TrackedNoResultCount for value: tracked_no_result_count
+  /// </summary>
+  [JsonPropertyName("tracked_no_result_count")]
+  TrackedNoResultCount = 6,
+
+  /// <summary>
   /// Enum AddToCartCount for value: add_to_cart_count
   /// </summary>
   [JsonPropertyName("add_to_cart_count")]
-  AddToCartCount = 6,
+  AddToCartCount = 7,
 
   /// <summary>
   /// Enum PurchaseCount for value: purchase_count
   /// </summary>
   [JsonPropertyName("purchase_count")]
-  PurchaseCount = 7,
+  PurchaseCount = 8,
 
   /// <summary>
   /// Enum ClickedSearchCount for value: clicked_search_count
   /// </summary>
   [JsonPropertyName("clicked_search_count")]
-  ClickedSearchCount = 8,
+  ClickedSearchCount = 9,
 
   /// <summary>
   /// Enum ConvertedSearchCount for value: converted_search_count
   /// </summary>
   [JsonPropertyName("converted_search_count")]
-  ConvertedSearchCount = 9,
+  ConvertedSearchCount = 10,
 
   /// <summary>
   /// Enum ClickThroughRate for value: click_through_rate
   /// </summary>
   [JsonPropertyName("click_through_rate")]
-  ClickThroughRate = 10,
+  ClickThroughRate = 11,
 
   /// <summary>
   /// Enum ConversionRate for value: conversion_rate
   /// </summary>
   [JsonPropertyName("conversion_rate")]
-  ConversionRate = 11,
+  ConversionRate = 12,
 
   /// <summary>
   /// Enum AddToCartRate for value: add_to_cart_rate
   /// </summary>
   [JsonPropertyName("add_to_cart_rate")]
-  AddToCartRate = 12,
+  AddToCartRate = 13,
 
   /// <summary>
   /// Enum PurchaseRate for value: purchase_rate
   /// </summary>
   [JsonPropertyName("purchase_rate")]
-  PurchaseRate = 13,
+  PurchaseRate = 14,
 
   /// <summary>
   /// Enum AverageClickPosition for value: average_click_position
   /// </summary>
   [JsonPropertyName("average_click_position")]
-  AverageClickPosition = 14,
+  AverageClickPosition = 15,
 
   /// <summary>
   /// Enum Revenue for value: revenue
   /// </summary>
   [JsonPropertyName("revenue")]
-  Revenue = 15,
+  Revenue = 16,
+
+  /// <summary>
+  /// Enum RevenuePerSearch for value: revenue_per_search
+  /// </summary>
+  [JsonPropertyName("revenue_per_search")]
+  RevenuePerSearch = 17,
+
+  /// <summary>
+  /// Enum AverageOrderValue for value: average_order_value
+  /// </summary>
+  [JsonPropertyName("average_order_value")]
+  AverageOrderValue = 18,
 }

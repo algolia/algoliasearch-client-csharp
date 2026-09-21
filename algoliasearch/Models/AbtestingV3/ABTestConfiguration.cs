@@ -23,6 +23,18 @@ public partial class ABTestConfiguration
   public ErrorCorrectionType? ErrorCorrection { get; set; }
 
   /// <summary>
+  /// Gets or Sets Method
+  /// </summary>
+  [JsonPropertyName("method")]
+  public AnalysisMethod? Method { get; set; }
+
+  /// <summary>
+  /// Gets or Sets PrimaryMetric
+  /// </summary>
+  [JsonPropertyName("primaryMetric")]
+  public PrimaryMetric? PrimaryMetric { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the ABTestConfiguration class.
   /// </summary>
   public ABTestConfiguration() { }
@@ -51,6 +63,8 @@ public partial class ABTestConfiguration
     sb.Append("  MinimumDetectableEffect: ").Append(MinimumDetectableEffect).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("  ErrorCorrection: ").Append(ErrorCorrection).Append("\n");
+    sb.Append("  Method: ").Append(Method).Append("\n");
+    sb.Append("  PrimaryMetric: ").Append(PrimaryMetric).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -87,9 +101,9 @@ public partial class ABTestConfiguration
         Filters == input.Filters
         || Filters != null && input.Filters != null && Filters.SequenceEqual(input.Filters)
       )
-      && (
-        ErrorCorrection == input.ErrorCorrection || ErrorCorrection.Equals(input.ErrorCorrection)
-      );
+      && (ErrorCorrection == input.ErrorCorrection || ErrorCorrection.Equals(input.ErrorCorrection))
+      && (Method == input.Method || Method.Equals(input.Method))
+      && (PrimaryMetric == input.PrimaryMetric || PrimaryMetric.Equals(input.PrimaryMetric));
   }
 
   /// <summary>
@@ -110,6 +124,8 @@ public partial class ABTestConfiguration
         hashCode = (hashCode * 59) + Filters.GetHashCode();
       }
       hashCode = (hashCode * 59) + ErrorCorrection.GetHashCode();
+      hashCode = (hashCode * 59) + Method.GetHashCode();
+      hashCode = (hashCode * 59) + PrimaryMetric.GetHashCode();
       return hashCode;
     }
   }

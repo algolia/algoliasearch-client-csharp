@@ -647,6 +647,7 @@ public interface IAbtestingV3Client
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="id">Unique A/B test identifier.</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -655,6 +656,7 @@ public interface IAbtestingV3Client
   /// <returns>Task of ABTest</returns>
   Task<ABTest> GetABTestAsync(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -666,6 +668,7 @@ public interface IAbtestingV3Client
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="id">Unique A/B test identifier.</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -674,6 +677,7 @@ public interface IAbtestingV3Client
   /// <returns>ABTest</returns>
   ABTest GetABTest(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -685,6 +689,7 @@ public interface IAbtestingV3Client
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="id">Unique A/B test identifier.</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -693,6 +698,7 @@ public interface IAbtestingV3Client
   /// <returns>Task of ABTest</returns>
   Task<AlgoliaHttpResponse> GetABTestWithHTTPInfoAsync(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -704,6 +710,7 @@ public interface IAbtestingV3Client
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="id">Unique A/B test identifier.</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -712,6 +719,7 @@ public interface IAbtestingV3Client
   /// <returns>ABTest</returns>
   AlgoliaHttpResponse GetABTestWithHTTPInfo(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -802,6 +810,7 @@ public interface IAbtestingV3Client
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="metric">List of metrics to retrieve. If not specified, all metrics are returned. (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -813,6 +822,7 @@ public interface IAbtestingV3Client
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -827,6 +837,7 @@ public interface IAbtestingV3Client
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="metric">List of metrics to retrieve. If not specified, all metrics are returned. (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -838,6 +849,7 @@ public interface IAbtestingV3Client
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -852,6 +864,7 @@ public interface IAbtestingV3Client
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="metric">List of metrics to retrieve. If not specified, all metrics are returned. (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -863,6 +876,7 @@ public interface IAbtestingV3Client
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -877,6 +891,7 @@ public interface IAbtestingV3Client
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="metric">List of metrics to retrieve. If not specified, all metrics are returned. (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -888,6 +903,7 @@ public interface IAbtestingV3Client
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -903,6 +919,7 @@ public interface IAbtestingV3Client
   /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
   /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="direction">Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first.  (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -915,6 +932,7 @@ public interface IAbtestingV3Client
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -930,6 +948,7 @@ public interface IAbtestingV3Client
   /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
   /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="direction">Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first.  (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -942,6 +961,7 @@ public interface IAbtestingV3Client
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -957,6 +977,7 @@ public interface IAbtestingV3Client
   /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
   /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="direction">Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first.  (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -969,6 +990,7 @@ public interface IAbtestingV3Client
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -984,6 +1006,7 @@ public interface IAbtestingV3Client
   /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
   /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="direction">Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first.  (optional)</param>
+  /// <param name="methods">Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed.  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -996,6 +1019,7 @@ public interface IAbtestingV3Client
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1848,6 +1872,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
   /// <inheritdoc />
   public async Task<ABTest> GetABTestAsync(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -1856,6 +1881,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
 
     requestOptions.PathParameters.Add("id", QueryStringHelper.ParameterToString(id));
 
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<ABTest>(
         new HttpMethod("GET"),
@@ -1869,13 +1895,15 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
   /// <inheritdoc />
   public ABTest GetABTest(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
-  ) => AsyncHelper.RunSync(() => GetABTestAsync(id, options, cancellationToken));
+  ) => AsyncHelper.RunSync(() => GetABTestAsync(id, methods, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<AlgoliaHttpResponse> GetABTestWithHTTPInfoAsync(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -1884,6 +1912,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
 
     requestOptions.PathParameters.Add("id", QueryStringHelper.ParameterToString(id));
 
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("GET"),
@@ -1897,9 +1926,11 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
   /// <inheritdoc />
   public AlgoliaHttpResponse GetABTestWithHTTPInfo(
     int id,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
-  ) => AsyncHelper.RunSync(() => GetABTestWithHTTPInfoAsync(id, options, cancellationToken));
+  ) =>
+    AsyncHelper.RunSync(() => GetABTestWithHTTPInfoAsync(id, methods, options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<ABTestSettingsResponse> GetABTestSettingsAsync(
@@ -1964,6 +1995,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -1975,6 +2007,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("metric", metric);
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<Timeseries>(
         new HttpMethod("GET"),
@@ -1991,11 +2024,12 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      GetTimeseriesAsync(id, startDate, endDate, metric, options, cancellationToken)
+      GetTimeseriesAsync(id, startDate, endDate, metric, methods, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -2004,6 +2038,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -2015,6 +2050,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("metric", metric);
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("GET"),
@@ -2031,11 +2067,20 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string startDate = default,
     string endDate = default,
     List<MetricName> metric = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      GetTimeseriesWithHTTPInfoAsync(id, startDate, endDate, metric, options, cancellationToken)
+      GetTimeseriesWithHTTPInfoAsync(
+        id,
+        startDate,
+        endDate,
+        metric,
+        methods,
+        options,
+        cancellationToken
+      )
     );
 
   /// <inheritdoc />
@@ -2045,6 +2090,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -2056,6 +2102,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     requestOptions.AddQueryParameter("indexPrefix", indexPrefix);
     requestOptions.AddQueryParameter("indexSuffix", indexSuffix);
     requestOptions.AddQueryParameter("direction", direction);
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<ListABTestsResponse>(
         new HttpMethod("GET"),
@@ -2073,6 +2120,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -2083,6 +2131,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
         indexPrefix,
         indexSuffix,
         direction,
+        methods,
         options,
         cancellationToken
       )
@@ -2095,6 +2144,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -2106,6 +2156,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     requestOptions.AddQueryParameter("indexPrefix", indexPrefix);
     requestOptions.AddQueryParameter("indexSuffix", indexSuffix);
     requestOptions.AddQueryParameter("direction", direction);
+    requestOptions.AddQueryParameter("methods", methods);
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("GET"),
@@ -2123,6 +2174,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
     string indexPrefix = default,
     string indexSuffix = default,
     Direction? direction = default,
+    List<AnalysisMethod> methods = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -2133,6 +2185,7 @@ public partial class AbtestingV3Client : IAbtestingV3Client, IDisposable
         indexPrefix,
         indexSuffix,
         direction,
+        methods,
         options,
         cancellationToken
       )
