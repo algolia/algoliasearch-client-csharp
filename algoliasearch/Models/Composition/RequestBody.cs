@@ -35,6 +35,12 @@ public partial class RequestBody
   public List<string> FeedsOrder { get; set; }
 
   /// <summary>
+  /// Gets or Sets ExternalProvider
+  /// </summary>
+  [JsonPropertyName("externalProvider")]
+  public ExternalProvider ExternalProvider { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -44,6 +50,7 @@ public partial class RequestBody
     sb.Append("class RequestBody {\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  FeedsOrder: ").Append(FeedsOrder).Append("\n");
+    sb.Append("  ExternalProvider: ").Append(ExternalProvider).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -75,6 +82,10 @@ public partial class RequestBody
         || FeedsOrder != null
           && input.FeedsOrder != null
           && FeedsOrder.SequenceEqual(input.FeedsOrder)
+      )
+      && (
+        ExternalProvider == input.ExternalProvider
+        || (ExternalProvider != null && ExternalProvider.Equals(input.ExternalProvider))
       );
   }
 
@@ -94,6 +105,10 @@ public partial class RequestBody
       if (FeedsOrder != null)
       {
         hashCode = (hashCode * 59) + FeedsOrder.GetHashCode();
+      }
+      if (ExternalProvider != null)
+      {
+        hashCode = (hashCode * 59) + ExternalProvider.GetHashCode();
       }
       return hashCode;
     }

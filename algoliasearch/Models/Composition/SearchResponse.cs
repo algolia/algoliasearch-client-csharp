@@ -49,6 +49,13 @@ public partial class SearchResponse<T>
   public List<SearchResultsItem<T>> Results { get; set; }
 
   /// <summary>
+  /// Non-critical errors encountered while processing the request that may have affected the returned results (for example, an external provider failure that fell back to another result set).
+  /// </summary>
+  /// <value>Non-critical errors encountered while processing the request that may have affected the returned results (for example, an external provider failure that fell back to another result set).</value>
+  [JsonPropertyName("errors")]
+  public List<ProcessingError> Errors { get; set; }
+
+  /// <summary>
   /// Gets or Sets additional properties
   /// </summary>
   [JsonExtensionData]
@@ -64,6 +71,7 @@ public partial class SearchResponse<T>
     sb.Append("class SearchResponse {\n");
     sb.Append("  Compositions: ").Append(Compositions).Append("\n");
     sb.Append("  Results: ").Append(Results).Append("\n");
+    sb.Append("  Errors: ").Append(Errors).Append("\n");
     sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -99,6 +107,10 @@ public partial class SearchResponse<T>
         || Results != null && input.Results != null && Results.SequenceEqual(input.Results)
       )
       && (
+        Errors == input.Errors
+        || Errors != null && input.Errors != null && Errors.SequenceEqual(input.Errors)
+      )
+      && (
         AdditionalProperties.Count == input.AdditionalProperties.Count
         && !AdditionalProperties.Except(input.AdditionalProperties).Any()
       );
@@ -120,6 +132,10 @@ public partial class SearchResponse<T>
       if (Results != null)
       {
         hashCode = (hashCode * 59) + Results.GetHashCode();
+      }
+      if (Errors != null)
+      {
+        hashCode = (hashCode * 59) + Errors.GetHashCode();
       }
       if (AdditionalProperties != null)
       {

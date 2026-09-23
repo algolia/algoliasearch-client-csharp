@@ -54,6 +54,17 @@ public partial class InjectedItemSource : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the InjectedItemSource class
+  /// with a InjectedItemExternalProviderSource
+  /// </summary>
+  /// <param name="actualInstance">An instance of InjectedItemExternalProviderSource.</param>
+  public InjectedItemSource(InjectedItemExternalProviderSource actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
@@ -89,6 +100,16 @@ public partial class InjectedItemSource : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `InjectedItemExternalProviderSource`. If the actual instance is not `InjectedItemExternalProviderSource`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of InjectedItemExternalProviderSource</returns>
+  public InjectedItemExternalProviderSource AsInjectedItemExternalProviderSource()
+  {
+    return (InjectedItemExternalProviderSource)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `InjectedItemSearchSource` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -113,6 +134,15 @@ public partial class InjectedItemSource : AbstractSchema
   public bool IsInjectedItemRecommendSource()
   {
     return ActualInstance.GetType() == typeof(InjectedItemRecommendSource);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `InjectedItemExternalProviderSource` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsInjectedItemExternalProviderSource()
+  {
+    return ActualInstance.GetType() == typeof(InjectedItemExternalProviderSource);
   }
 
   /// <summary>
@@ -243,6 +273,22 @@ public class InjectedItemSourceJsonConverter : JsonConverter<InjectedItemSource>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into InjectedItemRecommendSource: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("externalProvider", out _))
+    {
+      try
+      {
+        return new InjectedItemSource(
+          jsonDocument.Deserialize<InjectedItemExternalProviderSource>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into InjectedItemExternalProviderSource: {exception}"
         );
       }
     }

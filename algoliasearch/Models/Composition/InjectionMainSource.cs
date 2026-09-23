@@ -43,6 +43,17 @@ public partial class InjectionMainSource : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the InjectionMainSource class
+  /// with a InjectionMainExternalProviderSource
+  /// </summary>
+  /// <param name="actualInstance">An instance of InjectionMainExternalProviderSource.</param>
+  public InjectionMainSource(InjectionMainExternalProviderSource actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
@@ -68,6 +79,16 @@ public partial class InjectionMainSource : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `InjectionMainExternalProviderSource`. If the actual instance is not `InjectionMainExternalProviderSource`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of InjectionMainExternalProviderSource</returns>
+  public InjectionMainExternalProviderSource AsInjectionMainExternalProviderSource()
+  {
+    return (InjectionMainExternalProviderSource)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `InjectionMainSearchSource` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -83,6 +104,15 @@ public partial class InjectionMainSource : AbstractSchema
   public bool IsInjectionMainRecommendSource()
   {
     return ActualInstance.GetType() == typeof(InjectionMainRecommendSource);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `InjectionMainExternalProviderSource` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsInjectionMainExternalProviderSource()
+  {
+    return ActualInstance.GetType() == typeof(InjectionMainExternalProviderSource);
   }
 
   /// <summary>
@@ -197,6 +227,22 @@ public class InjectionMainSourceJsonConverter : JsonConverter<InjectionMainSourc
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into InjectionMainRecommendSource: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("externalProvider", out _))
+    {
+      try
+      {
+        return new InjectionMainSource(
+          jsonDocument.Deserialize<InjectionMainExternalProviderSource>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into InjectionMainExternalProviderSource: {exception}"
         );
       }
     }
