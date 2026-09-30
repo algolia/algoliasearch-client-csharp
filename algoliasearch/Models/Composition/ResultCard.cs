@@ -9,30 +9,24 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Algolia.Search.Serializer;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Widgets returned from any rules that are applied to the current search.
+/// Agent Studio Result Card to display for a given search.
 /// </summary>
-public partial class Widgets
+public partial class ResultCard
 {
   /// <summary>
-  /// Initializes a new instance of the Widgets class.
+  /// Initializes a new instance of the ResultCard class.
   /// </summary>
-  public Widgets() { }
+  public ResultCard() { }
 
   /// <summary>
-  /// Banners defined in the Merchandising Studio for a given search.
+  /// Whether to show the Result Card for the current search.
   /// </summary>
-  /// <value>Banners defined in the Merchandising Studio for a given search.</value>
-  [JsonPropertyName("banners")]
-  public List<Banner> Banners { get; set; }
-
-  /// <summary>
-  /// Gets or Sets ResultCard
-  /// </summary>
-  [JsonPropertyName("resultCard")]
-  public ResultCard ResultCard { get; set; }
+  /// <value>Whether to show the Result Card for the current search.</value>
+  [JsonPropertyName("enabled")]
+  public bool? Enabled { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -41,9 +35,8 @@ public partial class Widgets
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Widgets {\n");
-    sb.Append("  Banners: ").Append(Banners).Append("\n");
-    sb.Append("  ResultCard: ").Append(ResultCard).Append("\n");
+    sb.Append("class ResultCard {\n");
+    sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -64,19 +57,12 @@ public partial class Widgets
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Widgets input)
+    if (obj is not ResultCard input)
     {
       return false;
     }
 
-    return (
-        Banners == input.Banners
-        || Banners != null && input.Banners != null && Banners.SequenceEqual(input.Banners)
-      )
-      && (
-        ResultCard == input.ResultCard
-        || (ResultCard != null && ResultCard.Equals(input.ResultCard))
-      );
+    return (Enabled == input.Enabled || Enabled.Equals(input.Enabled));
   }
 
   /// <summary>
@@ -88,14 +74,7 @@ public partial class Widgets
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Banners != null)
-      {
-        hashCode = (hashCode * 59) + Banners.GetHashCode();
-      }
-      if (ResultCard != null)
-      {
-        hashCode = (hashCode * 59) + ResultCard.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Enabled.GetHashCode();
       return hashCode;
     }
   }

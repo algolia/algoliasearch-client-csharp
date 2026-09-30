@@ -29,6 +29,12 @@ public partial class Widgets
   public List<Banner> Banners { get; set; }
 
   /// <summary>
+  /// Gets or Sets ResultCard
+  /// </summary>
+  [JsonPropertyName("resultCard")]
+  public ResultCard ResultCard { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -37,6 +43,7 @@ public partial class Widgets
     StringBuilder sb = new StringBuilder();
     sb.Append("class Widgets {\n");
     sb.Append("  Banners: ").Append(Banners).Append("\n");
+    sb.Append("  ResultCard: ").Append(ResultCard).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -63,9 +70,13 @@ public partial class Widgets
     }
 
     return (
-      Banners == input.Banners
-      || Banners != null && input.Banners != null && Banners.SequenceEqual(input.Banners)
-    );
+        Banners == input.Banners
+        || Banners != null && input.Banners != null && Banners.SequenceEqual(input.Banners)
+      )
+      && (
+        ResultCard == input.ResultCard
+        || (ResultCard != null && ResultCard.Equals(input.ResultCard))
+      );
   }
 
   /// <summary>
@@ -80,6 +91,10 @@ public partial class Widgets
       if (Banners != null)
       {
         hashCode = (hashCode * 59) + Banners.GetHashCode();
+      }
+      if (ResultCard != null)
+      {
+        hashCode = (hashCode * 59) + ResultCard.GetHashCode();
       }
       return hashCode;
     }
