@@ -77,8 +77,8 @@ public partial class InjectedItemExternalProvider
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  ConfigurationID: ").Append(ConfigurationID).Append("\n");
     sb.Append("  ConfigurationParams: ").Append(ConfigurationParams).Append("\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Ordering: ").Append(Ordering).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -115,8 +115,8 @@ public partial class InjectedItemExternalProvider
           && input.ConfigurationParams != null
           && ConfigurationParams.SequenceEqual(input.ConfigurationParams)
       )
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
-      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering));
+      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering))
+      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -140,11 +140,11 @@ public partial class InjectedItemExternalProvider
       {
         hashCode = (hashCode * 59) + ConfigurationParams.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       if (Params != null)
       {
         hashCode = (hashCode * 59) + Params.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       return hashCode;
     }
   }

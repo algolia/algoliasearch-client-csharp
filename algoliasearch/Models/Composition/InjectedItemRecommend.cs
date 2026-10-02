@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Recommend
+/// InjectedItemRecommend
 /// </summary>
-public partial class Recommend
+public partial class InjectedItemRecommend
 {
   /// <summary>
   /// Gets or Sets Model
@@ -23,18 +23,18 @@ public partial class Recommend
   public Model? Model { get; set; }
 
   /// <summary>
-  /// Initializes a new instance of the Recommend class.
+  /// Initializes a new instance of the InjectedItemRecommend class.
   /// </summary>
   [JsonConstructor]
-  public Recommend() { }
+  public InjectedItemRecommend() { }
 
   /// <summary>
-  /// Initializes a new instance of the Recommend class.
+  /// Initializes a new instance of the InjectedItemRecommend class.
   /// </summary>
   /// <param name="indexName">Index to retrieve recommendations from. (required).</param>
   /// <param name="model">model (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included. (required).</param>
-  public Recommend(string indexName, Model? model, int threshold)
+  public InjectedItemRecommend(string indexName, Model? model, int threshold)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     Model = model;
@@ -74,7 +74,7 @@ public partial class Recommend
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Recommend {\n");
+    sb.Append("class InjectedItemRecommend {\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
@@ -100,7 +100,7 @@ public partial class Recommend
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Recommend input)
+    if (obj is not InjectedItemRecommend input)
     {
       return false;
     }

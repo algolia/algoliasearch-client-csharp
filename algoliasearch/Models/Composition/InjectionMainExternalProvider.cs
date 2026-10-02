@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// MainExternalProvider
+/// InjectionMainExternalProvider
 /// </summary>
-public partial class MainExternalProvider
+public partial class InjectionMainExternalProvider
 {
   /// <summary>
   /// Gets or Sets Ordering
@@ -23,17 +23,17 @@ public partial class MainExternalProvider
   public ExternalProviderOrdering? Ordering { get; set; }
 
   /// <summary>
-  /// Initializes a new instance of the MainExternalProvider class.
+  /// Initializes a new instance of the InjectionMainExternalProvider class.
   /// </summary>
   [JsonConstructor]
-  public MainExternalProvider() { }
+  public InjectionMainExternalProvider() { }
 
   /// <summary>
-  /// Initializes a new instance of the MainExternalProvider class.
+  /// Initializes a new instance of the InjectionMainExternalProvider class.
   /// </summary>
   /// <param name="index">Algolia index used to fetch the records. (required).</param>
   /// <param name="configurationID">Identifier of the external provider configuration. (required).</param>
-  public MainExternalProvider(string index, string configurationID)
+  public InjectionMainExternalProvider(string index, string configurationID)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
     ConfigurationID = configurationID ?? throw new ArgumentNullException(nameof(configurationID));
@@ -73,12 +73,12 @@ public partial class MainExternalProvider
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class MainExternalProvider {\n");
+    sb.Append("class InjectionMainExternalProvider {\n");
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  ConfigurationID: ").Append(ConfigurationID).Append("\n");
     sb.Append("  ConfigurationParams: ").Append(ConfigurationParams).Append("\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Ordering: ").Append(Ordering).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -99,7 +99,7 @@ public partial class MainExternalProvider
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not MainExternalProvider input)
+    if (obj is not InjectionMainExternalProvider input)
     {
       return false;
     }
@@ -115,8 +115,8 @@ public partial class MainExternalProvider
           && input.ConfigurationParams != null
           && ConfigurationParams.SequenceEqual(input.ConfigurationParams)
       )
-      && (Params == input.Params || (Params != null && Params.Equals(input.Params)))
-      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering));
+      && (Ordering == input.Ordering || Ordering.Equals(input.Ordering))
+      && (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -140,11 +140,11 @@ public partial class MainExternalProvider
       {
         hashCode = (hashCode * 59) + ConfigurationParams.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       if (Params != null)
       {
         hashCode = (hashCode * 59) + Params.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Ordering.GetHashCode();
       return hashCode;
     }
   }

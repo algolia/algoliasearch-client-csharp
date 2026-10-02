@@ -26,7 +26,7 @@ public partial class InjectedItemRecommendSource
   /// Initializes a new instance of the InjectedItemRecommendSource class.
   /// </summary>
   /// <param name="recommend">recommend (required).</param>
-  public InjectedItemRecommendSource(Recommend recommend)
+  public InjectedItemRecommendSource(InjectedItemRecommend recommend)
   {
     Recommend = recommend ?? throw new ArgumentNullException(nameof(recommend));
   }
@@ -35,7 +35,7 @@ public partial class InjectedItemRecommendSource
   /// Gets or Sets Recommend
   /// </summary>
   [JsonPropertyName("recommend")]
-  public Recommend Recommend { get; set; }
+  public InjectedItemRecommend Recommend { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

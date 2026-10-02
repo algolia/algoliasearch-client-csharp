@@ -12,29 +12,29 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// MainSearch
+/// InjectionMainSearch
 /// </summary>
-public partial class MainSearch
+public partial class InjectionMainSearch
 {
   /// <summary>
-  /// Initializes a new instance of the MainSearch class.
+  /// Initializes a new instance of the InjectionMainSearch class.
   /// </summary>
   [JsonConstructor]
-  public MainSearch() { }
+  public InjectionMainSearch() { }
 
   /// <summary>
-  /// Initializes a new instance of the MainSearch class.
+  /// Initializes a new instance of the InjectionMainSearch class.
   /// </summary>
-  /// <param name="index">Index to retrieve search results from. (required).</param>
-  public MainSearch(string index)
+  /// <param name="index">Algolia index used to retrieve records. (required).</param>
+  public InjectionMainSearch(string index)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Index to retrieve search results from.
+  /// Algolia index used to retrieve records.
   /// </summary>
-  /// <value>Index to retrieve search results from.</value>
+  /// <value>Algolia index used to retrieve records.</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 
@@ -51,7 +51,7 @@ public partial class MainSearch
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class MainSearch {\n");
+    sb.Append("class InjectionMainSearch {\n");
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
@@ -74,7 +74,7 @@ public partial class MainSearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not MainSearch input)
+    if (obj is not InjectionMainSearch input)
     {
       return false;
     }

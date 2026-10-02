@@ -25,16 +25,16 @@ public partial class InjectedItemSearch
   /// <summary>
   /// Initializes a new instance of the InjectedItemSearch class.
   /// </summary>
-  /// <param name="index">Composition Index name. (required).</param>
+  /// <param name="index">Algolia index used to retrieve records. (required).</param>
   public InjectedItemSearch(string index)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
   }
 
   /// <summary>
-  /// Composition Index name.
+  /// Algolia index used to retrieve records.
   /// </summary>
-  /// <value>Composition Index name.</value>
+  /// <value>Algolia index used to retrieve records.</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 

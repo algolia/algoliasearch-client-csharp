@@ -26,7 +26,7 @@ public partial class InjectionMainSearchSource
   /// Initializes a new instance of the InjectionMainSearchSource class.
   /// </summary>
   /// <param name="search">search (required).</param>
-  public InjectionMainSearchSource(MainSearch search)
+  public InjectionMainSearchSource(InjectionMainSearch search)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
   }
@@ -35,7 +35,7 @@ public partial class InjectionMainSearchSource
   /// Gets or Sets Search
   /// </summary>
   [JsonPropertyName("search")]
-  public MainSearch Search { get; set; }
+  public InjectionMainSearch Search { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -26,7 +26,7 @@ public partial class InjectionMainRecommendSource
   /// Initializes a new instance of the InjectionMainRecommendSource class.
   /// </summary>
   /// <param name="recommend">recommend (required).</param>
-  public InjectionMainRecommendSource(MainRecommend recommend)
+  public InjectionMainRecommendSource(InjectionMainRecommend recommend)
   {
     Recommend = recommend ?? throw new ArgumentNullException(nameof(recommend));
   }
@@ -35,7 +35,7 @@ public partial class InjectionMainRecommendSource
   /// Gets or Sets Recommend
   /// </summary>
   [JsonPropertyName("recommend")]
-  public MainRecommend Recommend { get; set; }
+  public InjectionMainRecommend Recommend { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

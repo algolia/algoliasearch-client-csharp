@@ -26,7 +26,7 @@ public partial class InjectionMainExternalProviderSource
   /// Initializes a new instance of the InjectionMainExternalProviderSource class.
   /// </summary>
   /// <param name="externalProvider">externalProvider (required).</param>
-  public InjectionMainExternalProviderSource(MainExternalProvider externalProvider)
+  public InjectionMainExternalProviderSource(InjectionMainExternalProvider externalProvider)
   {
     ExternalProvider =
       externalProvider ?? throw new ArgumentNullException(nameof(externalProvider));
@@ -36,7 +36,7 @@ public partial class InjectionMainExternalProviderSource
   /// Gets or Sets ExternalProvider
   /// </summary>
   [JsonPropertyName("externalProvider")]
-  public MainExternalProvider ExternalProvider { get; set; }
+  public InjectionMainExternalProvider ExternalProvider { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
