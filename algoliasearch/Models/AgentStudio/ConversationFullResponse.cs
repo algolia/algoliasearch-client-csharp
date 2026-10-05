@@ -130,10 +130,22 @@ public partial class ConversationFullResponse
   public List<FeedbackResponse> Feedback { get; set; }
 
   /// <summary>
+  /// Gets or Sets ImpactAnalytics
+  /// </summary>
+  [JsonPropertyName("impactAnalytics")]
+  public ImpactAnalytics ImpactAnalytics { get; set; }
+
+  /// <summary>
   /// Gets or Sets Messages
   /// </summary>
   [JsonPropertyName("messages")]
   public List<MessageResponse> Messages { get; set; }
+
+  /// <summary>
+  /// Gets or Sets AnalyticsDegraded
+  /// </summary>
+  [JsonPropertyName("analyticsDegraded")]
+  public bool? AnalyticsDegraded { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -157,7 +169,9 @@ public partial class ConversationFullResponse
     sb.Append("  TotalTokens: ").Append(TotalTokens).Append("\n");
     sb.Append("  ConversationMetadata: ").Append(ConversationMetadata).Append("\n");
     sb.Append("  Feedback: ").Append(Feedback).Append("\n");
+    sb.Append("  ImpactAnalytics: ").Append(ImpactAnalytics).Append("\n");
     sb.Append("  Messages: ").Append(Messages).Append("\n");
+    sb.Append("  AnalyticsDegraded: ").Append(AnalyticsDegraded).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -213,8 +227,16 @@ public partial class ConversationFullResponse
         || Feedback != null && input.Feedback != null && Feedback.SequenceEqual(input.Feedback)
       )
       && (
+        ImpactAnalytics == input.ImpactAnalytics
+        || (ImpactAnalytics != null && ImpactAnalytics.Equals(input.ImpactAnalytics))
+      )
+      && (
         Messages == input.Messages
         || Messages != null && input.Messages != null && Messages.SequenceEqual(input.Messages)
+      )
+      && (
+        AnalyticsDegraded == input.AnalyticsDegraded
+        || AnalyticsDegraded.Equals(input.AnalyticsDegraded)
       );
   }
 
@@ -268,10 +290,15 @@ public partial class ConversationFullResponse
       {
         hashCode = (hashCode * 59) + Feedback.GetHashCode();
       }
+      if (ImpactAnalytics != null)
+      {
+        hashCode = (hashCode * 59) + ImpactAnalytics.GetHashCode();
+      }
       if (Messages != null)
       {
         hashCode = (hashCode * 59) + Messages.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AnalyticsDegraded.GetHashCode();
       return hashCode;
     }
   }

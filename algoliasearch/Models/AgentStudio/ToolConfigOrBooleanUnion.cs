@@ -15,28 +15,28 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// ToolConfig
+/// ToolConfigOrBooleanUnion
 /// </summary>
-[JsonConverter(typeof(ToolConfigJsonConverter))]
-public partial class ToolConfig : AbstractSchema
+[JsonConverter(typeof(ToolConfigOrBooleanUnionJsonConverter))]
+public partial class ToolConfigOrBooleanUnion : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the ToolConfig class
+  /// Initializes a new instance of the ToolConfigOrBooleanUnion class
   /// with a McpToolConfig
   /// </summary>
   /// <param name="actualInstance">An instance of McpToolConfig.</param>
-  public ToolConfig(McpToolConfig actualInstance)
+  public ToolConfigOrBooleanUnion(McpToolConfig actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ToolConfig class
+  /// Initializes a new instance of the ToolConfigOrBooleanUnion class
   /// with a bool
   /// </summary>
   /// <param name="actualInstance">An instance of bool.</param>
-  public ToolConfig(bool actualInstance)
+  public ToolConfigOrBooleanUnion(bool actualInstance)
   {
     ActualInstance = actualInstance;
   }
@@ -91,7 +91,7 @@ public partial class ToolConfig : AbstractSchema
   public override string ToString()
   {
     var sb = new StringBuilder();
-    sb.Append("class ToolConfig {\n");
+    sb.Append("class ToolConfigOrBooleanUnion {\n");
     sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -113,7 +113,7 @@ public partial class ToolConfig : AbstractSchema
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ToolConfig input)
+    if (obj is not ToolConfigOrBooleanUnion input)
     {
       return false;
     }
@@ -138,9 +138,9 @@ public partial class ToolConfig : AbstractSchema
 }
 
 /// <summary>
-/// Custom JSON converter for ToolConfig
+/// Custom JSON converter for ToolConfigOrBooleanUnion
 /// </summary>
-public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
+public class ToolConfigOrBooleanUnionJsonConverter : JsonConverter<ToolConfigOrBooleanUnion>
 {
   /// <summary>
   /// Check if the object can be converted
@@ -149,7 +149,7 @@ public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
   /// <returns>True if the object can be converted</returns>
   public override bool CanConvert(Type objectType)
   {
-    return objectType == typeof(ToolConfig);
+    return objectType == typeof(ToolConfigOrBooleanUnion);
   }
 
   /// <summary>
@@ -159,7 +159,7 @@ public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
   /// <param name="typeToConvert">Object type</param>
   /// <param name="options">Serializer options</param>
   /// <returns>The object converted from the JSON string</returns>
-  public override ToolConfig Read(
+  public override ToolConfigOrBooleanUnion Read(
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
@@ -171,7 +171,9 @@ public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
     {
       try
       {
-        return new ToolConfig(jsonDocument.Deserialize<McpToolConfig>(JsonConfig.Options));
+        return new ToolConfigOrBooleanUnion(
+          jsonDocument.Deserialize<McpToolConfig>(JsonConfig.Options)
+        );
       }
       catch (Exception exception)
       {
@@ -185,7 +187,7 @@ public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
     {
       try
       {
-        return new ToolConfig(jsonDocument.Deserialize<bool>(JsonConfig.Options));
+        return new ToolConfigOrBooleanUnion(jsonDocument.Deserialize<bool>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
@@ -202,9 +204,13 @@ public class ToolConfigJsonConverter : JsonConverter<ToolConfig>
   /// To write the JSON string
   /// </summary>
   /// <param name="writer">JSON writer</param>
-  /// <param name="value">ToolConfig to be converted into a JSON string</param>
+  /// <param name="value">ToolConfigOrBooleanUnion to be converted into a JSON string</param>
   /// <param name="options">JSON Serializer options</param>
-  public override void Write(Utf8JsonWriter writer, ToolConfig value, JsonSerializerOptions options)
+  public override void Write(
+    Utf8JsonWriter writer,
+    ToolConfigOrBooleanUnion value,
+    JsonSerializerOptions options
+  )
   {
     writer.WriteRawValue(value.ToJson());
   }

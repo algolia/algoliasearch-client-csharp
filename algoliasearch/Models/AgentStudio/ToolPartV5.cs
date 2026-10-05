@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// Model for tool invocation in a Message.
+/// A tool invocation in a message.
 /// </summary>
 public partial class ToolPartV5
 {
@@ -58,10 +58,22 @@ public partial class ToolPartV5
   public Dictionary<string, object> Input { get; set; }
 
   /// <summary>
+  /// Gets or Sets RawInput
+  /// </summary>
+  [JsonPropertyName("rawInput")]
+  public Dictionary<string, object> RawInput { get; set; }
+
+  /// <summary>
   /// Gets or Sets Output
   /// </summary>
   [JsonPropertyName("output")]
   public Dictionary<string, object> Output { get; set; }
+
+  /// <summary>
+  /// Gets or Sets OutputMetadata
+  /// </summary>
+  [JsonPropertyName("outputMetadata")]
+  public Dictionary<string, object> OutputMetadata { get; set; }
 
   /// <summary>
   /// Gets or Sets ErrorText
@@ -105,7 +117,9 @@ public partial class ToolPartV5
     sb.Append("  ToolCallId: ").Append(ToolCallId).Append("\n");
     sb.Append("  State: ").Append(State).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
+    sb.Append("  RawInput: ").Append(RawInput).Append("\n");
     sb.Append("  Output: ").Append(Output).Append("\n");
+    sb.Append("  OutputMetadata: ").Append(OutputMetadata).Append("\n");
     sb.Append("  ErrorText: ").Append(ErrorText).Append("\n");
     sb.Append("  ProviderOptions: ").Append(ProviderOptions).Append("\n");
     sb.Append("  RequiresApproval: ").Append(RequiresApproval).Append("\n");
@@ -147,8 +161,18 @@ public partial class ToolPartV5
         || Input != null && input.Input != null && Input.SequenceEqual(input.Input)
       )
       && (
+        RawInput == input.RawInput
+        || RawInput != null && input.RawInput != null && RawInput.SequenceEqual(input.RawInput)
+      )
+      && (
         Output == input.Output
         || Output != null && input.Output != null && Output.SequenceEqual(input.Output)
+      )
+      && (
+        OutputMetadata == input.OutputMetadata
+        || OutputMetadata != null
+          && input.OutputMetadata != null
+          && OutputMetadata.SequenceEqual(input.OutputMetadata)
       )
       && (ErrorText == input.ErrorText || (ErrorText != null && ErrorText.Equals(input.ErrorText)))
       && (
@@ -159,7 +183,7 @@ public partial class ToolPartV5
       )
       && (
         RequiresApproval == input.RequiresApproval
-        || RequiresApproval.Equals(input.RequiresApproval)
+        || (RequiresApproval != null && RequiresApproval.Equals(input.RequiresApproval))
       )
       && (
         Description == input.Description
@@ -190,9 +214,17 @@ public partial class ToolPartV5
       {
         hashCode = (hashCode * 59) + Input.GetHashCode();
       }
+      if (RawInput != null)
+      {
+        hashCode = (hashCode * 59) + RawInput.GetHashCode();
+      }
       if (Output != null)
       {
         hashCode = (hashCode * 59) + Output.GetHashCode();
+      }
+      if (OutputMetadata != null)
+      {
+        hashCode = (hashCode * 59) + OutputMetadata.GetHashCode();
       }
       if (ErrorText != null)
       {
@@ -202,7 +234,10 @@ public partial class ToolPartV5
       {
         hashCode = (hashCode * 59) + ProviderOptions.GetHashCode();
       }
-      hashCode = (hashCode * 59) + RequiresApproval.GetHashCode();
+      if (RequiresApproval != null)
+      {
+        hashCode = (hashCode * 59) + RequiresApproval.GetHashCode();
+      }
       if (Description != null)
       {
         hashCode = (hashCode * 59) + Description.GetHashCode();

@@ -27,7 +27,7 @@ public partial class AzureOpenAIProviderInput
   /// </summary>
   /// <param name="apiKey">apiKey (required).</param>
   /// <param name="azureEndpoint">azureEndpoint (required).</param>
-  /// <param name="azureDeployment">Azure model deployment name is required. (required).</param>
+  /// <param name="azureDeployment">Azure model deployment name. (required).</param>
   public AzureOpenAIProviderInput(string apiKey, string azureEndpoint, string azureDeployment)
   {
     ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
@@ -48,9 +48,9 @@ public partial class AzureOpenAIProviderInput
   public string AzureEndpoint { get; set; }
 
   /// <summary>
-  /// Azure model deployment name is required.
+  /// Azure model deployment name.
   /// </summary>
-  /// <value>Azure model deployment name is required.</value>
+  /// <value>Azure model deployment name.</value>
   [JsonPropertyName("azureDeployment")]
   public string AzureDeployment { get; set; }
 

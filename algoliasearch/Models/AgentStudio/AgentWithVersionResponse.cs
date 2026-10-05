@@ -118,7 +118,7 @@ public partial class AgentWithVersionResponse
   /// Gets or Sets Tools
   /// </summary>
   [JsonPropertyName("tools")]
-  public List<ToolConfigInput> Tools { get; set; }
+  public List<ToolConfigOutput> Tools { get; set; }
 
   /// <summary>
   /// Gets or Sets TemplateType

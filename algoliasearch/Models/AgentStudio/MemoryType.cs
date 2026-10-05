@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// Memory types implemented so far. Follows LangMem's ontology: https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types.
+/// The type of the stored memory.
 /// </summary>
-/// <value>Memory types implemented so far. Follows LangMem's ontology: https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types.</value>
+/// <value>The type of the stored memory.</value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<MemoryType>))]
 public enum MemoryType
 {

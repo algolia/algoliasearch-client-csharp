@@ -22,6 +22,17 @@ public partial class AssistantPartV5 : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the AssistantPartV5 class
+  /// with a DataGuardrailViolationPartV5
+  /// </summary>
+  /// <param name="actualInstance">An instance of DataGuardrailViolationPartV5.</param>
+  public AssistantPartV5(DataGuardrailViolationPartV5 actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the AssistantPartV5 class
   /// with a ToolPartV5
   /// </summary>
   /// <param name="actualInstance">An instance of ToolPartV5.</param>
@@ -65,9 +76,30 @@ public partial class AssistantPartV5 : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the AssistantPartV5 class
+  /// with a DataPartV5
+  /// </summary>
+  /// <param name="actualInstance">An instance of DataPartV5.</param>
+  public AssistantPartV5(DataPartV5 actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `DataGuardrailViolationPartV5`. If the actual instance is not `DataGuardrailViolationPartV5`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of DataGuardrailViolationPartV5</returns>
+  public DataGuardrailViolationPartV5 AsDataGuardrailViolationPartV5()
+  {
+    return (DataGuardrailViolationPartV5)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `ToolPartV5`. If the actual instance is not `ToolPartV5`,
@@ -110,6 +142,25 @@ public partial class AssistantPartV5 : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `DataPartV5`. If the actual instance is not `DataPartV5`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of DataPartV5</returns>
+  public DataPartV5 AsDataPartV5()
+  {
+    return (DataPartV5)ActualInstance;
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `DataGuardrailViolationPartV5` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsDataGuardrailViolationPartV5()
+  {
+    return ActualInstance.GetType() == typeof(DataGuardrailViolationPartV5);
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `ToolPartV5` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -143,6 +194,15 @@ public partial class AssistantPartV5 : AbstractSchema
   public bool IsReasoningPartV5()
   {
     return ActualInstance.GetType() == typeof(ReasoningPartV5);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `DataPartV5` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsDataPartV5()
+  {
+    return ActualInstance.GetType() == typeof(DataPartV5);
   }
 
   /// <summary>
@@ -228,11 +288,23 @@ public class AssistantPartV5JsonConverter : JsonConverter<AssistantPartV5>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (
-      root.ValueKind == JsonValueKind.Object
-      && root.TryGetProperty("toolCallId", out _)
-      && root.TryGetProperty("type", out _)
-    )
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("data", out _))
+    {
+      try
+      {
+        return new AssistantPartV5(
+          jsonDocument.Deserialize<DataGuardrailViolationPartV5>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into DataGuardrailViolationPartV5: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("toolCallId", out _))
     {
       try
       {
@@ -282,6 +354,18 @@ public class AssistantPartV5JsonConverter : JsonConverter<AssistantPartV5>
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into ReasoningPartV5: {exception}"
         );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new AssistantPartV5(jsonDocument.Deserialize<DataPartV5>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into DataPartV5: {exception}");
       }
     }
     throw new InvalidDataException(

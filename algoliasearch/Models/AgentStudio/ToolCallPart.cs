@@ -62,6 +62,12 @@ public partial class ToolCallPart
   public object Args { get; set; }
 
   /// <summary>
+  /// Gets or Sets RawArgs
+  /// </summary>
+  [JsonPropertyName("rawArgs")]
+  public Dictionary<string, object> RawArgs { get; set; }
+
+  /// <summary>
   /// Gets or Sets RequiresApproval
   /// </summary>
   [JsonPropertyName("requiresApproval")]
@@ -85,6 +91,7 @@ public partial class ToolCallPart
     sb.Append("  ToolCallId: ").Append(ToolCallId).Append("\n");
     sb.Append("  ToolName: ").Append(ToolName).Append("\n");
     sb.Append("  Args: ").Append(Args).Append("\n");
+    sb.Append("  RawArgs: ").Append(RawArgs).Append("\n");
     sb.Append("  RequiresApproval: ").Append(RequiresApproval).Append("\n");
     sb.Append("  ProviderOptions: ").Append(ProviderOptions).Append("\n");
     sb.Append("}\n");
@@ -119,6 +126,10 @@ public partial class ToolCallPart
       )
       && (ToolName == input.ToolName || (ToolName != null && ToolName.Equals(input.ToolName)))
       && (Args == input.Args || (Args != null && Args.Equals(input.Args)))
+      && (
+        RawArgs == input.RawArgs
+        || RawArgs != null && input.RawArgs != null && RawArgs.SequenceEqual(input.RawArgs)
+      )
       && (
         RequiresApproval == input.RequiresApproval
         || (RequiresApproval != null && RequiresApproval.Equals(input.RequiresApproval))
@@ -155,6 +166,10 @@ public partial class ToolCallPart
       if (Args != null)
       {
         hashCode = (hashCode * 59) + Args.GetHashCode();
+      }
+      if (RawArgs != null)
+      {
+        hashCode = (hashCode * 59) + RawArgs.GetHashCode();
       }
       if (RequiresApproval != null)
       {

@@ -34,6 +34,13 @@ public partial class AgentCompletionAlgoliaParams
   public Dictionary<string, SearchParametersOverrides> SearchParameters { get; set; }
 
   /// <summary>
+  /// Per-request override for the Algolia Search tool's indices, honored only when the tool is configured with `mode=\"dynamic\"`. A list of index names; the API looks up each name in the agent's static `tool.indices` and reuses that entry, including its description and access-control fields. A name the agent configuration does not list is rejected with HTTP 422 (`index_not_listed_on_tool`) unless the tool sets `allowUnlistedIndices`, in which case the API synthesizes a minimal entry carrying the index name only. Capped at 10 entries. Sending this field against an agent whose tool is in `mode=\"static\"` (the default) is rejected with HTTP 422 — change the tool's `mode` in the agent configuration first. Defaults to `null`, which preserves the existing static behavior.
+  /// </summary>
+  /// <value>Per-request override for the Algolia Search tool's indices, honored only when the tool is configured with `mode=\"dynamic\"`. A list of index names; the API looks up each name in the agent's static `tool.indices` and reuses that entry, including its description and access-control fields. A name the agent configuration does not list is rejected with HTTP 422 (`index_not_listed_on_tool`) unless the tool sets `allowUnlistedIndices`, in which case the API synthesizes a minimal entry carrying the index name only. Capped at 10 entries. Sending this field against an agent whose tool is in `mode=\"static\"` (the default) is rejected with HTTP 422 — change the tool's `mode` in the agent configuration first. Defaults to `null`, which preserves the existing static behavior.</value>
+  [JsonPropertyName("indices")]
+  public List<string> Indices { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -43,6 +50,7 @@ public partial class AgentCompletionAlgoliaParams
     sb.Append("class AgentCompletionAlgoliaParams {\n");
     sb.Append("  McpServers: ").Append(McpServers).Append("\n");
     sb.Append("  SearchParameters: ").Append(SearchParameters).Append("\n");
+    sb.Append("  Indices: ").Append(Indices).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -79,6 +87,10 @@ public partial class AgentCompletionAlgoliaParams
         || SearchParameters != null
           && input.SearchParameters != null
           && SearchParameters.SequenceEqual(input.SearchParameters)
+      )
+      && (
+        Indices == input.Indices
+        || Indices != null && input.Indices != null && Indices.SequenceEqual(input.Indices)
       );
   }
 
@@ -98,6 +110,10 @@ public partial class AgentCompletionAlgoliaParams
       if (SearchParameters != null)
       {
         hashCode = (hashCode * 59) + SearchParameters.GetHashCode();
+      }
+      if (Indices != null)
+      {
+        hashCode = (hashCode * 59) + Indices.GetHashCode();
       }
       return hashCode;
     }

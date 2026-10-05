@@ -29,4 +29,10 @@ public enum CompatibilityMode
   /// </summary>
   [JsonPropertyName("ai-sdk-5")]
   AiSdk5 = 2,
+
+  /// <summary>
+  /// Enum AgUi for value: ag-ui
+  /// </summary>
+  [JsonPropertyName("ag-ui")]
+  AgUi = 3,
 }

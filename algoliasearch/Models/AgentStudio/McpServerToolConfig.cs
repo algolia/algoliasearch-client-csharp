@@ -83,7 +83,7 @@ public partial class McpServerToolConfig
   /// Gets or Sets AllowedTools
   /// </summary>
   [JsonPropertyName("allowedTools")]
-  public Dictionary<string, ToolConfig> AllowedTools { get; set; }
+  public Dictionary<string, ToolConfigOrBooleanUnion> AllowedTools { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

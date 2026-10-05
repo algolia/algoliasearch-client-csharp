@@ -12,21 +12,21 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// Configuration for the algolia_display_results tool.
+/// Use `algolia_grouped_results`.
 /// </summary>
-public partial class AlgoliaDisplayResultsToolConfig
+public partial class AlgoliaGroupedResultsCompatToolConfig
 {
   /// <summary>
-  /// Initializes a new instance of the AlgoliaDisplayResultsToolConfig class.
+  /// Initializes a new instance of the AlgoliaGroupedResultsCompatToolConfig class.
   /// </summary>
   [JsonConstructor]
-  public AlgoliaDisplayResultsToolConfig() { }
+  public AlgoliaGroupedResultsCompatToolConfig() { }
 
   /// <summary>
-  /// Initializes a new instance of the AlgoliaDisplayResultsToolConfig class.
+  /// Initializes a new instance of the AlgoliaGroupedResultsCompatToolConfig class.
   /// </summary>
   /// <param name="type">type (required) (default to "algolia_display_results").</param>
-  public AlgoliaDisplayResultsToolConfig(string type)
+  public AlgoliaGroupedResultsCompatToolConfig(string type)
   {
     Type = type ?? throw new ArgumentNullException(nameof(type));
   }
@@ -38,34 +38,45 @@ public partial class AlgoliaDisplayResultsToolConfig
   public string Name { get; set; }
 
   /// <summary>
-  /// Gets or Sets Type
+  /// When true, a successful tool invocation ends the agent graph (no further LLM turn). Use for chat experiences where the tool payload IS the final response. Leave false to let the main LLM produce a concluding assistant message after the tool runs.
   /// </summary>
-  [JsonPropertyName("type")]
-  public string Type { get; set; }
+  /// <value>When true, a successful tool invocation ends the agent graph (no further LLM turn). Use for chat experiences where the tool payload IS the final response. Leave false to let the main LLM produce a concluding assistant message after the tool runs.</value>
+  [JsonPropertyName("isTerminal")]
+  public bool? IsTerminal { get; set; }
 
   /// <summary>
-  /// Gets or Sets MinGroups
+  /// Minimum number of result groups.
   /// </summary>
+  /// <value>Minimum number of result groups.</value>
   [JsonPropertyName("minGroups")]
   public int? MinGroups { get; set; }
 
   /// <summary>
-  /// Gets or Sets MaxGroups
+  /// Maximum number of result groups.
   /// </summary>
+  /// <value>Maximum number of result groups.</value>
   [JsonPropertyName("maxGroups")]
   public int? MaxGroups { get; set; }
 
   /// <summary>
-  /// Gets or Sets MinResultsPerGroup
+  /// Minimum hits per group.
   /// </summary>
+  /// <value>Minimum hits per group.</value>
   [JsonPropertyName("minResultsPerGroup")]
   public int? MinResultsPerGroup { get; set; }
 
   /// <summary>
-  /// Gets or Sets MaxResultsPerGroup
+  /// Maximum hits per group.
   /// </summary>
+  /// <value>Maximum hits per group.</value>
   [JsonPropertyName("maxResultsPerGroup")]
   public int? MaxResultsPerGroup { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Type
+  /// </summary>
+  [JsonPropertyName("type")]
+  public string Type { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -74,13 +85,14 @@ public partial class AlgoliaDisplayResultsToolConfig
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class AlgoliaDisplayResultsToolConfig {\n");
+    sb.Append("class AlgoliaGroupedResultsCompatToolConfig {\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
-    sb.Append("  Type: ").Append(Type).Append("\n");
+    sb.Append("  IsTerminal: ").Append(IsTerminal).Append("\n");
     sb.Append("  MinGroups: ").Append(MinGroups).Append("\n");
     sb.Append("  MaxGroups: ").Append(MaxGroups).Append("\n");
     sb.Append("  MinResultsPerGroup: ").Append(MinResultsPerGroup).Append("\n");
     sb.Append("  MaxResultsPerGroup: ").Append(MaxResultsPerGroup).Append("\n");
+    sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -101,13 +113,13 @@ public partial class AlgoliaDisplayResultsToolConfig
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AlgoliaDisplayResultsToolConfig input)
+    if (obj is not AlgoliaGroupedResultsCompatToolConfig input)
     {
       return false;
     }
 
     return (Name == input.Name || (Name != null && Name.Equals(input.Name)))
-      && (Type == input.Type || (Type != null && Type.Equals(input.Type)))
+      && (IsTerminal == input.IsTerminal || IsTerminal.Equals(input.IsTerminal))
       && (MinGroups == input.MinGroups || MinGroups.Equals(input.MinGroups))
       && (MaxGroups == input.MaxGroups || MaxGroups.Equals(input.MaxGroups))
       && (
@@ -117,7 +129,8 @@ public partial class AlgoliaDisplayResultsToolConfig
       && (
         MaxResultsPerGroup == input.MaxResultsPerGroup
         || MaxResultsPerGroup.Equals(input.MaxResultsPerGroup)
-      );
+      )
+      && (Type == input.Type || (Type != null && Type.Equals(input.Type)));
   }
 
   /// <summary>
@@ -133,14 +146,15 @@ public partial class AlgoliaDisplayResultsToolConfig
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
       }
-      if (Type != null)
-      {
-        hashCode = (hashCode * 59) + Type.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + IsTerminal.GetHashCode();
       hashCode = (hashCode * 59) + MinGroups.GetHashCode();
       hashCode = (hashCode * 59) + MaxGroups.GetHashCode();
       hashCode = (hashCode * 59) + MinResultsPerGroup.GetHashCode();
       hashCode = (hashCode * 59) + MaxResultsPerGroup.GetHashCode();
+      if (Type != null)
+      {
+        hashCode = (hashCode * 59) + Type.GetHashCode();
+      }
       return hashCode;
     }
   }

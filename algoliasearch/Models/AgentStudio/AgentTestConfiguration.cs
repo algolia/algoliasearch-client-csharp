@@ -31,7 +31,7 @@ public partial class AgentTestConfiguration
   public AgentTestConfiguration(
     string instructions,
     Dictionary<string, object> config,
-    List<ToolConfigInput> tools
+    List<ItemsUnion> tools
   )
   {
     Instructions = instructions ?? throw new ArgumentNullException(nameof(instructions));
@@ -79,7 +79,7 @@ public partial class AgentTestConfiguration
   /// Gets or Sets Tools
   /// </summary>
   [JsonPropertyName("tools")]
-  public List<ToolConfigInput> Tools { get; set; }
+  public List<ItemsUnion> Tools { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

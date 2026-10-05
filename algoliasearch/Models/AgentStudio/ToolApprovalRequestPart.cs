@@ -86,6 +86,12 @@ public partial class ToolApprovalRequestPart
   public string AppId { get; set; }
 
   /// <summary>
+  /// Gets or Sets ConversationId
+  /// </summary>
+  [JsonPropertyName("conversationId")]
+  public string ConversationId { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -101,6 +107,7 @@ public partial class ToolApprovalRequestPart
     sb.Append("  ProviderOptions: ").Append(ProviderOptions).Append("\n");
     sb.Append("  ArgsHash: ").Append(ArgsHash).Append("\n");
     sb.Append("  AppId: ").Append(AppId).Append("\n");
+    sb.Append("  ConversationId: ").Append(ConversationId).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -144,7 +151,11 @@ public partial class ToolApprovalRequestPart
           && ProviderOptions.SequenceEqual(input.ProviderOptions)
       )
       && (ArgsHash == input.ArgsHash || (ArgsHash != null && ArgsHash.Equals(input.ArgsHash)))
-      && (AppId == input.AppId || (AppId != null && AppId.Equals(input.AppId)));
+      && (AppId == input.AppId || (AppId != null && AppId.Equals(input.AppId)))
+      && (
+        ConversationId == input.ConversationId
+        || (ConversationId != null && ConversationId.Equals(input.ConversationId))
+      );
   }
 
   /// <summary>
@@ -187,6 +198,10 @@ public partial class ToolApprovalRequestPart
       if (AppId != null)
       {
         hashCode = (hashCode * 59) + AppId.GetHashCode();
+      }
+      if (ConversationId != null)
+      {
+        hashCode = (hashCode * 59) + ConversationId.GetHashCode();
       }
       return hashCode;
     }

@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// Universal storage model for all memory types (semantic, episodic).  This is the ONLY model that touches storage (Algolia). Domain models (SemanticMemory, EpisodicMemory) are used for LLM extraction and converted to MemoryRecord before saving.  See https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types for memory type definitions.
+/// A stored memory record.
 /// </summary>
 public partial class MemoryRecord
 {
@@ -60,16 +60,16 @@ public partial class MemoryRecord
   public string RawExtract { get; set; }
 
   /// <summary>
-  /// 5-20 free-form keywords: entities, context, search terms (any words).
+  /// Keywords for retrieval: entities, context, search terms.
   /// </summary>
-  /// <value>5-20 free-form keywords: entities, context, search terms (any words).</value>
+  /// <value>Keywords for retrieval: entities, context, search terms.</value>
   [JsonPropertyName("keywords")]
   public List<string> Keywords { get; set; }
 
   /// <summary>
-  /// 2-4 topics ONLY from this list: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].
+  /// Topics that classify the memory. Each must be one of: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].
   /// </summary>
-  /// <value>2-4 topics ONLY from this list: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].</value>
+  /// <value>Topics that classify the memory. Each must be one of: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].</value>
   [JsonPropertyName("topics")]
   public List<string> Topics { get; set; }
 
@@ -81,9 +81,9 @@ public partial class MemoryRecord
   public List<string> Tags { get; set; }
 
   /// <summary>
-  /// 3-5 natural phrases that should trigger this memory.
+  /// Phrases that cause the API to recall this memory.
   /// </summary>
-  /// <value>3-5 natural phrases that should trigger this memory.</value>
+  /// <value>Phrases that cause the API to recall this memory.</value>
   [JsonPropertyName("recallTriggers")]
   public List<string> RecallTriggers { get; set; }
 

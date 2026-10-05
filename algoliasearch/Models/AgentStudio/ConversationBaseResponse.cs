@@ -122,6 +122,12 @@ public partial class ConversationBaseResponse
   public List<FeedbackResponse> Feedback { get; set; }
 
   /// <summary>
+  /// Gets or Sets ImpactAnalytics
+  /// </summary>
+  [JsonPropertyName("impactAnalytics")]
+  public ImpactAnalytics ImpactAnalytics { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -143,6 +149,7 @@ public partial class ConversationBaseResponse
     sb.Append("  TotalTokens: ").Append(TotalTokens).Append("\n");
     sb.Append("  ConversationMetadata: ").Append(ConversationMetadata).Append("\n");
     sb.Append("  Feedback: ").Append(Feedback).Append("\n");
+    sb.Append("  ImpactAnalytics: ").Append(ImpactAnalytics).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -196,6 +203,10 @@ public partial class ConversationBaseResponse
       && (
         Feedback == input.Feedback
         || Feedback != null && input.Feedback != null && Feedback.SequenceEqual(input.Feedback)
+      )
+      && (
+        ImpactAnalytics == input.ImpactAnalytics
+        || (ImpactAnalytics != null && ImpactAnalytics.Equals(input.ImpactAnalytics))
       );
   }
 
@@ -248,6 +259,10 @@ public partial class ConversationBaseResponse
       if (Feedback != null)
       {
         hashCode = (hashCode * 59) + Feedback.GetHashCode();
+      }
+      if (ImpactAnalytics != null)
+      {
+        hashCode = (hashCode * 59) + ImpactAnalytics.GetHashCode();
       }
       return hashCode;
     }

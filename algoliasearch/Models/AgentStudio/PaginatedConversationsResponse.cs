@@ -49,6 +49,12 @@ public partial class PaginatedConversationsResponse
   public PaginationMetadata Pagination { get; set; }
 
   /// <summary>
+  /// Gets or Sets AnalyticsDegraded
+  /// </summary>
+  [JsonPropertyName("analyticsDegraded")]
+  public bool? AnalyticsDegraded { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -58,6 +64,7 @@ public partial class PaginatedConversationsResponse
     sb.Append("class PaginatedConversationsResponse {\n");
     sb.Append("  Data: ").Append(Data).Append("\n");
     sb.Append("  Pagination: ").Append(Pagination).Append("\n");
+    sb.Append("  AnalyticsDegraded: ").Append(AnalyticsDegraded).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -89,6 +96,10 @@ public partial class PaginatedConversationsResponse
       && (
         Pagination == input.Pagination
         || (Pagination != null && Pagination.Equals(input.Pagination))
+      )
+      && (
+        AnalyticsDegraded == input.AnalyticsDegraded
+        || AnalyticsDegraded.Equals(input.AnalyticsDegraded)
       );
   }
 
@@ -109,6 +120,7 @@ public partial class PaginatedConversationsResponse
       {
         hashCode = (hashCode * 59) + Pagination.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AnalyticsDegraded.GetHashCode();
       return hashCode;
     }
   }

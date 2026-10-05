@@ -55,21 +55,10 @@ public partial class ToolConfigInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the ToolConfigInput class
-  /// with a AlgoliaRecommendToolConfigInput
+  /// with a AlgoliaRecommendToolConfig
   /// </summary>
-  /// <param name="actualInstance">An instance of AlgoliaRecommendToolConfigInput.</param>
-  public ToolConfigInput(AlgoliaRecommendToolConfigInput actualInstance)
-  {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the ToolConfigInput class
-  /// with a AlgoliaDisplayResultsToolConfig
-  /// </summary>
-  /// <param name="actualInstance">An instance of AlgoliaDisplayResultsToolConfig.</param>
-  public ToolConfigInput(AlgoliaDisplayResultsToolConfig actualInstance)
+  /// <param name="actualInstance">An instance of AlgoliaRecommendToolConfig.</param>
+  public ToolConfigInput(AlgoliaRecommendToolConfig actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -122,23 +111,13 @@ public partial class ToolConfigInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `AlgoliaRecommendToolConfigInput`. If the actual instance is not `AlgoliaRecommendToolConfigInput`,
+  /// Get the actual instance of `AlgoliaRecommendToolConfig`. If the actual instance is not `AlgoliaRecommendToolConfig`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of AlgoliaRecommendToolConfigInput</returns>
-  public AlgoliaRecommendToolConfigInput AsAlgoliaRecommendToolConfigInput()
+  /// <returns>An instance of AlgoliaRecommendToolConfig</returns>
+  public AlgoliaRecommendToolConfig AsAlgoliaRecommendToolConfig()
   {
-    return (AlgoliaRecommendToolConfigInput)ActualInstance;
-  }
-
-  /// <summary>
-  /// Get the actual instance of `AlgoliaDisplayResultsToolConfig`. If the actual instance is not `AlgoliaDisplayResultsToolConfig`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of AlgoliaDisplayResultsToolConfig</returns>
-  public AlgoliaDisplayResultsToolConfig AsAlgoliaDisplayResultsToolConfig()
-  {
-    return (AlgoliaDisplayResultsToolConfig)ActualInstance;
+    return (AlgoliaRecommendToolConfig)ActualInstance;
   }
 
   /// <summary>
@@ -179,21 +158,12 @@ public partial class ToolConfigInput : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `AlgoliaRecommendToolConfigInput` type.
+  /// Check if the actual instance is of `AlgoliaRecommendToolConfig` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsAlgoliaRecommendToolConfigInput()
+  public bool IsAlgoliaRecommendToolConfig()
   {
-    return ActualInstance.GetType() == typeof(AlgoliaRecommendToolConfigInput);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `AlgoliaDisplayResultsToolConfig` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsAlgoliaDisplayResultsToolConfig()
-  {
-    return ActualInstance.GetType() == typeof(AlgoliaDisplayResultsToolConfig);
+    return ActualInstance.GetType() == typeof(AlgoliaRecommendToolConfig);
   }
 
   /// <summary>
@@ -291,16 +261,10 @@ public class ToolConfigInputJsonConverter : JsonConverter<ToolConfigInput>
     if (root.TryGetProperty("type", out JsonElement discriminatorElement))
     {
       string discriminatorValue = discriminatorElement.GetString();
-      if (discriminatorValue == "algolia_display_results")
-      {
-        return new ToolConfigInput(
-          jsonDocument.Deserialize<AlgoliaDisplayResultsToolConfig>(JsonConfig.Options)
-        );
-      }
       if (discriminatorValue == "algolia_recommend")
       {
         return new ToolConfigInput(
-          jsonDocument.Deserialize<AlgoliaRecommendToolConfigInput>(JsonConfig.Options)
+          jsonDocument.Deserialize<AlgoliaRecommendToolConfig>(JsonConfig.Options)
         );
       }
       if (discriminatorValue == "algolia_search_index")
@@ -387,30 +351,14 @@ public class ToolConfigInputJsonConverter : JsonConverter<ToolConfigInput>
       try
       {
         return new ToolConfigInput(
-          jsonDocument.Deserialize<AlgoliaRecommendToolConfigInput>(JsonConfig.Options)
+          jsonDocument.Deserialize<AlgoliaRecommendToolConfig>(JsonConfig.Options)
         );
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into AlgoliaRecommendToolConfigInput: {exception}"
-        );
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new ToolConfigInput(
-          jsonDocument.Deserialize<AlgoliaDisplayResultsToolConfig>(JsonConfig.Options)
-        );
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into AlgoliaDisplayResultsToolConfig: {exception}"
+          $"Failed to deserialize into AlgoliaRecommendToolConfig: {exception}"
         );
       }
     }

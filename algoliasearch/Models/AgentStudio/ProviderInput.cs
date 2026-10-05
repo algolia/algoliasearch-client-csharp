@@ -76,6 +76,17 @@ public partial class ProviderInput : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the ProviderInput class
+  /// with a XAIProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of XAIProviderInput.</param>
+  public ProviderInput(XAIProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
@@ -131,6 +142,16 @@ public partial class ProviderInput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `XAIProviderInput`. If the actual instance is not `XAIProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of XAIProviderInput</returns>
+  public XAIProviderInput AsXAIProviderInput()
+  {
+    return (XAIProviderInput)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `AzureOpenAIProviderInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -173,6 +194,15 @@ public partial class ProviderInput : AbstractSchema
   public bool IsAnthropicProviderInput()
   {
     return ActualInstance.GetType() == typeof(AnthropicProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `XAIProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsXAIProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(XAIProviderInput);
   }
 
   /// <summary>
@@ -339,6 +369,20 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into AnthropicProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new ProviderInput(jsonDocument.Deserialize<XAIProviderInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into XAIProviderInput: {exception}"
         );
       }
     }

@@ -54,18 +54,6 @@ public partial class ValidationError
   public string Type { get; set; }
 
   /// <summary>
-  /// Gets or Sets Input
-  /// </summary>
-  [JsonPropertyName("input")]
-  public object Input { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Ctx
-  /// </summary>
-  [JsonPropertyName("ctx")]
-  public object Ctx { get; set; }
-
-  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -76,8 +64,6 @@ public partial class ValidationError
     sb.Append("  Loc: ").Append(Loc).Append("\n");
     sb.Append("  Msg: ").Append(Msg).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
-    sb.Append("  Input: ").Append(Input).Append("\n");
-    sb.Append("  Ctx: ").Append(Ctx).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -105,9 +91,7 @@ public partial class ValidationError
 
     return (Loc == input.Loc || Loc != null && input.Loc != null && Loc.SequenceEqual(input.Loc))
       && (Msg == input.Msg || (Msg != null && Msg.Equals(input.Msg)))
-      && (Type == input.Type || (Type != null && Type.Equals(input.Type)))
-      && (Input == input.Input || (Input != null && Input.Equals(input.Input)))
-      && (Ctx == input.Ctx || (Ctx != null && Ctx.Equals(input.Ctx)));
+      && (Type == input.Type || (Type != null && Type.Equals(input.Type)));
   }
 
   /// <summary>
@@ -130,14 +114,6 @@ public partial class ValidationError
       if (Type != null)
       {
         hashCode = (hashCode * 59) + Type.GetHashCode();
-      }
-      if (Input != null)
-      {
-        hashCode = (hashCode * 59) + Input.GetHashCode();
-      }
-      if (Ctx != null)
-      {
-        hashCode = (hashCode * 59) + Ctx.GetHashCode();
       }
       return hashCode;
     }

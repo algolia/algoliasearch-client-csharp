@@ -21,18 +21,14 @@ namespace Algolia.Search.Models.AgentStudio;
 public partial class MessagesUnion : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the MessagesUnion class.
-  /// </summary>
-  public MessagesUnion() { }
-
-  /// <summary>
   /// Initializes a new instance of the MessagesUnion class
   /// with a List{MessageV4}
   /// </summary>
   /// <param name="actualInstance">An instance of List<MessageV4>.</param>
   public MessagesUnion(List<MessageV4> actualInstance)
   {
-    ActualInstance = actualInstance;
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -42,7 +38,8 @@ public partial class MessagesUnion : AbstractSchema
   /// <param name="actualInstance">An instance of List<MessageV5>.</param>
   public MessagesUnion(List<MessageV5> actualInstance)
   {
-    ActualInstance = actualInstance;
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

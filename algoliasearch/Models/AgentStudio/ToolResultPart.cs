@@ -68,6 +68,30 @@ public partial class ToolResultPart
   public Dictionary<string, object> ProviderOptions { get; set; }
 
   /// <summary>
+  /// Gets or Sets McpConfigId
+  /// </summary>
+  [JsonPropertyName("mcpConfigId")]
+  public string McpConfigId { get; set; }
+
+  /// <summary>
+  /// Gets or Sets McpConfigName
+  /// </summary>
+  [JsonPropertyName("mcpConfigName")]
+  public string McpConfigName { get; set; }
+
+  /// <summary>
+  /// Gets or Sets IsTerminal
+  /// </summary>
+  [JsonPropertyName("isTerminal")]
+  public bool? IsTerminal { get; set; }
+
+  /// <summary>
+  /// Gets or Sets OutputMetadata
+  /// </summary>
+  [JsonPropertyName("outputMetadata")]
+  public Dictionary<string, object> OutputMetadata { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -80,6 +104,10 @@ public partial class ToolResultPart
     sb.Append("  ToolName: ").Append(ToolName).Append("\n");
     sb.Append("  Output: ").Append(Output).Append("\n");
     sb.Append("  ProviderOptions: ").Append(ProviderOptions).Append("\n");
+    sb.Append("  McpConfigId: ").Append(McpConfigId).Append("\n");
+    sb.Append("  McpConfigName: ").Append(McpConfigName).Append("\n");
+    sb.Append("  IsTerminal: ").Append(IsTerminal).Append("\n");
+    sb.Append("  OutputMetadata: ").Append(OutputMetadata).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -117,6 +145,24 @@ public partial class ToolResultPart
         || ProviderOptions != null
           && input.ProviderOptions != null
           && ProviderOptions.SequenceEqual(input.ProviderOptions)
+      )
+      && (
+        McpConfigId == input.McpConfigId
+        || (McpConfigId != null && McpConfigId.Equals(input.McpConfigId))
+      )
+      && (
+        McpConfigName == input.McpConfigName
+        || (McpConfigName != null && McpConfigName.Equals(input.McpConfigName))
+      )
+      && (
+        IsTerminal == input.IsTerminal
+        || (IsTerminal != null && IsTerminal.Equals(input.IsTerminal))
+      )
+      && (
+        OutputMetadata == input.OutputMetadata
+        || OutputMetadata != null
+          && input.OutputMetadata != null
+          && OutputMetadata.SequenceEqual(input.OutputMetadata)
       );
   }
 
@@ -148,6 +194,22 @@ public partial class ToolResultPart
       if (ProviderOptions != null)
       {
         hashCode = (hashCode * 59) + ProviderOptions.GetHashCode();
+      }
+      if (McpConfigId != null)
+      {
+        hashCode = (hashCode * 59) + McpConfigId.GetHashCode();
+      }
+      if (McpConfigName != null)
+      {
+        hashCode = (hashCode * 59) + McpConfigName.GetHashCode();
+      }
+      if (IsTerminal != null)
+      {
+        hashCode = (hashCode * 59) + IsTerminal.GetHashCode();
+      }
+      if (OutputMetadata != null)
+      {
+        hashCode = (hashCode * 59) + OutputMetadata.GetHashCode();
       }
       return hashCode;
     }

@@ -135,23 +135,6 @@ var response = await client.SearchAsync(params);
 var response = client.SearchAsync(params).GetAwaiter().GetResult();
 ```
 
-### Nullable Reference Types
-
-```csharp
-// C# 8+ nullable annotations
-string? nullable = null;      // Can be null
-string nonNull = "";          // Cannot be null
-
-// Null-conditional
-var length = nullable?.Length;
-
-// Null-coalescing
-var value = nullable ?? "default";
-
-// Null-forgiving (use sparingly)
-var sure = nullable!;
-```
-
 ### Disposal
 
 ```csharp
@@ -169,16 +152,6 @@ finally
 {
     client.Dispose();
 }
-```
-
-### LINQ
-
-```csharp
-// Use LINQ for collections
-var filtered = response.Hits
-    .Where(h => h.Score > 0.5)
-    .Select(h => h.ObjectID)
-    .ToList();
 ```
 
 ### Serialization

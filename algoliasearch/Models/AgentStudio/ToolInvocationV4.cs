@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// Model for tool invocation in a Message.
+/// A tool invocation in a message.
 /// </summary>
 public partial class ToolInvocationV4
 {
@@ -148,7 +148,7 @@ public partial class ToolInvocationV4
         Result == input.Result
         || Result != null && input.Result != null && Result.SequenceEqual(input.Result)
       )
-      && (Step == input.Step || Step.Equals(input.Step))
+      && (Step == input.Step || (Step != null && Step.Equals(input.Step)))
       && (State == input.State || (State != null && State.Equals(input.State)))
       && (
         ProviderOptions == input.ProviderOptions
@@ -158,7 +158,7 @@ public partial class ToolInvocationV4
       )
       && (
         RequiresApproval == input.RequiresApproval
-        || RequiresApproval.Equals(input.RequiresApproval)
+        || (RequiresApproval != null && RequiresApproval.Equals(input.RequiresApproval))
       )
       && (
         Description == input.Description
@@ -192,7 +192,10 @@ public partial class ToolInvocationV4
       {
         hashCode = (hashCode * 59) + Result.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Step.GetHashCode();
+      if (Step != null)
+      {
+        hashCode = (hashCode * 59) + Step.GetHashCode();
+      }
       if (State != null)
       {
         hashCode = (hashCode * 59) + State.GetHashCode();
@@ -201,7 +204,10 @@ public partial class ToolInvocationV4
       {
         hashCode = (hashCode * 59) + ProviderOptions.GetHashCode();
       }
-      hashCode = (hashCode * 59) + RequiresApproval.GetHashCode();
+      if (RequiresApproval != null)
+      {
+        hashCode = (hashCode * 59) + RequiresApproval.GetHashCode();
+      }
       if (Description != null)
       {
         hashCode = (hashCode * 59) + Description.GetHashCode();

@@ -103,10 +103,46 @@ public partial class MessageResponse
   public int? OutputTokens { get; set; }
 
   /// <summary>
+  /// Gets or Sets ReasoningTokens
+  /// </summary>
+  [JsonPropertyName("reasoningTokens")]
+  public int? ReasoningTokens { get; set; }
+
+  /// <summary>
+  /// Gets or Sets InputTokenDetails
+  /// </summary>
+  [JsonPropertyName("inputTokenDetails")]
+  public Dictionary<string, int> InputTokenDetails { get; set; }
+
+  /// <summary>
+  /// Gets or Sets OutputTokenDetails
+  /// </summary>
+  [JsonPropertyName("outputTokenDetails")]
+  public Dictionary<string, int> OutputTokenDetails { get; set; }
+
+  /// <summary>
+  /// Gets or Sets IsCacheHit
+  /// </summary>
+  [JsonPropertyName("isCacheHit")]
+  public bool? IsCacheHit { get; set; }
+
+  /// <summary>
   /// Gets or Sets TurnContext
   /// </summary>
   [JsonPropertyName("turnContext")]
-  public Dictionary<string, string> TurnContext { get; set; }
+  public Dictionary<string, object> TurnContext { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Events
+  /// </summary>
+  [JsonPropertyName("events")]
+  public List<MessageEvent> Events { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Guardrail
+  /// </summary>
+  [JsonPropertyName("guardrail")]
+  public GuardrailOutcome Guardrail { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -125,7 +161,13 @@ public partial class MessageResponse
     sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  InputTokens: ").Append(InputTokens).Append("\n");
     sb.Append("  OutputTokens: ").Append(OutputTokens).Append("\n");
+    sb.Append("  ReasoningTokens: ").Append(ReasoningTokens).Append("\n");
+    sb.Append("  InputTokenDetails: ").Append(InputTokenDetails).Append("\n");
+    sb.Append("  OutputTokenDetails: ").Append(OutputTokenDetails).Append("\n");
+    sb.Append("  IsCacheHit: ").Append(IsCacheHit).Append("\n");
     sb.Append("  TurnContext: ").Append(TurnContext).Append("\n");
+    sb.Append("  Events: ").Append(Events).Append("\n");
+    sb.Append("  Guardrail: ").Append(Guardrail).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -173,11 +215,36 @@ public partial class MessageResponse
         || (OutputTokens != null && OutputTokens.Equals(input.OutputTokens))
       )
       && (
+        ReasoningTokens == input.ReasoningTokens
+        || (ReasoningTokens != null && ReasoningTokens.Equals(input.ReasoningTokens))
+      )
+      && (
+        InputTokenDetails == input.InputTokenDetails
+        || InputTokenDetails != null
+          && input.InputTokenDetails != null
+          && InputTokenDetails.SequenceEqual(input.InputTokenDetails)
+      )
+      && (
+        OutputTokenDetails == input.OutputTokenDetails
+        || OutputTokenDetails != null
+          && input.OutputTokenDetails != null
+          && OutputTokenDetails.SequenceEqual(input.OutputTokenDetails)
+      )
+      && (
+        IsCacheHit == input.IsCacheHit
+        || (IsCacheHit != null && IsCacheHit.Equals(input.IsCacheHit))
+      )
+      && (
         TurnContext == input.TurnContext
         || TurnContext != null
           && input.TurnContext != null
           && TurnContext.SequenceEqual(input.TurnContext)
-      );
+      )
+      && (
+        Events == input.Events
+        || Events != null && input.Events != null && Events.SequenceEqual(input.Events)
+      )
+      && (Guardrail == input.Guardrail || (Guardrail != null && Guardrail.Equals(input.Guardrail)));
   }
 
   /// <summary>
@@ -222,9 +289,33 @@ public partial class MessageResponse
       {
         hashCode = (hashCode * 59) + OutputTokens.GetHashCode();
       }
+      if (ReasoningTokens != null)
+      {
+        hashCode = (hashCode * 59) + ReasoningTokens.GetHashCode();
+      }
+      if (InputTokenDetails != null)
+      {
+        hashCode = (hashCode * 59) + InputTokenDetails.GetHashCode();
+      }
+      if (OutputTokenDetails != null)
+      {
+        hashCode = (hashCode * 59) + OutputTokenDetails.GetHashCode();
+      }
+      if (IsCacheHit != null)
+      {
+        hashCode = (hashCode * 59) + IsCacheHit.GetHashCode();
+      }
       if (TurnContext != null)
       {
         hashCode = (hashCode * 59) + TurnContext.GetHashCode();
+      }
+      if (Events != null)
+      {
+        hashCode = (hashCode * 59) + Events.GetHashCode();
+      }
+      if (Guardrail != null)
+      {
+        hashCode = (hashCode * 59) + Guardrail.GetHashCode();
       }
       return hashCode;
     }

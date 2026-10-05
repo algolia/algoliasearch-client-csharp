@@ -17,6 +17,12 @@ namespace Algolia.Search.Models.AgentStudio;
 public partial class AlgoliaSearchToolConfig
 {
   /// <summary>
+  /// Gets or Sets Mode
+  /// </summary>
+  [JsonPropertyName("mode")]
+  public ModeEnum? Mode { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the AlgoliaSearchToolConfig class.
   /// </summary>
   [JsonConstructor]
@@ -58,6 +64,12 @@ public partial class AlgoliaSearchToolConfig
   public List<AlgoliaSearchToolIndexConfig> Indices { get; set; }
 
   /// <summary>
+  /// Gets or Sets AllowUnlistedIndices
+  /// </summary>
+  [JsonPropertyName("allowUnlistedIndices")]
+  public bool? AllowUnlistedIndices { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -68,6 +80,8 @@ public partial class AlgoliaSearchToolConfig
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  Indices: ").Append(Indices).Append("\n");
+    sb.Append("  Mode: ").Append(Mode).Append("\n");
+    sb.Append("  AllowUnlistedIndices: ").Append(AllowUnlistedIndices).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -98,6 +112,11 @@ public partial class AlgoliaSearchToolConfig
       && (
         Indices == input.Indices
         || Indices != null && input.Indices != null && Indices.SequenceEqual(input.Indices)
+      )
+      && (Mode == input.Mode || Mode.Equals(input.Mode))
+      && (
+        AllowUnlistedIndices == input.AllowUnlistedIndices
+        || AllowUnlistedIndices.Equals(input.AllowUnlistedIndices)
       );
   }
 
@@ -122,6 +141,8 @@ public partial class AlgoliaSearchToolConfig
       {
         hashCode = (hashCode * 59) + Indices.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Mode.GetHashCode();
+      hashCode = (hashCode * 59) + AllowUnlistedIndices.GetHashCode();
       return hashCode;
     }
   }

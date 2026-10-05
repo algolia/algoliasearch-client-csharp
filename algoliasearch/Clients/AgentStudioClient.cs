@@ -189,6 +189,82 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
+  /// Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextCompactRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ContextResponse</returns>
+  Task<ContextResponse> CompactContextAsync(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextCompactRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ContextResponse</returns>
+  ContextResponse CompactContext(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextCompactRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ContextResponse</returns>
+  Task<AlgoliaHttpResponse> CompactContextWithHTTPInfoAsync(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextCompactRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ContextResponse</returns>
+  AlgoliaHttpResponse CompactContextWithHTTPInfo(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Create a new agent.
   /// </summary>
   ///
@@ -349,7 +425,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -371,7 +447,7 @@ public interface IAgentStudioClient
   Task<Dictionary<string, object>> CreateAgentCompletionAsync(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -382,7 +458,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result. (Synchronous version)
+  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -404,7 +480,7 @@ public interface IAgentStudioClient
   Dictionary<string, object> CreateAgentCompletion(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -415,7 +491,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -437,7 +513,7 @@ public interface IAgentStudioClient
   Task<AlgoliaHttpResponse> CreateAgentCompletionWithHTTPInfoAsync(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -448,7 +524,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result. (Synchronous version)
+  /// Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -470,12 +546,120 @@ public interface IAgentStudioClient
   AlgoliaHttpResponse CreateAgentCompletionWithHTTPInfo(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="agentId">The agentId.</param>
+  /// <param name="taskRequest"></param>
+  /// <param name="stream">Whether to stream the response or not. (optional, default to false)</param>
+  /// <param name="cache">Use cached responses if available. (optional, default to true)</param>
+  /// <param name="analytics">Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional, default to true)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskResponse</returns>
+  Task<TaskResponse> CreateAgentTaskAsync(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="agentId">The agentId.</param>
+  /// <param name="taskRequest"></param>
+  /// <param name="stream">Whether to stream the response or not. (optional, default to false)</param>
+  /// <param name="cache">Use cached responses if available. (optional, default to true)</param>
+  /// <param name="analytics">Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional, default to true)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskResponse</returns>
+  TaskResponse CreateAgentTask(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="agentId">The agentId.</param>
+  /// <param name="taskRequest"></param>
+  /// <param name="stream">Whether to stream the response or not. (optional, default to false)</param>
+  /// <param name="cache">Use cached responses if available. (optional, default to true)</param>
+  /// <param name="analytics">Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional, default to true)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TaskResponse</returns>
+  Task<AlgoliaHttpResponse> CreateAgentTaskWithHTTPInfoAsync(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="agentId">The agentId.</param>
+  /// <param name="taskRequest"></param>
+  /// <param name="stream">Whether to stream the response or not. (optional, default to false)</param>
+  /// <param name="cache">Use cached responses if available. (optional, default to true)</param>
+  /// <param name="analytics">Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional, default to true)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TaskResponse</returns>
+  AlgoliaHttpResponse CreateAgentTaskWithHTTPInfo(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1089,7 +1273,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Deletes the conversations matching the given filers.
+  /// Deletes the conversations matching the given filters.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1112,7 +1296,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Deletes the conversations matching the given filers. (Synchronous version)
+  /// Deletes the conversations matching the given filters. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1135,7 +1319,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Deletes the conversations matching the given filers.
+  /// Deletes the conversations matching the given filters.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1158,7 +1342,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Deletes the conversations matching the given filers. (Synchronous version)
+  /// Deletes the conversations matching the given filters. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1905,6 +2089,8 @@ public interface IAgentStudioClient
   /// <param name="conversationId">The conversationId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="includeFeedback">Include feedback for the conversation. (optional, default to false)</param>
+  /// <param name="includeMessageEvents">Include Insights events attributed to each assistant message. (optional, default to false)</param>
+  /// <param name="includeImpactAnalytics">Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional, default to false)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1916,6 +2102,8 @@ public interface IAgentStudioClient
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1930,6 +2118,8 @@ public interface IAgentStudioClient
   /// <param name="conversationId">The conversationId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="includeFeedback">Include feedback for the conversation. (optional, default to false)</param>
+  /// <param name="includeMessageEvents">Include Insights events attributed to each assistant message. (optional, default to false)</param>
+  /// <param name="includeImpactAnalytics">Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional, default to false)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1941,6 +2131,8 @@ public interface IAgentStudioClient
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1955,6 +2147,8 @@ public interface IAgentStudioClient
   /// <param name="conversationId">The conversationId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="includeFeedback">Include feedback for the conversation. (optional, default to false)</param>
+  /// <param name="includeMessageEvents">Include Insights events attributed to each assistant message. (optional, default to false)</param>
+  /// <param name="includeImpactAnalytics">Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional, default to false)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1966,6 +2160,8 @@ public interface IAgentStudioClient
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -1980,6 +2176,8 @@ public interface IAgentStudioClient
   /// <param name="conversationId">The conversationId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="includeFeedback">Include feedback for the conversation. (optional, default to false)</param>
+  /// <param name="includeMessageEvents">Include Insights events attributed to each assistant message. (optional, default to false)</param>
+  /// <param name="includeImpactAnalytics">Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional, default to false)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1991,6 +2189,8 @@ public interface IAgentStudioClient
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2225,7 +2425,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Invalidate cached completions for this agent. Filter with `before` (exclusive).
+  /// Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2246,7 +2446,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Invalidate cached completions for this agent. Filter with `before` (exclusive). (Synchronous version)
+  /// Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive). (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2267,7 +2467,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Invalidate cached completions for this agent. Filter with `before` (exclusive).
+  /// Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive).
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2288,7 +2488,7 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
-  /// Invalidate cached completions for this agent. Filter with `before` (exclusive). (Synchronous version)
+  /// Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive). (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2397,6 +2597,10 @@ public interface IAgentStudioClient
   /// <param name="feedbackVote">Filter by feedback value (requires includeFeedback=true). (optional)</param>
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 20)</param>
+  /// <param name="includeImpactAnalytics">Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)</param>
+  /// <param name="clicked">Filter by conversations with at least one item click. (optional)</param>
+  /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
+  /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2412,6 +2616,10 @@ public interface IAgentStudioClient
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2430,6 +2638,10 @@ public interface IAgentStudioClient
   /// <param name="feedbackVote">Filter by feedback value (requires includeFeedback=true). (optional)</param>
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 20)</param>
+  /// <param name="includeImpactAnalytics">Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)</param>
+  /// <param name="clicked">Filter by conversations with at least one item click. (optional)</param>
+  /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
+  /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2445,6 +2657,10 @@ public interface IAgentStudioClient
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2463,6 +2679,10 @@ public interface IAgentStudioClient
   /// <param name="feedbackVote">Filter by feedback value (requires includeFeedback=true). (optional)</param>
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 20)</param>
+  /// <param name="includeImpactAnalytics">Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)</param>
+  /// <param name="clicked">Filter by conversations with at least one item click. (optional)</param>
+  /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
+  /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2478,6 +2698,10 @@ public interface IAgentStudioClient
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2496,6 +2720,10 @@ public interface IAgentStudioClient
   /// <param name="feedbackVote">Filter by feedback value (requires includeFeedback=true). (optional)</param>
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 20)</param>
+  /// <param name="includeImpactAnalytics">Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)</param>
+  /// <param name="clicked">Filter by conversations with at least one item click. (optional)</param>
+  /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
+  /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2511,6 +2739,10 @@ public interface IAgentStudioClient
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -2997,6 +3229,82 @@ public interface IAgentStudioClient
   );
 
   /// <summary>
+  /// Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation).
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextTrimRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ContextResponse</returns>
+  Task<ContextResponse> TrimContextAsync(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation). (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextTrimRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ContextResponse</returns>
+  ContextResponse TrimContext(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation).
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextTrimRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ContextResponse</returns>
+  Task<AlgoliaHttpResponse> TrimContextWithHTTPInfoAsync(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation). (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="contextTrimRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ContextResponse</returns>
+  AlgoliaHttpResponse TrimContextWithHTTPInfo(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
   /// Unpublish the specified agent.
   /// </summary>
   ///
@@ -3228,6 +3536,82 @@ public interface IAgentStudioClient
   /// <returns>ApplicationConfigResponse</returns>
   AlgoliaHttpResponse UpdateConfigurationWithHTTPInfo(
     ApplicationConfigPatch applicationConfigPatch,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update an existing feedback entry.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="feedbackUpdateRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of FeedbackResponse</returns>
+  Task<FeedbackResponse> UpdateFeedbackAsync(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update an existing feedback entry. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="feedbackUpdateRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>FeedbackResponse</returns>
+  FeedbackResponse UpdateFeedback(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update an existing feedback entry.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="feedbackUpdateRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of FeedbackResponse</returns>
+  Task<AlgoliaHttpResponse> UpdateFeedbackWithHTTPInfoAsync(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Update an existing feedback entry. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="feedbackUpdateRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>FeedbackResponse</returns>
+  AlgoliaHttpResponse UpdateFeedbackWithHTTPInfo(
+    FeedbackUpdateRequest feedbackUpdateRequest,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -3709,6 +4093,76 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     );
 
   /// <inheritdoc />
+  public async Task<ContextResponse> CompactContextAsync(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (contextCompactRequest == null)
+      throw new ArgumentException(
+        "Parameter `contextCompactRequest` is required when calling `CompactContext`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = contextCompactRequest;
+    return await _transport
+      .ExecuteRequestAsync<ContextResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/unstable/context/compact",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public ContextResponse CompactContext(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CompactContextAsync(contextCompactRequest, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CompactContextWithHTTPInfoAsync(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (contextCompactRequest == null)
+      throw new ArgumentException(
+        "Parameter `contextCompactRequest` is required when calling `CompactContext`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = contextCompactRequest;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/unstable/context/compact",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CompactContextWithHTTPInfo(
+    ContextCompactRequest contextCompactRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CompactContextWithHTTPInfoAsync(contextCompactRequest, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<AgentWithVersionResponse> CreateAgentAsync(
     AgentConfigCreate agentConfigCreate,
     RequestOptions options = null,
@@ -3882,7 +4336,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
   public async Task<Dictionary<string, object>> CreateAgentCompletionAsync(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -3938,7 +4392,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
   public Dictionary<string, object> CreateAgentCompletion(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -3966,7 +4420,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
   public async Task<AlgoliaHttpResponse> CreateAgentCompletionWithHTTPInfoAsync(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -4022,7 +4476,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
   public AlgoliaHttpResponse CreateAgentCompletionWithHTTPInfo(
     string agentId,
     CompatibilityMode compatibilityMode,
-    AgentCompletionRequest agentCompletionRequest,
+    AgentCompletionRequestUnion agentCompletionRequest,
     bool? stream = default,
     bool? cache = default,
     bool? memory = default,
@@ -4041,6 +4495,138 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         memory,
         analytics,
         xAlgoliaSecureUserToken,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<TaskResponse> CreateAgentTaskAsync(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (agentId == null)
+      throw new ArgumentException(
+        "Parameter `agentId` is required when calling `CreateAgentTask`."
+      );
+
+    if (string.IsNullOrWhiteSpace(agentId))
+      throw new ArgumentException(
+        "Parameter `agentId` is required when calling `CreateAgentTask`."
+      );
+
+    if (taskRequest == null)
+      throw new ArgumentException(
+        "Parameter `taskRequest` is required when calling `CreateAgentTask`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("agentId", QueryStringHelper.ParameterToString(agentId));
+
+    requestOptions.AddQueryParameter("stream", stream);
+    requestOptions.AddQueryParameter("cache", cache);
+    requestOptions.AddQueryParameter("analytics", analytics);
+    requestOptions.Data = taskRequest;
+    return await _transport
+      .ExecuteRequestAsync<TaskResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/agents/{agentId}/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public TaskResponse CreateAgentTask(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateAgentTaskAsync(
+        agentId,
+        taskRequest,
+        stream,
+        cache,
+        analytics,
+        options,
+        cancellationToken
+      )
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> CreateAgentTaskWithHTTPInfoAsync(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (agentId == null)
+      throw new ArgumentException(
+        "Parameter `agentId` is required when calling `CreateAgentTask`."
+      );
+
+    if (string.IsNullOrWhiteSpace(agentId))
+      throw new ArgumentException(
+        "Parameter `agentId` is required when calling `CreateAgentTask`."
+      );
+
+    if (taskRequest == null)
+      throw new ArgumentException(
+        "Parameter `taskRequest` is required when calling `CreateAgentTask`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("agentId", QueryStringHelper.ParameterToString(agentId));
+
+    requestOptions.AddQueryParameter("stream", stream);
+    requestOptions.AddQueryParameter("cache", cache);
+    requestOptions.AddQueryParameter("analytics", analytics);
+    requestOptions.Data = taskRequest;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/agents/{agentId}/tasks",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse CreateAgentTaskWithHTTPInfo(
+    string agentId,
+    TaskRequest taskRequest,
+    bool? stream = default,
+    bool? cache = default,
+    bool? analytics = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      CreateAgentTaskWithHTTPInfoAsync(
+        agentId,
+        taskRequest,
+        stream,
+        cache,
+        analytics,
         options,
         cancellationToken
       )
@@ -5499,6 +6085,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -5532,6 +6120,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.PathParameters.Add("agentId", QueryStringHelper.ParameterToString(agentId));
 
     requestOptions.AddQueryParameter("includeFeedback", includeFeedback);
+    requestOptions.AddQueryParameter("includeMessageEvents", includeMessageEvents);
+    requestOptions.AddQueryParameter("includeImpactAnalytics", includeImpactAnalytics);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -5554,6 +6144,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -5563,6 +6155,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         conversationId,
         agentId,
         includeFeedback,
+        includeMessageEvents,
+        includeImpactAnalytics,
         xAlgoliaSecureUserToken,
         options,
         cancellationToken
@@ -5574,6 +6168,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -5607,6 +6203,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.PathParameters.Add("agentId", QueryStringHelper.ParameterToString(agentId));
 
     requestOptions.AddQueryParameter("includeFeedback", includeFeedback);
+    requestOptions.AddQueryParameter("includeMessageEvents", includeMessageEvents);
+    requestOptions.AddQueryParameter("includeImpactAnalytics", includeImpactAnalytics);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -5629,6 +6227,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string conversationId,
     string agentId,
     bool? includeFeedback = default,
+    bool? includeMessageEvents = default,
+    bool? includeImpactAnalytics = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -5638,6 +6238,8 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         conversationId,
         agentId,
         includeFeedback,
+        includeMessageEvents,
+        includeImpactAnalytics,
         xAlgoliaSecureUserToken,
         options,
         cancellationToken
@@ -6039,6 +6641,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -6063,6 +6669,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("feedbackVote", feedbackVote);
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("limit", limit);
+    requestOptions.AddQueryParameter("includeImpactAnalytics", includeImpactAnalytics);
+    requestOptions.AddQueryParameter("clicked", clicked);
+    requestOptions.AddQueryParameter("converted", converted);
+    requestOptions.AddQueryParameter("hasAlgoliaSearch", hasAlgoliaSearch);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -6089,6 +6699,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -6102,6 +6716,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         feedbackVote,
         page,
         limit,
+        includeImpactAnalytics,
+        clicked,
+        converted,
+        hasAlgoliaSearch,
         xAlgoliaSecureUserToken,
         options,
         cancellationToken
@@ -6117,6 +6735,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -6141,6 +6763,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("feedbackVote", feedbackVote);
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("limit", limit);
+    requestOptions.AddQueryParameter("includeImpactAnalytics", includeImpactAnalytics);
+    requestOptions.AddQueryParameter("clicked", clicked);
+    requestOptions.AddQueryParameter("converted", converted);
+    requestOptions.AddQueryParameter("hasAlgoliaSearch", hasAlgoliaSearch);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -6167,6 +6793,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     int? feedbackVote = default,
     int? page = default,
     int? limit = default,
+    bool? includeImpactAnalytics = default,
+    bool? clicked = default,
+    bool? converted = default,
+    bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
@@ -6180,6 +6810,10 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         feedbackVote,
         page,
         limit,
+        includeImpactAnalytics,
+        clicked,
+        converted,
+        hasAlgoliaSearch,
         xAlgoliaSecureUserToken,
         options,
         cancellationToken
@@ -6581,6 +7215,73 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     AsyncHelper.RunSync(() => PublishAgentWithHTTPInfoAsync(agentId, options, cancellationToken));
 
   /// <inheritdoc />
+  public async Task<ContextResponse> TrimContextAsync(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (contextTrimRequest == null)
+      throw new ArgumentException(
+        "Parameter `contextTrimRequest` is required when calling `TrimContext`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = contextTrimRequest;
+    return await _transport
+      .ExecuteRequestAsync<ContextResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/unstable/context/trim",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public ContextResponse TrimContext(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => TrimContextAsync(contextTrimRequest, options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> TrimContextWithHTTPInfoAsync(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (contextTrimRequest == null)
+      throw new ArgumentException(
+        "Parameter `contextTrimRequest` is required when calling `TrimContext`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = contextTrimRequest;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("POST"),
+        "/agent-studio/1/unstable/context/trim",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse TrimContextWithHTTPInfo(
+    ContextTrimRequest contextTrimRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      TrimContextWithHTTPInfoAsync(contextTrimRequest, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
   public async Task<AgentWithVersionResponse> UnpublishAgentAsync(
     string agentId,
     RequestOptions options = null,
@@ -6805,6 +7506,76 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
   ) =>
     AsyncHelper.RunSync(() =>
       UpdateConfigurationWithHTTPInfoAsync(applicationConfigPatch, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<FeedbackResponse> UpdateFeedbackAsync(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (feedbackUpdateRequest == null)
+      throw new ArgumentException(
+        "Parameter `feedbackUpdateRequest` is required when calling `UpdateFeedback`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = feedbackUpdateRequest;
+    return await _transport
+      .ExecuteRequestAsync<FeedbackResponse>(
+        new HttpMethod("PATCH"),
+        "/agent-studio/1/feedback",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public FeedbackResponse UpdateFeedback(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateFeedbackAsync(feedbackUpdateRequest, options, cancellationToken)
+    );
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> UpdateFeedbackWithHTTPInfoAsync(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    if (feedbackUpdateRequest == null)
+      throw new ArgumentException(
+        "Parameter `feedbackUpdateRequest` is required when calling `UpdateFeedback`."
+      );
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.Data = feedbackUpdateRequest;
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("PATCH"),
+        "/agent-studio/1/feedback",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse UpdateFeedbackWithHTTPInfo(
+    FeedbackUpdateRequest feedbackUpdateRequest,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() =>
+      UpdateFeedbackWithHTTPInfoAsync(feedbackUpdateRequest, options, cancellationToken)
     );
 
   /// <inheritdoc />

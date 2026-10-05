@@ -14,20 +14,20 @@ namespace Algolia.Search.Models.AgentStudio;
 /// <summary>
 /// Configuration for the Algolia Recommend tool. Allows specifying recommend models and related parameters.
 /// </summary>
-public partial class AlgoliaRecommendToolConfigInput
+public partial class AlgoliaRecommendToolConfig
 {
   /// <summary>
-  /// Initializes a new instance of the AlgoliaRecommendToolConfigInput class.
+  /// Initializes a new instance of the AlgoliaRecommendToolConfig class.
   /// </summary>
   [JsonConstructor]
-  public AlgoliaRecommendToolConfigInput() { }
+  public AlgoliaRecommendToolConfig() { }
 
   /// <summary>
-  /// Initializes a new instance of the AlgoliaRecommendToolConfigInput class.
+  /// Initializes a new instance of the AlgoliaRecommendToolConfig class.
   /// </summary>
   /// <param name="name">name (required).</param>
   /// <param name="type">type (required) (default to "algolia_recommend").</param>
-  public AlgoliaRecommendToolConfigInput(string name, string type)
+  public AlgoliaRecommendToolConfig(string name, string type)
   {
     Name = name ?? throw new ArgumentNullException(nameof(name));
     Type = type ?? throw new ArgumentNullException(nameof(type));
@@ -64,7 +64,7 @@ public partial class AlgoliaRecommendToolConfigInput
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class AlgoliaRecommendToolConfigInput {\n");
+    sb.Append("class AlgoliaRecommendToolConfig {\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  AllowedConfigs: ").Append(AllowedConfigs).Append("\n");
@@ -91,7 +91,7 @@ public partial class AlgoliaRecommendToolConfigInput
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AlgoliaRecommendToolConfigInput input)
+    if (obj is not AlgoliaRecommendToolConfig input)
     {
       return false;
     }

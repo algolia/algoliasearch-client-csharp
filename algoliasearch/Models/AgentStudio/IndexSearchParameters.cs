@@ -52,6 +52,12 @@ public partial class IndexSearchParameters
   public StringArrayParam ResponseFields { get; set; }
 
   /// <summary>
+  /// Gets or Sets Distinct
+  /// </summary>
+  [JsonPropertyName("distinct")]
+  public BooleanParam Distinct { get; set; }
+
+  /// <summary>
   /// Gets or Sets Facets
   /// </summary>
   [JsonPropertyName("facets")]
@@ -76,6 +82,7 @@ public partial class IndexSearchParameters
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  ResponseFields: ").Append(ResponseFields).Append("\n");
+    sb.Append("  Distinct: ").Append(Distinct).Append("\n");
     sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  Custom: ").Append(Custom).Append("\n");
     sb.Append("}\n");
@@ -117,6 +124,7 @@ public partial class IndexSearchParameters
         ResponseFields == input.ResponseFields
         || (ResponseFields != null && ResponseFields.Equals(input.ResponseFields))
       )
+      && (Distinct == input.Distinct || (Distinct != null && Distinct.Equals(input.Distinct)))
       && (Facets == input.Facets || (Facets != null && Facets.Equals(input.Facets)))
       && (
         Custom == input.Custom
@@ -152,6 +160,10 @@ public partial class IndexSearchParameters
       if (ResponseFields != null)
       {
         hashCode = (hashCode * 59) + ResponseFields.GetHashCode();
+      }
+      if (Distinct != null)
+      {
+        hashCode = (hashCode * 59) + Distinct.GetHashCode();
       }
       if (Facets != null)
       {
