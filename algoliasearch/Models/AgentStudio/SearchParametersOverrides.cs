@@ -70,6 +70,42 @@ public partial class SearchParametersOverrides
   public OptionalFiltersUnion OptionalFilters { get; set; }
 
   /// <summary>
+  /// Gets or Sets AroundLatLng
+  /// </summary>
+  [JsonPropertyName("aroundLatLng")]
+  public string AroundLatLng { get; set; }
+
+  /// <summary>
+  /// Gets or Sets AroundRadius
+  /// </summary>
+  [JsonPropertyName("aroundRadius")]
+  public AroundRadiusUnion AroundRadius { get; set; }
+
+  /// <summary>
+  /// Gets or Sets AroundPrecision
+  /// </summary>
+  [JsonPropertyName("aroundPrecision")]
+  public AroundPrecisionUnion AroundPrecision { get; set; }
+
+  /// <summary>
+  /// Gets or Sets MinimumAroundRadius
+  /// </summary>
+  [JsonPropertyName("minimumAroundRadius")]
+  public int? MinimumAroundRadius { get; set; }
+
+  /// <summary>
+  /// Gets or Sets InsideBoundingBox
+  /// </summary>
+  [JsonPropertyName("insideBoundingBox")]
+  public InsideBoundingBoxUnion InsideBoundingBox { get; set; }
+
+  /// <summary>
+  /// Gets or Sets InsidePolygon
+  /// </summary>
+  [JsonPropertyName("insidePolygon")]
+  public InsidePolygonUnion InsidePolygon { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -85,6 +121,12 @@ public partial class SearchParametersOverrides
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  PersonalizationImpact: ").Append(PersonalizationImpact).Append("\n");
     sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
+    sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");
+    sb.Append("  AroundRadius: ").Append(AroundRadius).Append("\n");
+    sb.Append("  AroundPrecision: ").Append(AroundPrecision).Append("\n");
+    sb.Append("  MinimumAroundRadius: ").Append(MinimumAroundRadius).Append("\n");
+    sb.Append("  InsideBoundingBox: ").Append(InsideBoundingBox).Append("\n");
+    sb.Append("  InsidePolygon: ").Append(InsidePolygon).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -136,6 +178,30 @@ public partial class SearchParametersOverrides
       && (
         OptionalFilters == input.OptionalFilters
         || (OptionalFilters != null && OptionalFilters.Equals(input.OptionalFilters))
+      )
+      && (
+        AroundLatLng == input.AroundLatLng
+        || (AroundLatLng != null && AroundLatLng.Equals(input.AroundLatLng))
+      )
+      && (
+        AroundRadius == input.AroundRadius
+        || (AroundRadius != null && AroundRadius.Equals(input.AroundRadius))
+      )
+      && (
+        AroundPrecision == input.AroundPrecision
+        || (AroundPrecision != null && AroundPrecision.Equals(input.AroundPrecision))
+      )
+      && (
+        MinimumAroundRadius == input.MinimumAroundRadius
+        || MinimumAroundRadius.Equals(input.MinimumAroundRadius)
+      )
+      && (
+        InsideBoundingBox == input.InsideBoundingBox
+        || (InsideBoundingBox != null && InsideBoundingBox.Equals(input.InsideBoundingBox))
+      )
+      && (
+        InsidePolygon == input.InsidePolygon
+        || (InsidePolygon != null && InsidePolygon.Equals(input.InsidePolygon))
       );
   }
 
@@ -173,6 +239,27 @@ public partial class SearchParametersOverrides
       if (OptionalFilters != null)
       {
         hashCode = (hashCode * 59) + OptionalFilters.GetHashCode();
+      }
+      if (AroundLatLng != null)
+      {
+        hashCode = (hashCode * 59) + AroundLatLng.GetHashCode();
+      }
+      if (AroundRadius != null)
+      {
+        hashCode = (hashCode * 59) + AroundRadius.GetHashCode();
+      }
+      if (AroundPrecision != null)
+      {
+        hashCode = (hashCode * 59) + AroundPrecision.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + MinimumAroundRadius.GetHashCode();
+      if (InsideBoundingBox != null)
+      {
+        hashCode = (hashCode * 59) + InsideBoundingBox.GetHashCode();
+      }
+      if (InsidePolygon != null)
+      {
+        hashCode = (hashCode * 59) + InsidePolygon.GetHashCode();
       }
       return hashCode;
     }
