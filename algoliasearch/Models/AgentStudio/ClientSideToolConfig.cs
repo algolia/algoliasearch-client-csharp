@@ -67,6 +67,13 @@ public partial class ClientSideToolConfig
   public ClientToolsArgsSchema InputSchema { get; set; }
 
   /// <summary>
+  /// Server-side declaration that this tool is display/render-only: a resolved result ends the turn and the model is not re-invoked on it (CR-11753). The client's terminal claim on a tool result is honored only when this agrees; leave false for data tools whose result the model must reason about.
+  /// </summary>
+  /// <value>Server-side declaration that this tool is display/render-only: a resolved result ends the turn and the model is not re-invoked on it (CR-11753). The client's terminal claim on a tool result is honored only when this agrees; leave false for data tools whose result the model must reason about.</value>
+  [JsonPropertyName("isTerminal")]
+  public bool? IsTerminal { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -78,6 +85,7 @@ public partial class ClientSideToolConfig
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  InputSchema: ").Append(InputSchema).Append("\n");
+    sb.Append("  IsTerminal: ").Append(IsTerminal).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -112,7 +120,8 @@ public partial class ClientSideToolConfig
       && (
         InputSchema == input.InputSchema
         || (InputSchema != null && InputSchema.Equals(input.InputSchema))
-      );
+      )
+      && (IsTerminal == input.IsTerminal || IsTerminal.Equals(input.IsTerminal));
   }
 
   /// <summary>
@@ -140,6 +149,7 @@ public partial class ClientSideToolConfig
       {
         hashCode = (hashCode * 59) + InputSchema.GetHashCode();
       }
+      hashCode = (hashCode * 59) + IsTerminal.GetHashCode();
       return hashCode;
     }
   }

@@ -82,6 +82,12 @@ public partial class ToolPartV5
   public string ErrorText { get; set; }
 
   /// <summary>
+  /// Gets or Sets Terminal
+  /// </summary>
+  [JsonPropertyName("terminal")]
+  public bool? Terminal { get; set; }
+
+  /// <summary>
   /// Gets or Sets ProviderOptions
   /// </summary>
   [JsonPropertyName("providerOptions")]
@@ -121,6 +127,7 @@ public partial class ToolPartV5
     sb.Append("  Output: ").Append(Output).Append("\n");
     sb.Append("  OutputMetadata: ").Append(OutputMetadata).Append("\n");
     sb.Append("  ErrorText: ").Append(ErrorText).Append("\n");
+    sb.Append("  Terminal: ").Append(Terminal).Append("\n");
     sb.Append("  ProviderOptions: ").Append(ProviderOptions).Append("\n");
     sb.Append("  RequiresApproval: ").Append(RequiresApproval).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
@@ -175,6 +182,7 @@ public partial class ToolPartV5
           && OutputMetadata.SequenceEqual(input.OutputMetadata)
       )
       && (ErrorText == input.ErrorText || (ErrorText != null && ErrorText.Equals(input.ErrorText)))
+      && (Terminal == input.Terminal || (Terminal != null && Terminal.Equals(input.Terminal)))
       && (
         ProviderOptions == input.ProviderOptions
         || ProviderOptions != null
@@ -229,6 +237,10 @@ public partial class ToolPartV5
       if (ErrorText != null)
       {
         hashCode = (hashCode * 59) + ErrorText.GetHashCode();
+      }
+      if (Terminal != null)
+      {
+        hashCode = (hashCode * 59) + Terminal.GetHashCode();
       }
       if (ProviderOptions != null)
       {

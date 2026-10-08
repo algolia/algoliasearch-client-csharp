@@ -70,6 +70,12 @@ public partial class SearchParametersOverrides
   public OptionalFiltersUnion OptionalFilters { get; set; }
 
   /// <summary>
+  /// Gets or Sets FacetFilters
+  /// </summary>
+  [JsonPropertyName("facetFilters")]
+  public FacetFiltersUnionSearchParametersOverrides FacetFilters { get; set; }
+
+  /// <summary>
   /// Gets or Sets AroundLatLng
   /// </summary>
   [JsonPropertyName("aroundLatLng")]
@@ -121,6 +127,7 @@ public partial class SearchParametersOverrides
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  PersonalizationImpact: ").Append(PersonalizationImpact).Append("\n");
     sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
+    sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
     sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");
     sb.Append("  AroundRadius: ").Append(AroundRadius).Append("\n");
     sb.Append("  AroundPrecision: ").Append(AroundPrecision).Append("\n");
@@ -178,6 +185,10 @@ public partial class SearchParametersOverrides
       && (
         OptionalFilters == input.OptionalFilters
         || (OptionalFilters != null && OptionalFilters.Equals(input.OptionalFilters))
+      )
+      && (
+        FacetFilters == input.FacetFilters
+        || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))
       )
       && (
         AroundLatLng == input.AroundLatLng
@@ -239,6 +250,10 @@ public partial class SearchParametersOverrides
       if (OptionalFilters != null)
       {
         hashCode = (hashCode * 59) + OptionalFilters.GetHashCode();
+      }
+      if (FacetFilters != null)
+      {
+        hashCode = (hashCode * 59) + FacetFilters.GetHashCode();
       }
       if (AroundLatLng != null)
       {
