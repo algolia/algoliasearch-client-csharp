@@ -12,17 +12,17 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Ordering to apply on the items retrieved from the external provider. 'default' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider.
+/// Ordering to apply on the items retrieved from the external provider. 'algoliaDefined' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider.
 /// </summary>
-/// <value>Ordering to apply on the items retrieved from the external provider. 'default' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider. </value>
+/// <value>Ordering to apply on the items retrieved from the external provider. 'algoliaDefined' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider. </value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<ExternalProviderOrdering>))]
 public enum ExternalProviderOrdering
 {
   /// <summary>
-  /// Enum Default for value: default
+  /// Enum AlgoliaDefined for value: algoliaDefined
   /// </summary>
-  [JsonPropertyName("default")]
-  Default = 1,
+  [JsonPropertyName("algoliaDefined")]
+  AlgoliaDefined = 1,
 
   /// <summary>
   /// Enum ProviderDefined for value: providerDefined
