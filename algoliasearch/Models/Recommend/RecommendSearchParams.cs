@@ -72,9 +72,9 @@ public partial class RecommendSearchParams
   public TagFilters TagFilters { get; set; }
 
   /// <summary>
-  /// Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
+  /// Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores).
   /// </summary>
-  /// <value>Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). </value>
+  /// <value>Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores). </value>
   [JsonPropertyName("sumOrFiltersScores")]
   public bool? SumOrFiltersScores { get; set; }
 
@@ -153,9 +153,9 @@ public partial class RecommendSearchParams
   public List<SupportedLanguage> NaturalLanguages { get; set; }
 
   /// <summary>
-  /// Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+  /// Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules.
   /// </summary>
-  /// <value>Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
+  /// <value>Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules. </value>
   [JsonPropertyName("ruleContexts")]
   public List<string> RuleContexts { get; set; }
 
@@ -286,9 +286,9 @@ public partial class RecommendSearchParams
   public List<SupportedLanguage> IndexLanguages { get; set; }
 
   /// <summary>
-  /// Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search). Attribute names are case-sensitive.
+  /// Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjust-prefix-search). Attribute names are case-sensitive.
   /// </summary>
-  /// <value>Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search). Attribute names are case-sensitive. </value>
+  /// <value>Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjust-prefix-search). Attribute names are case-sensitive. </value>
   [JsonPropertyName("disablePrefixOnAttributes")]
   public List<string> DisablePrefixOnAttributes { get; set; }
 
@@ -370,9 +370,9 @@ public partial class RecommendSearchParams
   public List<string> AttributesToRetrieve { get; set; }
 
   /// <summary>
-  /// Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+  /// Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#standard-and-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
   /// </summary>
-  /// <value>Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
+  /// <value>Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#standard-and-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
   [JsonPropertyName("relevancyStrictness")]
   public int? RelevancyStrictness { get; set; }
 
@@ -419,16 +419,16 @@ public partial class RecommendSearchParams
   public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).</value>
   [JsonPropertyName("minWordSizefor1Typo")]
   public int? MinWordSizefor1Typo { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).</value>
   [JsonPropertyName("minWordSizefor2Typos")]
   public int? MinWordSizefor2Typos { get; set; }
 
@@ -472,9 +472,9 @@ public partial class RecommendSearchParams
   public List<SupportedLanguage> QueryLanguages { get; set; }
 
   /// <summary>
-  /// Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
+  /// Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#split-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
   /// </summary>
-  /// <value>Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). </value>
+  /// <value>Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#split-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). </value>
   [JsonPropertyName("decompoundQuery")]
   public bool? DecompoundQuery { get; set; }
 

@@ -62,6 +62,13 @@ public partial class SourceUpdateCommercetools
   public bool? UseImagesObjects { get; set; }
 
   /// <summary>
+  /// When set to true, the connector uses the complete category path (e.g. \"Root > Level 1 > Category name\") in `categoriesCustomFields`.
+  /// </summary>
+  /// <value>When set to true, the connector uses the complete category path (e.g. \"Root > Level 1 > Category name\") in `categoriesCustomFields`. </value>
+  [JsonPropertyName("categoriesCustomFieldsFullPath")]
+  public bool? CategoriesCustomFieldsFullPath { get; set; }
+
+  /// <summary>
   /// Gets or Sets CustomFields
   /// </summary>
   [JsonPropertyName("customFields")]
@@ -81,6 +88,9 @@ public partial class SourceUpdateCommercetools
     sb.Append("  FallbackIsInStockValue: ").Append(FallbackIsInStockValue).Append("\n");
     sb.Append("  ProductQueryPredicate: ").Append(ProductQueryPredicate).Append("\n");
     sb.Append("  UseImagesObjects: ").Append(UseImagesObjects).Append("\n");
+    sb.Append("  CategoriesCustomFieldsFullPath: ")
+      .Append(CategoriesCustomFieldsFullPath)
+      .Append("\n");
     sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -131,6 +141,10 @@ public partial class SourceUpdateCommercetools
         || UseImagesObjects.Equals(input.UseImagesObjects)
       )
       && (
+        CategoriesCustomFieldsFullPath == input.CategoriesCustomFieldsFullPath
+        || CategoriesCustomFieldsFullPath.Equals(input.CategoriesCustomFieldsFullPath)
+      )
+      && (
         CustomFields == input.CustomFields
         || (CustomFields != null && CustomFields.Equals(input.CustomFields))
       );
@@ -163,6 +177,7 @@ public partial class SourceUpdateCommercetools
         hashCode = (hashCode * 59) + ProductQueryPredicate.GetHashCode();
       }
       hashCode = (hashCode * 59) + UseImagesObjects.GetHashCode();
+      hashCode = (hashCode * 59) + CategoriesCustomFieldsFullPath.GetHashCode();
       if (CustomFields != null)
       {
         hashCode = (hashCode * 59) + CustomFields.GetHashCode();

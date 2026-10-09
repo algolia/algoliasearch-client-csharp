@@ -198,16 +198,16 @@ public partial class MainInjectionQueryParameters
   public int? MinProximity { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).</value>
   [JsonPropertyName("minWordSizefor1Typo")]
   public int? MinWordSizefor1Typo { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).</value>
   [JsonPropertyName("minWordSizefor2Typos")]
   public int? MinWordSizefor2Typos { get; set; }
 
@@ -292,9 +292,9 @@ public partial class MainInjectionQueryParameters
   public List<string> RestrictSearchableAttributes { get; set; }
 
   /// <summary>
-  /// Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+  /// Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules.
   /// </summary>
-  /// <value>Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
+  /// <value>Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules. </value>
   [JsonPropertyName("ruleContexts")]
   public List<string> RuleContexts { get; set; }
 
@@ -360,9 +360,9 @@ public partial class MainInjectionQueryParameters
   public string SortFacetValuesBy { get; set; }
 
   /// <summary>
-  /// Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
+  /// Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores).
   /// </summary>
-  /// <value>Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). </value>
+  /// <value>Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores). </value>
   [JsonPropertyName("sumOrFiltersScores")]
   public bool? SumOrFiltersScores { get; set; }
 
