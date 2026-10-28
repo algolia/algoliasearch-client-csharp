@@ -29,9 +29,9 @@ public partial class EstimateABTestResponse
   public long? DurationDays { get; set; }
 
   /// <summary>
-  /// Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance.
+  /// Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches, or users for user-level rates (metrics ending in `UsersRate`), required to achieve the desired statistical significance.
   /// </summary>
-  /// <value>Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance. </value>
+  /// <value>Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches, or users for user-level rates (metrics ending in `UsersRate`), required to achieve the desired statistical significance. </value>
   [JsonPropertyName("sampleSizes")]
   public List<long> SampleSizes { get; set; }
 

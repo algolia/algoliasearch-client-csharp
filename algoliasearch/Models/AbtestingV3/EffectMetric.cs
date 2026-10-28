@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AbtestingV3;
 
 /// <summary>
-/// Metric for which you want to detect the smallest relative difference.
+/// Metric for which you want to detect the smallest relative difference. Metrics ending in `UsersRate` are user-level rates: the share of tracked users with at least one search with a click, conversion, add-to-cart, or purchase. For these metrics, sample sizes count users instead of searches.
 /// </summary>
-/// <value>Metric for which you want to detect the smallest relative difference.</value>
+/// <value>Metric for which you want to detect the smallest relative difference. Metrics ending in `UsersRate` are user-level rates: the share of tracked users with at least one search with a click, conversion, add-to-cart, or purchase. For these metrics, sample sizes count users instead of searches. </value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<EffectMetric>))]
 public enum EffectMetric
 {
@@ -47,4 +47,28 @@ public enum EffectMetric
   /// </summary>
   [JsonPropertyName("noResultsRate")]
   NoResultsRate = 5,
+
+  /// <summary>
+  /// Enum AddToCartUsersRate for value: addToCartUsersRate
+  /// </summary>
+  [JsonPropertyName("addToCartUsersRate")]
+  AddToCartUsersRate = 6,
+
+  /// <summary>
+  /// Enum ClickedUsersRate for value: clickedUsersRate
+  /// </summary>
+  [JsonPropertyName("clickedUsersRate")]
+  ClickedUsersRate = 7,
+
+  /// <summary>
+  /// Enum ConvertedUsersRate for value: convertedUsersRate
+  /// </summary>
+  [JsonPropertyName("convertedUsersRate")]
+  ConvertedUsersRate = 8,
+
+  /// <summary>
+  /// Enum PurchaseUsersRate for value: purchaseUsersRate
+  /// </summary>
+  [JsonPropertyName("purchaseUsersRate")]
+  PurchaseUsersRate = 9,
 }
