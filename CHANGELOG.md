@@ -1,3 +1,11 @@
+## [7.51.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.50.0...7.51.0)
+
+- [e6d5471f15](https://github.com/algolia/api-clients-automation/commit/e6d5471f15) fix(scripts): avoid swift CTS deadlock when running in docker ([#7146](https://github.com/algolia/api-clients-automation/pull/7146)) by [@Fluf22](https://github.com/Fluf22/)
+- [c2153f09a5](https://github.com/algolia/api-clients-automation/commit/c2153f09a5) fix(specs): remove obsolete index-key copy note ([#7177](https://github.com/algolia/api-clients-automation/pull/7177)) by [@xroche](https://github.com/xroche/)
+- [8b2ad07687](https://github.com/algolia/api-clients-automation/commit/8b2ad07687) chore(deps): dependencies 2026-10-12 ([#7135](https://github.com/algolia/api-clients-automation/pull/7135)) by [@algolia-api-clients-automation-bot[bot]](https://github.com/apps/algolia-api-clients-automation-bot)
+- [75e309924e](https://github.com/algolia/api-clients-automation/commit/75e309924e) clients(clients): cache host state only on change ([#7202](https://github.com/algolia/api-clients-automation/pull/7202)) by [@zigzagdev](https://github.com/zigzagdev/)
+- [e7642ce951](https://github.com/algolia/api-clients-automation/commit/e7642ce951) feat(specs): add user metrics to abtesting-v3 timeseries enum ([#7181](https://github.com/algolia/api-clients-automation/pull/7181)) by [@stevenMevans](https://github.com/stevenMevans/)
+
 ## [7.50.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.49.0...7.50.0)
 
 BREAKING CHANGES: this minor version includes breaking changes (A/B Testing V3 API, request bodies, Agent Studio API). See below for more details.
