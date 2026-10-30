@@ -53,9 +53,9 @@ public partial class ApiKey
   public List<string> Indexes { get; set; }
 
   /// <summary>
-  /// Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+  /// Maximum number of hits this API key can retrieve per page.  If you set this to 0, the maximum allowed value (1,000) applies. If you also set `hitsPerPage` on the index, the engine uses the lower of the two values.
   /// </summary>
-  /// <value>Maximum number of results this API key can retrieve in one query. By default, there's no limit. </value>
+  /// <value>Maximum number of hits this API key can retrieve per page.  If you set this to 0, the maximum allowed value (1,000) applies. If you also set `hitsPerPage` on the index, the engine uses the lower of the two values. </value>
   [JsonPropertyName("maxHitsPerQuery")]
   public int? MaxHitsPerQuery { get; set; }
 
