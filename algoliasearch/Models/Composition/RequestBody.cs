@@ -41,6 +41,13 @@ public partial class RequestBody
   public ExternalProvider ExternalProvider { get; set; }
 
   /// <summary>
+  /// Per-feed parameters for `multifeed` compositions. Each key is a feed ID.  Feed `params` take precedence over the root `params`. A feed inherits every root key it doesn't set. A feed value replaces the root value instead of combining with it. This applies to every key, including `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example, `filters` must repeat the common values. An empty value such as `filters: \"\"` discards the root value.  The API validates feed `params` like the root `params`. An unsupported parameter returns a 400 error.  A feed ID may not exist in the composition (for example, because a rule removed it). The response reports it in the `errors` field but request still succeeds.  Rules match once per request, against the root `params` only.
+  /// </summary>
+  /// <value>Per-feed parameters for `multifeed` compositions. Each key is a feed ID.  Feed `params` take precedence over the root `params`. A feed inherits every root key it doesn't set. A feed value replaces the root value instead of combining with it. This applies to every key, including `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example, `filters` must repeat the common values. An empty value such as `filters: \"\"` discards the root value.  The API validates feed `params` like the root `params`. An unsupported parameter returns a 400 error.  A feed ID may not exist in the composition (for example, because a rule removed it). The response reports it in the `errors` field but request still succeeds.  Rules match once per request, against the root `params` only. </value>
+  [JsonPropertyName("feeds")]
+  public Dictionary<string, FeedRequest> Feeds { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -51,6 +58,7 @@ public partial class RequestBody
     sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  FeedsOrder: ").Append(FeedsOrder).Append("\n");
     sb.Append("  ExternalProvider: ").Append(ExternalProvider).Append("\n");
+    sb.Append("  Feeds: ").Append(Feeds).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -86,6 +94,10 @@ public partial class RequestBody
       && (
         ExternalProvider == input.ExternalProvider
         || (ExternalProvider != null && ExternalProvider.Equals(input.ExternalProvider))
+      )
+      && (
+        Feeds == input.Feeds
+        || Feeds != null && input.Feeds != null && Feeds.SequenceEqual(input.Feeds)
       );
   }
 
@@ -109,6 +121,10 @@ public partial class RequestBody
       if (ExternalProvider != null)
       {
         hashCode = (hashCode * 59) + ExternalProvider.GetHashCode();
+      }
+      if (Feeds != null)
+      {
+        hashCode = (hashCode * 59) + Feeds.GetHashCode();
       }
       return hashCode;
     }
