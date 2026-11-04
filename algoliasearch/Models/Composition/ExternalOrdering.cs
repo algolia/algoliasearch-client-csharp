@@ -12,21 +12,27 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// Ordering to apply on the injected items coming from the external source. 'default' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.
+/// Ordering to apply on the injected items coming from the external source. 'algoliaDefined' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.
 /// </summary>
-/// <value>Ordering to apply on the injected items coming from the external source. 'default' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.</value>
+/// <value>Ordering to apply on the injected items coming from the external source. 'algoliaDefined' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.</value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<ExternalOrdering>))]
 public enum ExternalOrdering
 {
   /// <summary>
+  /// Enum AlgoliaDefined for value: algoliaDefined
+  /// </summary>
+  [JsonPropertyName("algoliaDefined")]
+  AlgoliaDefined = 1,
+
+  /// <summary>
   /// Enum Default for value: default
   /// </summary>
   [JsonPropertyName("default")]
-  Default = 1,
+  Default = 2,
 
   /// <summary>
   /// Enum UserDefined for value: userDefined
   /// </summary>
   [JsonPropertyName("userDefined")]
-  UserDefined = 2,
+  UserDefined = 3,
 }
