@@ -25,9 +25,9 @@ public partial class DailyNoClickRates
   /// <summary>
   /// Initializes a new instance of the DailyNoClickRates class.
   /// </summary>
-  /// <param name="rate">No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches.  (required).</param>
+  /// <param name="rate">No click rate: calculated as the number of tracked searches with results whose query didn't get any click in the time range, divided by the number of tracked searches with results.  (required).</param>
   /// <param name="count">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
-  /// <param name="noClickCount">Number of times this search was returned as a result without any click. (required).</param>
+  /// <param name="noClickCount">Number of tracked searches with results whose query didn't get any click in the time range. (required).</param>
   /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
   public DailyNoClickRates(double rate, int count, int noClickCount, string date)
   {
@@ -38,9 +38,9 @@ public partial class DailyNoClickRates
   }
 
   /// <summary>
-  /// No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches.
+  /// No click rate: calculated as the number of tracked searches with results whose query didn't get any click in the time range, divided by the number of tracked searches with results.
   /// </summary>
-  /// <value>No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches. </value>
+  /// <value>No click rate: calculated as the number of tracked searches with results whose query didn't get any click in the time range, divided by the number of tracked searches with results. </value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 
@@ -52,9 +52,9 @@ public partial class DailyNoClickRates
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of times this search was returned as a result without any click.
+  /// Number of tracked searches with results whose query didn't get any click in the time range.
   /// </summary>
-  /// <value>Number of times this search was returned as a result without any click.</value>
+  /// <value>Number of tracked searches with results whose query didn't get any click in the time range.</value>
   [JsonPropertyName("noClickCount")]
   public int NoClickCount { get; set; }
 
