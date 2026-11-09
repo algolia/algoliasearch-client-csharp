@@ -180,44 +180,50 @@ public enum MetricName
   PurchaseUsersRate = 27,
 
   /// <summary>
+  /// Enum UsersWithNoResultsRate for value: users_with_no_results_rate
+  /// </summary>
+  [JsonPropertyName("users_with_no_results_rate")]
+  UsersWithNoResultsRate = 28,
+
+  /// <summary>
   /// Enum AvgClickThroughRatePerUser for value: avg_click_through_rate_per_user
   /// </summary>
   [JsonPropertyName("avg_click_through_rate_per_user")]
-  AvgClickThroughRatePerUser = 28,
+  AvgClickThroughRatePerUser = 29,
 
   /// <summary>
   /// Enum AvgConversionRatePerUser for value: avg_conversion_rate_per_user
   /// </summary>
   [JsonPropertyName("avg_conversion_rate_per_user")]
-  AvgConversionRatePerUser = 29,
+  AvgConversionRatePerUser = 30,
 
   /// <summary>
   /// Enum AvgPurchaseRatePerUser for value: avg_purchase_rate_per_user
   /// </summary>
   [JsonPropertyName("avg_purchase_rate_per_user")]
-  AvgPurchaseRatePerUser = 30,
+  AvgPurchaseRatePerUser = 31,
 
   /// <summary>
   /// Enum AvgAddToCartRatePerUser for value: avg_add_to_cart_rate_per_user
   /// </summary>
   [JsonPropertyName("avg_add_to_cart_rate_per_user")]
-  AvgAddToCartRatePerUser = 31,
+  AvgAddToCartRatePerUser = 32,
 
   /// <summary>
   /// Enum AvgClickPositionPerUser for value: avg_click_position_per_user
   /// </summary>
   [JsonPropertyName("avg_click_position_per_user")]
-  AvgClickPositionPerUser = 32,
+  AvgClickPositionPerUser = 33,
 
   /// <summary>
   /// Enum WinsorizedRevenuePerUser for value: winsorized_revenue_per_user
   /// </summary>
   [JsonPropertyName("winsorized_revenue_per_user")]
-  WinsorizedRevenuePerUser = 33,
+  WinsorizedRevenuePerUser = 34,
 
   /// <summary>
   /// Enum WinsorizedRevenuePerPurchaser for value: winsorized_revenue_per_purchaser
   /// </summary>
   [JsonPropertyName("winsorized_revenue_per_purchaser")]
-  WinsorizedRevenuePerPurchaser = 34,
+  WinsorizedRevenuePerPurchaser = 35,
 }

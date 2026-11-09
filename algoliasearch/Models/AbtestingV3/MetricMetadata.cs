@@ -36,6 +36,13 @@ public partial class MetricMetadata
   public double? Mean { get; set; }
 
   /// <summary>
+  /// Only present for `winsorized_revenue_per_user`. Number of tracked users in this variant with a tracked purchase in the metric's currency (`dimension`), plus tracked users with no tracked purchase in any currency. Users who purchased only in other currencies are excluded. It's the sample size behind the mean, p-value, and intervals, and differs from the overall `user_count` metric. Omitted when the variant has no record for that currency.
+  /// </summary>
+  /// <value>Only present for `winsorized_revenue_per_user`. Number of tracked users in this variant with a tracked purchase in the metric's currency (`dimension`), plus tracked users with no tracked purchase in any currency. Users who purchased only in other currencies are excluded. It's the sample size behind the mean, p-value, and intervals, and differs from the overall `user_count` metric. Omitted when the variant has no record for that currency. </value>
+  [JsonPropertyName("userCount")]
+  public long? UserCount { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -45,6 +52,7 @@ public partial class MetricMetadata
     sb.Append("class MetricMetadata {\n");
     sb.Append("  WinsorizedValue: ").Append(WinsorizedValue).Append("\n");
     sb.Append("  Mean: ").Append(Mean).Append("\n");
+    sb.Append("  UserCount: ").Append(UserCount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -72,7 +80,9 @@ public partial class MetricMetadata
 
     return (
         WinsorizedValue == input.WinsorizedValue || WinsorizedValue.Equals(input.WinsorizedValue)
-      ) && (Mean == input.Mean || Mean.Equals(input.Mean));
+      )
+      && (Mean == input.Mean || Mean.Equals(input.Mean))
+      && (UserCount == input.UserCount || UserCount.Equals(input.UserCount));
   }
 
   /// <summary>
@@ -86,6 +96,7 @@ public partial class MetricMetadata
       int hashCode = 41;
       hashCode = (hashCode * 59) + WinsorizedValue.GetHashCode();
       hashCode = (hashCode * 59) + Mean.GetHashCode();
+      hashCode = (hashCode * 59) + UserCount.GetHashCode();
       return hashCode;
     }
   }

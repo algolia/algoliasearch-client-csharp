@@ -78,9 +78,9 @@ public partial class MetricResult
   public double? PValue { get; set; }
 
   /// <summary>
-  /// Dimension defined during test creation. For revenue metrics, including `revenue_per_search`, this is the currency.
+  /// Dimension defined during test creation. For revenue metrics, including `revenue_per_search` and `winsorized_revenue_per_user`, this is the currency.
   /// </summary>
-  /// <value>Dimension defined during test creation. For revenue metrics, including `revenue_per_search`, this is the currency.</value>
+  /// <value>Dimension defined during test creation. For revenue metrics, including `revenue_per_search` and `winsorized_revenue_per_user`, this is the currency.</value>
   [JsonPropertyName("dimension")]
   public string Dimension { get; set; }
 

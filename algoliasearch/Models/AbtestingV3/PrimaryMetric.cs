@@ -12,9 +12,9 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AbtestingV3;
 
 /// <summary>
-/// Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such search. Add-to-cart rates, purchase rates, and revenue per search require access to revenue analytics.
+/// Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such search. For `users_with_no_results_rate`, this is the share of tracked users with at least one search returning no results. Lower values are better. Add-to-cart rates, purchase rates, and revenue per search require access to revenue analytics.
 /// </summary>
-/// <value>Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such search. Add-to-cart rates, purchase rates, and revenue per search require access to revenue analytics. </value>
+/// <value>Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such search. For `users_with_no_results_rate`, this is the share of tracked users with at least one search returning no results. Lower values are better. Add-to-cart rates, purchase rates, and revenue per search require access to revenue analytics. </value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<PrimaryMetric>))]
 public enum PrimaryMetric
 {
@@ -71,4 +71,10 @@ public enum PrimaryMetric
   /// </summary>
   [JsonPropertyName("purchase_users_rate")]
   PurchaseUsersRate = 9,
+
+  /// <summary>
+  /// Enum UsersWithNoResultsRate for value: users_with_no_results_rate
+  /// </summary>
+  [JsonPropertyName("users_with_no_results_rate")]
+  UsersWithNoResultsRate = 10,
 }
