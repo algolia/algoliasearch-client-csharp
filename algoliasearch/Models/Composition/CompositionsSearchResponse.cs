@@ -12,7 +12,7 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.Composition;
 
 /// <summary>
-/// CompositionsSearchResponse
+/// Information about the compositions processed by the run request. Only present when `getRankingInfo` is `true`.
 /// </summary>
 public partial class CompositionsSearchResponse
 {
