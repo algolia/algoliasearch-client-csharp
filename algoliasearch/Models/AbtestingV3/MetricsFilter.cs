@@ -25,7 +25,7 @@ public partial class MetricsFilter
   /// <summary>
   /// Initializes a new instance of the MetricsFilter class.
   /// </summary>
-  /// <param name="domain">Metric domain (for example `abtesting`, `personalization`). (required).</param>
+  /// <param name="domain">Metric domain (for example `abtesting`, `core`, `personalization`). (required).</param>
   /// <param name="name">Public metric name. (required).</param>
   public MetricsFilter(string domain, string name)
   {
@@ -34,9 +34,9 @@ public partial class MetricsFilter
   }
 
   /// <summary>
-  /// Metric domain (for example `abtesting`, `personalization`).
+  /// Metric domain (for example `abtesting`, `core`, `personalization`).
   /// </summary>
-  /// <value>Metric domain (for example `abtesting`, `personalization`).</value>
+  /// <value>Metric domain (for example `abtesting`, `core`, `personalization`).</value>
   [JsonPropertyName("domain")]
   public string Domain { get; set; }
 
@@ -48,18 +48,24 @@ public partial class MetricsFilter
   public string Name { get; set; }
 
   /// <summary>
-  /// Whether the experiment should record the effects of this filter.
+  /// Whether the experiment should record the effects of this filter. Not supported by `core.hasExactCategoryFilter`.
   /// </summary>
-  /// <value>Whether the experiment should record the effects of this filter.</value>
+  /// <value>Whether the experiment should record the effects of this filter. Not supported by `core.hasExactCategoryFilter`.</value>
   [JsonPropertyName("trackEffects")]
   public bool? TrackEffects { get; set; }
 
   /// <summary>
-  /// If true, keep items that match the filter; if false, exclude them.
+  /// If true, keep items that match the filter; if false, exclude them. Defaults to false.
   /// </summary>
-  /// <value>If true, keep items that match the filter; if false, exclude them.</value>
+  /// <value>If true, keep items that match the filter; if false, exclude them. Defaults to false.</value>
   [JsonPropertyName("includes")]
   public bool? Includes { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Parameters
+  /// </summary>
+  [JsonPropertyName("parameters")]
+  public MetricsFilterParameters Parameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -73,6 +79,7 @@ public partial class MetricsFilter
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  TrackEffects: ").Append(TrackEffects).Append("\n");
     sb.Append("  Includes: ").Append(Includes).Append("\n");
+    sb.Append("  Parameters: ").Append(Parameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -101,7 +108,11 @@ public partial class MetricsFilter
     return (Domain == input.Domain || (Domain != null && Domain.Equals(input.Domain)))
       && (Name == input.Name || (Name != null && Name.Equals(input.Name)))
       && (TrackEffects == input.TrackEffects || TrackEffects.Equals(input.TrackEffects))
-      && (Includes == input.Includes || Includes.Equals(input.Includes));
+      && (Includes == input.Includes || Includes.Equals(input.Includes))
+      && (
+        Parameters == input.Parameters
+        || (Parameters != null && Parameters.Equals(input.Parameters))
+      );
   }
 
   /// <summary>
@@ -123,6 +134,10 @@ public partial class MetricsFilter
       }
       hashCode = (hashCode * 59) + TrackEffects.GetHashCode();
       hashCode = (hashCode * 59) + Includes.GetHashCode();
+      if (Parameters != null)
+      {
+        hashCode = (hashCode * 59) + Parameters.GetHashCode();
+      }
       return hashCode;
     }
   }
