@@ -36,6 +36,12 @@ public partial class Condition
   public string Context { get; set; }
 
   /// <summary>
+  /// Gets or Sets RequestScope
+  /// </summary>
+  [JsonPropertyName("requestScope")]
+  public RequestScope RequestScope { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -45,6 +51,7 @@ public partial class Condition
     sb.Append("class Condition {\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("  Context: ").Append(Context).Append("\n");
+    sb.Append("  RequestScope: ").Append(RequestScope).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -71,7 +78,11 @@ public partial class Condition
     }
 
     return (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters)))
-      && (Context == input.Context || (Context != null && Context.Equals(input.Context)));
+      && (Context == input.Context || (Context != null && Context.Equals(input.Context)))
+      && (
+        RequestScope == input.RequestScope
+        || (RequestScope != null && RequestScope.Equals(input.RequestScope))
+      );
   }
 
   /// <summary>
@@ -90,6 +101,10 @@ public partial class Condition
       if (Context != null)
       {
         hashCode = (hashCode * 59) + Context.GetHashCode();
+      }
+      if (RequestScope != null)
+      {
+        hashCode = (hashCode * 59) + RequestScope.GetHashCode();
       }
       return hashCode;
     }

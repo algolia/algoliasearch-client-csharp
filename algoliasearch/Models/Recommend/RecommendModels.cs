@@ -30,14 +30,14 @@ public enum RecommendModels
   BoughtTogether = 2,
 
   /// <summary>
-  /// Enum TrendingFacets for value: trending-facets
-  /// </summary>
-  [JsonPropertyName("trending-facets")]
-  TrendingFacets = 3,
-
-  /// <summary>
   /// Enum TrendingItems for value: trending-items
   /// </summary>
   [JsonPropertyName("trending-items")]
-  TrendingItems = 4,
+  TrendingItems = 3,
+
+  /// <summary>
+  /// Enum LookingSimilar for value: looking-similar
+  /// </summary>
+  [JsonPropertyName("looking-similar")]
+  LookingSimilar = 4,
 }
