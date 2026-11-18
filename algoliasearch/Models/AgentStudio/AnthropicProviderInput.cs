@@ -44,6 +44,13 @@ public partial class AnthropicProviderInput
   public string BaseUrl { get; set; }
 
   /// <summary>
+  /// Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the anthropic-workspace-id header on every request.
+  /// </summary>
+  /// <value>Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the anthropic-workspace-id header on every request.</value>
+  [JsonPropertyName("workspaceId")]
+  public string WorkspaceId { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -53,6 +60,7 @@ public partial class AnthropicProviderInput
     sb.Append("class AnthropicProviderInput {\n");
     sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
     sb.Append("  BaseUrl: ").Append(BaseUrl).Append("\n");
+    sb.Append("  WorkspaceId: ").Append(WorkspaceId).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -79,7 +87,11 @@ public partial class AnthropicProviderInput
     }
 
     return (ApiKey == input.ApiKey || (ApiKey != null && ApiKey.Equals(input.ApiKey)))
-      && (BaseUrl == input.BaseUrl || (BaseUrl != null && BaseUrl.Equals(input.BaseUrl)));
+      && (BaseUrl == input.BaseUrl || (BaseUrl != null && BaseUrl.Equals(input.BaseUrl)))
+      && (
+        WorkspaceId == input.WorkspaceId
+        || (WorkspaceId != null && WorkspaceId.Equals(input.WorkspaceId))
+      );
   }
 
   /// <summary>
@@ -98,6 +110,10 @@ public partial class AnthropicProviderInput
       if (BaseUrl != null)
       {
         hashCode = (hashCode * 59) + BaseUrl.GetHashCode();
+      }
+      if (WorkspaceId != null)
+      {
+        hashCode = (hashCode * 59) + WorkspaceId.GetHashCode();
       }
       return hashCode;
     }

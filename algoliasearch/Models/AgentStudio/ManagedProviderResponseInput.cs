@@ -19,7 +19,17 @@ public partial class ManagedProviderResponseInput
   /// <summary>
   /// Initializes a new instance of the ManagedProviderResponseInput class.
   /// </summary>
+  [JsonConstructor]
   public ManagedProviderResponseInput() { }
+
+  /// <summary>
+  /// Initializes a new instance of the ManagedProviderResponseInput class.
+  /// </summary>
+  /// <param name="defaultModel">defaultModel (required).</param>
+  public ManagedProviderResponseInput(string defaultModel)
+  {
+    DefaultModel = defaultModel ?? throw new ArgumentNullException(nameof(defaultModel));
+  }
 
   /// <summary>
   /// Gets or Sets DefaultModel

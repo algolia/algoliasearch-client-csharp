@@ -36,26 +36,44 @@ public enum ProviderName
   GoogleGenai = 3,
 
   /// <summary>
+  /// Enum GoogleVertexai for value: google_vertexai
+  /// </summary>
+  [JsonPropertyName("google_vertexai")]
+  GoogleVertexai = 4,
+
+  /// <summary>
   /// Enum Deepseek for value: deepseek
   /// </summary>
   [JsonPropertyName("deepseek")]
-  Deepseek = 4,
+  Deepseek = 5,
 
   /// <summary>
   /// Enum OpenaiCompatible for value: openai_compatible
   /// </summary>
   [JsonPropertyName("openai_compatible")]
-  OpenaiCompatible = 5,
+  OpenaiCompatible = 6,
+
+  /// <summary>
+  /// Enum AlgoliaManagedLlm for value: algolia_managed_llm
+  /// </summary>
+  [JsonPropertyName("algolia_managed_llm")]
+  AlgoliaManagedLlm = 7,
 
   /// <summary>
   /// Enum Xai for value: xai
   /// </summary>
   [JsonPropertyName("xai")]
-  Xai = 6,
+  Xai = 8,
 
   /// <summary>
   /// Enum Anthropic for value: anthropic
   /// </summary>
   [JsonPropertyName("anthropic")]
-  Anthropic = 7,
+  Anthropic = 9,
+
+  /// <summary>
+  /// Enum Mistralai for value: mistralai
+  /// </summary>
+  [JsonPropertyName("mistralai")]
+  Mistralai = 10,
 }

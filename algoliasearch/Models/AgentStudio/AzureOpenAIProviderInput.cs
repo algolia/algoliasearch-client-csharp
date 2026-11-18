@@ -17,6 +17,12 @@ namespace Algolia.Search.Models.AgentStudio;
 public partial class AzureOpenAIProviderInput
 {
   /// <summary>
+  /// Gets or Sets ApiMode
+  /// </summary>
+  [JsonPropertyName("apiMode")]
+  public ApiModeEnum? ApiMode { get; set; }
+
+  /// <summary>
   /// Initializes a new instance of the AzureOpenAIProviderInput class.
   /// </summary>
   [JsonConstructor]
@@ -71,6 +77,7 @@ public partial class AzureOpenAIProviderInput
     sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
     sb.Append("  AzureEndpoint: ").Append(AzureEndpoint).Append("\n");
     sb.Append("  AzureDeployment: ").Append(AzureDeployment).Append("\n");
+    sb.Append("  ApiMode: ").Append(ApiMode).Append("\n");
     sb.Append("  ApiVersion: ").Append(ApiVersion).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -106,6 +113,7 @@ public partial class AzureOpenAIProviderInput
         AzureDeployment == input.AzureDeployment
         || (AzureDeployment != null && AzureDeployment.Equals(input.AzureDeployment))
       )
+      && (ApiMode == input.ApiMode || ApiMode.Equals(input.ApiMode))
       && (
         ApiVersion == input.ApiVersion
         || (ApiVersion != null && ApiVersion.Equals(input.ApiVersion))
@@ -133,6 +141,7 @@ public partial class AzureOpenAIProviderInput
       {
         hashCode = (hashCode * 59) + AzureDeployment.GetHashCode();
       }
+      hashCode = (hashCode * 59) + ApiMode.GetHashCode();
       if (ApiVersion != null)
       {
         hashCode = (hashCode * 59) + ApiVersion.GetHashCode();

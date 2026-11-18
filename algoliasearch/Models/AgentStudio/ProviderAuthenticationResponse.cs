@@ -35,7 +35,7 @@ public partial class ProviderAuthenticationResponse
     string id,
     string name,
     string providerName,
-    InputUnion input,
+    InputUnionProviderAuthenticationResponse input,
     string createdAt,
     string updatedAt
   )
@@ -70,7 +70,7 @@ public partial class ProviderAuthenticationResponse
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
-  public InputUnion Input { get; set; }
+  public InputUnionProviderAuthenticationResponse Input { get; set; }
 
   /// <summary>
   /// Gets or Sets CreatedAt
@@ -91,12 +91,6 @@ public partial class ProviderAuthenticationResponse
   public string LastUsedAt { get; set; }
 
   /// <summary>
-  /// Gets or Sets IsAlgoliaManaged
-  /// </summary>
-  [JsonPropertyName("isAlgoliaManaged")]
-  public bool? IsAlgoliaManaged { get; set; }
-
-  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -111,7 +105,6 @@ public partial class ProviderAuthenticationResponse
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("  LastUsedAt: ").Append(LastUsedAt).Append("\n");
-    sb.Append("  IsAlgoliaManaged: ").Append(IsAlgoliaManaged).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -149,10 +142,6 @@ public partial class ProviderAuthenticationResponse
       && (
         LastUsedAt == input.LastUsedAt
         || (LastUsedAt != null && LastUsedAt.Equals(input.LastUsedAt))
-      )
-      && (
-        IsAlgoliaManaged == input.IsAlgoliaManaged
-        || IsAlgoliaManaged.Equals(input.IsAlgoliaManaged)
       );
   }
 
@@ -193,7 +182,6 @@ public partial class ProviderAuthenticationResponse
       {
         hashCode = (hashCode * 59) + LastUsedAt.GetHashCode();
       }
-      hashCode = (hashCode * 59) + IsAlgoliaManaged.GetHashCode();
       return hashCode;
     }
   }

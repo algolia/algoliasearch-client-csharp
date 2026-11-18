@@ -15,72 +15,105 @@ using Algolia.Search.Serializer;
 namespace Algolia.Search.Models.AgentStudio;
 
 /// <summary>
-/// ProviderInput
+/// InputUnionProviderAuthenticationResponse
 /// </summary>
-[JsonConverter(typeof(ProviderInputJsonConverter))]
-public partial class ProviderInput : AbstractSchema
+[JsonConverter(typeof(InputUnionProviderAuthenticationResponseJsonConverter))]
+public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a AzureOpenAIProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of AzureOpenAIProviderInput.</param>
-  public ProviderInput(AzureOpenAIProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(AzureOpenAIProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a OpenAICompatibleProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of OpenAICompatibleProviderInput.</param>
-  public ProviderInput(OpenAICompatibleProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(OpenAICompatibleProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a OpenAIProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of OpenAIProviderInput.</param>
-  public ProviderInput(OpenAIProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(OpenAIProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a BaseProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of BaseProviderInput.</param>
-  public ProviderInput(BaseProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(BaseProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a AnthropicProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of AnthropicProviderInput.</param>
-  public ProviderInput(AnthropicProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(AnthropicProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
-  /// Initializes a new instance of the ProviderInput class
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
   /// with a XAIProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of XAIProviderInput.</param>
-  public ProviderInput(XAIProviderInput actualInstance)
+  public InputUnionProviderAuthenticationResponse(XAIProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
+  /// with a MistralProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of MistralProviderInput.</param>
+  public InputUnionProviderAuthenticationResponse(MistralProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
+  /// with a VertexAIProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of VertexAIProviderInput.</param>
+  public InputUnionProviderAuthenticationResponse(VertexAIProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnionProviderAuthenticationResponse class
+  /// with a ManagedProviderResponseInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of ManagedProviderResponseInput.</param>
+  public InputUnionProviderAuthenticationResponse(ManagedProviderResponseInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -152,6 +185,36 @@ public partial class ProviderInput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `MistralProviderInput`. If the actual instance is not `MistralProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of MistralProviderInput</returns>
+  public MistralProviderInput AsMistralProviderInput()
+  {
+    return (MistralProviderInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `VertexAIProviderInput`. If the actual instance is not `VertexAIProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of VertexAIProviderInput</returns>
+  public VertexAIProviderInput AsVertexAIProviderInput()
+  {
+    return (VertexAIProviderInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `ManagedProviderResponseInput`. If the actual instance is not `ManagedProviderResponseInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of ManagedProviderResponseInput</returns>
+  public ManagedProviderResponseInput AsManagedProviderResponseInput()
+  {
+    return (ManagedProviderResponseInput)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `AzureOpenAIProviderInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -206,13 +269,40 @@ public partial class ProviderInput : AbstractSchema
   }
 
   /// <summary>
+  /// Check if the actual instance is of `MistralProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsMistralProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(MistralProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `VertexAIProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsVertexAIProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(VertexAIProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `ManagedProviderResponseInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsManagedProviderResponseInput()
+  {
+    return ActualInstance.GetType() == typeof(ManagedProviderResponseInput);
+  }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     var sb = new StringBuilder();
-    sb.Append("class ProviderInput {\n");
+    sb.Append("class InputUnionProviderAuthenticationResponse {\n");
     sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -234,7 +324,7 @@ public partial class ProviderInput : AbstractSchema
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ProviderInput input)
+    if (obj is not InputUnionProviderAuthenticationResponse input)
     {
       return false;
     }
@@ -259,9 +349,10 @@ public partial class ProviderInput : AbstractSchema
 }
 
 /// <summary>
-/// Custom JSON converter for ProviderInput
+/// Custom JSON converter for InputUnionProviderAuthenticationResponse
 /// </summary>
-public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
+public class InputUnionProviderAuthenticationResponseJsonConverter
+  : JsonConverter<InputUnionProviderAuthenticationResponse>
 {
   /// <summary>
   /// Check if the object can be converted
@@ -270,7 +361,7 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
   /// <returns>True if the object can be converted</returns>
   public override bool CanConvert(Type objectType)
   {
-    return objectType == typeof(ProviderInput);
+    return objectType == typeof(InputUnionProviderAuthenticationResponse);
   }
 
   /// <summary>
@@ -280,7 +371,7 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
   /// <param name="typeToConvert">Object type</param>
   /// <param name="options">Serializer options</param>
   /// <returns>The object converted from the JSON string</returns>
-  public override ProviderInput Read(
+  public override InputUnionProviderAuthenticationResponse Read(
     ref Utf8JsonReader reader,
     Type typeToConvert,
     JsonSerializerOptions options
@@ -296,7 +387,7 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(
+        return new InputUnionProviderAuthenticationResponse(
           jsonDocument.Deserialize<AzureOpenAIProviderInput>(JsonConfig.Options)
         );
       }
@@ -316,7 +407,7 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(
+        return new InputUnionProviderAuthenticationResponse(
           jsonDocument.Deserialize<OpenAICompatibleProviderInput>(JsonConfig.Options)
         );
       }
@@ -332,7 +423,9 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(jsonDocument.Deserialize<OpenAIProviderInput>(JsonConfig.Options));
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<OpenAIProviderInput>(JsonConfig.Options)
+        );
       }
       catch (Exception exception)
       {
@@ -346,7 +439,9 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(jsonDocument.Deserialize<BaseProviderInput>(JsonConfig.Options));
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<BaseProviderInput>(JsonConfig.Options)
+        );
       }
       catch (Exception exception)
       {
@@ -360,7 +455,7 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(
+        return new InputUnionProviderAuthenticationResponse(
           jsonDocument.Deserialize<AnthropicProviderInput>(JsonConfig.Options)
         );
       }
@@ -376,13 +471,63 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
     {
       try
       {
-        return new ProviderInput(jsonDocument.Deserialize<XAIProviderInput>(JsonConfig.Options));
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<XAIProviderInput>(JsonConfig.Options)
+        );
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into XAIProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<MistralProviderInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into MistralProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<VertexAIProviderInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into VertexAIProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new InputUnionProviderAuthenticationResponse(
+          jsonDocument.Deserialize<ManagedProviderResponseInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into ManagedProviderResponseInput: {exception}"
         );
       }
     }
@@ -395,11 +540,11 @@ public class ProviderInputJsonConverter : JsonConverter<ProviderInput>
   /// To write the JSON string
   /// </summary>
   /// <param name="writer">JSON writer</param>
-  /// <param name="value">ProviderInput to be converted into a JSON string</param>
+  /// <param name="value">InputUnionProviderAuthenticationResponse to be converted into a JSON string</param>
   /// <param name="options">JSON Serializer options</param>
   public override void Write(
     Utf8JsonWriter writer,
-    ProviderInput value,
+    InputUnionProviderAuthenticationResponse value,
     JsonSerializerOptions options
   )
   {

@@ -22,17 +22,6 @@ public partial class InputUnion : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the InputUnion class
-  /// with a AzureOpenAIProviderInput
-  /// </summary>
-  /// <param name="actualInstance">An instance of AzureOpenAIProviderInput.</param>
-  public InputUnion(AzureOpenAIProviderInput actualInstance)
-  {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the InputUnion class
   /// with a OpenAICompatibleProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of OpenAICompatibleProviderInput.</param>
@@ -44,10 +33,32 @@ public partial class InputUnion : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the InputUnion class
+  /// with a AzureOpenAIProviderCreateInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of AzureOpenAIProviderCreateInput.</param>
+  public InputUnion(AzureOpenAIProviderCreateInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnion class
   /// with a OpenAIProviderInput
   /// </summary>
   /// <param name="actualInstance">An instance of OpenAIProviderInput.</param>
   public InputUnion(OpenAIProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnion class
+  /// with a AzureOpenAIProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of AzureOpenAIProviderInput.</param>
+  public InputUnion(AzureOpenAIProviderInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -88,10 +99,32 @@ public partial class InputUnion : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the InputUnion class
-  /// with a ManagedProviderResponseInput
+  /// with a MistralProviderInput
   /// </summary>
-  /// <param name="actualInstance">An instance of ManagedProviderResponseInput.</param>
-  public InputUnion(ManagedProviderResponseInput actualInstance)
+  /// <param name="actualInstance">An instance of MistralProviderInput.</param>
+  public InputUnion(MistralProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnion class
+  /// with a VertexAIProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of VertexAIProviderInput.</param>
+  public InputUnion(VertexAIProviderInput actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InputUnion class
+  /// with a AlgoliaManagedLLMCreateInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of AlgoliaManagedLLMCreateInput.</param>
+  public InputUnion(AlgoliaManagedLLMCreateInput actualInstance)
   {
     ActualInstance =
       actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -101,16 +134,6 @@ public partial class InputUnion : AbstractSchema
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
-
-  /// <summary>
-  /// Get the actual instance of `AzureOpenAIProviderInput`. If the actual instance is not `AzureOpenAIProviderInput`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of AzureOpenAIProviderInput</returns>
-  public AzureOpenAIProviderInput AsAzureOpenAIProviderInput()
-  {
-    return (AzureOpenAIProviderInput)ActualInstance;
-  }
 
   /// <summary>
   /// Get the actual instance of `OpenAICompatibleProviderInput`. If the actual instance is not `OpenAICompatibleProviderInput`,
@@ -123,6 +146,16 @@ public partial class InputUnion : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `AzureOpenAIProviderCreateInput`. If the actual instance is not `AzureOpenAIProviderCreateInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AzureOpenAIProviderCreateInput</returns>
+  public AzureOpenAIProviderCreateInput AsAzureOpenAIProviderCreateInput()
+  {
+    return (AzureOpenAIProviderCreateInput)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `OpenAIProviderInput`. If the actual instance is not `OpenAIProviderInput`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -130,6 +163,16 @@ public partial class InputUnion : AbstractSchema
   public OpenAIProviderInput AsOpenAIProviderInput()
   {
     return (OpenAIProviderInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `AzureOpenAIProviderInput`. If the actual instance is not `AzureOpenAIProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AzureOpenAIProviderInput</returns>
+  public AzureOpenAIProviderInput AsAzureOpenAIProviderInput()
+  {
+    return (AzureOpenAIProviderInput)ActualInstance;
   }
 
   /// <summary>
@@ -163,22 +206,33 @@ public partial class InputUnion : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `ManagedProviderResponseInput`. If the actual instance is not `ManagedProviderResponseInput`,
+  /// Get the actual instance of `MistralProviderInput`. If the actual instance is not `MistralProviderInput`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of ManagedProviderResponseInput</returns>
-  public ManagedProviderResponseInput AsManagedProviderResponseInput()
+  /// <returns>An instance of MistralProviderInput</returns>
+  public MistralProviderInput AsMistralProviderInput()
   {
-    return (ManagedProviderResponseInput)ActualInstance;
+    return (MistralProviderInput)ActualInstance;
   }
 
   /// <summary>
-  /// Check if the actual instance is of `AzureOpenAIProviderInput` type.
+  /// Get the actual instance of `VertexAIProviderInput`. If the actual instance is not `VertexAIProviderInput`,
+  /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsAzureOpenAIProviderInput()
+  /// <returns>An instance of VertexAIProviderInput</returns>
+  public VertexAIProviderInput AsVertexAIProviderInput()
   {
-    return ActualInstance.GetType() == typeof(AzureOpenAIProviderInput);
+    return (VertexAIProviderInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `AlgoliaManagedLLMCreateInput`. If the actual instance is not `AlgoliaManagedLLMCreateInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AlgoliaManagedLLMCreateInput</returns>
+  public AlgoliaManagedLLMCreateInput AsAlgoliaManagedLLMCreateInput()
+  {
+    return (AlgoliaManagedLLMCreateInput)ActualInstance;
   }
 
   /// <summary>
@@ -191,12 +245,30 @@ public partial class InputUnion : AbstractSchema
   }
 
   /// <summary>
+  /// Check if the actual instance is of `AzureOpenAIProviderCreateInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAzureOpenAIProviderCreateInput()
+  {
+    return ActualInstance.GetType() == typeof(AzureOpenAIProviderCreateInput);
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `OpenAIProviderInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsOpenAIProviderInput()
   {
     return ActualInstance.GetType() == typeof(OpenAIProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AzureOpenAIProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAzureOpenAIProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(AzureOpenAIProviderInput);
   }
 
   /// <summary>
@@ -227,12 +299,30 @@ public partial class InputUnion : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `ManagedProviderResponseInput` type.
+  /// Check if the actual instance is of `MistralProviderInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsManagedProviderResponseInput()
+  public bool IsMistralProviderInput()
   {
-    return ActualInstance.GetType() == typeof(ManagedProviderResponseInput);
+    return ActualInstance.GetType() == typeof(MistralProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `VertexAIProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsVertexAIProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(VertexAIProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AlgoliaManagedLLMCreateInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAlgoliaManagedLLMCreateInput()
+  {
+    return ActualInstance.GetType() == typeof(AlgoliaManagedLLMCreateInput);
   }
 
   /// <summary>
@@ -320,26 +410,6 @@ public class InputUnionJsonConverter : JsonConverter<InputUnion>
     var root = jsonDocument.RootElement;
     if (
       root.ValueKind == JsonValueKind.Object
-      && root.TryGetProperty("azureDeployment", out _)
-      && root.TryGetProperty("azureEndpoint", out _)
-    )
-    {
-      try
-      {
-        return new InputUnion(
-          jsonDocument.Deserialize<AzureOpenAIProviderInput>(JsonConfig.Options)
-        );
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into AzureOpenAIProviderInput: {exception}"
-        );
-      }
-    }
-    if (
-      root.ValueKind == JsonValueKind.Object
       && root.TryGetProperty("baseUrl", out _)
       && root.TryGetProperty("defaultModel", out _)
     )
@@ -362,6 +432,22 @@ public class InputUnionJsonConverter : JsonConverter<InputUnion>
     {
       try
       {
+        return new InputUnion(
+          jsonDocument.Deserialize<AzureOpenAIProviderCreateInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into AzureOpenAIProviderCreateInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
         return new InputUnion(jsonDocument.Deserialize<OpenAIProviderInput>(JsonConfig.Options));
       }
       catch (Exception exception)
@@ -369,6 +455,22 @@ public class InputUnionJsonConverter : JsonConverter<InputUnion>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into OpenAIProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new InputUnion(
+          jsonDocument.Deserialize<AzureOpenAIProviderInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into AzureOpenAIProviderInput: {exception}"
         );
       }
     }
@@ -418,15 +520,43 @@ public class InputUnionJsonConverter : JsonConverter<InputUnion>
     {
       try
       {
+        return new InputUnion(jsonDocument.Deserialize<MistralProviderInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into MistralProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new InputUnion(jsonDocument.Deserialize<VertexAIProviderInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into VertexAIProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
         return new InputUnion(
-          jsonDocument.Deserialize<ManagedProviderResponseInput>(JsonConfig.Options)
+          jsonDocument.Deserialize<AlgoliaManagedLLMCreateInput>(JsonConfig.Options)
         );
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
-          $"Failed to deserialize into ManagedProviderResponseInput: {exception}"
+          $"Failed to deserialize into AlgoliaManagedLLMCreateInput: {exception}"
         );
       }
     }

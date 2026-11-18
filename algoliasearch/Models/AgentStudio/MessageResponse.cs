@@ -145,6 +145,12 @@ public partial class MessageResponse
   public GuardrailOutcome Guardrail { get; set; }
 
   /// <summary>
+  /// Gets or Sets Metadata
+  /// </summary>
+  [JsonPropertyName("metadata")]
+  public Dictionary<string, object> Metadata { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -168,6 +174,7 @@ public partial class MessageResponse
     sb.Append("  TurnContext: ").Append(TurnContext).Append("\n");
     sb.Append("  Events: ").Append(Events).Append("\n");
     sb.Append("  Guardrail: ").Append(Guardrail).Append("\n");
+    sb.Append("  Metadata: ").Append(Metadata).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -244,7 +251,11 @@ public partial class MessageResponse
         Events == input.Events
         || Events != null && input.Events != null && Events.SequenceEqual(input.Events)
       )
-      && (Guardrail == input.Guardrail || (Guardrail != null && Guardrail.Equals(input.Guardrail)));
+      && (Guardrail == input.Guardrail || (Guardrail != null && Guardrail.Equals(input.Guardrail)))
+      && (
+        Metadata == input.Metadata
+        || Metadata != null && input.Metadata != null && Metadata.SequenceEqual(input.Metadata)
+      );
   }
 
   /// <summary>
@@ -316,6 +327,10 @@ public partial class MessageResponse
       if (Guardrail != null)
       {
         hashCode = (hashCode * 59) + Guardrail.GetHashCode();
+      }
+      if (Metadata != null)
+      {
+        hashCode = (hashCode * 59) + Metadata.GetHashCode();
       }
       return hashCode;
     }

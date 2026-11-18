@@ -1857,7 +1857,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1876,7 +1876,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1895,7 +1895,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1914,7 +1914,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1933,7 +1933,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="domainId">The domainId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1954,7 +1954,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="domainId">The domainId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1975,7 +1975,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="domainId">The domainId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1996,7 +1996,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="domainId">The domainId.</param>
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2201,7 +2201,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2220,7 +2220,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2239,7 +2239,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2258,7 +2258,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2513,7 +2513,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2532,7 +2532,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2551,7 +2551,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2570,7 +2570,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="agentId">The agentId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2753,7 +2753,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="providerId">Filter by provider id. (optional)</param>
@@ -2776,7 +2776,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="providerId">Filter by provider id. (optional)</param>
@@ -2799,7 +2799,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="providerId">Filter by provider id. (optional)</param>
@@ -2822,7 +2822,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="providerId">Filter by provider id. (optional)</param>
@@ -2913,7 +2913,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2932,7 +2932,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2951,7 +2951,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2970,7 +2970,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="providerId">The providerId.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2989,7 +2989,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3010,7 +3010,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3031,7 +3031,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3052,7 +3052,7 @@ public interface IAgentStudioClient
   /// </summary>
   ///
   /// Required API Key ACLs:
-  ///   - settings
+  ///   - editSettings
   /// <param name="page">Page number. (optional, default to 1)</param>
   /// <param name="limit">Items per page. (optional, default to 10)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>

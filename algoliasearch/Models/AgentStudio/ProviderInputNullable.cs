@@ -86,6 +86,26 @@ public partial class ProviderInputNullable : AbstractSchema
   }
 
   /// <summary>
+  /// Initializes a new instance of the ProviderInputNullable class
+  /// with a MistralProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of MistralProviderInput.</param>
+  public ProviderInputNullable(MistralProviderInput actualInstance)
+  {
+    ActualInstance = actualInstance;
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the ProviderInputNullable class
+  /// with a VertexAIProviderInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of VertexAIProviderInput.</param>
+  public ProviderInputNullable(VertexAIProviderInput actualInstance)
+  {
+    ActualInstance = actualInstance;
+  }
+
+  /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
@@ -151,6 +171,26 @@ public partial class ProviderInputNullable : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `MistralProviderInput`. If the actual instance is not `MistralProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of MistralProviderInput</returns>
+  public MistralProviderInput AsMistralProviderInput()
+  {
+    return (MistralProviderInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `VertexAIProviderInput`. If the actual instance is not `VertexAIProviderInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of VertexAIProviderInput</returns>
+  public VertexAIProviderInput AsVertexAIProviderInput()
+  {
+    return (VertexAIProviderInput)ActualInstance;
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `AzureOpenAIProviderInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -202,6 +242,24 @@ public partial class ProviderInputNullable : AbstractSchema
   public bool IsXAIProviderInput()
   {
     return ActualInstance.GetType() == typeof(XAIProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `MistralProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsMistralProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(MistralProviderInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `VertexAIProviderInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsVertexAIProviderInput()
+  {
+    return ActualInstance.GetType() == typeof(VertexAIProviderInput);
   }
 
   /// <summary>
@@ -388,6 +446,38 @@ public class ProviderInputNullableJsonConverter : JsonConverter<ProviderInputNul
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into XAIProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new ProviderInputNullable(
+          jsonDocument.Deserialize<MistralProviderInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into MistralProviderInput: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new ProviderInputNullable(
+          jsonDocument.Deserialize<VertexAIProviderInput>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into VertexAIProviderInput: {exception}"
         );
       }
     }

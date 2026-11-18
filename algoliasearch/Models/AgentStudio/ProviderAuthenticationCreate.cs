@@ -34,7 +34,7 @@ public partial class ProviderAuthenticationCreate
   /// <param name="name">name (required).</param>
   /// <param name="providerName">providerName (required).</param>
   /// <param name="input">input (required).</param>
-  public ProviderAuthenticationCreate(string name, ProviderName? providerName, ProviderInput input)
+  public ProviderAuthenticationCreate(string name, ProviderName? providerName, InputUnion input)
   {
     Name = name ?? throw new ArgumentNullException(nameof(name));
     ProviderName = providerName;
@@ -51,7 +51,7 @@ public partial class ProviderAuthenticationCreate
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
-  public ProviderInput Input { get; set; }
+  public InputUnion Input { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
