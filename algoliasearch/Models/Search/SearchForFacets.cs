@@ -547,6 +547,13 @@ public partial class SearchForFacets
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
+  /// Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+  /// </summary>
+  /// <value>Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`. </value>
+  [JsonPropertyName("allowReRankingOnPersonalization")]
+  public bool? AllowReRankingOnPersonalization { get; set; }
+
+  /// <summary>
   /// Facet name.
   /// </summary>
   /// <value>Facet name.</value>
@@ -663,6 +670,9 @@ public partial class SearchForFacets
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
+    sb.Append("  AllowReRankingOnPersonalization: ")
+      .Append(AllowReRankingOnPersonalization)
+      .Append("\n");
     sb.Append("  Facet: ").Append(Facet).Append("\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  FacetQuery: ").Append(FacetQuery).Append("\n");
@@ -960,6 +970,10 @@ public partial class SearchForFacets
         ReRankingApplyFilter == input.ReRankingApplyFilter
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
       )
+      && (
+        AllowReRankingOnPersonalization == input.AllowReRankingOnPersonalization
+        || AllowReRankingOnPersonalization.Equals(input.AllowReRankingOnPersonalization)
+      )
       && (Facet == input.Facet || (Facet != null && Facet.Equals(input.Facet)))
       && (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName)))
       && (
@@ -1177,6 +1191,7 @@ public partial class SearchForFacets
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AllowReRankingOnPersonalization.GetHashCode();
       if (Facet != null)
       {
         hashCode = (hashCode * 59) + Facet.GetHashCode();

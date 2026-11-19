@@ -531,6 +531,13 @@ public partial class ConsequenceParams
   public AutomaticFacetFilters AutomaticOptionalFacetFilters { get; set; }
 
   /// <summary>
+  /// Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+  /// </summary>
+  /// <value>Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`. </value>
+  [JsonPropertyName("allowReRankingOnPersonalization")]
+  public bool? AllowReRankingOnPersonalization { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -621,6 +628,9 @@ public partial class ConsequenceParams
     sb.Append("  AutomaticFacetFilters: ").Append(AutomaticFacetFilters).Append("\n");
     sb.Append("  AutomaticOptionalFacetFilters: ")
       .Append(AutomaticOptionalFacetFilters)
+      .Append("\n");
+    sb.Append("  AllowReRankingOnPersonalization: ")
+      .Append(AllowReRankingOnPersonalization)
       .Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -925,6 +935,10 @@ public partial class ConsequenceParams
           AutomaticOptionalFacetFilters != null
           && AutomaticOptionalFacetFilters.Equals(input.AutomaticOptionalFacetFilters)
         )
+      )
+      && (
+        AllowReRankingOnPersonalization == input.AllowReRankingOnPersonalization
+        || AllowReRankingOnPersonalization.Equals(input.AllowReRankingOnPersonalization)
       );
   }
 
@@ -1139,6 +1153,7 @@ public partial class ConsequenceParams
       {
         hashCode = (hashCode * 59) + AutomaticOptionalFacetFilters.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AllowReRankingOnPersonalization.GetHashCode();
       return hashCode;
     }
   }

@@ -520,6 +520,13 @@ public partial class SearchParamsObject
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
+  /// Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+  /// </summary>
+  /// <value>Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`. </value>
+  [JsonPropertyName("allowReRankingOnPersonalization")]
+  public bool? AllowReRankingOnPersonalization { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -607,6 +614,9 @@ public partial class SearchParamsObject
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
+    sb.Append("  AllowReRankingOnPersonalization: ")
+      .Append(AllowReRankingOnPersonalization)
+      .Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -897,6 +907,10 @@ public partial class SearchParamsObject
       && (
         ReRankingApplyFilter == input.ReRankingApplyFilter
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
+      )
+      && (
+        AllowReRankingOnPersonalization == input.AllowReRankingOnPersonalization
+        || AllowReRankingOnPersonalization.Equals(input.AllowReRankingOnPersonalization)
       );
   }
 
@@ -1103,6 +1117,7 @@ public partial class SearchParamsObject
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AllowReRankingOnPersonalization.GetHashCode();
       return hashCode;
     }
   }

@@ -520,6 +520,13 @@ public partial class BrowseParamsObject
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
+  /// Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+  /// </summary>
+  /// <value>Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`. </value>
+  [JsonPropertyName("allowReRankingOnPersonalization")]
+  public bool? AllowReRankingOnPersonalization { get; set; }
+
+  /// <summary>
   /// Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute.
   /// </summary>
   /// <value>Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute. </value>
@@ -614,6 +621,9 @@ public partial class BrowseParamsObject
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
+    sb.Append("  AllowReRankingOnPersonalization: ")
+      .Append(AllowReRankingOnPersonalization)
+      .Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -906,6 +916,10 @@ public partial class BrowseParamsObject
         ReRankingApplyFilter == input.ReRankingApplyFilter
         || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))
       )
+      && (
+        AllowReRankingOnPersonalization == input.AllowReRankingOnPersonalization
+        || AllowReRankingOnPersonalization.Equals(input.AllowReRankingOnPersonalization)
+      )
       && (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
   }
 
@@ -1112,6 +1126,7 @@ public partial class BrowseParamsObject
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AllowReRankingOnPersonalization.GetHashCode();
       if (Cursor != null)
       {
         hashCode = (hashCode * 59) + Cursor.GetHashCode();
