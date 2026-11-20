@@ -66,6 +66,17 @@ public partial class ToolConfigOutput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the ToolConfigOutput class
+  /// with a AlgoliaCompareProductsToolConfig
+  /// </summary>
+  /// <param name="actualInstance">An instance of AlgoliaCompareProductsToolConfig.</param>
+  public ToolConfigOutput(AlgoliaCompareProductsToolConfig actualInstance)
+  {
+    ActualInstance =
+      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the ToolConfigOutput class
   /// with a UnknownToolConfig
   /// </summary>
   /// <param name="actualInstance">An instance of UnknownToolConfig.</param>
@@ -121,6 +132,16 @@ public partial class ToolConfigOutput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `AlgoliaCompareProductsToolConfig`. If the actual instance is not `AlgoliaCompareProductsToolConfig`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AlgoliaCompareProductsToolConfig</returns>
+  public AlgoliaCompareProductsToolConfig AsAlgoliaCompareProductsToolConfig()
+  {
+    return (AlgoliaCompareProductsToolConfig)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `UnknownToolConfig`. If the actual instance is not `UnknownToolConfig`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -164,6 +185,15 @@ public partial class ToolConfigOutput : AbstractSchema
   public bool IsAlgoliaRecommendToolConfig()
   {
     return ActualInstance.GetType() == typeof(AlgoliaRecommendToolConfig);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AlgoliaCompareProductsToolConfig` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAlgoliaCompareProductsToolConfig()
+  {
+    return ActualInstance.GetType() == typeof(AlgoliaCompareProductsToolConfig);
   }
 
   /// <summary>
@@ -261,6 +291,12 @@ public class ToolConfigOutputJsonConverter : JsonConverter<ToolConfigOutput>
     if (root.TryGetProperty("type", out JsonElement discriminatorElement))
     {
       string discriminatorValue = discriminatorElement.GetString();
+      if (discriminatorValue == "algolia_compare_products")
+      {
+        return new ToolConfigOutput(
+          jsonDocument.Deserialize<AlgoliaCompareProductsToolConfig>(JsonConfig.Options)
+        );
+      }
       if (discriminatorValue == "algolia_recommend")
       {
         return new ToolConfigOutput(
@@ -361,6 +397,22 @@ public class ToolConfigOutputJsonConverter : JsonConverter<ToolConfigOutput>
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(
           $"Failed to deserialize into AlgoliaRecommendToolConfig: {exception}"
+        );
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new ToolConfigOutput(
+          jsonDocument.Deserialize<AlgoliaCompareProductsToolConfig>(JsonConfig.Options)
+        );
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(
+          $"Failed to deserialize into AlgoliaCompareProductsToolConfig: {exception}"
         );
       }
     }

@@ -148,6 +148,12 @@ public partial class ConversationFullResponse
   public bool? AnalyticsDegraded { get; set; }
 
   /// <summary>
+  /// Gets or Sets IsEphemeral
+  /// </summary>
+  [JsonPropertyName("isEphemeral")]
+  public bool? IsEphemeral { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -172,6 +178,7 @@ public partial class ConversationFullResponse
     sb.Append("  ImpactAnalytics: ").Append(ImpactAnalytics).Append("\n");
     sb.Append("  Messages: ").Append(Messages).Append("\n");
     sb.Append("  AnalyticsDegraded: ").Append(AnalyticsDegraded).Append("\n");
+    sb.Append("  IsEphemeral: ").Append(IsEphemeral).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -237,7 +244,8 @@ public partial class ConversationFullResponse
       && (
         AnalyticsDegraded == input.AnalyticsDegraded
         || AnalyticsDegraded.Equals(input.AnalyticsDegraded)
-      );
+      )
+      && (IsEphemeral == input.IsEphemeral || IsEphemeral.Equals(input.IsEphemeral));
   }
 
   /// <summary>
@@ -299,6 +307,7 @@ public partial class ConversationFullResponse
         hashCode = (hashCode * 59) + Messages.GetHashCode();
       }
       hashCode = (hashCode * 59) + AnalyticsDegraded.GetHashCode();
+      hashCode = (hashCode * 59) + IsEphemeral.GetHashCode();
       return hashCode;
     }
   }

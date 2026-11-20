@@ -128,6 +128,12 @@ public partial class ConversationBaseResponse
   public ImpactAnalytics ImpactAnalytics { get; set; }
 
   /// <summary>
+  /// Gets or Sets IsEphemeral
+  /// </summary>
+  [JsonPropertyName("isEphemeral")]
+  public bool? IsEphemeral { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -150,6 +156,7 @@ public partial class ConversationBaseResponse
     sb.Append("  ConversationMetadata: ").Append(ConversationMetadata).Append("\n");
     sb.Append("  Feedback: ").Append(Feedback).Append("\n");
     sb.Append("  ImpactAnalytics: ").Append(ImpactAnalytics).Append("\n");
+    sb.Append("  IsEphemeral: ").Append(IsEphemeral).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -207,7 +214,8 @@ public partial class ConversationBaseResponse
       && (
         ImpactAnalytics == input.ImpactAnalytics
         || (ImpactAnalytics != null && ImpactAnalytics.Equals(input.ImpactAnalytics))
-      );
+      )
+      && (IsEphemeral == input.IsEphemeral || IsEphemeral.Equals(input.IsEphemeral));
   }
 
   /// <summary>
@@ -264,6 +272,7 @@ public partial class ConversationBaseResponse
       {
         hashCode = (hashCode * 59) + ImpactAnalytics.GetHashCode();
       }
+      hashCode = (hashCode * 59) + IsEphemeral.GetHashCode();
       return hashCode;
     }
   }

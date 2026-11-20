@@ -438,6 +438,7 @@ public interface IAgentStudioClient
   /// <param name="memory">Set to false to disable memory (enabled by default). (optional)</param>
   /// <param name="analytics">Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional, default to true)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -453,6 +454,7 @@ public interface IAgentStudioClient
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -471,6 +473,7 @@ public interface IAgentStudioClient
   /// <param name="memory">Set to false to disable memory (enabled by default). (optional)</param>
   /// <param name="analytics">Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional, default to true)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -486,6 +489,7 @@ public interface IAgentStudioClient
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -504,6 +508,7 @@ public interface IAgentStudioClient
   /// <param name="memory">Set to false to disable memory (enabled by default). (optional)</param>
   /// <param name="analytics">Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional, default to true)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -519,6 +524,7 @@ public interface IAgentStudioClient
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -537,6 +543,7 @@ public interface IAgentStudioClient
   /// <param name="memory">Set to false to disable memory (enabled by default). (optional)</param>
   /// <param name="analytics">Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional, default to true)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -552,6 +559,7 @@ public interface IAgentStudioClient
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1281,6 +1289,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1291,6 +1300,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1304,6 +1314,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1314,6 +1325,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1327,6 +1339,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1337,6 +1350,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1350,6 +1364,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1360,6 +1375,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1769,6 +1785,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1779,6 +1796,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1792,6 +1810,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1802,6 +1821,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1815,6 +1835,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1825,6 +1846,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -1838,6 +1860,7 @@ public interface IAgentStudioClient
   /// <param name="agentId">The agentId.</param>
   /// <param name="startDate">Filter conversations created after this date (format: YYYY-MM-DD). (optional)</param>
   /// <param name="endDate">Filter conversations created before this date (format: YYYY-MM-DD). (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1848,6 +1871,7 @@ public interface IAgentStudioClient
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -2602,6 +2626,7 @@ public interface IAgentStudioClient
   /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
   /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2621,6 +2646,7 @@ public interface IAgentStudioClient
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -2643,6 +2669,7 @@ public interface IAgentStudioClient
   /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
   /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2662,6 +2689,7 @@ public interface IAgentStudioClient
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -2684,6 +2712,7 @@ public interface IAgentStudioClient
   /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
   /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2703,6 +2732,7 @@ public interface IAgentStudioClient
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -2725,6 +2755,7 @@ public interface IAgentStudioClient
   /// <param name="converted">Filter by conversations with at least one conversion. (optional)</param>
   /// <param name="hasAlgoliaSearch">Filter by conversations where the search tool was used. (optional)</param>
   /// <param name="xAlgoliaSecureUserToken">The X-Algolia-Secure-User-Token. (optional)</param>
+  /// <param name="ephemeral">Filter by ephemeral (not retained) conversations; omit to include both. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2744,6 +2775,7 @@ public interface IAgentStudioClient
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -2836,6 +2868,74 @@ public interface IAgentStudioClient
     int? page = default,
     int? limit = default,
     string providerId = default,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Live conversations counted against the per-application limit.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - logs
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ConversationUsageResponse</returns>
+  Task<ConversationUsageResponse> ListConversationUsageAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Live conversations counted against the per-application limit. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - logs
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ConversationUsageResponse</returns>
+  ConversationUsageResponse ListConversationUsage(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Live conversations counted against the per-application limit.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - logs
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ConversationUsageResponse</returns>
+  Task<AlgoliaHttpResponse> ListConversationUsageWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  );
+
+  /// <summary>
+  /// Live conversations counted against the per-application limit. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - logs
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ConversationUsageResponse</returns>
+  AlgoliaHttpResponse ListConversationUsageWithHTTPInfo(
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   );
@@ -4342,6 +4442,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4370,6 +4471,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("cache", cache);
     requestOptions.AddQueryParameter("memory", memory);
     requestOptions.AddQueryParameter("analytics", analytics);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -4398,6 +4500,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -4411,6 +4514,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         memory,
         analytics,
         xAlgoliaSecureUserToken,
+        ephemeral,
         options,
         cancellationToken
       )
@@ -4426,6 +4530,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -4454,6 +4559,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("cache", cache);
     requestOptions.AddQueryParameter("memory", memory);
     requestOptions.AddQueryParameter("analytics", analytics);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -4482,6 +4588,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? memory = default,
     bool? analytics = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -4495,6 +4602,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         memory,
         analytics,
         xAlgoliaSecureUserToken,
+        ephemeral,
         options,
         cancellationToken
       )
@@ -5216,6 +5324,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -5235,6 +5344,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     await _transport
       .ExecuteRequestAsync(
         new HttpMethod("DELETE"),
@@ -5250,11 +5360,19 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      DeleteAgentConversationsAsync(agentId, startDate, endDate, options, cancellationToken)
+      DeleteAgentConversationsAsync(
+        agentId,
+        startDate,
+        endDate,
+        ephemeral,
+        options,
+        cancellationToken
+      )
     );
 
   /// <inheritdoc />
@@ -5262,6 +5380,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -5281,6 +5400,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("DELETE"),
@@ -5296,6 +5416,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -5304,6 +5425,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         agentId,
         startDate,
         endDate,
+        ephemeral,
         options,
         cancellationToken
       )
@@ -5775,6 +5897,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -5794,6 +5917,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     return await _transport
       .ExecuteRequestAsync<List<ConversationFullResponse>>(
         new HttpMethod("GET"),
@@ -5809,11 +5933,12 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      ExportConversationsAsync(agentId, startDate, endDate, options, cancellationToken)
+      ExportConversationsAsync(agentId, startDate, endDate, ephemeral, options, cancellationToken)
     );
 
   /// <inheritdoc />
@@ -5821,6 +5946,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -5840,6 +5966,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
 
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     return await _transport
       .ExecuteRequestAsync<AlgoliaHttpResponse>(
         new HttpMethod("GET"),
@@ -5855,11 +5982,19 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     string agentId,
     string startDate = default,
     string endDate = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
     AsyncHelper.RunSync(() =>
-      ExportConversationsWithHTTPInfoAsync(agentId, startDate, endDate, options, cancellationToken)
+      ExportConversationsWithHTTPInfoAsync(
+        agentId,
+        startDate,
+        endDate,
+        ephemeral,
+        options,
+        cancellationToken
+      )
     );
 
   /// <inheritdoc />
@@ -6646,6 +6781,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -6673,6 +6809,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("clicked", clicked);
     requestOptions.AddQueryParameter("converted", converted);
     requestOptions.AddQueryParameter("hasAlgoliaSearch", hasAlgoliaSearch);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -6704,6 +6841,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -6721,6 +6859,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         converted,
         hasAlgoliaSearch,
         xAlgoliaSecureUserToken,
+        ephemeral,
         options,
         cancellationToken
       )
@@ -6740,6 +6879,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   )
@@ -6767,6 +6907,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     requestOptions.AddQueryParameter("clicked", clicked);
     requestOptions.AddQueryParameter("converted", converted);
     requestOptions.AddQueryParameter("hasAlgoliaSearch", hasAlgoliaSearch);
+    requestOptions.AddQueryParameter("ephemeral", ephemeral);
     if (xAlgoliaSecureUserToken != null)
     {
       requestOptions.HeaderParameters.Add(
@@ -6798,6 +6939,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     bool? converted = default,
     bool? hasAlgoliaSearch = default,
     string xAlgoliaSecureUserToken = default,
+    bool? ephemeral = default,
     RequestOptions options = null,
     CancellationToken cancellationToken = default
   ) =>
@@ -6815,6 +6957,7 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
         converted,
         hasAlgoliaSearch,
         xAlgoliaSecureUserToken,
+        ephemeral,
         options,
         cancellationToken
       )
@@ -6889,6 +7032,55 @@ public partial class AgentStudioClient : IAgentStudioClient, IDisposable
     AsyncHelper.RunSync(() =>
       ListAgentsWithHTTPInfoAsync(page, limit, providerId, options, cancellationToken)
     );
+
+  /// <inheritdoc />
+  public async Task<ConversationUsageResponse> ListConversationUsageAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    return await _transport
+      .ExecuteRequestAsync<ConversationUsageResponse>(
+        new HttpMethod("GET"),
+        "/agent-studio/1/configuration/conversation-usage",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public ConversationUsageResponse ListConversationUsage(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) => AsyncHelper.RunSync(() => ListConversationUsageAsync(options, cancellationToken));
+
+  /// <inheritdoc />
+  public async Task<AlgoliaHttpResponse> ListConversationUsageWithHTTPInfoAsync(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  )
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+    return await _transport
+      .ExecuteRequestAsync<AlgoliaHttpResponse>(
+        new HttpMethod("GET"),
+        "/agent-studio/1/configuration/conversation-usage",
+        requestOptions,
+        cancellationToken
+      )
+      .ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  public AlgoliaHttpResponse ListConversationUsageWithHTTPInfo(
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default
+  ) =>
+    AsyncHelper.RunSync(() => ListConversationUsageWithHTTPInfoAsync(options, cancellationToken));
 
   /// <inheritdoc />
   public async Task<Dictionary<string, List<string>>> ListModelsAsync(
