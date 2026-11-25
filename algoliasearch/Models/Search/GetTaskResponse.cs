@@ -38,6 +38,14 @@ public partial class GetTaskResponse
   }
 
   /// <summary>
+  /// Indicates whether the index has pending tasks. This value is deprecated and always `false`. Don't use it.
+  /// </summary>
+  /// <value>Indicates whether the index has pending tasks. This value is deprecated and always `false`. Don't use it.</value>
+  [JsonPropertyName("pendingTask")]
+  [Obsolete]
+  public bool? PendingTask { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -46,6 +54,7 @@ public partial class GetTaskResponse
     StringBuilder sb = new StringBuilder();
     sb.Append("class GetTaskResponse {\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
+    sb.Append("  PendingTask: ").Append(PendingTask).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -71,7 +80,8 @@ public partial class GetTaskResponse
       return false;
     }
 
-    return (Status == input.Status || Status.Equals(input.Status));
+    return (Status == input.Status || Status.Equals(input.Status))
+      && (PendingTask == input.PendingTask || PendingTask.Equals(input.PendingTask));
   }
 
   /// <summary>
@@ -84,6 +94,7 @@ public partial class GetTaskResponse
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + Status.GetHashCode();
+      hashCode = (hashCode * 59) + PendingTask.GetHashCode();
       return hashCode;
     }
   }
