@@ -166,7 +166,35 @@ public partial class IngestionClient : IIngestionClient
                   return await Task.FromResult<Algolia.Search.Models.Ingestion.Event>(null);
                 }
               },
-              eventResponse => eventResponse != null,
+              eventResponse =>
+              {
+                if (eventResponse == null)
+                {
+                  return false;
+                }
+
+                var status = eventResponse.Status;
+                switch (status)
+                {
+                  case null:
+                  case EventStatus.Succeeded:
+                    return true;
+                  case EventStatus.Created:
+                  case EventStatus.Started:
+                  case EventStatus.Retried:
+                    return false;
+                  default:
+                    var reason =
+                      eventResponse.Data != null
+                      && eventResponse.Data.TryGetValue("message", out var message)
+                      && !string.IsNullOrEmpty(message?.ToString())
+                        ? $": {message}"
+                        : "";
+                    throw new AlgoliaException(
+                      $"ingestion push to index {indexName} did not succeed: event {resp.EventID} of run {resp.RunID} has status {status.ToString().ToLowerInvariant()}{reason}"
+                    );
+                }
+              },
               maxRetries: maxRetries,
               timeout: retryCount => Math.Min(retryCount * 1500, 5000),
               ct: cancellationToken
