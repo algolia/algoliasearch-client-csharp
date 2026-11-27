@@ -27,8 +27,8 @@ public partial class RulesBatchCompositionAction : AbstractSchema
   /// <param name="actualInstance">An instance of CompositionRule.</param>
   public RulesBatchCompositionAction(CompositionRule actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class RulesBatchCompositionAction : AbstractSchema
   /// <param name="actualInstance">An instance of DeleteCompositionRuleAction.</param>
   public RulesBatchCompositionAction(DeleteCompositionRuleAction actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

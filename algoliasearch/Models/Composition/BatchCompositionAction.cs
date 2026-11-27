@@ -27,8 +27,8 @@ public partial class BatchCompositionAction : AbstractSchema
   /// <param name="actualInstance">An instance of Composition.</param>
   public BatchCompositionAction(Composition actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class BatchCompositionAction : AbstractSchema
   /// <param name="actualInstance">An instance of DeleteCompositionAction.</param>
   public BatchCompositionAction(DeleteCompositionAction actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

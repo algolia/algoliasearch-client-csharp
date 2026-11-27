@@ -34,11 +34,11 @@ public partial class ReplaceAllObjectsWithTransformationResponse
     UpdatedAtResponse moveOperationResponse
   )
   {
-    CopyOperationResponse =
-      copyOperationResponse ?? throw new ArgumentNullException(nameof(copyOperationResponse));
+    CopyOperationResponse = copyOperationResponse
+      ?? throw new ArgumentNullException(nameof(copyOperationResponse));
     WatchResponses = watchResponses ?? throw new ArgumentNullException(nameof(watchResponses));
-    MoveOperationResponse =
-      moveOperationResponse ?? throw new ArgumentNullException(nameof(moveOperationResponse));
+    MoveOperationResponse = moveOperationResponse
+      ?? throw new ArgumentNullException(nameof(moveOperationResponse));
   }
 
   /// <summary>

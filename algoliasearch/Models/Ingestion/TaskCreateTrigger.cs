@@ -27,8 +27,8 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of ScheduleTriggerInput.</param>
   public TaskCreateTrigger(ScheduleTriggerInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of OnDemandTriggerInput.</param>
   public TaskCreateTrigger(OnDemandTriggerInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
   public TaskCreateTrigger(SubscriptionTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of StreamingTrigger.</param>
   public TaskCreateTrigger(StreamingTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

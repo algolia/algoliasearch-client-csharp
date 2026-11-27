@@ -27,8 +27,8 @@ public partial class BuiltInOperationValue : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public BuiltInOperationValue(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

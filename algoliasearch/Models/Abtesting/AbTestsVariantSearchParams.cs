@@ -36,8 +36,8 @@ public partial class AbTestsVariantSearchParams
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
     TrafficPercentage = trafficPercentage;
-    CustomSearchParameters =
-      customSearchParameters ?? throw new ArgumentNullException(nameof(customSearchParameters));
+    CustomSearchParameters = customSearchParameters
+      ?? throw new ArgumentNullException(nameof(customSearchParameters));
   }
 
   /// <summary>

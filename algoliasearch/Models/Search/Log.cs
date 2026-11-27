@@ -57,8 +57,8 @@ public partial class Log
     Ip = ip ?? throw new ArgumentNullException(nameof(ip));
     QueryHeaders = queryHeaders ?? throw new ArgumentNullException(nameof(queryHeaders));
     Sha1 = sha1 ?? throw new ArgumentNullException(nameof(sha1));
-    ProcessingTimeMs =
-      processingTimeMs ?? throw new ArgumentNullException(nameof(processingTimeMs));
+    ProcessingTimeMs = processingTimeMs
+      ?? throw new ArgumentNullException(nameof(processingTimeMs));
   }
 
   /// <summary>

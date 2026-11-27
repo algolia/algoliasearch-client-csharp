@@ -28,8 +28,8 @@ public partial class GetDictionarySettingsResponse
   /// <param name="disableStandardEntries">disableStandardEntries (required).</param>
   public GetDictionarySettingsResponse(StandardEntries disableStandardEntries)
   {
-    DisableStandardEntries =
-      disableStandardEntries ?? throw new ArgumentNullException(nameof(disableStandardEntries));
+    DisableStandardEntries = disableStandardEntries
+      ?? throw new ArgumentNullException(nameof(disableStandardEntries));
   }
 
   /// <summary>

@@ -27,8 +27,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
   public EventsItems(AddedToCartObjectIDsAfterSearch actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of PurchasedObjectIDsAfterSearch.</param>
   public EventsItems(PurchasedObjectIDsAfterSearch actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedObjectIDsAfterSearch.</param>
   public EventsItems(ClickedObjectIDsAfterSearch actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of PurchasedObjectIDs.</param>
   public EventsItems(PurchasedObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
   public EventsItems(AddedToCartObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
   public EventsItems(ConvertedObjectIDsAfterSearch actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -93,8 +93,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
   public EventsItems(ClickedObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -104,8 +104,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedObjectIDs.</param>
   public EventsItems(ConvertedObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -115,8 +115,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedFilters.</param>
   public EventsItems(ClickedFilters actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -126,8 +126,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedFilters.</param>
   public EventsItems(ConvertedFilters actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -137,8 +137,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ViewedObjectIDs.</param>
   public EventsItems(ViewedObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -148,8 +148,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ViewedFilters.</param>
   public EventsItems(ViewedFilters actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -159,8 +159,8 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of Instantsearch.</param>
   public EventsItems(Instantsearch actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

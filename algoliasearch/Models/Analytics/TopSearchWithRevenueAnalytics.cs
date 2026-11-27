@@ -60,10 +60,10 @@ public partial class TopSearchWithRevenueAnalytics
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
-    ClickThroughRate =
-      clickThroughRate ?? throw new ArgumentNullException(nameof(clickThroughRate));
-    AverageClickPosition =
-      averageClickPosition ?? throw new ArgumentNullException(nameof(averageClickPosition));
+    ClickThroughRate = clickThroughRate
+      ?? throw new ArgumentNullException(nameof(clickThroughRate));
+    AverageClickPosition = averageClickPosition
+      ?? throw new ArgumentNullException(nameof(averageClickPosition));
     ClickPositions = clickPositions ?? throw new ArgumentNullException(nameof(clickPositions));
     ConversionRate = conversionRate ?? throw new ArgumentNullException(nameof(conversionRate));
     TrackedSearchCount = trackedSearchCount;

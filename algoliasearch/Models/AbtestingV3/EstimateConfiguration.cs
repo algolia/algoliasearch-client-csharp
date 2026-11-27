@@ -28,8 +28,8 @@ public partial class EstimateConfiguration
   /// <param name="minimumDetectableEffect">minimumDetectableEffect (required).</param>
   public EstimateConfiguration(MinimumDetectableEffect minimumDetectableEffect)
   {
-    MinimumDetectableEffect =
-      minimumDetectableEffect ?? throw new ArgumentNullException(nameof(minimumDetectableEffect));
+    MinimumDetectableEffect = minimumDetectableEffect
+      ?? throw new ArgumentNullException(nameof(minimumDetectableEffect));
   }
 
   /// <summary>

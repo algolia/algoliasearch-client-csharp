@@ -27,8 +27,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
   public SourceInput(SourceGA4BigQueryExport actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceDocker.</param>
   public SourceInput(SourceDocker actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceCommercetools.</param>
   public SourceInput(SourceCommercetools actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceBigCommerce.</param>
   public SourceInput(SourceBigCommerce actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceBigQuery.</param>
   public SourceInput(SourceBigQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceShopify.</param>
   public SourceInput(SourceShopify actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -93,8 +93,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceAlgoliaIndex.</param>
   public SourceInput(SourceAlgoliaIndex actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -104,8 +104,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceJSON.</param>
   public SourceInput(SourceJSON actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -115,8 +115,8 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceCSV.</param>
   public SourceInput(SourceCSV actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

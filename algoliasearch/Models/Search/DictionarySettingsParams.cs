@@ -28,8 +28,8 @@ public partial class DictionarySettingsParams
   /// <param name="disableStandardEntries">disableStandardEntries (required).</param>
   public DictionarySettingsParams(StandardEntries disableStandardEntries)
   {
-    DisableStandardEntries =
-      disableStandardEntries ?? throw new ArgumentNullException(nameof(disableStandardEntries));
+    DisableStandardEntries = disableStandardEntries
+      ?? throw new ArgumentNullException(nameof(disableStandardEntries));
   }
 
   /// <summary>

@@ -27,8 +27,8 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of TrendingFacetsQuery.</param>
   public RecommendationsRequest(TrendingFacetsQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of BoughtTogetherQuery.</param>
   public RecommendationsRequest(BoughtTogetherQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of RelatedQuery.</param>
   public RecommendationsRequest(RelatedQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of TrendingItemsQuery.</param>
   public RecommendationsRequest(TrendingItemsQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of LookingSimilarQuery.</param>
   public RecommendationsRequest(LookingSimilarQuery actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

@@ -26,8 +26,8 @@ public partial class SearchResult<T> : AbstractSchema
   /// <param name="actualInstance">An instance of SearchResponse.</param>
   public SearchResult(SearchResponse<T> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -37,8 +37,8 @@ public partial class SearchResult<T> : AbstractSchema
   /// <param name="actualInstance">An instance of SearchForFacetValuesResponse.</param>
   public SearchResult(SearchForFacetValuesResponse actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -48,8 +48,8 @@ public partial class SearchResult<T> : AbstractSchema
   /// <param name="actualInstance">An instance of SearchResponsePartial.</param>
   public SearchResult(SearchResponsePartial<T> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

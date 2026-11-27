@@ -28,8 +28,8 @@ public partial class TransformationSearch
   /// <param name="transformationIDs">transformationIDs (required).</param>
   public TransformationSearch(List<string> transformationIDs)
   {
-    TransformationIDs =
-      transformationIDs ?? throw new ArgumentNullException(nameof(transformationIDs));
+    TransformationIDs = transformationIDs
+      ?? throw new ArgumentNullException(nameof(transformationIDs));
   }
 
   /// <summary>

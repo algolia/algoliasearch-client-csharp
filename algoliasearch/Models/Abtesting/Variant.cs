@@ -57,8 +57,8 @@ public partial class Variant
     SearchCount = searchCount ?? throw new ArgumentNullException(nameof(searchCount));
     TrafficPercentage = trafficPercentage;
     UserCount = userCount ?? throw new ArgumentNullException(nameof(userCount));
-    TrackedUserCount =
-      trackedUserCount ?? throw new ArgumentNullException(nameof(trackedUserCount));
+    TrackedUserCount = trackedUserCount
+      ?? throw new ArgumentNullException(nameof(trackedUserCount));
   }
 
   /// <summary>

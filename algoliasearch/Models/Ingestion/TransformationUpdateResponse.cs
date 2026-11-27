@@ -29,8 +29,8 @@ public partial class TransformationUpdateResponse
   /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public TransformationUpdateResponse(string transformationID, string updatedAt)
   {
-    TransformationID =
-      transformationID ?? throw new ArgumentNullException(nameof(transformationID));
+    TransformationID = transformationID
+      ?? throw new ArgumentNullException(nameof(transformationID));
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 

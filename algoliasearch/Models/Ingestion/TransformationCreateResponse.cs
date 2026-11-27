@@ -29,8 +29,8 @@ public partial class TransformationCreateResponse
   /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public TransformationCreateResponse(string transformationID, string createdAt)
   {
-    TransformationID =
-      transformationID ?? throw new ArgumentNullException(nameof(transformationID));
+    TransformationID = transformationID
+      ?? throw new ArgumentNullException(nameof(transformationID));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
   }
 

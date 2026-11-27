@@ -27,8 +27,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of ClientSideToolConfig.</param>
   public ItemsUnion(ClientSideToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of McpServerToolConfig.</param>
   public ItemsUnion(McpServerToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaSearchToolConfig.</param>
   public ItemsUnion(AlgoliaSearchToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaRecommendToolConfig.</param>
   public ItemsUnion(AlgoliaRecommendToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaGroupedResultsToolConfig.</param>
   public ItemsUnion(AlgoliaGroupedResultsToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaGroupedResultsCompatToolConfig.</param>
   public ItemsUnion(AlgoliaGroupedResultsCompatToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -93,8 +93,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaCompareProductsToolConfig.</param>
   public ItemsUnion(AlgoliaCompareProductsToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -104,8 +104,8 @@ public partial class ItemsUnion : AbstractSchema
   /// <param name="actualInstance">An instance of UnknownToolConfig.</param>
   public ItemsUnion(UnknownToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

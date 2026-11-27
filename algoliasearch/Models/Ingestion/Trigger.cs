@@ -27,8 +27,8 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of ScheduleTrigger.</param>
   public Trigger(ScheduleTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of OnDemandTrigger.</param>
   public Trigger(OnDemandTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
   public Trigger(SubscriptionTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of StreamingTrigger.</param>
   public Trigger(StreamingTrigger actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

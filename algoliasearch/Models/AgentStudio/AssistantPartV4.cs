@@ -27,8 +27,8 @@ public partial class AssistantPartV4 : AbstractSchema
   /// <param name="actualInstance">An instance of ReasoningPartV4.</param>
   public AssistantPartV4(ReasoningPartV4 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AssistantPartV4 : AbstractSchema
   /// <param name="actualInstance">An instance of TextPartV4.</param>
   public AssistantPartV4(TextPartV4 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class AssistantPartV4 : AbstractSchema
   /// <param name="actualInstance">An instance of ToolInvocationPartV4.</param>
   public AssistantPartV4(ToolInvocationPartV4 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class AssistantPartV4 : AbstractSchema
   /// <param name="actualInstance">An instance of StepStartPartV4.</param>
   public AssistantPartV4(StepStartPartV4 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

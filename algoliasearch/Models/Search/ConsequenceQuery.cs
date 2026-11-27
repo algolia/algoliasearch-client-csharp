@@ -27,8 +27,8 @@ public partial class ConsequenceQuery : AbstractSchema
   /// <param name="actualInstance">An instance of ConsequenceQueryObject.</param>
   public ConsequenceQuery(ConsequenceQueryObject actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class ConsequenceQuery : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public ConsequenceQuery(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

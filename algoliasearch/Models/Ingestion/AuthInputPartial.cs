@@ -27,8 +27,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthGoogleServiceAccountPartial.</param>
   public AuthInputPartial(AuthGoogleServiceAccountPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthBasicPartial.</param>
   public AuthInputPartial(AuthBasicPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAPIKeyPartial.</param>
   public AuthInputPartial(AuthAPIKeyPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthOAuthPartial.</param>
   public AuthInputPartial(AuthOAuthPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgoliaPartial.</param>
   public AuthInputPartial(AuthAlgoliaPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgoliaInsightsPartial.</param>
   public AuthInputPartial(AuthAlgoliaInsightsPartial actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

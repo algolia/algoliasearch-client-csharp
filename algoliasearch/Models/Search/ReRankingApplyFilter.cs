@@ -27,8 +27,8 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <param name="actualInstance">An instance of List<ReRankingApplyFilter>.</param>
   public ReRankingApplyFilter(List<ReRankingApplyFilter> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public ReRankingApplyFilter(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

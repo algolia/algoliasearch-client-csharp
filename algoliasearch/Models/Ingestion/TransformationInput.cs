@@ -27,8 +27,8 @@ public partial class TransformationInput : AbstractSchema
   /// <param name="actualInstance">An instance of TransformationCode.</param>
   public TransformationInput(TransformationCode actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class TransformationInput : AbstractSchema
   /// <param name="actualInstance">An instance of TransformationNoCode.</param>
   public TransformationInput(TransformationNoCode actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

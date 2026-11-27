@@ -27,8 +27,8 @@ public partial class TagFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List<TagFilters>.</param>
   public TagFilters(List<TagFilters> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class TagFilters : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public TagFilters(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

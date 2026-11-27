@@ -27,8 +27,8 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List<AutomaticFacetFilter>.</param>
   public AutomaticFacetFilters(List<AutomaticFacetFilter> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List<string>.</param>
   public AutomaticFacetFilters(List<string> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

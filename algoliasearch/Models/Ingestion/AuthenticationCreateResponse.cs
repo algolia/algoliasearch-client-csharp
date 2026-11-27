@@ -30,8 +30,8 @@ public partial class AuthenticationCreateResponse
   /// <param name="createdAt">Date and time when the resource was created, in RFC 3339 format. (required).</param>
   public AuthenticationCreateResponse(string authenticationID, string name, string createdAt)
   {
-    AuthenticationID =
-      authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
+    AuthenticationID = authenticationID
+      ?? throw new ArgumentNullException(nameof(authenticationID));
     Name = name ?? throw new ArgumentNullException(nameof(name));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
   }

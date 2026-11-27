@@ -27,8 +27,8 @@ public partial class TaskInput : AbstractSchema
   /// <param name="actualInstance">An instance of ShopifyInput.</param>
   public TaskInput(ShopifyInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class TaskInput : AbstractSchema
   /// <param name="actualInstance">An instance of StreamingInput.</param>
   public TaskInput(StreamingInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class TaskInput : AbstractSchema
   /// <param name="actualInstance">An instance of DockerStreamsInput.</param>
   public TaskInput(DockerStreamsInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

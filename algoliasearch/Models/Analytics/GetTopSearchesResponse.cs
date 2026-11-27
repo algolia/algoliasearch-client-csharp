@@ -27,8 +27,8 @@ public partial class GetTopSearchesResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopSearchesResponse.</param>
   public GetTopSearchesResponse(TopSearchesResponse actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class GetTopSearchesResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopSearchesResponseWithAnalytics.</param>
   public GetTopSearchesResponse(TopSearchesResponseWithAnalytics actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class GetTopSearchesResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopSearchesResponseWithRevenueAnalytics.</param>
   public GetTopSearchesResponse(TopSearchesResponseWithRevenueAnalytics actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

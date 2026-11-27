@@ -30,8 +30,8 @@ public partial class AuthenticationUpdateResponse
   /// <param name="updatedAt">Date and time when the resource was last updated, in RFC 3339 format. (required).</param>
   public AuthenticationUpdateResponse(string authenticationID, string name, string updatedAt)
   {
-    AuthenticationID =
-      authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
+    AuthenticationID = authenticationID
+      ?? throw new ArgumentNullException(nameof(authenticationID));
     Name = name ?? throw new ArgumentNullException(nameof(name));
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }

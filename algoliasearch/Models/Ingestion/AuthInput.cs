@@ -27,8 +27,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthOAuth.</param>
   public AuthInput(AuthOAuth actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthGoogleServiceAccount.</param>
   public AuthInput(AuthGoogleServiceAccount actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthBasic.</param>
   public AuthInput(AuthBasic actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAPIKey.</param>
   public AuthInput(AuthAPIKey actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgolia.</param>
   public AuthInput(AuthAlgolia actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgoliaInsights.</param>
   public AuthInput(AuthAlgoliaInsights actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

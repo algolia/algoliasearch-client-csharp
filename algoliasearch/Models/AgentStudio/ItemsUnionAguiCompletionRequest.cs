@@ -27,8 +27,8 @@ public partial class ItemsUnionAguiCompletionRequest : AbstractSchema
   /// <param name="actualInstance">An instance of ToolMessageAGUI.</param>
   public ItemsUnionAguiCompletionRequest(ToolMessageAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class ItemsUnionAguiCompletionRequest : AbstractSchema
   /// <param name="actualInstance">An instance of UserMessageAGUI.</param>
   public ItemsUnionAguiCompletionRequest(UserMessageAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class ItemsUnionAguiCompletionRequest : AbstractSchema
   /// <param name="actualInstance">An instance of AssistantMessageAGUI.</param>
   public ItemsUnionAguiCompletionRequest(AssistantMessageAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class ItemsUnionAguiCompletionRequest : AbstractSchema
   /// <param name="actualInstance">An instance of ReasoningMessageAGUI.</param>
   public ItemsUnionAguiCompletionRequest(ReasoningMessageAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

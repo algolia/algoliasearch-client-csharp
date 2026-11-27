@@ -27,8 +27,8 @@ public partial class MessagePartAssistantMessageAGUI : AbstractSchema
   /// <param name="actualInstance">An instance of ToolCallPartAGUI.</param>
   public MessagePartAssistantMessageAGUI(ToolCallPartAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class MessagePartAssistantMessageAGUI : AbstractSchema
   /// <param name="actualInstance">An instance of ToolCallResultPartAGUI.</param>
   public MessagePartAssistantMessageAGUI(ToolCallResultPartAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class MessagePartAssistantMessageAGUI : AbstractSchema
   /// <param name="actualInstance">An instance of TextPartAGUI.</param>
   public MessagePartAssistantMessageAGUI(TextPartAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class MessagePartAssistantMessageAGUI : AbstractSchema
   /// <param name="actualInstance">An instance of ReasoningPartAGUI.</param>
   public MessagePartAssistantMessageAGUI(ReasoningPartAGUI actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

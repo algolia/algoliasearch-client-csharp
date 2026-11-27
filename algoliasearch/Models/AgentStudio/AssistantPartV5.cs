@@ -27,8 +27,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of DataGuardrailViolationPartV5.</param>
   public AssistantPartV5(DataGuardrailViolationPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of ToolPartV5.</param>
   public AssistantPartV5(ToolPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of StepStartPartV5.</param>
   public AssistantPartV5(StepStartPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of TextPartV5.</param>
   public AssistantPartV5(TextPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of ReasoningPartV5.</param>
   public AssistantPartV5(ReasoningPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class AssistantPartV5 : AbstractSchema
   /// <param name="actualInstance">An instance of DataPartV5.</param>
   public AssistantPartV5(DataPartV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

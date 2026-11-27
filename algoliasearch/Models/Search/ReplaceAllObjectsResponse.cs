@@ -34,11 +34,11 @@ public partial class ReplaceAllObjectsResponse
     UpdatedAtResponse moveOperationResponse
   )
   {
-    CopyOperationResponse =
-      copyOperationResponse ?? throw new ArgumentNullException(nameof(copyOperationResponse));
+    CopyOperationResponse = copyOperationResponse
+      ?? throw new ArgumentNullException(nameof(copyOperationResponse));
     BatchResponses = batchResponses ?? throw new ArgumentNullException(nameof(batchResponses));
-    MoveOperationResponse =
-      moveOperationResponse ?? throw new ArgumentNullException(nameof(moveOperationResponse));
+    MoveOperationResponse = moveOperationResponse
+      ?? throw new ArgumentNullException(nameof(moveOperationResponse));
   }
 
   /// <summary>

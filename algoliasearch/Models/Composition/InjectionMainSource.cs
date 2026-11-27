@@ -27,8 +27,8 @@ public partial class InjectionMainSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectionMainSearchSource.</param>
   public InjectionMainSource(InjectionMainSearchSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class InjectionMainSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectionMainRecommendSource.</param>
   public InjectionMainSource(InjectionMainRecommendSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class InjectionMainSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectionMainExternalProviderSource.</param>
   public InjectionMainSource(InjectionMainExternalProviderSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

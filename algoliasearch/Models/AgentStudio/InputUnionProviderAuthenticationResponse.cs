@@ -27,8 +27,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of AzureOpenAIProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(AzureOpenAIProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of OpenAICompatibleProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(OpenAICompatibleProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of OpenAIProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(OpenAIProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of BaseProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(BaseProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of AnthropicProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(AnthropicProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of XAIProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(XAIProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -93,8 +93,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of MistralProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(MistralProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -104,8 +104,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of VertexAIProviderInput.</param>
   public InputUnionProviderAuthenticationResponse(VertexAIProviderInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -115,8 +115,8 @@ public partial class InputUnionProviderAuthenticationResponse : AbstractSchema
   /// <param name="actualInstance">An instance of ManagedProviderResponseInput.</param>
   public InputUnionProviderAuthenticationResponse(ManagedProviderResponseInput actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

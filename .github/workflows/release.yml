@@ -8,7 +8,7 @@ on:
 jobs:
   release:
     name: Publish
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     if: "startsWith(github.event.head_commit.message, 'chore: release')"
     permissions:
       id-token: write  # enable GitHub OIDC token issuance for this job
@@ -16,9 +16,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
-          dotnet-version: 10.0.402
+          dotnet-version: 11.0.100
 
       - name: Create Nugget package
         run: dotnet pack --configuration Release --output nugget

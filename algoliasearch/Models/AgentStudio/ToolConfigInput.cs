@@ -27,8 +27,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of ClientSideToolConfig.</param>
   public ToolConfigInput(ClientSideToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of McpServerToolConfig.</param>
   public ToolConfigInput(McpServerToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaSearchToolConfig.</param>
   public ToolConfigInput(AlgoliaSearchToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaRecommendToolConfig.</param>
   public ToolConfigInput(AlgoliaRecommendToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of AlgoliaCompareProductsToolConfig.</param>
   public ToolConfigInput(AlgoliaCompareProductsToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class ToolConfigInput : AbstractSchema
   /// <param name="actualInstance">An instance of UnknownToolConfig.</param>
   public ToolConfigInput(UnknownToolConfig actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

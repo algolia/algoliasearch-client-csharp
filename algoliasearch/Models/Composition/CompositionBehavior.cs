@@ -27,8 +27,8 @@ public partial class CompositionBehavior : AbstractSchema
   /// <param name="actualInstance">An instance of CompositionInjectionBehavior.</param>
   public CompositionBehavior(CompositionInjectionBehavior actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class CompositionBehavior : AbstractSchema
   /// <param name="actualInstance">An instance of CompositionMultifeedBehavior.</param>
   public CompositionBehavior(CompositionMultifeedBehavior actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

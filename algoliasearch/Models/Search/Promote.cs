@@ -27,8 +27,8 @@ public partial class Promote : AbstractSchema
   /// <param name="actualInstance">An instance of PromoteObjectIDs.</param>
   public Promote(PromoteObjectIDs actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class Promote : AbstractSchema
   /// <param name="actualInstance">An instance of PromoteObjectID.</param>
   public Promote(PromoteObjectID actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

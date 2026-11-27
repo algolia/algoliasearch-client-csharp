@@ -27,8 +27,8 @@ public partial class AddABTestsVariant : AbstractSchema
   /// <param name="actualInstance">An instance of AbTestsVariantSearchParams.</param>
   public AddABTestsVariant(AbTestsVariantSearchParams actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class AddABTestsVariant : AbstractSchema
   /// <param name="actualInstance">An instance of AbTestsVariant.</param>
   public AddABTestsVariant(AbTestsVariant actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

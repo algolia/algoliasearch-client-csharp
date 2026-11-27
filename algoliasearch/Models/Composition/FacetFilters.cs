@@ -27,8 +27,8 @@ public partial class FacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List<FacetFilters>.</param>
   public FacetFilters(List<FacetFilters> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class FacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public FacetFilters(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

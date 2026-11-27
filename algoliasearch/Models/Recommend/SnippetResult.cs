@@ -27,8 +27,8 @@ public partial class SnippetResult : AbstractSchema
   /// <param name="actualInstance">An instance of SnippetResultOption.</param>
   public SnippetResult(SnippetResultOption actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class SnippetResult : AbstractSchema
   /// <param name="actualInstance">An instance of Dictionary<string, SnippetResult>.</param>
   public SnippetResult(Dictionary<string, SnippetResult> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class SnippetResult : AbstractSchema
   /// <param name="actualInstance">An instance of List<SnippetResult>.</param>
   public SnippetResult(List<SnippetResult> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

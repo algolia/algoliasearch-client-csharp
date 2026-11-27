@@ -52,8 +52,8 @@ public partial class Authentication
     string updatedAt
   )
   {
-    AuthenticationID =
-      authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
+    AuthenticationID = authenticationID
+      ?? throw new ArgumentNullException(nameof(authenticationID));
     Type = type;
     Name = name ?? throw new ArgumentNullException(nameof(name));
     Input = input ?? throw new ArgumentNullException(nameof(input));

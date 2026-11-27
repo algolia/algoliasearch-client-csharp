@@ -27,8 +27,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of ToolResultPart.</param>
   public MessagePart(ToolResultPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of TextPart.</param>
   public MessagePart(TextPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of ToolCallPart.</param>
   public MessagePart(ToolCallPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of StartPart.</param>
   public MessagePart(StartPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -71,8 +71,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of StartStepPart.</param>
   public MessagePart(StartStepPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -82,8 +82,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of ReasoningPart.</param>
   public MessagePart(ReasoningPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -93,8 +93,8 @@ public partial class MessagePart : AbstractSchema
   /// <param name="actualInstance">An instance of ToolApprovalRequestPart.</param>
   public MessagePart(ToolApprovalRequestPart actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

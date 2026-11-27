@@ -161,8 +161,9 @@ internal class HttpTransport : IDisposable
         requestOptions?.QueryParameters
       );
       var requestTimeout = GetTimeOut(callType, requestOptions);
-      var baseConnectTimeout =
-        requestOptions?.ConnectTimeout ?? _algoliaConfig.ConnectTimeout ?? Defaults.ConnectTimeout;
+      var baseConnectTimeout = requestOptions?.ConnectTimeout
+        ?? _algoliaConfig.ConnectTimeout
+        ?? Defaults.ConnectTimeout;
       var connectTimeout = TimeSpan.FromTicks(baseConnectTimeout.Ticks * (host.RetryCount + 1));
 
       // the body stream is consumed by each send, so it alone is rebuilt per 429 retry

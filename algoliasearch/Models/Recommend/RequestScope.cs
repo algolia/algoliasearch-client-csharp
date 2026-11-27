@@ -27,8 +27,8 @@ public partial class RequestScope : AbstractSchema
   /// <param name="actualInstance">An instance of FacetRequestScope.</param>
   public RequestScope(FacetRequestScope actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class RequestScope : AbstractSchema
   /// <param name="actualInstance">An instance of GlobalRequestScope.</param>
   public RequestScope(GlobalRequestScope actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

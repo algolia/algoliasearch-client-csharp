@@ -44,8 +44,8 @@ public partial class Transformation
     string updatedAt
   )
   {
-    TransformationID =
-      transformationID ?? throw new ArgumentNullException(nameof(transformationID));
+    TransformationID = transformationID
+      ?? throw new ArgumentNullException(nameof(transformationID));
     Code = code ?? throw new ArgumentNullException(nameof(code));
     Name = name ?? throw new ArgumentNullException(nameof(name));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));

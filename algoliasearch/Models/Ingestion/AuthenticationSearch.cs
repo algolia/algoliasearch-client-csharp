@@ -28,8 +28,8 @@ public partial class AuthenticationSearch
   /// <param name="authenticationIDs">authenticationIDs (required).</param>
   public AuthenticationSearch(List<string> authenticationIDs)
   {
-    AuthenticationIDs =
-      authenticationIDs ?? throw new ArgumentNullException(nameof(authenticationIDs));
+    AuthenticationIDs = authenticationIDs
+      ?? throw new ArgumentNullException(nameof(authenticationIDs));
   }
 
   /// <summary>

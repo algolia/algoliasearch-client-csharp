@@ -27,8 +27,8 @@ public partial class MessageV5 : AbstractSchema
   /// <param name="actualInstance">An instance of UserMessageV5.</param>
   public MessageV5(UserMessageV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class MessageV5 : AbstractSchema
   /// <param name="actualInstance">An instance of AssistantMessageV5.</param>
   public MessageV5(AssistantMessageV5 actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

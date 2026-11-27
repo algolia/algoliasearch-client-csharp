@@ -27,8 +27,8 @@ public partial class OptionalFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List<OptionalFilters>.</param>
   public OptionalFilters(List<OptionalFilters> actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class OptionalFilters : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public OptionalFilters(string actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

@@ -28,8 +28,8 @@ public partial class InjectedItemExternalProviderSource
   /// <param name="externalProvider">externalProvider (required).</param>
   public InjectedItemExternalProviderSource(InjectedItemExternalProvider externalProvider)
   {
-    ExternalProvider =
-      externalProvider ?? throw new ArgumentNullException(nameof(externalProvider));
+    ExternalProvider = externalProvider
+      ?? throw new ArgumentNullException(nameof(externalProvider));
   }
 
   /// <summary>

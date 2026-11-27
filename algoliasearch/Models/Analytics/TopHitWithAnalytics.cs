@@ -44,8 +44,8 @@ public partial class TopHitWithAnalytics
   {
     Hit = hit ?? throw new ArgumentNullException(nameof(hit));
     Count = count;
-    ClickThroughRate =
-      clickThroughRate ?? throw new ArgumentNullException(nameof(clickThroughRate));
+    ClickThroughRate = clickThroughRate
+      ?? throw new ArgumentNullException(nameof(clickThroughRate));
     ConversionRate = conversionRate ?? throw new ArgumentNullException(nameof(conversionRate));
     TrackedHitCount = trackedHitCount;
     ClickCount = clickCount;

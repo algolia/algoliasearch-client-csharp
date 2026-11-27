@@ -27,8 +27,8 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopHitsResponse.</param>
   public GetTopHitsResponse(TopHitsResponse actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopHitsResponseWithAnalytics.</param>
   public GetTopHitsResponse(TopHitsResponseWithAnalytics actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopHitsResponseWithRevenueAnalytics.</param>
   public GetTopHitsResponse(TopHitsResponseWithRevenueAnalytics actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>

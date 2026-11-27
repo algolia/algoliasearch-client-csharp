@@ -27,8 +27,8 @@ public partial class InjectedItemSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectedItemSearchSource.</param>
   public InjectedItemSource(InjectedItemSearchSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -38,8 +38,8 @@ public partial class InjectedItemSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectedItemExternalSource.</param>
   public InjectedItemSource(InjectedItemExternalSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -49,8 +49,8 @@ public partial class InjectedItemSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectedItemRecommendSource.</param>
   public InjectedItemSource(InjectedItemRecommendSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -60,8 +60,8 @@ public partial class InjectedItemSource : AbstractSchema
   /// <param name="actualInstance">An instance of InjectedItemExternalProviderSource.</param>
   public InjectedItemSource(InjectedItemExternalProviderSource actualInstance)
   {
-    ActualInstance =
-      actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance
+      ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
